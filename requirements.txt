@@ -1,0 +1,8 @@
+Flask==0.12.2
+Flask-GraphQL==1.4.1
+Flask-SQLAlchemy==2.3.2
+graphene==2.0.1
+graphene-sqlalchemy==2.0.0
+graphql-core==2.0
+graphql-relay==0.4.5
+SQLAlchemy==1.2.5

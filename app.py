@@ -16,7 +16,8 @@ def root_dir():  # pragma: no cover
 
 def get_file(filename):  # pragma: no cover
     try:
-        src = os.path.join(root_dir()+'\\dist\\', filename)
+        src = os.path.join(root_dir(),'dist')
+        src = os.path.join(src, filename)
         # Figure out how flask returns static files
         # Tried:
         # - render_template

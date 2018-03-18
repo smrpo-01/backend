@@ -14,13 +14,13 @@ projects = Table(
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
-    email = Column(String, unique=True, nullable=False)
-    name = Column(String, nullable=False)
-    password = Column(String, nullable=False)
+    email = Column(String, unique=True)
+    name = Column(String)
+    password = Column(String)
 
 
 class Project(Base):
     __tablename__ = 'project'
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
+    name = Column(String)
     project_members = relationship('User', secondary=projects, backref=backref('projects', lazy=True))

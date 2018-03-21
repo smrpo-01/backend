@@ -48,6 +48,8 @@ class Query(graphene.AbstractType):
     all_groups = graphene.List(GroupType)
     all_projects = graphene.List(ProjectType)
 
+    current_user = graphene.Field(UserType)
+
     def resolve_all_users(self, info):
         return models.User.objects.all()
 
@@ -65,3 +67,8 @@ class Query(graphene.AbstractType):
 
     def resolve_all_projects(self, info):
         return models.Project.objects.all()
+
+    def resolve_current_user(self, context):
+        if context.user.is_authenticated:
+            return context.user
+        return None

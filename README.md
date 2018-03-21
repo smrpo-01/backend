@@ -13,3 +13,9 @@ python3 manage.py runserver # run server
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
+
+## JWT
+```
+# da dobiš token userja - avtentikacija
+curl -X POST -d "email=admin@demo.com&password=demodemo1" http://localhost:8000/api-token-auth/
+```

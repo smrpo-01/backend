@@ -5,28 +5,28 @@ from backend.app.models import *
 
 pwd = "demodemo1"
 
-admin = User(email="admin@demo.com", password=pwd, first_name="Ad", last_name="Min",)
+admin = User.objects.create_superuser(email="admin@demo.com", password=pwd, first_name="Ad", last_name="Min",)
 admin.save()
 admin.roles.add(UserRole.objects.get(id=1))
 admin.save()
 
-dev1 = User(email="dev1@demo.com", password=pwd, first_name="Dev", last_name="Ena",)
+dev1 = User.objects.create_user(email="dev1@demo.com", password=pwd, first_name="Dev", last_name="Ena",)
 dev1.save()
 dev1.roles.add(UserRole.objects.get(id=3))
 dev1.roles.add(UserRole.objects.get(id=4))
 dev1.save()
 
-dev2 = User(email="dev2@demo.com", password=pwd, first_name="Dev", last_name="Dve",)
+dev2 = User.objects.create_user(email="dev2@demo.com", password=pwd, first_name="Dev", last_name="Dve",)
 dev2.save()
 dev2.roles.add(UserRole.objects.get(id=4))
 dev2.save()
 
-km = User(email="km@demo.com", password=pwd, first_name="K", last_name="M",)
+km = User.objects.create_user(email="km@demo.com", password=pwd, first_name="K", last_name="M",)
 km.save()
 km.roles.add(UserRole.objects.get(id=3))
 km.save()
 
-po = User(email="po@demo.com", password=pwd, first_name="P", last_name="O",)
+po = User.objects.create_user(email="po@demo.com", password=pwd, first_name="P", last_name="O",)
 po.save()
 po.roles.add(UserRole.objects.get(id=2))
 po.save()

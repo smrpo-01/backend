@@ -5,7 +5,7 @@ import datetime
 
 class UserManager(BaseUserManager):
     # **extra_fields, npr. za povezave
-    def create_user(self, email, password, first_name, last_name, roles, is_admin=False, **extra_fields):
+    def create_user(self, email, password, first_name, last_name, is_admin=False, **extra_fields):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -14,15 +14,14 @@ class UserManager(BaseUserManager):
             first_name=first_name,
             last_name=last_name,
             is_admin=is_admin,
-            roles=roles,
             **extra_fields
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password, first_name, last_name, roles, **extra_fields):
-        return self.create_user(email, password, first_name=first_name, last_name=last_name, roles=roles, **extra_fields)
+    def create_superuser(self, email, password, first_name, last_name, **extra_fields):
+        return self.create_user(email, password, first_name=first_name, last_name=last_name, **extra_fields)
 
 
 class UserRole(models.Model):
@@ -45,13 +44,11 @@ class UserRole(models.Model):
 
 
 class ProjectRole(models.Model):
-    ADMIN = 1
     PROJECT_OWNER = 2
     KANBAN_MASTER = 3
     DEV = 4
 
     ROLE_CHOICES = (
-        (ADMIN, 'Administrator'),
         (PROJECT_OWNER, 'Naročnik'),
         (KANBAN_MASTER, 'Kanban Master'),
         (DEV, 'Razvijalec')
@@ -79,7 +76,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return "(%s, %s, %s, %s\n)" % (self.email, self.first_name, self.last_name, str(self.is_active))
+        return "(%s, %s, %s, %s)\n" % (self.email, self.first_name, self.last_name, str(self.is_active))
 
 
 class Group(models.Model):

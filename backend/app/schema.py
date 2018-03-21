@@ -68,7 +68,8 @@ class Query(graphene.AbstractType):
     def resolve_all_projects(self, info):
         return models.Project.objects.all()
 
-    def resolve_current_user(self, context):
-        if context.user.is_authenticated:
-            return context.user
+    def resolve_current_user(self, info):
+        print(type(info))
+        if info.context.user.is_authenticated:
+            return info.context.user
         return None

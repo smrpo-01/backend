@@ -9,7 +9,6 @@ graphql-core==2.0
 graphql-relay==0.4.5
 iso8601==0.1.12
 mixer==6.0.1
-pkg-resources==0.0.0
 promise==2.1
 PyJWT==1.6.1
 python-dateutil==2.7.0

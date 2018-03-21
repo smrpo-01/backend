@@ -10,7 +10,6 @@ class UserType(DjangoObjectType):
         interfaces = (graphene.Node, )
 
 
-
 class UserRoleType(DjangoObjectType):
     class Meta:
         model = models.UserRole
@@ -48,9 +47,10 @@ class Query(graphene.AbstractType):
     all_user_groups = graphene.List(UserGroupType)
     all_groups = graphene.List(GroupType)
     all_projects = graphene.List(ProjectType)
-    users = graphene.Field(UserType, id=graphene.String())
 
-    def resolve_all_users(self, info, id):
+    current_user = graphene.Field(UserType)
+
+    def resolve_all_users(self, info):
         return models.User.objects.all()
 
     def resolve_all_user_roles(self, info):
@@ -68,6 +68,7 @@ class Query(graphene.AbstractType):
     def resolve_all_projects(self, info):
         return models.Project.objects.all()
 
-    def resolve_users(selfs, info, id):
-        return #models.User.objects.get(id=id)
-
+    def resolve_current_user(self, context):
+        if context.user.is_authenticated:
+            return context.user
+        return None

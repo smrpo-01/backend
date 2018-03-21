@@ -1,11 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
+from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, PermissionsMixin)
 import datetime
 
 
 class UserManager(BaseUserManager):
     # **extra_fields, npr. za povezave
-    def create_user(self, email, password, first_name, last_name, is_admin=False, **extra_fields):
+    def create_user(self, email, password, first_name, last_name, is_superuser=False, is_admin=False, is_staff=False, **extra_fields):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -14,6 +14,8 @@ class UserManager(BaseUserManager):
             first_name=first_name,
             last_name=last_name,
             is_admin=is_admin,
+            is_staff=is_staff,
+            is_superuser=is_superuser,
             **extra_fields
         )
         user.set_password(password)
@@ -21,7 +23,16 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password, first_name, last_name, **extra_fields):
-        return self.create_user(email, password, first_name=first_name, last_name=last_name, **extra_fields)
+        return self.create_user(
+            email,
+            password,
+            first_name=first_name,
+            last_name=last_name,
+            is_admin=True,
+            is_staff=True,
+            is_superuser=True,
+            **extra_fields
+        )
 
 
 class UserRole(models.Model):
@@ -74,9 +85,20 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     def __str__(self):
         return "(%s, %s, %s, %s)\n" % (self.email, self.first_name, self.last_name, str(self.is_active))
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_perms(self, perm_list, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
 
 
 class Group(models.Model):

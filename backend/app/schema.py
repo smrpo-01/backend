@@ -51,7 +51,9 @@ class ProjectType(DjangoObjectType):
 
 class Query(graphene.AbstractType):
     all_users = graphene.List(UserType)
-    all_paginated_users = graphene.Field(UserPaginatedType, page=graphene.Int())
+    all_paginated_users = graphene.Field(UserPaginatedType,
+                                         page=graphene.Int(),
+                                         page_size=graphene.Int(default_value=3))
     all_user_roles = graphene.List(UserRoleType)
     all_project_roles = graphene.List(ProjectRoleType)
     all_user_groups = graphene.List(UserGroupType)
@@ -63,10 +65,10 @@ class Query(graphene.AbstractType):
     def resolve_all_users(self, info):
         return models.User.objects.all()
 
-    def resolve_all_paginated_users(self, info, page):
-        page_size = 3
+    def resolve_all_paginated_users(self, info, page, page_size):
+        p_size = page_size
         qs = models.User.objects.all()
-        return get_paginator(qs, page_size, page, UserPaginatedType)
+        return get_paginator(qs, p_size, page, UserPaginatedType)
 
     def resolve_all_user_roles(self, info):
         return models.UserRole.objects.all()

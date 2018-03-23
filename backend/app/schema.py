@@ -13,11 +13,19 @@ class UserRoleType(DjangoObjectType):
     class Meta:
         model = models.UserRole
 
+    name = graphene.String()
 
-class ProjectRoleType(DjangoObjectType):
+    def resolve_name(instance, info):
+        return str(instance)
+
+class GroupRoleType(DjangoObjectType):
     class Meta:
-        model = models.ProjectRole
+        model = models.GroupRole
 
+    name = graphene.String()
+
+    def resolve_name(instance, info):
+        return str(instance)
 
 class UserGroupType(DjangoObjectType):
     class Meta:
@@ -37,7 +45,7 @@ class ProjectType(DjangoObjectType):
 class Query(graphene.AbstractType):
     all_users = graphene.List(UserType)
     all_user_roles = graphene.List(UserRoleType)
-    all_project_roles = graphene.List(ProjectRoleType)
+    all_group_roles = graphene.List(GroupRoleType)
     all_user_groups = graphene.List(UserGroupType)
     all_groups = graphene.List(GroupType)
     all_projects = graphene.List(ProjectType)
@@ -50,8 +58,8 @@ class Query(graphene.AbstractType):
     def resolve_all_user_roles(self, info):
         return models.UserRole.objects.all()
 
-    def resolve_all_project_roles(self, info):
-        return models.ProjectRole.objects.all()
+    def resolve_all_group_roles(self, info):
+        return models.GroupRole.objects.all()
 
     def resolve_all_user_groups(self, info):
         return models.UserGroup.objects.all()

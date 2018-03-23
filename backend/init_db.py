@@ -1,7 +1,17 @@
 from backend.app.models import *
+"""
+
+
+ADMIN = 1
+PRODUCT_OWNER = 2
+KANBAN_MASTER = 3
+DEV = 4
+
+
+"""
 
 [UserRole(i).save() for i in range(1,5)]
-[ProjectRole(i).save() for i in range(2,5)]
+[GroupRole(i).save() for i in range(2,5)]
 
 pwd = "demodemo1"
 
@@ -31,33 +41,33 @@ po.save()
 po.roles.add(UserRole.objects.get(id=2))
 po.save()
 
-g1 = Group.objects.create()
-g2 = Group.objects.create()
-g3 = Group.objects.create()
+g1 = Group.objects.create(kanban_master=km, product_owner=po)
+g2 = Group.objects.create(kanban_master=km, product_owner=dev1)
+g3 = Group.objects.create(kanban_master=dev2, product_owner=po)
 
 ug1 = UserGroup(member=dev1, group=g1)
 ug1.save()
-ug1.roles.add(ProjectRole.objects.get(id=4))
+ug1.roles.add(GroupRole.objects.get(id=4))
 ug1.save()
 
 ug2 = UserGroup(member=dev2, group=g1)
 ug2.save()
-ug2.roles.add(ProjectRole.objects.get(id=4))
+ug2.roles.add(GroupRole.objects.get(id=4))
 ug2.save()
 
 ug3 = UserGroup(member=km, group=g1)
 ug3.save()
-ug3.roles.add(ProjectRole.objects.get(id=3))
+ug3.roles.add(GroupRole.objects.get(id=3))
 ug3.save()
 
 ug4 = UserGroup(member=km, group=g2)
 ug4.save()
-ug4.roles.add(ProjectRole.objects.get(id=3))
-ug4.roles.add(ProjectRole.objects.get(id=4))
+ug4.roles.add(GroupRole.objects.get(id=3))
+ug4.roles.add(GroupRole.objects.get(id=4))
 ug4.save()
 
-p1 = Project(group=g1, name="Projekt 1", owner=po)
+p1 = Project(group=g1, name="Projekt 1", customer="Mahnic")
 p1.save()
 
-p2 = Project(group=g1, name="Projekt 2", owner=km)
+p2 = Project(group=g1, name="Projekt 2", customer="Furst")
 p2.save()

@@ -4,7 +4,6 @@ import datetime
 
 
 class UserManager(BaseUserManager):
-    # **extra_fields, npr. za povezave
     def create_user(self, email, password, first_name, last_name, is_superuser=False, is_admin=False, is_staff=False, **extra_fields):
         if not email:
             raise ValueError('Users must have an email address')
@@ -37,14 +36,14 @@ class UserManager(BaseUserManager):
 
 class UserRole(models.Model):
     ADMIN = 1
-    PROJECT_OWNER = 2
+    PRODUCT_OWNER = 2
     KANBAN_MASTER = 3
     DEV = 4
 
     ROLE_CHOICES = (
         (ADMIN, 'Administrator'),
-        (PROJECT_OWNER, 'Naročnik'),
-        (KANBAN_MASTER, 'Kanban Master'),
+        (PRODUCT_OWNER, 'Product Owner'),
+        (KANBAN_MASTER, 'KanbanMaster'),
         (DEV, 'Razvijalec')
     )
 
@@ -54,14 +53,14 @@ class UserRole(models.Model):
         return self.get_id_display()
 
 
-class ProjectRole(models.Model):
-    PROJECT_OWNER = 2
+class GroupRole(models.Model):
+    PRODUCT_OWNER = 2
     KANBAN_MASTER = 3
     DEV = 4
 
     ROLE_CHOICES = (
-        (PROJECT_OWNER, 'Naročnik'),
-        (KANBAN_MASTER, 'Kanban Master'),
+        (PRODUCT_OWNER, 'Product Owner'),
+        (KANBAN_MASTER, 'KanbanMaster'),
         (DEV, 'Razvijalec')
     )
 
@@ -103,18 +102,24 @@ class User(AbstractBaseUser):
 
 class Group(models.Model):
     id = models.AutoField(primary_key=True)
+    # group_km = user field, kjer so grupe kjer je user km
+    kanban_master = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='group_km')
+    product_owner = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='group_po')
+
+    def clean(self):
+        pass
 
 
 class UserGroup(models.Model):
     member = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, null=False, on_delete=models.CASCADE)
-    roles = models.ManyToManyField(ProjectRole, null=False)
+    roles = models.ManyToManyField(GroupRole)
     is_active = models.BooleanField(default=True)
 
 
 class Project(models.Model):
     group = models.ForeignKey(Group, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
-    owner = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
+    customer = models.CharField(max_length=255, null=False, default="") # narocnik
     date_start = models.DateField(default=datetime.date.today)
     date_end = models.DateField(default=datetime.date.today()+datetime.timedelta(days=5))

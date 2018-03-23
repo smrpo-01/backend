@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, PermissionsMixin)
+from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
+from django.utils import timezone
 import datetime
 
 
@@ -68,6 +69,50 @@ class GroupRole(models.Model):
 
     def __str__(self):
         return self.get_id_display()
+
+
+class Setting(models.Model):
+    """
+    ip_lock_time
+    max_attempts
+    etc.
+    """
+    key = models.CharField(max_length=255, unique=True)
+    value = models.CharField(max_length=255)
+
+    def __str__(self):
+        return '%s - %s' % (self.key, self.value)
+
+
+class LoginAttempt(models.Model):
+    ip = models.CharField(max_length=40)
+    unlock_date = models.DateTimeField(default=timezone.now)
+    counter = models.IntegerField(default=0)
+
+    def success(self):
+        self.counter = 0
+        self.save()
+
+    def fail(self):
+        self.counter += 1
+        max_attempts = int(Setting.objects.get_or_create(key='max_attempts')[0].value)
+        if self.counter >= max_attempts:
+            try:
+                lock_time = int(Setting.objects.get_or_create(key='ip_lock_time')[0].value)
+            except:
+                lock_time = 1
+            self.unlock_date = timezone.now() + datetime.timedelta(minutes=lock_time)
+        self.save()
+
+    def can_login(self):
+        now = timezone.now()
+        max_attempts = int(Setting.objects.get_or_create(key='max_attempts')[0].value)
+        if self.counter < max_attempts or self.unlock_date < now:
+            return True
+        return False
+
+    def __str__(self):
+        return 'IP: %s, Attempts: %s' % (self.ip, self.counter)
 
 
 class User(AbstractBaseUser):

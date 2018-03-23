@@ -10,6 +10,9 @@ DEV = 4
 
 """
 
+Setting(key='ip_lock_time', value='3').save() # ip_lock_time = 3min
+Setting(key='max_attempts', value='3').save() # max num of failed attempts
+
 [UserRole(i).save() for i in range(1,5)]
 [GroupRole(i).save() for i in range(2,5)]
 

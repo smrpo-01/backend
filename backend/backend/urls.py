@@ -24,6 +24,8 @@ from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_jwt.views import verify_jwt_token
 
+from app.views import ObtainJWTView
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^graphiql', csrf_exempt(GraphQLView.as_view(graphiql=True))),
@@ -31,4 +33,5 @@ urlpatterns = [
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^api-token-verify/', verify_jwt_token),
+    url(r'^login/', view=ObtainJWTView.as_view(), name='login'),
 ]

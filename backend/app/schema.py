@@ -7,37 +7,31 @@ from . import models
 class UserType(DjangoObjectType):
     class Meta:
         model = models.User
-        interfaces = (graphene.Node, )
 
 
 class UserRoleType(DjangoObjectType):
     class Meta:
         model = models.UserRole
-        interfaces = (graphene.Node, )
 
 
 class ProjectRoleType(DjangoObjectType):
     class Meta:
         model = models.ProjectRole
-        interfaces = (graphene.Node,)
 
 
 class UserGroupType(DjangoObjectType):
     class Meta:
         model = models.UserGroup
-        interfaces = (graphene.Node,)
 
 
 class GroupType(DjangoObjectType):
     class Meta:
         model = models.Group
-        interfaces = (graphene.Node,)
 
 
 class ProjectType(DjangoObjectType):
     class Meta:
         model = models.Project
-        interfaces = (graphene.Node,)
 
 
 class Query(graphene.AbstractType):

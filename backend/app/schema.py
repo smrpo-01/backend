@@ -52,7 +52,7 @@ class ProjectType(DjangoObjectType):
         model = models.Project
 
 
-class Query(graphene.AbstractType):
+class Query(graphene.ObjectType):
     all_users = graphene.List(UserType)
     all_paginated_users = graphene.Field(UserPaginatedType,
                                          page=graphene.Int(),
@@ -92,3 +92,7 @@ class Query(graphene.AbstractType):
         if info.context.user.is_authenticated:
             return info.context.user
         return None
+
+
+class Mutation(graphene.ObjectType):
+    pass

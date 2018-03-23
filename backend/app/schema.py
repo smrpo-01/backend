@@ -2,11 +2,20 @@ import graphene
 from graphene_django.types import DjangoObjectType
 
 from . import models
+from backend.utils import get_paginator
 
 
 class UserType(DjangoObjectType):
     class Meta:
         model = models.User
+
+
+class UserPaginatedType(graphene.ObjectType):
+    page = graphene.Int()
+    pages = graphene.Int()
+    has_next = graphene.Boolean()
+    has_prev = graphene.Boolean()
+    objects = graphene.List(UserType)
 
 
 class UserRoleType(DjangoObjectType):
@@ -44,6 +53,9 @@ class ProjectType(DjangoObjectType):
 
 class Query(graphene.AbstractType):
     all_users = graphene.List(UserType)
+    all_paginated_users = graphene.Field(UserPaginatedType,
+                                         page=graphene.Int(),
+                                         page_size=graphene.Int(default_value=3))
     all_user_roles = graphene.List(UserRoleType)
     all_group_roles = graphene.List(GroupRoleType)
     all_user_groups = graphene.List(UserGroupType)
@@ -54,6 +66,11 @@ class Query(graphene.AbstractType):
 
     def resolve_all_users(self, info):
         return models.User.objects.all()
+
+    def resolve_all_paginated_users(self, info, page, page_size):
+        p_size = page_size
+        qs = models.User.objects.all()
+        return get_paginator(qs, p_size, page, UserPaginatedType)
 
     def resolve_all_user_roles(self, info):
         return models.UserRole.objects.all()

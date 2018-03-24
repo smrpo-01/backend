@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, user_logged_in
+from django.contrib.auth import authenticate, user_logged_in, get_user_model
 
 from rest_framework import serializers
 from rest_framework_jwt.serializers import JSONWebTokenSerializer, jwt_payload_handler, jwt_encode_handler
@@ -31,8 +31,8 @@ class JWTSerializer(JSONWebTokenSerializer):
                     attempt.success()
 
                     return {
-                        'token': jwt_encode_handler(payload),
-                        'user': user
+                        'user': user,
+                        'token': jwt_encode_handler(payload)
                     }
                 else:
                     attempt.fail()
@@ -45,3 +45,16 @@ class JWTSerializer(JSONWebTokenSerializer):
             msg = 'Must include "{username_field}" and "password".'
             msg = msg.format(username_field=self.username_field)
             raise serializers.ValidationError(msg)
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta(object):
+        model = get_user_model()
+        fields = ('id','email', 'first_name', 'last_name', 'roles')
+
+
+def jwt_response_payload_handler(token, user=None, request=None):
+    return {
+        'token': token,
+        'user': UserSerializer(user, context={'request': request}).data
+    }

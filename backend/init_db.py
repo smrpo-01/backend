@@ -14,7 +14,7 @@ Setting(key='ip_lock_time', value='1').save() # ip_lock_time = 3min
 Setting(key='max_attempts', value='3').save() # max num of failed attempts
 
 [UserRole(i).save() for i in range(1,5)]
-[GroupRole(i).save() for i in range(2,5)]
+[TeamRole(i).save() for i in range(2, 5)]
 
 pwd = "demodemo1"
 
@@ -44,33 +44,33 @@ po.save()
 po.roles.add(UserRole.objects.get(id=2))
 po.save()
 
-g1 = Group.objects.create(kanban_master=km, product_owner=po)
-g2 = Group.objects.create(kanban_master=km, product_owner=dev1)
-g3 = Group.objects.create(kanban_master=dev2, product_owner=po)
+t1 = Team.objects.create(kanban_master=km, product_owner=po)
+t2 = Team.objects.create(kanban_master=km, product_owner=dev1)
+t3 = Team.objects.create(kanban_master=dev2, product_owner=po)
 
-ug1 = UserGroup(member=dev1, group=g1)
+ug1 = UserTeam(member=dev1, team=t1)
 ug1.save()
-ug1.roles.add(GroupRole.objects.get(id=4))
+ug1.roles.add(TeamRole.objects.get(id=4))
 ug1.save()
 
-ug2 = UserGroup(member=dev2, group=g1)
+ug2 = UserTeam(member=dev2, team=t1)
 ug2.save()
-ug2.roles.add(GroupRole.objects.get(id=4))
+ug2.roles.add(TeamRole.objects.get(id=4))
 ug2.save()
 
-ug3 = UserGroup(member=km, group=g1)
+ug3 = UserTeam(member=km, team=t1)
 ug3.save()
-ug3.roles.add(GroupRole.objects.get(id=3))
+ug3.roles.add(TeamRole.objects.get(id=3))
 ug3.save()
 
-ug4 = UserGroup(member=km, group=g2)
+ug4 = UserTeam(member=km, team=t2)
 ug4.save()
-ug4.roles.add(GroupRole.objects.get(id=3))
-ug4.roles.add(GroupRole.objects.get(id=4))
+ug4.roles.add(TeamRole.objects.get(id=3))
+ug4.roles.add(TeamRole.objects.get(id=4))
 ug4.save()
 
-p1 = Project(group=g1, name="Projekt 1", customer="Mahnic")
+p1 = Project(team=t1, name="Projekt 1", customer="Mahnic")
 p1.save()
 
-p2 = Project(group=g1, name="Projekt 2", customer="Furst")
+p2 = Project(team=t1, name="Projekt 2", customer="Furst")
 p2.save()

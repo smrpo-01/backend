@@ -1,5 +1,7 @@
 import graphene
 from graphene_django.types import DjangoObjectType
+from keyring import set_password
+
 from . import models
 from backend.utils import HelperClass
 
@@ -27,9 +29,9 @@ class UserRoleType(DjangoObjectType):
         return str(instance)
 
 
-class GroupRoleType(DjangoObjectType):
+class TeamRoleType(DjangoObjectType):
     class Meta:
-        model = models.GroupRole
+        model = models.TeamRole
 
     name = graphene.String()
 
@@ -37,14 +39,14 @@ class GroupRoleType(DjangoObjectType):
         return str(instance)
 
 
-class UserGroupType(DjangoObjectType):
+class UserTeamType(DjangoObjectType):
     class Meta:
-        model = models.UserGroup
+        model = models.UserTeam
 
 
-class GroupType(DjangoObjectType):
+class TeamType(DjangoObjectType):
     class Meta:
-        model = models.Group
+        model = models.Team
 
 
 class ProjectType(DjangoObjectType):
@@ -58,9 +60,9 @@ class Query(graphene.ObjectType):
                                          page=graphene.Int(),
                                          page_size=graphene.Int(default_value=3))
     all_user_roles = graphene.List(UserRoleType)
-    all_group_roles = graphene.List(GroupRoleType)
-    all_user_groups = graphene.List(UserGroupType)
-    all_groups = graphene.List(GroupType)
+    all_team_roles = graphene.List(TeamRoleType)
+    all_user_teams = graphene.List(UserTeamType)
+    all_teams = graphene.List(TeamType)
     all_projects = graphene.List(ProjectType)
 
     current_user = graphene.Field(UserType)
@@ -76,14 +78,14 @@ class Query(graphene.ObjectType):
     def resolve_all_user_roles(self, info):
         return models.UserRole.objects.all()
 
-    def resolve_all_group_roles(self, info):
-        return models.GroupRole.objects.all()
+    def resolve_all_team_roles(self, info):
+        return models.TeamRole.objects.all()
 
-    def resolve_all_user_groups(self, info):
-        return models.UserGroup.objects.all()
+    def resolve_all_user_teams(self, info):
+        return models.UserTeam.objects.all()
 
-    def resolve_all_groups(self, info):
-        return models.Group.objects.all()
+    def resolve_all_teams(self, info):
+        return models.Team.objects.all()
 
     def resolve_all_projects(self, info):
         return models.Project.objects.all()
@@ -93,6 +95,106 @@ class Query(graphene.ObjectType):
             return info.context.user
         return None
 
+"""
+class PersonInput(graphene.InputObjectType):
+    name = graphene.String(required=True)
+    age = graphene.Int(required=True)
+
+class CreatePerson(graphene.Mutation):
+    class Arguments:
+        person_data = PersonInput(required=True)
+
+    person = graphene.Field(Person)
+
+    @staticmethod
+    def mutate(root, info, person_data=None):
+        person = Person(
+            name=person_data.name,
+            age=person_data.age
+        )
+        return CreatePerson(person=person)
+"""
+
+
+class CreateUserInput(graphene.InputObjectType):
+    email = graphene.String(required=True)
+    password = graphene.String(required=True)
+    first_name = graphene.String(required=True)
+    last_name = graphene.String(required=True)
+    roles = graphene.List(graphene.Int)
+
+
+class EditUserInput(graphene.InputObjectType):
+    id = graphene.Int(required=True)
+    email = graphene.String(required=True)
+    password = graphene.String(required=True)
+    first_name = graphene.String(required=True)
+    last_name = graphene.String(required=True)
+    roles = graphene.List(graphene.Int)
+
+
+class CreateUser(graphene.Mutation):
+    class Arguments:
+        user_data = CreateUserInput(required=True)
+
+    user = graphene.Field(UserType)
+
+    @staticmethod
+    def mutate(root, info, user_data=None):
+        user = models.User.objects.create_user(
+            email=user_data.email,
+            password=user_data.password,
+            first_name=user_data.first_name,
+            last_name=user_data.last_name,
+        )
+        user.save()
+        role_ids = user_data.roles
+        for i in role_ids:
+            user.roles.add(models.UserRole.objects.get(id=i))
+        user.save()
+        return CreateUser(user=user)
+
+
+class EditUser(graphene.Mutation):
+    class Arguments:
+        user_data = EditUserInput(required=True)
+
+    user = graphene.Field(UserType)
+
+    @staticmethod
+    def mutate(root, info, user_data=None):
+        u = models.User.objects.get(id=user_data.id)
+
+        u.email = user_data.email
+        u.set_password(user_data.password)
+        u.save()
+        u.first_name = user_data.first_name
+        u.last_name = user_data.last_name
+        u.save()
+        role_ids = user_data.roles
+        u.roles.through.objects.filter(user=u).delete()
+        u.save()
+        for i in role_ids:
+            u.roles.add(models.UserRole.objects.get(id=i))
+        u.save()
+        return EditUser(user=u)
+
+
+class DeleteUser(graphene.Mutation):
+    class Arguments:
+        user_id = graphene.Int(required=True)
+
+    user = graphene.Field(UserType)
+
+    @staticmethod
+    def mutate(root, info, user_id=None):
+        u = models.User.objects.get(id=user_id)
+        u.is_active = False
+        u.save()
+        return DeleteUser(user=u)
+
 
 class Mutation(graphene.ObjectType):
-    pass
+    create_user = CreateUser.Field()
+    edit_user = EditUser.Field()
+    delete_user = DeleteUser.Field()

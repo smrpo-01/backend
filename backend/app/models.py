@@ -54,7 +54,7 @@ class UserRole(models.Model):
         return self.get_id_display()
 
 
-class GroupRole(models.Model):
+class TeamRole(models.Model):
     PRODUCT_OWNER = 2
     KANBAN_MASTER = 3
     DEV = 4
@@ -123,7 +123,7 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
 
     roles = models.ManyToManyField(UserRole)
-    groups = models.ManyToManyField('Group', through='UserGroup', related_name='members')
+    teams = models.ManyToManyField('Team', through='UserTeam', related_name='members')
 
     objects = UserManager()
 
@@ -145,25 +145,25 @@ class User(AbstractBaseUser):
         return True
 
 
-class Group(models.Model):
+class Team(models.Model):
     id = models.AutoField(primary_key=True)
-    # group_km = user field, kjer so grupe kjer je user km
-    kanban_master = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='group_km')
-    product_owner = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='group_po')
+    # team_km = user field, kjer so grupe kjer je user km
+    kanban_master = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='team_km')
+    product_owner = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='team_po')
 
     def clean(self):
         pass
 
 
-class UserGroup(models.Model):
+class UserTeam(models.Model):
     member = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, null=False, on_delete=models.CASCADE)
-    roles = models.ManyToManyField(GroupRole)
+    team = models.ForeignKey(Team, null=False, on_delete=models.CASCADE)
+    roles = models.ManyToManyField(TeamRole)
     is_active = models.BooleanField(default=True)
 
 
 class Project(models.Model):
-    group = models.ForeignKey(Group, null=False, on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
     customer = models.CharField(max_length=255, null=False, default="") # narocnik
     date_start = models.DateField(default=datetime.date.today)

@@ -5,6 +5,9 @@ from keyring import set_password
 from . import models
 from backend.utils import HelperClass
 
+# schemas import
+from app.schemas.team_schema import *
+
 
 class UserType(DjangoObjectType):
     class Meta:
@@ -27,27 +30,6 @@ class UserRoleType(DjangoObjectType):
 
     def resolve_name(instance, info):
         return str(instance)
-
-
-class TeamRoleType(DjangoObjectType):
-    class Meta:
-        model = models.TeamRole
-
-    name = graphene.String()
-
-    def resolve_name(instance, info):
-        return str(instance)
-
-
-class UserTeamType(DjangoObjectType):
-    class Meta:
-        model = models.UserTeam
-
-
-class TeamType(DjangoObjectType):
-    class Meta:
-        model = models.Team
-
 
 class ProjectType(DjangoObjectType):
     class Meta:
@@ -178,3 +160,5 @@ class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
     edit_user = EditUser.Field()
     delete_user = DeleteUser.Field()
+
+    create_team = CreateTeam.Field()

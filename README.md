@@ -19,3 +19,24 @@ python3 manage.py migrate
 # da dobiš token userja - avtentikacija
 curl -X POST -d "email=admin@demo.com&password=demodemo1" http://localhost:8000/api-token-auth/
 ```
+
+## Mutacija
+
+```
+mutation Mutation {
+  createUser (userData: {
+    email:"test@demo.com",
+    password:"demodemo1",
+    firstName:"Testni",
+    lastName:"Uporabnik",
+    roles:[3,4]
+  }) {
+    user {
+      email
+      roles {
+        id
+      }
+    }
+  }
+}
+```

@@ -1,6 +1,5 @@
 import graphene
 from graphene_django.types import DjangoObjectType
-from keyring import set_password
 
 from . import models
 from backend.utils import HelperClass

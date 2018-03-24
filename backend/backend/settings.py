@@ -96,7 +96,10 @@ REST_FRAMEWORK = {
     ),
 }
 
-
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    'app.serializers.jwt_response_payload_handler',
+}
 
 
 # Database

@@ -108,9 +108,7 @@ class CreateTeam(graphene.Mutation):
         return CreateTeam(team=team, ok=True)
 
 
-
-
-class Query(graphene.ObjectType):
+class TeamQueries(graphene.ObjectType):
     all_team_roles = graphene.List(TeamRoleType)
     all_user_teams = graphene.List(UserTeamType)
     all_teams = graphene.List(TeamType)
@@ -129,5 +127,5 @@ class Query(graphene.ObjectType):
         return models.UserTeamLog.objects.all()
 
 
-class Mutation(graphene.ObjectType):
+class TeamMutations(graphene.ObjectType):
     create_team = CreateTeam.Field()

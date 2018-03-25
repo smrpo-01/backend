@@ -1,11 +1,8 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 
-from . import models
+from .. import models
 from backend.utils import HelperClass
-
-# schemas import
-from app.schemas.team_schema import *
 
 
 class UserType(DjangoObjectType):
@@ -30,20 +27,13 @@ class UserRoleType(DjangoObjectType):
     def resolve_name(instance, info):
         return str(instance)
 
-class ProjectType(DjangoObjectType):
-    class Meta:
-        model = models.Project
 
-
-class Query(graphene.ObjectType):
+class UserQueries(graphene.ObjectType):
     all_users = graphene.List(UserType)
     all_paginated_users = graphene.Field(UserPaginatedType,
                                          page=graphene.Int(),
                                          page_size=graphene.Int(default_value=3))
     all_user_roles = graphene.List(UserRoleType)
-
-    all_projects = graphene.List(ProjectType)
-
     current_user = graphene.Field(UserType)
 
     def resolve_all_users(self, info):
@@ -56,11 +46,6 @@ class Query(graphene.ObjectType):
 
     def resolve_all_user_roles(self, info):
         return models.UserRole.objects.all()
-
-
-
-    def resolve_all_projects(self, info):
-        return models.Project.objects.all()
 
     def resolve_current_user(self, info):
         if info.context.user.is_authenticated:
@@ -79,7 +64,7 @@ class CreateUserInput(graphene.InputObjectType):
 class EditUserInput(graphene.InputObjectType):
     id = graphene.Int(required=True)
     email = graphene.String(required=True)
-    password = graphene.String(required=True)
+    password = graphene.String()
     first_name = graphene.String(required=True)
     last_name = graphene.String(required=True)
     roles = graphene.List(graphene.Int)
@@ -118,11 +103,10 @@ class EditUser(graphene.Mutation):
         u = models.User.objects.get(id=user_data.id)
 
         u.email = user_data.email
-        u.set_password(user_data.password)
-        u.save()
+        if user_data.password:
+            u.set_password(user_data.password)
         u.first_name = user_data.first_name
         u.last_name = user_data.last_name
-        u.save()
         role_ids = user_data.roles
         u.roles.through.objects.filter(user=u).delete()
         u.save()
@@ -146,7 +130,7 @@ class DeleteUser(graphene.Mutation):
         return DeleteUser(user=u)
 
 
-class Mutation(graphene.ObjectType):
+class UserMutations(graphene.ObjectType):
     create_user = CreateUser.Field()
     edit_user = EditUser.Field()
     delete_user = DeleteUser.Field()

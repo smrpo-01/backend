@@ -41,9 +41,7 @@ class Query(graphene.ObjectType):
                                          page=graphene.Int(),
                                          page_size=graphene.Int(default_value=3))
     all_user_roles = graphene.List(UserRoleType)
-    all_team_roles = graphene.List(TeamRoleType)
-    all_user_teams = graphene.List(UserTeamType)
-    all_teams = graphene.List(TeamType)
+
     all_projects = graphene.List(ProjectType)
 
     current_user = graphene.Field(UserType)
@@ -59,14 +57,7 @@ class Query(graphene.ObjectType):
     def resolve_all_user_roles(self, info):
         return models.UserRole.objects.all()
 
-    def resolve_all_team_roles(self, info):
-        return models.TeamRole.objects.all()
 
-    def resolve_all_user_teams(self, info):
-        return models.UserTeam.objects.all()
-
-    def resolve_all_teams(self, info):
-        return models.Team.objects.all()
 
     def resolve_all_projects(self, info):
         return models.Project.objects.all()
@@ -159,5 +150,3 @@ class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
     edit_user = EditUser.Field()
     delete_user = DeleteUser.Field()
-
-    create_team = CreateTeam.Field()

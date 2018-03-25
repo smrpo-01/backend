@@ -44,9 +44,9 @@ po.save()
 po.roles.add(UserRole.objects.get(id=2))
 po.save()
 
-t1 = Team.objects.create(kanban_master=km, product_owner=po)
-t2 = Team.objects.create(kanban_master=km, product_owner=dev1)
-t3 = Team.objects.create(kanban_master=dev2, product_owner=po)
+t1 = Team.objects.create(kanban_master=km, product_owner=po, name="t1")
+t2 = Team.objects.create(kanban_master=km, product_owner=dev1, name="t2")
+t3 = Team.objects.create(kanban_master=dev2, product_owner=po, name="t3")
 
 ug1 = UserTeam(member=dev1, team=t1)
 ug1.save()
@@ -68,6 +68,19 @@ ug4.save()
 ug4.roles.add(TeamRole.objects.get(id=3))
 ug4.roles.add(TeamRole.objects.get(id=4))
 ug4.save()
+
+utl1 = UserTeamLog(userteam_id=ug1, action="User added to team")
+utl1.save()
+
+utl2 = UserTeamLog(userteam_id=ug2, action="User added to team")
+utl2.save()
+
+utl3 = UserTeamLog(userteam_id=ug3, action="User added to team")
+utl3.save()
+
+utl4 = UserTeamLog(userteam_id=ug4, action="User added to team")
+utl4.save()
+
 
 p1 = Project(team=t1, name="Projekt 1", customer="Mahnic")
 p1.save()

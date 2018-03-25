@@ -150,6 +150,7 @@ class Team(models.Model):
     # team_km = user field, kjer so grupe kjer je user km
     kanban_master = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='team_km')
     product_owner = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='team_po')
+    name = models.CharField(max_length=255)
 
     def clean(self):
         pass
@@ -162,9 +163,17 @@ class UserTeam(models.Model):
     is_active = models.BooleanField(default=True)
 
 
+class UserTeamLog(models.Model):
+    id = models.AutoField(primary_key=True)
+    userteam_id = models.ForeignKey(UserTeam, null=False, on_delete=models.CASCADE)
+    action = models.CharField(max_length=255)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+
 class Project(models.Model):
     team = models.ForeignKey(Team, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
     customer = models.CharField(max_length=255, null=False, default="") # narocnik
     date_start = models.DateField(default=datetime.date.today)
     date_end = models.DateField(default=datetime.date.today()+datetime.timedelta(days=5))
+

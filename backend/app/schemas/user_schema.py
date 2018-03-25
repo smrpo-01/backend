@@ -68,6 +68,7 @@ class EditUserInput(graphene.InputObjectType):
     first_name = graphene.String(required=True)
     last_name = graphene.String(required=True)
     roles = graphene.List(graphene.Int)
+    is_active = graphene.Boolean(required=True)
 
 
 class CreateUser(graphene.Mutation):
@@ -107,6 +108,7 @@ class EditUser(graphene.Mutation):
             u.set_password(user_data.password)
         u.first_name = user_data.first_name
         u.last_name = user_data.last_name
+        u.is_active = user_data.is_active
         role_ids = user_data.roles
         u.roles.through.objects.filter(user=u).delete()
         u.save()

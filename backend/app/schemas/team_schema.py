@@ -109,14 +109,7 @@ class CreateTeam(graphene.Mutation):
         return CreateTeam(team=team, ok=True)
 
 '''
-class DeleteUserTeam(graphene.Mutation):
-    # delete user from team (inactive)
-    class Arguments:
-        user_team_id = graphene.Int(required=True)
 
-class EditUserTeam(graphene.Mutation):
-    # change roles of user in a team
-    
 
 '''
 
@@ -139,12 +132,14 @@ class EditTeam(graphene.Mutation):
     team = graphene.Field(TeamType)
 
     @staticmethod
-    def mutate(root, info, team_data=None):
+    def mutate(root, info, team_data=None, ok=False):
         team = models.Team.objects.get(id=team_data.team_id)
+        added_users_id = [user.id for user in team_data.members]
         team_members = []
         team_members_id = []
         old_member_roles = {}
         newly_added_users_ids = []
+
         if team_data.members is not None:
             for member in team_data.members:
                 try:
@@ -159,7 +154,7 @@ class EditTeam(graphene.Mutation):
                     old_member_roles[team_member] = old_roles
                     team_members.append(team_member)
                     team_members_id.append(member.id)
-                    
+
                 except ObjectDoesNotExist:
                     # nova dodaja v ekipo
                     team_member = models.UserTeam(member=models.User.objects.get(id=member.id), team=team)
@@ -190,14 +185,14 @@ class EditTeam(graphene.Mutation):
             for team_role in new_user_roles:
                 team_roles.append(models.UserRole.objects.get(id=team_role))
                 if team_role == 2:
-                    if team_data.po_id != u.id:
+                    if (team_data.po_id != u.id) and (u.id in added_users_id):
                         if team_data.po_id is None:
                             error = 'PO role given but not correctly assigned to team'
                         else:
                             error = 'PO assigned: %d, is not the same as: %d' % (team_data.po_id, u.id)
                     no_po += 1
                 elif team_role == 3:
-                    if team_data.km_id != u.id:
+                    if team_data.km_id != u.id and (u.id in added_users_id):
                         if team_data.km_id is None:
                             error = 'KS role given but not correctly assigned to team'
                         else:
@@ -237,6 +232,12 @@ class EditTeam(graphene.Mutation):
 
         # no errors save everything and add to log
         for user in team_members:
+            if user.member.id in added_users_id:
+                if user.is_active is False:
+                    user.is_active = True
+                    user_team_log = models.UserTeamLog(action="User reactivated",
+                                                       userteam=user)
+                    user_team_log.save()
             user.save()
 
         for user_id in newly_added_users_ids:
@@ -252,6 +253,47 @@ class EditTeam(graphene.Mutation):
             team.save()
 
         return EditTeam(team=team, ok=True)
+
+
+class DeleteUserTeam(graphene.Mutation):
+    # delete user from team (inactive)
+    class Arguments:
+        user_team_id = graphene.Int(required=True)
+
+    ok = graphene.Boolean()
+    team = graphene.Field(TeamType)
+
+    @staticmethod
+    def mutate(root, info, team_data=None, ok=False, user_team_id=None):
+        from django.db.models import Q
+
+        user_team = models.UserTeam.objects.get(id=user_team_id)
+        team_without_user = list(models.UserTeam.objects.filter(~Q(id=user_team_id), team=user_team.team))
+
+        no_po = 0
+        no_km = 0
+        no_dev = 0
+        for user in team_without_user:
+            for role in list(user.roles.all()):
+                role_id = role.id
+                if role_id == 2:
+                    no_po += 1
+                elif role_id == 3:
+                    no_km += 1
+                elif role_id == 4:
+                    no_dev += 1
+
+        if (no_dev == 0) or (no_km != 1) or (no_po != 1):
+            raise GraphQLError('Insufficient number of team members: noPO: %d, noKM: %d, noDev: %d' % (no_po, no_km, no_dev))
+
+        if user_team.is_active is True:
+            user_team.is_active = False
+            user_team.save()
+            user_team_log = models.UserTeamLog(action="User deactivated",
+                                               userteam=user_team)
+            user_team_log.save()
+
+        return EditTeam(team=user_team.team, ok=True)
 
 
 class TeamQueries(graphene.ObjectType):
@@ -276,3 +318,4 @@ class TeamQueries(graphene.ObjectType):
 class TeamMutations(graphene.ObjectType):
     create_team = CreateTeam.Field()
     edit_team = EditTeam.Field()
+    delete_user_team = DeleteUserTeam.Field()

@@ -40,3 +40,33 @@ mutation Mutation {
   }
 }
 ```
+
+### Mutacija createTeam
+
+```
+mutation Mutate {
+  createTeam(teamData: {
+      name: "test1", 
+      kmId: 25, 
+      poId: 28, 
+      members: [
+                {id: 25, roles: [3,4]},
+                {id: 28, roles: [2]}
+                ]}) {
+    ok
+    id
+    team{
+      kanbanMaster {
+        id
+      }
+      productOwner {
+        id
+      }
+      members{
+        email
+      }
+      
+    }
+  }
+}
+```

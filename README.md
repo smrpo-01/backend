@@ -3,47 +3,48 @@
 Naj bi blo vse v requirements.txt. Če se da development v venv, da so v 'requirements.txt' samo potrebni.
 
 ```
-pip3 freeze > requirements.txt # da dobis requirements
+pip freeze > requirements.txt # da dobis requirements
 
-pip3 install -r requirements.txt # install modules
-python3 manage.py runserver # run server
+pip install -r requirements.txt # install modules
+python manage.py runserver # run server
 
 
 # Migracije
-python3 manage.py makemigrations
-python3 manage.py migrate
+manage.py makemigrations
+manage.py migrate
+
+# brisanje baze
+manage.py flush
+
+# Nalaganje/shranjevanje podatkov
+manage.py dumpdata > data_dump.json
+manage.py loaddata data_dump.json
 ```
 
-## JWT
-```
-# da dobiš token userja - avtentikacija
-curl -X POST -d "email=admin@demo.com&password=demodemo1" http://localhost:8000/api-token-auth/
-```
+## JWT avtentikacija
+Na /login/
 
-## Mutacija
+## Mutacije
 
 ```
 mutation Mutation {
   createUser (userData: {
-    email:"test@demo.com",
-    password:"demodemo1",
-    firstName:"Testni",
-    lastName:"Uporabnik",
-    roles:[3,4]
+    email: "test@demo.com",
+    password: "demodemo1",
+    firstName: "Testni",
+    lastName: "Uporabnik",
+    roles: [3,4]
   }) {
     user {
       email
       roles {
-        id
+        name
       }
     }
   }
 }
-```
 
-### Mutacija createTeam
 
-```
 mutation Mutate {
   createTeam(teamData: {
       name: "test1", 

@@ -51,11 +51,12 @@ mutation Mutate {
       poId: 28, 
       members: [
                 {id: 25, roles: [3,4]},
-                {id: 28, roles: [2]}
+                {id: 28, roles: [2]},
+        				{id: 27, roles: []}
                 ]}) {
     ok
-    id
     team{
+    	id
       kanbanMaster {
         id
       }

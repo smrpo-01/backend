@@ -90,4 +90,15 @@ mutation Mutate {
   }
 }
 
+// deactivira userja
+mutation Mutate {
+  deleteUserTeam(userTeamId: 46) {
+    ok
+    team {
+      id
+    }
+  }
+}
+
+
 ```

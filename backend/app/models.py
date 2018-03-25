@@ -72,11 +72,6 @@ class TeamRole(models.Model):
 
 
 class Setting(models.Model):
-    """
-    ip_lock_time
-    max_attempts
-    etc.
-    """
     key = models.CharField(max_length=255, unique=True)
     value = models.CharField(max_length=255)
 
@@ -146,7 +141,6 @@ class User(AbstractBaseUser):
 
 
 class Team(models.Model):
-    id = models.AutoField(primary_key=True)
     # team_km = user field, kjer so grupe kjer je user km
     kanban_master = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='team_km')
     product_owner = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='team_po')
@@ -164,8 +158,7 @@ class UserTeam(models.Model):
 
 
 class UserTeamLog(models.Model):
-    id = models.AutoField(primary_key=True)
-    userteam_id = models.ForeignKey(UserTeam, null=False, on_delete=models.CASCADE)
+    userteam = models.ForeignKey(UserTeam, null=False, on_delete=models.CASCADE)
     action = models.CharField(max_length=255)
     timestamp = models.DateTimeField(default=timezone.now)
 

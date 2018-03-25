@@ -1,4 +1,4 @@
-from backend.app.models import *
+from .app.models import *
 """
 
 
@@ -69,16 +69,16 @@ ug4.roles.add(TeamRole.objects.get(id=3))
 ug4.roles.add(TeamRole.objects.get(id=4))
 ug4.save()
 
-utl1 = UserTeamLog(userteam_id=ug1, action="User added to team")
+utl1 = UserTeamLog(userteam=ug1, action="User added to team")
 utl1.save()
 
-utl2 = UserTeamLog(userteam_id=ug2, action="User added to team")
+utl2 = UserTeamLog(userteam=ug2, action="User added to team")
 utl2.save()
 
-utl3 = UserTeamLog(userteam_id=ug3, action="User added to team")
+utl3 = UserTeamLog(userteam=ug3, action="User added to team")
 utl3.save()
 
-utl4 = UserTeamLog(userteam_id=ug4, action="User added to team")
+utl4 = UserTeamLog(userteam=ug4, action="User added to team")
 utl4.save()
 
 

@@ -50,7 +50,7 @@ class JWTSerializer(JSONWebTokenSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = get_user_model()
-        fields = ('id','email', 'first_name', 'last_name', 'roles')
+        fields = ('id', 'email', 'first_name', 'last_name', 'roles')
 
 
 def jwt_response_payload_handler(token, user=None, request=None):

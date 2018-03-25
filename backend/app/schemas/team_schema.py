@@ -2,6 +2,7 @@ from .. import models
 import graphene
 from graphene_django.types import DjangoObjectType
 from graphql import GraphQLError
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class UserIdTeamRoleType(graphene.InputObjectType):
@@ -107,6 +108,90 @@ class CreateTeam(graphene.Mutation):
 
         return CreateTeam(team=team, ok=True)
 
+'''
+class DeleteUserTeam(graphene.Mutation):
+    # delete user from team (inactive)
+    class Arguments:
+        user_team_id = graphene.Int(required=True)
+
+class EditUserTeam(graphene.Mutation):
+    # change roles of user in a team
+    
+
+'''
+
+
+class EditTeamInput(graphene.InputObjectType):
+    team_id = graphene.Int(required=True)
+    km_id = graphene.Int(required=False)
+    po_id = graphene.Int(required=False)
+    members = graphene.List(UserIdTeamRoleType)
+
+
+# add user to existing team
+# change km
+# change po
+class EditTeam(graphene.Mutation):
+    class Arguments:
+        team_data = EditTeamInput(required=True)
+
+    ok = graphene.Boolean()
+    team = graphene.Field(TeamType)
+
+    @staticmethod
+    def mutate(root, info, team_data=None):
+        #if team_data.km_id is not None:
+         #   print("KUL")
+
+        team = models.Team.objects.get(id=team_data.team_id)
+        team_members = []
+        team_members_id = []
+        if team_data.members is not None:
+            for member in team_data.members:
+                try:
+                    # če je že v ekipi ga povlečemo vn
+                    team_member = models.UserTeam.objects.get(team=team, member=models.User.objects.get(id=member.id))
+                    team_member.roles.all().delete()
+                    for role in member.roles:
+                        print("ROLE: " + str(role))
+                        team_member.roles.add(models.TeamRole.objects.get(id=2))
+
+                    team_members.append(team_member)
+                    team_members_id.append(member.id)
+                except ObjectDoesNotExist:
+                    # nova dodaja v ekipo
+                    team_member = models.UserTeam(member=models.User.objects.get(id=member.id), team=team)
+                    for role in member.roles:
+                        team_member.roles.add(models.TeamRole.objects.get(id=role))
+                    team_members.append(team_member)
+                    team_members_id.append(member.id)
+        print("do sm")
+        # get rest of team members
+        for team_member in list(models.UserTeam.objects.filter(team=team)):
+            if team_member.member.id not in team_members_id:
+                team_members.append(team_member)
+
+        print(team_members)
+
+
+
+
+        #team_members_u = []
+        #for member in team_members:
+        #    team_members_u.append(member.member)
+        #print(team_members_u)
+        #for user in team_data.members:
+         #   if user in team.members
+
+
+        #for user in team_data.members:
+
+
+
+
+
+        return EditTeam(team=None, ok=True)
+
 
 
 
@@ -131,3 +216,4 @@ class Query(graphene.ObjectType):
 
 class Mutation(graphene.ObjectType):
     create_team = CreateTeam.Field()
+    edit_team = EditTeam.Field()

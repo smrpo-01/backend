@@ -71,4 +71,23 @@ mutation Mutate {
     }
   }
 }
+
+// poId in kmId optional (če v memberjih tega ne spreminjaš)
+// po tem ukazu more met team pravilno število memberjev (1 km, 1 pm, >0 dev)
+mutation Mutate {
+	editTeam(teamData: 
+    {teamId: 13, poId: 43, kmId: 40, 
+      members: [
+        {id: 43, roles: [2]}, 
+        {id: 40, roles: [3,4]}, 
+        {id:41, roles: [4] }
+      ]})
+  {
+    ok
+    team {
+      id
+    }
+  }
+}
+
 ```

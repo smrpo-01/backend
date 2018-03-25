@@ -141,7 +141,6 @@ class User(AbstractBaseUser):
 
 
 class Team(models.Model):
-    # team_km = user field, kjer so grupe kjer je user km
     kanban_master = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='team_km')
     product_owner = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='team_po')
     name = models.CharField(max_length=255)
@@ -163,10 +162,55 @@ class UserTeamLog(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
 
 
+class Board(models.Model):
+    name = models.CharField(max_length=255, null=False)
+
+
 class Project(models.Model):
     team = models.ForeignKey(Team, null=False, on_delete=models.CASCADE)
+    board = models.ForeignKey(Board, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
     customer = models.CharField(max_length=255, null=False, default="") # narocnik
-    date_start = models.DateField(default=datetime.date.today)
-    date_end = models.DateField(default=datetime.date.today()+datetime.timedelta(days=5))
+    date_start = models.DateField(default=timezone.now)
+    date_end = models.DateField(default=timezone.now()+datetime.timedelta(days=5))
 
+
+class Column(models.Model):
+    board = models.ForeignKey(Board, null=False, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, null=False)
+    position = models.IntegerField(default=0, null=False)
+    wip = models.IntegerField(default=0, null=False)
+    type = models.CharField(max_length=255, null=False)
+    parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
+
+
+class CardType(models.Model):
+    NORMAL = 0
+    SILVER_BULLET = 1
+
+    CARD_TYPES = (
+        (NORMAL, 'Navadna kartica'),
+        (SILVER_BULLET, 'Nujna zahteva')
+    )
+
+    id = models.PositiveIntegerField(choices=CARD_TYPES, default=NORMAL, primary_key=True)
+
+    def __str__(self):
+        return self.get_id_display()
+
+
+class Card(models.Model):
+    column = models.ForeignKey(Column, null=False, on_delete=models.CASCADE)
+    type = models.ForeignKey(CardType, null=False, on_delete=models.CASCADE, related_name='cards')
+    description = models.TextField(blank=True, null=True, default="")
+    name = models.CharField(max_length=255, null=True)
+    estimate = models.FloatField()
+    expiration =  models.DateTimeField(default=timezone.now()+datetime.timedelta(days=5))
+
+
+class CardLog(models.Model):
+    card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='logs')
+    from_column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name='from_column_log')
+    to_column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name='to_column_log')
+    action = models.CharField(max_length=255)
+    timestamp = models.DateTimeField(default=timezone.now)

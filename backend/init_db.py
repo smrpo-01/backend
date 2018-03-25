@@ -81,9 +81,36 @@ utl3.save()
 utl4 = UserTeamLog(userteam=ug4, action="User added to team")
 utl4.save()
 
+b1 = Board(name="Tabla 1")
+b1.save()
 
-p1 = Project(team=t1, name="Projekt 1", customer="Mahnic")
+p1 = Project(team=t1, name="Projekt 1", customer="Mahnic", board=b1)
 p1.save()
 
-p2 = Project(team=t1, name="Projekt 2", customer="Furst")
+p2 = Project(team=t1, name="Projekt 2", customer="Furst", board=b1)
 p2.save()
+
+col1 = Column(board=b1, name="Stolpec 1", position=0, wip=3, type="Tip stolpca 1")
+col1.save()
+
+col2 = Column(board=b1, name="Stolpec 2", position=0, wip=4, type="Tip stolpca 2", parent=col1)
+col2.save()
+
+col3 = Column(board=b1, name="Stolpec 3", position=1, wip=5, type="Tip stolpca 3", parent=col1)
+col3.save()
+
+[CardType(i).save() for i in range(0,2)]
+
+c1 = Card(column=col2, type=CardType.objects.get(id=0), description="Mellow", name="To je ime kartice", estimate=3.5)
+c1.save()
+
+c2 = Card(column=col2, type=CardType.objects.get(id=0), description="Meowww", name="To je kartica", estimate=1)
+c2.save()
+
+c3 = Card(column=col3, type=CardType.objects.get(id=1), description="Meowing all over the world.", name="Bllll", estimate=666)
+c3.save()
+
+CardLog(card=c1, from_column=col1, to_column=col2, action="Premik1").save()
+CardLog(card=c1, from_column=col2, to_column=col3, action="Premik2").save()
+CardLog(card=c1, from_column=col3, to_column=col1, action="Premik3").save()
+CardLog(card=c3, from_column=col1, to_column=col3, action="Premik4").save()

@@ -52,7 +52,7 @@ class CreateTeam(graphene.Mutation):
     @staticmethod
     def mutate(root, info, team_data=None):
         if team_data.km_id == team_data.po_id:
-            raise GraphQLError('KM and PO must not be the same!')
+            raise GraphQLError('KanbanMaster in ProductOwner ne smeta biti ista oseba!')
 
         no_dev = 0
         no_km = 0
@@ -61,7 +61,7 @@ class CreateTeam(graphene.Mutation):
         for user in team_data.members:
             u = models.User.objects.get(id=user.id)
             if u is None:
-                raise GraphQLError('User: %d, does not exist' % user.id)
+                raise GraphQLError('Uporabnik: %d, ne obstaja' % user.id)
             # preveri če je user zmožen ush assignanih team_rolov
             user_roles = list(u.roles.filter())
             team_roles = []
@@ -69,27 +69,27 @@ class CreateTeam(graphene.Mutation):
                 team_roles.append(models.UserRole.objects.get(id=team_role))
                 if team_role == 2:
                     if team_data.po_id != user.id:
-                        raise GraphQLError('PO assigned: %d, is not the same as: %d' % (team_data.po_id, user.id))
+                        raise GraphQLError('Dodeljen ProductOwner: %d, ni isti kot: %d' % (team_data.po_id, user.id))
                     no_po += 1
                 elif team_role == 3:
                     if team_data.km_id != user.id:
-                        raise GraphQLError('KM assigned: %d, is not the same as: %d' % (team_data.km_id, user.id))
+                        raise GraphQLError('Dodeljen KanbanMaster: %d, ni isti kot: %d' % (team_data.km_id, user.id))
                     no_km += 1
                 elif team_role == 4:
                     no_dev += 1
                 else:
-                    raise GraphQLError('No such role: %d, UserId: %d' % (team_role, user.id))
+                    raise GraphQLError('Taka vloga ne obstaja: %d, id uporabnika: %d' % (team_role, user.id))
 
             if not all(e in user_roles for e in team_roles):
-                raise GraphQLError('User: %d, can\'t do assigned jobs' % user.id)
+                raise GraphQLError('Uporabnik: %d, ne more opravljati dodeljenih vlog' % user.id)
 
             # preveri da ni naenkrat km in po
             if (models.UserRole.objects.get(id=3) in team_roles) and (models.UserRole.objects.get(id=2) in team_roles):
-                raise GraphQLError("Team member cannot be KM and PO ath the same time")
+                raise GraphQLError("KanbanMaster in ProductOwner ne smeta biti ista oseba!")
 
         if (no_dev == 0) or (no_km != 1) or (no_po != 1):
             raise GraphQLError(
-            'Insufficient number of team members: noPO: %d, noKM: %d, noDev: %d' % (no_po, no_km, no_dev))
+            'Premalo število vlog v ekipi: stPO: %d, stKM: %d, stDev: %d' % (no_po, no_km, no_dev))
 
         # add to db
         team = models.Team.objects.create(name=team_data.name,
@@ -177,7 +177,7 @@ class EditTeam(graphene.Mutation):
         for user in team_members:
             u = models.User.objects.get(id=user.member.id)
             if u is None:
-                error = 'User: %d, does not exist' % user.member.id
+                error = 'Uporabnik: %d, ne obstaja' % user.member.id
             # preveri če je user zmožen ush assignanih team_rolov
             user_roles = list(u.roles.filter())
             team_roles = []
@@ -187,31 +187,31 @@ class EditTeam(graphene.Mutation):
                 if team_role == 2:
                     if (team_data.po_id != u.id) and (u.id in added_users_id):
                         if team_data.po_id is None:
-                            error = 'PO role given but not correctly assigned to team'
+                            error = 'ProductOwner vloga dana ampak ni dodeljana ekipi'
                         else:
-                            error = 'PO assigned: %d, is not the same as: %d' % (team_data.po_id, u.id)
+                            error = 'Dodeljen ProductOwner: %d, ni isti kot: %d'  % (team_data.po_id, u.id)
                     no_po += 1
                 elif team_role == 3:
                     if team_data.km_id != u.id and (u.id in added_users_id):
                         if team_data.km_id is None:
-                            error = 'KS role given but not correctly assigned to team'
+                            error = 'KanbanMaster vloga dana ampak ni dodeljena ekipi'
                         else:
-                            error = 'KM assigned: %d, is not the same as: %d' % (team_data.km_id, u.id)
+                            error = 'Dodeljen KanbanMaster: %d, ni isti kot: %d' % (team_data.km_id, u.id)
                     no_km += 1
                 elif team_role == 4:
                     no_dev += 1
                 else:
-                    error = 'No such role: %d, UserId: %d' % (team_role,  user.member.id)
+                    error = 'Taka vloga ne obstaja: %d, id uporabnika: %d' % (team_role,  user.member.id)
 
             if not all(e in user_roles for e in team_roles):
-                error = 'User: %d, can\'t do assigned jobs' % user.member.id
+                error = 'Uporabnik: %d, ne more opravljati dodeljenih vlog' % user.member.id
 
             # preveri da ni naenkrat km in po
             if (models.UserRole.objects.get(id=3) in team_roles) and (models.UserRole.objects.get(id=2) in team_roles):
-                error = "Team member cannot be KM and PO ath the same time"
+                error = "KanbanMaster in ProductOwner ne smeta biti ista oseba!"
 
         if (no_dev == 0) or (no_km != 1) or (no_po != 1):
-            error = 'Insufficient number of team members: noPO: %d, noKM: %d, noDev: %d' % (no_po, no_km, no_dev)
+            error = 'Premalo število vlog v ekipi: stPO: %d, stKM: %d, stDev: %d' % (no_po, no_km, no_dev)
 
         if error is not None:
             # revert back to old roles
@@ -284,7 +284,7 @@ class DeleteUserTeam(graphene.Mutation):
                     no_dev += 1
 
         if (no_dev == 0) or (no_km != 1) or (no_po != 1):
-            raise GraphQLError('Insufficient number of team members: noPO: %d, noKM: %d, noDev: %d' % (no_po, no_km, no_dev))
+            raise GraphQLError('Premalo število vlog v ekipi: stPO: %d, stKM: %d, stDev: %d'  % (no_po, no_km, no_dev))
 
         if user_team.is_active is True:
             user_team.is_active = False

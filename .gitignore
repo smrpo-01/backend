@@ -108,3 +108,6 @@ venv.bak/
 
 #db
 *.sqlite3
+
+# my db backup
+*cleptes_dump.json

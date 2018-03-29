@@ -62,6 +62,10 @@ class CreateTeam(graphene.Mutation):
             u = models.User.objects.get(id=user.id)
             if u is None:
                 raise GraphQLError('Uporabnik: %d, ne obstaja' % user.id)
+
+            if u.is_active is False:
+                raise GraphQLError('Uporabnik: %d, ni aktiven!' % user.id)
+
             # preveri če je user zmožen ush assignanih team_rolov
             user_roles = list(u.roles.filter())
             team_roles = []
@@ -107,11 +111,6 @@ class CreateTeam(graphene.Mutation):
             user_team_log.save()
 
         return CreateTeam(team=team, ok=True)
-
-'''
-
-
-'''
 
 
 class EditTeamInput(graphene.InputObjectType):
@@ -178,6 +177,10 @@ class EditTeam(graphene.Mutation):
             u = models.User.objects.get(id=user.member.id)
             if u is None:
                 error = 'Uporabnik: %d, ne obstaja' % user.member.id
+
+            if u.is_active is False:
+                error = 'Uporabnik: %d, ni aktiven!' % u.id
+
             # preveri če je user zmožen ush assignanih team_rolov
             user_roles = list(u.roles.filter())
             team_roles = []

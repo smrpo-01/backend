@@ -299,6 +299,33 @@ class DeleteUserTeam(graphene.Mutation):
         return EditTeam(team=user_team.team, ok=True)
 
 
+class DeleteTeam(graphene.Mutation):
+    # delete team (proper delete)
+    class Arguments:
+        team_id = graphene.Int(required=True)
+
+    ok = graphene.Boolean()
+
+    @staticmethod
+    def mutate(root, info, ok=False, team_id=None):
+        # TODO: če je ekipa vezana na projekt vrž vn error
+        team = models.Team.objects.get(id=team_id)
+        users_team = models.UserTeam.objects.filter(team=team)
+
+        for user in users_team:
+            user_team_logs = models.UserTeamLog.objects.filter(userteam=user)
+            for log in user_team_logs:
+                log.delete()
+
+            user.delete()
+
+        team.delete()
+
+        return DeleteTeam(ok=True)
+
+
+
+
 class TeamQueries(graphene.ObjectType):
     all_team_roles = graphene.List(TeamRoleType)
     all_user_teams = graphene.List(UserTeamType)
@@ -322,3 +349,4 @@ class TeamMutations(graphene.ObjectType):
     create_team = CreateTeam.Field()
     edit_team = EditTeam.Field()
     delete_user_team = DeleteUserTeam.Field()
+    delete_team = DeleteTeam.Field()

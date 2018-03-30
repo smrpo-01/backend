@@ -115,6 +115,7 @@ class CreateTeam(graphene.Mutation):
 
 class EditTeamInput(graphene.InputObjectType):
     team_id = graphene.Int(required=True)
+    name = graphene.String(required=False)
     km_id = graphene.Int(required=False)
     po_id = graphene.Int(required=False)
     members = graphene.List(UserIdTeamRoleType)
@@ -133,7 +134,11 @@ class EditTeam(graphene.Mutation):
     @staticmethod
     def mutate(root, info, team_data=None, ok=False):
         team = models.Team.objects.get(id=team_data.team_id)
-        added_users_id = [user.id for user in team_data.members]
+
+        added_users_id = []
+        if team_data.members is not None:
+            added_users_id = [user.id for user in team_data.members]
+
         team_members = []
         team_members_id = []
         old_member_roles = {}
@@ -231,6 +236,7 @@ class EditTeam(graphene.Mutation):
             for user_id in newly_added_users_ids:
                 models.UserTeam.objects.filter(id=user_id).delete()
 
+
             raise GraphQLError(error)
 
         # no errors save everything and add to log
@@ -253,6 +259,10 @@ class EditTeam(graphene.Mutation):
 
         if team_data.km_id is not None:
             team.kanban_master = models.User.objects.get(id=team_data.km_id)
+            team.save()
+
+        if team_data.name is not None:
+            team.name = team_data.name
             team.save()
 
         return EditTeam(team=team, ok=True)

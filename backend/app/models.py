@@ -176,6 +176,7 @@ class Project(models.Model):
 
 
 class Column(models.Model):
+    id = models.CharField(max_length=255, primary_key=True)
     board = models.ForeignKey(Board, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
     position = models.IntegerField(default=0, null=False)

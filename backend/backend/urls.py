@@ -17,6 +17,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.base import TemplateView
 
 from graphene_django.views import GraphQLView
 
@@ -34,5 +35,5 @@ urlpatterns = [
     url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^api-token-verify/', verify_jwt_token),
     url(r'^login/', view=ObtainJWTView.as_view(), name='login'),
-    url(r'^app/', view=EmineoView.as_view()),
+    url(r'^', view=TemplateView.as_view(template_name='app/index.html')),
 ]

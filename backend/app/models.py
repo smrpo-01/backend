@@ -167,12 +167,13 @@ class Board(models.Model):
 
 
 class Project(models.Model):
-    team = models.ForeignKey(Team, null=False, on_delete=models.CASCADE)
-    board = models.ForeignKey(Board, null=False, on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, null=True, on_delete=models.CASCADE)
+    board = models.ForeignKey(Board, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
     customer = models.CharField(max_length=255, null=False, default="") # narocnik
     date_start = models.DateField(default=timezone.now)
     date_end = models.DateField(default=timezone.now()+datetime.timedelta(days=5))
+    is_active = models.BooleanField(default=True)
 
 
 class Column(models.Model):

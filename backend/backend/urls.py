@@ -24,7 +24,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_jwt.views import verify_jwt_token
 
-from app.views import ObtainJWTView
+from app.views import ObtainJWTView, EmineoView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -34,4 +34,5 @@ urlpatterns = [
     url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^api-token-verify/', verify_jwt_token),
     url(r'^login/', view=ObtainJWTView.as_view(), name='login'),
+    url(r'^app/', view=EmineoView.as_view()),
 ]

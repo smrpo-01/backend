@@ -119,14 +119,14 @@ class EditProject(graphene.Mutation):
         else:
             raise GraphQLError(err)
 
-
+'''
 class DeleteProject(graphene.Mutation):
     class Arguments:
         project_id = graphene.Int(required=True)
 
     ok = graphene.Boolean()
 
-
+'''
 
 
 class ProjectQueries(graphene.ObjectType):

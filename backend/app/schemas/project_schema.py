@@ -1,20 +1,33 @@
 import graphene
 from graphene_django.types import DjangoObjectType
-
+import datetime
 from .. import models
+from graphql import GraphQLError
 
 
 class ProjectType(DjangoObjectType):
     class Meta:
         model = models.Project
 
+
 class AddProjectInput(graphene.InputObjectType):
     team_id = graphene.Int(required=False)
     board_id = graphene.Int(required=False)
     name = graphene.String(required=True)
     customer = graphene.String(required=True)
-    date_start = graphene.types.datetime.DateTime(required=True)
-    date_end = graphene.types.datetime.DateTime(required=True)
+    date_start = graphene.String(required=True)
+    date_end = graphene.String(required=True)
+    project_code = graphene.String(required=True)
+
+
+def validate_project(project_data):
+    date_start = datetime.datetime.strptime(project_data.date_start, "%Y-%m-%d").date()
+    date_end = datetime.datetime.strptime(project_data.date_end, "%Y-%m-%d").date()
+
+    if date_end < date_start:
+        return "Datum pričetka %s ni manjši/enak datumu konca %s" % (project_data.date_start, project_data.date_end)
+
+    return None
 
 
 class AddProject(graphene.Mutation):
@@ -26,8 +39,37 @@ class AddProject(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, project=None, ok=False, project_data=None):
+        date_start = datetime.datetime.strptime(project_data.date_start, "%Y-%m-%d").date()
+        date_end = datetime.datetime.strptime(project_data.date_end, "%Y-%m-%d").date()
+
+        err = validate_project(project_data)
+        if err is None:
+            if project_data.team_id is None:
+                team = None
+            else:
+                team = models.Team.objects.get(id=project_data.team_id)
+            if project_data.board_id is None:
+                board = None
+            else:
+                board = models.Board.objects.get(id=project_data.board_id)
+
+            project = models.Project(team=team,
+                                     board=board,
+                                     name=project_data.name,
+                                     project_code=project_data.project_code,
+                                     customer=project_data.customer,
+                                     date_start=date_start,
+                                     date_end=date_end)
+
+            project.save()
+
+            return AddProject(ok=True, project=project)
+
+        else:
+            raise GraphQLError(err)
 
         return AddProject(ok=False, project=None)
+
 
 class ProjectQueries(graphene.ObjectType):
     all_projects = graphene.List(ProjectType)
@@ -37,4 +79,4 @@ class ProjectQueries(graphene.ObjectType):
 
 
 class ProjectMutations(graphene.ObjectType):
-    pass
+    add_project = AddProject.Field()

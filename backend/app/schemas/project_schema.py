@@ -10,7 +10,7 @@ class ProjectType(DjangoObjectType):
         model = models.Project
 
 
-class AddProjectInput(graphene.InputObjectType):
+class ProjectInput(graphene.InputObjectType):
     id = graphene.Int(required=False)
     team_id = graphene.Int(required=False)
     board_id = graphene.Int(required=False)
@@ -37,7 +37,7 @@ def validate_project(project_data):
 
 class AddProject(graphene.Mutation):
     class Arguments:
-        project_data = AddProjectInput(required=True)
+        project_data = ProjectInput(required=True)
 
     ok = graphene.Boolean()
     project = graphene.Field(ProjectType)
@@ -78,7 +78,7 @@ class AddProject(graphene.Mutation):
 
 class EditProject(graphene.Mutation):
     class Arguments:
-        project_data = AddProjectInput(required=True)
+        project_data = ProjectInput(required=True)
 
     ok = graphene.Boolean()
     project = graphene.Field(ProjectType)

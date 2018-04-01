@@ -29,8 +29,11 @@ def validate_project(project_data):
         return "Datum pričetka %s ni manjši/enak datumu konca %s" % (project_data.date_start, project_data.date_end)
 
     if project_data.id is not None:
-        #cards = models.Card.objects.
-        pass
+        project = models.Project.objects.get(id=project_data.id)
+        cards = models.Card.objects.filter(project=project)
+        if len(cards) > 0:
+            if project.date_start != date_start:
+                return "Kartice že obstajajo, datum pričetka se ne sme spremeniti!"
 
     return None
 
@@ -119,14 +122,24 @@ class EditProject(graphene.Mutation):
         else:
             raise GraphQLError(err)
 
-'''
+
 class DeleteProject(graphene.Mutation):
     class Arguments:
         project_id = graphene.Int(required=True)
 
     ok = graphene.Boolean()
 
-'''
+    @staticmethod
+    def mutate(root, info, ok=False, project_id=None):
+        project = models.Project.objects.get(id=project_id)
+        cards = models.Card.objects.filter(project=project)
+        if len(cards) > 0:
+            project.is_active = False
+            project.save()
+        else:
+            project.delete()
+
+        return DeleteProject(ok=True)
 
 
 class ProjectQueries(graphene.ObjectType):
@@ -139,3 +152,4 @@ class ProjectQueries(graphene.ObjectType):
 class ProjectMutations(graphene.ObjectType):
     add_project = AddProject.Field()
     edit_project = EditProject.Field()
+    delete_project = DeleteProject.Field()

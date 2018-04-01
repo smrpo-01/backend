@@ -318,9 +318,12 @@ class DeleteTeam(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, ok=False, team_id=None):
-        # TODO: če je ekipa vezana na projekt vrž vn error
         team = models.Team.objects.get(id=team_id)
         users_team = models.UserTeam.objects.filter(team=team)
+
+        projects = models.Project.objects.filter(team=team)
+        if len(projects) > 0:
+            raise GraphQLError("Ekipa %d, je vezana na projekte. Prvo pobriši projekte nato lahko šele ekipo!" % team_id)
 
         for user in users_team:
             user_team_logs = models.UserTeamLog.objects.filter(userteam=user)

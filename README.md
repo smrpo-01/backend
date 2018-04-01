@@ -101,4 +101,21 @@ mutation Mutate {
 }
 
 
+mutation Mutate {
+  addProject(projectData: 
+    {	name: "bla", 
+      projectCode: "blabla", 
+      dateStart: "2018-5-7", 
+      dateEnd: "2018-5-7", 
+      customer: "blablabla", 
+      teamId: 10, # optional field, če ga ni mi ga ne rabš pošilat
+      boardId: 4 # optional field, če ga ni mi ga ne rabš pošilat
+    }) {project{id, team {
+      id}, board {
+        id
+      }
+    }}
+}
+
+
 ```

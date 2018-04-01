@@ -18,7 +18,7 @@ class ProjectInput(graphene.InputObjectType):
     customer = graphene.String(required=True)
     date_start = graphene.String(required=True)
     date_end = graphene.String(required=True)
-    project_code = graphene.String(required=True)
+    project_code = graphene.String(required=False)
 
 
 def validate_project(project_data):
@@ -29,7 +29,7 @@ def validate_project(project_data):
         return "Datum pričetka %s ni manjši/enak datumu konca %s" % (project_data.date_start, project_data.date_end)
 
     if project_data.id is not None:
-        # TODO: prever če že obstajajo kartice na projektu in če ja potem se date_start nesme spremenit!
+        #cards = models.Card.objects.
         pass
 
     return None
@@ -118,6 +118,15 @@ class EditProject(graphene.Mutation):
 
         else:
             raise GraphQLError(err)
+
+
+class DeleteProject(graphene.Mutation):
+    class Arguments:
+        project_id = graphene.Int(required=True)
+
+    ok = graphene.Boolean()
+
+
 
 
 class ProjectQueries(graphene.ObjectType):

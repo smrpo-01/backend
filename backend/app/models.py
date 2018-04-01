@@ -208,7 +208,8 @@ class Card(models.Model):
     description = models.TextField(blank=True, null=True, default="")
     name = models.CharField(max_length=255, null=True)
     estimate = models.FloatField()
-    expiration =  models.DateTimeField(default=timezone.now()+datetime.timedelta(days=5))
+    project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
+    expiration = models.DateTimeField(default=timezone.now()+datetime.timedelta(days=5))
 
 
 class CardLog(models.Model):

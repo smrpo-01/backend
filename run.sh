@@ -12,4 +12,7 @@ echo [$0] port is------------------- $SERVER_PORT
 # python manage.py makemigrations
 # python manage.py migrate
 echo [$0] Starting Django Server...
+python manage.py makemigrations
+python manage.py migrate
+python manage.py loaddata data_dump.json
 python manage.py runserver 0.0.0.0:$SERVER_PORT --noreload

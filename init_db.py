@@ -84,10 +84,10 @@ utl4.save()
 b1 = Board(name="Tabla 1")
 b1.save()
 
-p1 = Project(team=t1, name="Projekt 1", customer="Mahnic", board=b1)
+p1 = Project(team=t1, name="Projekt 1", customer="Mahnic", board=b1, project_code="Koda 1")
 p1.save()
 
-p2 = Project(team=t1, name="Projekt 2", customer="Furst", board=b1)
+p2 = Project(team=t1, name="Projekt 2", customer="Furst", board=b1, project_code="Koda 2")
 p2.save()
 
 col1 = Column(board=b1, name="Stolpec 1", position=0, wip=3, type="Tip stolpca 1")

@@ -25,7 +25,7 @@ SECRET_KEY = '@)6w6jhjqq@#&l2m#mqcff^yx*fczo!q+5$_#6ha()+!*l=69j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'emineo.eu-de.mybluemix.net']
 
 
 # Application definition

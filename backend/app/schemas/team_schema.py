@@ -64,7 +64,7 @@ class CreateTeam(graphene.Mutation):
                 raise GraphQLError('Uporabnik: %d, ne obstaja' % user.id)
 
             if u.is_active is False:
-                raise GraphQLError('Uporabnik: %d, ni aktiven!' % user.id)
+                raise GraphQLError('Uporabnik: %s %s, ni aktiven!' % (u.first_name, u.last_name))
 
             # preveri če je user zmožen ush assignanih team_rolov
             user_roles = list(u.roles.filter())
@@ -85,7 +85,7 @@ class CreateTeam(graphene.Mutation):
                     raise GraphQLError('Taka vloga ne obstaja: %d, id uporabnika: %d' % (team_role, user.id))
 
             if not all(e in user_roles for e in team_roles):
-                raise GraphQLError('Uporabnik: %d, ne more opravljati dodeljenih vlog' % user.id)
+                raise GraphQLError('Uporabnik: %s %s, ne more upravljati dodeljenih vlog!' % (u.first_name, u.last_name))
 
             # preveri da ni naenkrat km in po
             if (models.UserRole.objects.get(id=3) in team_roles) and (models.UserRole.objects.get(id=2) in team_roles):
@@ -184,7 +184,7 @@ class EditTeam(graphene.Mutation):
                 error = 'Uporabnik: %d, ne obstaja' % user.member.id
 
             if u.is_active is False:
-                error = 'Uporabnik: %d, ni aktiven!' % u.id
+                error = 'Uporabnik: %s %s, ni aktiven!' % (u.first_name, u.last_name)
 
             # preveri če je user zmožen ush assignanih team_rolov
             user_roles = list(u.roles.filter())
@@ -212,7 +212,7 @@ class EditTeam(graphene.Mutation):
                     error = 'Taka vloga ne obstaja: %d, id uporabnika: %d' % (team_role,  user.member.id)
 
             if not all(e in user_roles for e in team_roles):
-                error = 'Uporabnik: %d, ne more opravljati dodeljenih vlog' % user.member.id
+                error = 'Uporabnik: %s %s, ne more upravljati dodeljenih vlog!' % (u.first_name, u.last_name)
 
             # preveri da ni naenkrat km in po
             if (models.UserRole.objects.get(id=3) in team_roles) and (models.UserRole.objects.get(id=2) in team_roles):

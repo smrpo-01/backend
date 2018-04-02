@@ -114,6 +114,7 @@ class EditProject(graphene.Mutation):
             project.customer = project_data.customer
             project.date_start = date_start
             project.date_end = date_end
+            project.is_active = True
 
             project.save()
 

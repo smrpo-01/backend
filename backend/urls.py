@@ -35,5 +35,5 @@ urlpatterns = [
     url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^api-token-verify/', verify_jwt_token),
     url(r'^login/', view=ObtainJWTView.as_view(), name='login'),
-    url(r'^', view=TemplateView.as_view(template_name='app/index.html')),
+    url(r'^$', view=TemplateView.as_view(template_name='app/index.html')),
 ]

@@ -23,9 +23,10 @@ manage.py loaddata data_dump.json
 
 ## Deploy
 ```
+bluemix api https://api.eu-de.bluemix.net/
+
 python manage.py collectstatic --noinput
 
-bluemix api https://api.eu-de.bluemix.net/
 bluemix login -u <mail> -o smrpo -s emineo
 bluemix app push emineo
 ```

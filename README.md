@@ -21,8 +21,14 @@ manage.py dumpdata > data_dump.json
 manage.py loaddata data_dump.json
 ```
 
-## JWT avtentikacija
-Na /login/
+## Deploy
+```
+python manage.py collectstatic --noinput
+
+bluemix api https://api.eu-de.bluemix.net/
+bluemix login -u <mail> -o smrpo -s emineo
+bluemix app push emineo
+```
 
 ## Mutacije
 

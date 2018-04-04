@@ -1,8 +1,13 @@
 from .. import models
+
 import graphene
 from graphene_django.types import DjangoObjectType
 from graphql import GraphQLError
 from django.core.exceptions import ObjectDoesNotExist
+
+from app.schemas.user_schema import UserType
+from app.schemas.project_schema import ProjectType
+
 
 
 class UserIdTeamRoleType(graphene.InputObjectType):
@@ -33,6 +38,35 @@ class UserTeamType(DjangoObjectType):
 class TeamType(DjangoObjectType):
     class Meta:
         model = models.Team
+
+    projects = graphene.List(ProjectType)
+    developers = graphene.List(UserType)
+
+    def resolve_projects(self, info):
+        return models.Project.objects.filter(team=self)
+
+    def resolve_developers(self, info):
+        # ideja: userteam so samo developerji (km pa po sta itk že definirana)
+        all_members = list(models.UserTeam.objects.filter(team=self))
+        #all_members = list(self.members)
+        print(all_members)
+        only_devs = []
+        for member in all_members:
+            member_roles = list(models.TeamRole.objects.filter(userteam=member))
+            print(member_roles)
+            #member_roles = list(models.TeamRole.objects.filter())
+            #if (models.TeamRole.PRODUCT_OWNER in member_roles) or (models.TeamRole.KANBAN_MASTER in member_roles):
+            #    pass
+            #else:
+            if models.TeamRole.DEV in member_roles:
+                only_devs.append(member.member)
+            #for role in member.roles:
+             #   print("k")
+
+
+        return only_devs
+
+
 
 
 class CreateTeamInput(graphene.InputObjectType):

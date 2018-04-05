@@ -1,4 +1,4 @@
-from .app.models import *
+from app.models import *
 """
 
 
@@ -42,11 +42,11 @@ km.save()
 po = User.objects.create_user(email="po@demo.com", password=pwd, first_name="P", last_name="O",)
 po.save()
 po.roles.add(UserRole.objects.get(id=2))
+po.roles.add(UserRole.objects.get(id=4))
 po.save()
 
 t1 = Team.objects.create(kanban_master=km, product_owner=po, name="t1")
-t2 = Team.objects.create(kanban_master=km, product_owner=dev1, name="t2")
-t3 = Team.objects.create(kanban_master=dev2, product_owner=po, name="t3")
+t2 = Team.objects.create(kanban_master=dev1, product_owner=po, name="t2")
 
 ug1 = UserTeam(member=dev1, team=t1)
 ug1.save()
@@ -58,14 +58,13 @@ ug2.save()
 ug2.roles.add(TeamRole.objects.get(id=4))
 ug2.save()
 
-ug3 = UserTeam(member=km, team=t1)
+ug3 = UserTeam(member=po, team=t1)
 ug3.save()
-ug3.roles.add(TeamRole.objects.get(id=3))
+ug3.roles.add(TeamRole.objects.get(id=4))
 ug3.save()
 
-ug4 = UserTeam(member=km, team=t2)
+ug4 = UserTeam(member=dev2, team=t2)
 ug4.save()
-ug4.roles.add(TeamRole.objects.get(id=3))
 ug4.roles.add(TeamRole.objects.get(id=4))
 ug4.save()
 

@@ -47,26 +47,9 @@ class TeamType(DjangoObjectType):
 
     def resolve_developers(self, info):
         # ideja: userteam so samo developerji (km pa po sta itk že definirana)
-        all_members = list(models.UserTeam.objects.filter(team=self))
-        #all_members = list(self.members)
-        print(all_members)
-        only_devs = []
-        for member in all_members:
-            member_roles = list(models.TeamRole.objects.filter(userteam=member))
-            print(member_roles)
-            #member_roles = list(models.TeamRole.objects.filter())
-            #if (models.TeamRole.PRODUCT_OWNER in member_roles) or (models.TeamRole.KANBAN_MASTER in member_roles):
-            #    pass
-            #else:
-            if models.TeamRole.DEV in member_roles:
-                only_devs.append(member.member)
-            #for role in member.roles:
-             #   print("k")
-
-
-        return only_devs
-
-
+        userteams = list(models.UserTeam.objects.filter(team=self))
+        users = [userteam.member for userteam in userteams]
+        return users
 
 
 class CreateTeamInput(graphene.InputObjectType):

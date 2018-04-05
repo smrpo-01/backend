@@ -9,10 +9,9 @@ from app.schemas.user_schema import UserType
 from app.schemas.project_schema import ProjectType
 
 
-
 class UserIdTeamRoleType(graphene.InputObjectType):
     id = graphene.Int()
-    roles = graphene.List(graphene.Int)
+    email = graphene.String()
 
 
 class UserTeamLogType(DjangoObjectType):
@@ -99,7 +98,34 @@ class CreateTeamInput(graphene.InputObjectType):
     members = graphene.List(UserIdTeamRoleType)
 
 
+def checkIfMemberCanDoWhatTheyAreTold(team_data):
+    if team_data.km_id == team_data.po_id:
+        return 'KanbanMaster in ProductOwner ne smeta biti ista oseba!'
+
+    # prvo dobit user memberje
+    km = models.User.objects.get(id=team_data.km_id)
+    po = models.User.objects.get(id=team_data.po_id)
+    devs = []
+    for dev in team_data.members:
+        devs.append(models.User.objects.get(id=dev.id))
+
+    # checki
+    if models.UserRole.objects.get(id=2) not in list(po.roles.filter()):
+        return "ProductOwner ne more izvajati svoje vloge"
+
+    if models.UserRole.objects.get(id=3) not in list(km.roles.filter()):
+        return "KanbanMaster ne more izvajati svoje vloge"
+
+    for dev in devs:
+        if models.UserRole.objects.get(id=4) not in list(dev.roles.filter()):
+            return "Dev %s, ne more izvajati svoje vloge" % dev.email
+
+    return None
+
+
 class CreateTeam(graphene.Mutation):
+    # preveri če member lahko opravlja svoje zadolžitve doda userteame pa binda team not
+
     class Arguments:
         team_data = CreateTeamInput(required=True)
     ok = graphene.Boolean()
@@ -108,64 +134,29 @@ class CreateTeam(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, team_data=None):
-        if team_data.km_id == team_data.po_id:
-            raise GraphQLError('KanbanMaster in ProductOwner ne smeta biti ista oseba!')
+        err = checkIfMemberCanDoWhatTheyAreTold(team_data)
+        if err is not None:
+            raise GraphQLError(err)
 
-        no_dev = 0
-        no_km = 0
-        no_po = 0
-
-        for user in team_data.members:
-            u = models.User.objects.get(id=user.id)
-            if u is None:
-                raise GraphQLError('Uporabnik: %d, ne obstaja' % user.id)
-
-            if u.is_active is False:
-                raise GraphQLError('Uporabnik: %s %s, ni aktiven!' % (u.first_name, u.last_name))
-
-            # preveri če je user zmožen ush assignanih team_rolov
-            user_roles = list(u.roles.filter())
-            team_roles = []
-            for team_role in user.roles:
-                team_roles.append(models.UserRole.objects.get(id=team_role))
-                if team_role == 2:
-                    if team_data.po_id != user.id:
-                        raise GraphQLError('Dodeljen ProductOwner: %d, ni isti kot: %d' % (team_data.po_id, user.id))
-                    no_po += 1
-                elif team_role == 3:
-                    if team_data.km_id != user.id:
-                        raise GraphQLError('Dodeljen KanbanMaster: %d, ni isti kot: %d' % (team_data.km_id, user.id))
-                    no_km += 1
-                elif team_role == 4:
-                    no_dev += 1
-                else:
-                    raise GraphQLError('Taka vloga ne obstaja: %d, id uporabnika: %d' % (team_role, user.id))
-
-            if not all(e in user_roles for e in team_roles):
-                raise GraphQLError('Uporabnik: %s %s, ne more upravljati dodeljenih vlog!' % (u.first_name, u.last_name))
-
-            # preveri da ni naenkrat km in po
-            if (models.UserRole.objects.get(id=3) in team_roles) and (models.UserRole.objects.get(id=2) in team_roles):
-                raise GraphQLError("KanbanMaster in ProductOwner ne smeta biti ista oseba!")
-
-        if (no_dev == 0) or (no_km != 1) or (no_po != 1):
-            raise GraphQLError(
-            'Premalo število vlog v ekipi: stPO: %d, stKM: %d, stDev: %d' % (no_po, no_km, no_dev))
-
-        # add to db
         team = models.Team.objects.create(name=team_data.name,
                                           kanban_master=models.User.objects.get(id=team_data.km_id),
                                           product_owner=models.User.objects.get(id=team_data.po_id))
 
-        for user in team_data.members:
-            user_team = models.UserTeam(member=models.User.objects.get(id=user.id), team=team)
-            user_team.save()
-            for role in user.roles:
-                user_team.roles.add(models.TeamRole.objects.get(id=role))
-            user_team.save()
+        po_user_team = models.UserTeam(member=models.User.objects.get(id=team_data.po_id),
+                                     team=team,
+                                     role=models.TeamRole.objects.get(id=2))
+        po_user_team.save()
 
-            user_team_log = models.UserTeamLog(action="User added to team", userteam=user_team)
-            user_team_log.save()
+        km_user_team = models.UserTeam(member=models.User.objects.get(id=team_data.km_id),
+                                     team=team,
+                                     role=models.TeamRole.objects.get(id=3))
+        km_user_team.save()
+
+        for dev in team_data.members:
+            dev = models.UserTeam(member=models.User.objects.get(id=dev.id),
+                                  team=team,
+                                  role=models.TeamRole.objects.get(id=4))
+            dev.save()
 
         return CreateTeam(team=team, ok=True)
 

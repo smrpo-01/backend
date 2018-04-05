@@ -35,21 +35,61 @@ class UserTeamType(DjangoObjectType):
         model = models.UserTeam
 
 
+class CustomUserTeamType(graphene.ObjectType):
+    id_user_team = graphene.Int()
+    first_name = graphene.String()
+    last_name = graphene.String()
+    email = graphene.String()
+    is_active = graphene.Boolean()
+
+
 class TeamType(DjangoObjectType):
     class Meta:
         model = models.Team
 
     projects = graphene.List(ProjectType)
-    developers = graphene.List(UserType)
+    developers = graphene.List(CustomUserTeamType)
+    kanban_master = graphene.Field(CustomUserTeamType)
+    product_owner = graphene.Field(CustomUserTeamType)
+
 
     def resolve_projects(self, info):
         return models.Project.objects.filter(team=self)
 
     def resolve_developers(self, info):
-        # ideja: userteam so samo developerji (km pa po sta itk že definirana)
         userteams = list(models.UserTeam.objects.filter(team=self))
-        users = [userteam.member for userteam in userteams]
+        users = []
+        for userteam in userteams:
+            if userteam.role == models.TeamRole.objects.get(id=4):
+                user = userteam.member
+                users.append(CustomUserTeamType(id_user_team=userteam.id,
+                                                first_name=user.first_name,
+                                                last_name=user.last_name,
+                                                is_active=userteam.is_active,
+                                                email=user.email))
         return users
+
+    def resolve_kanban_master(self, info):
+        userteams = list(models.UserTeam.objects.filter(team=self))
+        for userteam in userteams:
+            if userteam.member.id == self.kanban_master.id:
+                user = userteam.member
+                return CustomUserTeamType(id_user_team=userteam.id,
+                                          first_name=user.first_name,
+                                          last_name=user.last_name,
+                                          is_active=userteam.is_active,
+                                          email=user.email)
+
+    def resolve_product_owner(self, info):
+        userteams = list(models.UserTeam.objects.filter(team=self))
+        for userteam in userteams:
+            if userteam.member.id == self.product_owner.id:
+                user = userteam.member
+                return CustomUserTeamType(id_user_team=userteam.id,
+                                          first_name=user.first_name,
+                                          last_name=user.last_name,
+                                          is_active=userteam.is_active,
+                                          email=user.email)
 
 
 class CreateTeamInput(graphene.InputObjectType):

@@ -152,7 +152,7 @@ class Team(models.Model):
 class UserTeam(models.Model):
     member = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
     team = models.ForeignKey(Team, null=False, on_delete=models.CASCADE)
-    roles = models.ManyToManyField(TeamRole)
+    role = models.ForeignKey(TeamRole, null=True, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
 
 

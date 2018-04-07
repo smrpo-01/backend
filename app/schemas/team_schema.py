@@ -343,7 +343,7 @@ class EditTeamMemberStatus(graphene.Mutation):
         user_team.is_active = is_active
         user_team.save()
 
-        user_team_log = models.U
+        #user_team_log = models.U
 
         return EditTeamMemberStatus(ok=True, user_team=user_team)
 

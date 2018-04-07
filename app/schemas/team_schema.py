@@ -10,6 +10,10 @@ from app.schemas.user_schema import UserType
 from app.schemas.project_schema import ProjectType
 
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Types and Querys
+# ----------------------------------------------------------------------------------------------------------------------
+
 class UserIdTeamRoleType(graphene.InputObjectType):
     id = graphene.Int(required=True)
     is_active = graphene.Boolean(required=False)
@@ -96,12 +100,28 @@ class TeamType(DjangoObjectType):
                                           email=user.email)
 
 
-class CreateTeamInput(graphene.InputObjectType):
-    name = graphene.String(required=True)
-    km_id = graphene.Int(required=True)
-    po_id = graphene.Int(required=True)
-    members = graphene.List(UserIdTeamRoleType)
+class TeamQueries(graphene.ObjectType):
+    all_team_roles = graphene.List(TeamRoleType)
+    all_user_teams = graphene.List(UserTeamType)
+    all_teams = graphene.List(TeamType)
+    all_user_team_logs = graphene.List(UserTeamLogType)
 
+    def resolve_all_team_roles(self, info):
+        return models.TeamRole.objects.all()
+
+    def resolve_all_user_teams(self, info):
+        return models.UserTeam.objects.all()
+
+    def resolve_all_teams(self, info):
+        return models.Team.objects.all()
+
+    def resolve_all_user_team_logs(self, info):
+        return models.UserTeamLog.objects.all()
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Funs
+# ----------------------------------------------------------------------------------------------------------------------
 
 def checkIfMemberCanDoWhatTheyAreTold(team_data):
     if team_data.km_id == team_data.po_id:
@@ -126,6 +146,17 @@ def checkIfMemberCanDoWhatTheyAreTold(team_data):
             return "Dev %s, ne more izvajati svoje vloge" % dev.email
 
     return None
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Mutations and associated types
+# ----------------------------------------------------------------------------------------------------------------------
+
+class CreateTeamInput(graphene.InputObjectType):
+    name = graphene.String(required=True)
+    km_id = graphene.Int(required=True)
+    po_id = graphene.Int(required=True)
+    members = graphene.List(UserIdTeamRoleType)
 
 
 class CreateTeam(graphene.Mutation):
@@ -416,25 +447,6 @@ class EditTeamMemberStatus(graphene.Mutation):
         user_team_log.save()
 
         return EditTeamMemberStatus(ok=True, user_team=user_team)
-
-
-class TeamQueries(graphene.ObjectType):
-    all_team_roles = graphene.List(TeamRoleType)
-    all_user_teams = graphene.List(UserTeamType)
-    all_teams = graphene.List(TeamType)
-    all_user_team_logs = graphene.List(UserTeamLogType)
-
-    def resolve_all_team_roles(self, info):
-        return models.TeamRole.objects.all()
-
-    def resolve_all_user_teams(self, info):
-        return models.UserTeam.objects.all()
-
-    def resolve_all_teams(self, info):
-        return models.Team.objects.all()
-
-    def resolve_all_user_team_logs(self, info):
-        return models.UserTeamLog.objects.all()
 
 
 class TeamMutations(graphene.ObjectType):

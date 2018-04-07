@@ -36,6 +36,7 @@ class UserTeamType(DjangoObjectType):
 
 class CustomUserTeamType(graphene.ObjectType):
     id_user_team = graphene.Int()
+    id_user = graphene.Int()
     first_name = graphene.String()
     last_name = graphene.String()
     email = graphene.String()
@@ -51,7 +52,6 @@ class TeamType(DjangoObjectType):
     kanban_master = graphene.Field(CustomUserTeamType)
     product_owner = graphene.Field(CustomUserTeamType)
 
-
     def resolve_projects(self, info):
         return models.Project.objects.filter(team=self)
 
@@ -62,6 +62,7 @@ class TeamType(DjangoObjectType):
             if userteam.role == models.TeamRole.objects.get(id=4):
                 user = userteam.member
                 users.append(CustomUserTeamType(id_user_team=userteam.id,
+                                                id_user=user.id,
                                                 first_name=user.first_name,
                                                 last_name=user.last_name,
                                                 is_active=userteam.is_active,
@@ -74,6 +75,7 @@ class TeamType(DjangoObjectType):
             if userteam.member.id == self.kanban_master.id:
                 user = userteam.member
                 return CustomUserTeamType(id_user_team=userteam.id,
+                                          id_user=user.id,
                                           first_name=user.first_name,
                                           last_name=user.last_name,
                                           is_active=userteam.is_active,
@@ -85,6 +87,7 @@ class TeamType(DjangoObjectType):
             if userteam.member.id == self.product_owner.id:
                 user = userteam.member
                 return CustomUserTeamType(id_user_team=userteam.id,
+                                          id_user=user.id,
                                           first_name=user.first_name,
                                           last_name=user.last_name,
                                           is_active=userteam.is_active,
@@ -122,15 +125,16 @@ def checkIfMemberCanDoWhatTheyAreTold(team_data):
 
     return None
 
+
 # TODO: dodej logging
 class CreateTeam(graphene.Mutation):
     # preveri če member lahko opravlja svoje zadolžitve doda userteame pa binda team not
 
     class Arguments:
         team_data = CreateTeamInput(required=True)
+
     ok = graphene.Boolean()
     team = graphene.Field(TeamType)
-
 
     @staticmethod
     def mutate(root, info, team_data=None):
@@ -293,47 +297,6 @@ class EditTeam(graphene.Mutation):
 
         return EditTeam(team=team, ok=True)
 
-'''
-class DeleteUserTeam(graphene.Mutation):
-    # delete user from team (inactive)
-    class Arguments:
-        user_team_id = graphene.Int(required=True)
-
-    ok = graphene.Boolean()
-    team = graphene.Field(TeamType)
-
-    @staticmethod
-    def mutate(root, info, team_data=None, ok=False, user_team_id=None):
-        from django.db.models import Q
-
-        user_team = models.UserTeam.objects.get(id=user_team_id)
-        team_without_user = list(models.UserTeam.objects.filter(~Q(id=user_team_id), team=user_team.team))
-
-        no_po = 0
-        no_km = 0
-        no_dev = 0
-        for user in team_without_user:
-            for role in list(user.roles.all()):
-                role_id = role.id
-                if role_id == 2:
-                    no_po += 1
-                elif role_id == 3:
-                    no_km += 1
-                elif role_id == 4:
-                    no_dev += 1
-
-        if (no_dev == 0) or (no_km != 1) or (no_po != 1):
-            raise GraphQLError('Premalo število vlog v ekipi: stPO: %d, stKM: %d, stDev: %d'  % (no_po, no_km, no_dev))
-
-        if user_team.is_active is True:
-            user_team.is_active = False
-            user_team.save()
-            user_team_log = models.UserTeamLog(action="User deactivated",
-                                               userteam=user_team)
-            user_team_log.save()
-
-        return EditTeam(team=user_team.team, ok=True)
-'''
 
 class DeleteTeam(graphene.Mutation):
     # delete team (proper delete)
@@ -349,7 +312,8 @@ class DeleteTeam(graphene.Mutation):
 
         projects = models.Project.objects.filter(team=team)
         if len(projects) > 0:
-            raise GraphQLError("Ekipa %d, je vezana na projekte. Prvo pobriši projekte nato lahko šele ekipo!" % team_id)
+            raise GraphQLError(
+                "Ekipa %d, je vezana na projekte. Prvo pobriši projekte nato lahko šele ekipo!" % team_id)
 
         for user in users_team:
             user_team_logs = models.UserTeamLog.objects.filter(userteam=user)
@@ -379,7 +343,10 @@ class EditTeamMemberStatus(graphene.Mutation):
         user_team.is_active = is_active
         user_team.save()
 
+        user_team_log = models.U
+
         return EditTeamMemberStatus(ok=True, user_team=user_team)
+
 
 class TeamQueries(graphene.ObjectType):
     all_team_roles = graphene.List(TeamRoleType)

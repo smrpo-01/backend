@@ -12,6 +12,7 @@ from app.schemas.project_schema import ProjectType
 
 class UserIdTeamRoleType(graphene.InputObjectType):
     id = graphene.Int(required=True)
+    is_active = graphene.Boolean(required=False)
     email = graphene.String(required=False)
 
 
@@ -272,6 +273,7 @@ class EditTeam(graphene.Mutation):
 
         # aktivira dodane deve (če obstajajo)
         # deaktivira deve
+        '''
         for dev in devs_current:
             if dev.member.id in to_deactivate_dev_ids:
                 dev.is_active = False
@@ -283,12 +285,33 @@ class EditTeam(graphene.Mutation):
                     to_add_dev_ids.remove(dev.member.id)
                 except ValueError:
                     pass
+        '''
+        for dev in team_data.members:
+            try:
+                user_team = models.UserTeam.objects.get(member=models.User.objects.get(id=dev.id),
+                                                        role=models.TeamRole.objects.get(id=4),
+                                                        team=team)
+                print(dev.is_active)
+                if dev.is_active is None:
+                    raise GraphQLError("Potreben isActive polje change existing user")
+                user_team.is_active = dev.is_active
+                user_team.save()
+
+            except ObjectDoesNotExist:
+                pass
+
+
 
         # ustvari nove userteame za deve ki še ne obstajajo
         for dev_id in to_add_dev_ids:
+            dev = [dev for dev in team_data.members if dev.id == dev_id][0]
+            if dev.is_active is None:
+                raise GraphQLError("Potreben isActive polje add new user")
+
             dev_user_team = models.UserTeam(member=models.User.objects.get(id=dev_id),
                                             team=team,
-                                            role=models.TeamRole.objects.get(id=4))
+                                            role=models.TeamRole.objects.get(id=4),
+                                            is_active=dev.is_active)
             dev_user_team.save()
 
         return EditTeam(team=team, ok=True)
@@ -341,7 +364,7 @@ class EditTeamMemberStatus(graphene.Mutation):
             user_teams = models.UserTeam.objects.filter(~Q(id=user_team_id), team=user_team.team, role=models.TeamRole.objects.get(id=4))
             user_teams = [user_team for user_team in user_teams if user_team.is_active]
             if len(user_teams) == 0:
-                raise GraphQLError("V ekipi mora biti vsaj en razvijalec")
+                raise GraphQLError("V ekipi mora biti aktiven vsaj en razvijalec.")
 
         user_team.is_active = is_active
         user_team.save()

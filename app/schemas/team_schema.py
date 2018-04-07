@@ -128,7 +128,6 @@ def checkIfMemberCanDoWhatTheyAreTold(team_data):
     return None
 
 
-# TODO: dodej logging
 class CreateTeam(graphene.Mutation):
     # preveri če member lahko opravlja svoje zadolžitve doda userteame pa binda team not
 
@@ -153,16 +152,24 @@ class CreateTeam(graphene.Mutation):
                                        role=models.TeamRole.objects.get(id=2))
         po_user_team.save()
 
+        user_team_log = models.UserTeamLog(action="Uporabnik ustvarjen.", userteam=po_user_team)
+        user_team_log.save()
+
         km_user_team = models.UserTeam(member=models.User.objects.get(id=team_data.km_id),
                                        team=team,
                                        role=models.TeamRole.objects.get(id=3))
         km_user_team.save()
+
+        user_team_log = models.UserTeamLog(action="Uporabnik ustvarjen.", userteam=km_user_team)
+        user_team_log.save()
 
         for dev in team_data.members:
             dev = models.UserTeam(member=models.User.objects.get(id=dev.id),
                                   team=team,
                                   role=models.TeamRole.objects.get(id=4))
             dev.save()
+            user_team_log = models.UserTeamLog(action="Uporabnik ustvarjen.", userteam=dev)
+            user_team_log.save()
 
         return CreateTeam(team=team, ok=True)
 
@@ -178,7 +185,6 @@ class EditTeamInput(graphene.InputObjectType):
 # add user to existing team
 # change km
 # change po
-# TODO: dodej logging, isActive!
 class EditTeam(graphene.Mutation):
     class Arguments:
         team_data = EditTeamInput(required=True)
@@ -209,6 +215,9 @@ class EditTeam(graphene.Mutation):
             km_user_team.is_active = False
             km_user_team.save()
 
+            km_user_team_old_log = models.UserTeamLog(action="Uporabnik deaktiviran.", userteam=km_user_team)
+            km_user_team_old_log.save()
+
             # pogleda če userteam za novga km že obstaja
             km_user_team_new = list(models.UserTeam.objects.filter(member=models.User.objects.get(id=team_data.km_id),
                                                                    role=models.TeamRole.objects.get(id=3),
@@ -217,17 +226,23 @@ class EditTeam(graphene.Mutation):
                 km_user_team_new = km_user_team_new[0]
                 km_user_team_new.is_active = True
                 km_user_team_new.save()
+
+                km_user_team_new_log = models.UserTeamLog(action="Uporabnik aktiviran.", userteam=km_user_team_new)
+                km_user_team_new_log.save()
+
             elif len(km_user_team_new) == 0:
                 km_user_team_new = models.UserTeam(member=models.User.objects.get(id=team_data.km_id),
                                                    team=team,
                                                    role=models.TeamRole.objects.get(id=3))
                 km_user_team_new.save()
+
+                km_user_team_new_log = models.UserTeamLog(action="Uporabnik ustvarjen.", userteam=km_user_team_new)
+                km_user_team_new_log.save()
             else:
                 raise GraphQLError("Nekaj je narobe z bazo (km)")
 
             team.kanban_master = models.User.objects.get(id=team_data.km_id)
             team.save()
-
 
         # za novega productownerja
         if team.product_owner.id != team_data.po_id:
@@ -244,6 +259,9 @@ class EditTeam(graphene.Mutation):
             po_user_team.is_active = False
             po_user_team.save()
 
+            po_user_team_old_log = models.UserTeamLog(action="Uporabnik deaktiviran.", userteam=po_user_team)
+            po_user_team_old_log.save()
+
             # pogleda če userteam za novega že obstaja
             po_user_team_new = list(models.UserTeam.objects.filter(member=models.User.objects.get(id=team_data.po_id),
                                                                    role=models.TeamRole.objects.get(id=2),
@@ -252,11 +270,19 @@ class EditTeam(graphene.Mutation):
                 po_user_team_new = po_user_team_new[0]
                 po_user_team_new.is_active = True
                 po_user_team_new.save()
+
+                po_user_team_new_log = models.UserTeamLog(action="Uporabnik aktiviran.", userteam=po_user_team_new)
+                po_user_team_new_log.save()
+
             elif len(po_user_team_new) == 0:
                 po_user_team_new = models.UserTeam(member=models.User.objects.get(id=team_data.po_id),
                                                    team=team,
                                                    role=models.TeamRole.objects.get(id=2))
                 po_user_team_new.save()
+
+                po_user_team_new_log = models.UserTeamLog(action="Uporabnik ustvarjen.", userteam=po_user_team_new)
+                po_user_team_new_log.save()
+
             else:
                 raise GraphQLError("Nekaj je narobe z bazo (po)")
 
@@ -294,13 +320,21 @@ class EditTeam(graphene.Mutation):
                 print(dev.is_active)
                 if dev.is_active is None:
                     raise GraphQLError("Potreben isActive polje change existing user")
+
+                if user_team.is_active != dev.is_active:
+                    if user_team.is_active:
+                        user_team_log = models.UserTeamLog(action="Uporabnik aktiviran.", userteam=user_team)
+                    else:
+                        user_team_log = models.UserTeamLog(action="Uporabnik deaktiviran.", userteam=user_team)
+                    user_team_log.save()
+
                 user_team.is_active = dev.is_active
                 user_team.save()
 
             except ObjectDoesNotExist:
                 pass
 
-
+        # roza opomba za boj proti raku: #ff69b4
 
         # ustvari nove userteame za deve ki še ne obstajajo
         for dev_id in to_add_dev_ids:
@@ -313,6 +347,13 @@ class EditTeam(graphene.Mutation):
                                             role=models.TeamRole.objects.get(id=4),
                                             is_active=dev.is_active)
             dev_user_team.save()
+
+            user_team_log = models.UserTeamLog(action="Uporabnik ustvarjen.", userteam=dev_user_team)
+            user_team_log.save()
+
+            if not dev_user_team.is_active:
+                user_team_log = models.UserTeamLog(action="Uporabnik deaktiviran.", userteam=dev_user_team)
+            user_team_log.save()
 
         return EditTeam(team=team, ok=True)
 
@@ -346,7 +387,6 @@ class DeleteTeam(graphene.Mutation):
         return DeleteTeam(ok=True)
 
 
-
 class EditTeamMemberStatus(graphene.Mutation):
     # delete team (proper delete)
     class Arguments:
@@ -361,17 +401,18 @@ class EditTeamMemberStatus(graphene.Mutation):
         user_team = models.UserTeam.objects.get(id=user_team_id)
 
         if user_team.role == models.TeamRole.objects.get(id=4) and not is_active:
-            user_teams = models.UserTeam.objects.filter(~Q(id=user_team_id), team=user_team.team, role=models.TeamRole.objects.get(id=4))
+            user_teams = models.UserTeam.objects.filter(~Q(id=user_team_id), team=user_team.team,
+                                                        role=models.TeamRole.objects.get(id=4))
             user_teams = [user_team for user_team in user_teams if user_team.is_active]
             if len(user_teams) == 0:
                 raise GraphQLError("V ekipi mora biti aktiven vsaj en razvijalec.")
 
         user_team.is_active = is_active
         user_team.save()
-
-
-
-        user_team_log = models.UserTeamLog(action="Uporabnik deaktiviran", userteam=user_team)
+        if is_active:
+            user_team_log = models.UserTeamLog(action="Uporabnik aktiviran", userteam=user_team)
+        else:
+            user_team_log = models.UserTeamLog(action="Uporabnik deaktiviran", userteam=user_team)
         user_team_log.save()
 
         return EditTeamMemberStatus(ok=True, user_team=user_team)

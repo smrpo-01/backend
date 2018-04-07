@@ -84,19 +84,19 @@ utl4.save()
 b1 = Board(name="Tabla 1")
 b1.save()
 
-p1 = Project(team=t1, name="Projekt 1", customer="Mahnic", board=b1, project_code="Koda 1")
+p1 = Project(team=t1, name="Projekt 1", customer="Mahnic", board=b1, project_code="Koda 1", date_end=datetime.date(2018,10,20))
 p1.save()
 
-p2 = Project(team=t1, name="Projekt 2", customer="Furst", board=b1, project_code="Koda 2")
+p2 = Project(team=t1, name="Projekt 2", customer="Furst", board=b1, project_code="Koda 2", date_end=datetime.date(2018,12,12))
 p2.save()
 
-col1 = Column(board=b1, name="Stolpec 1", position=0, wip=3, type="Tip stolpca 1")
+col1 = Column(id="1", board=b1, name="Stolpec 1", position=0, wip=3)
 col1.save()
 
-col2 = Column(board=b1, name="Stolpec 2", position=0, wip=4, type="Tip stolpca 2", parent=col1)
+col2 = Column(id="2", board=b1, name="Stolpec 2", position=0, wip=4, parent=col1)
 col2.save()
 
-col3 = Column(board=b1, name="Stolpec 3", position=1, wip=5, type="Tip stolpca 3", parent=col1)
+col3 = Column(id="3", board=b1, name="Stolpec 3", position=1, wip=5, parent=col1)
 col3.save()
 
 [CardType(i).save() for i in range(0,2)]

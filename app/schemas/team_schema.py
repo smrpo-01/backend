@@ -10,8 +10,8 @@ from app.schemas.project_schema import ProjectType
 
 
 class UserIdTeamRoleType(graphene.InputObjectType):
-    id = graphene.Int()
-    email = graphene.String()
+    id = graphene.Int(required=True)
+    email = graphene.String(required=False)
 
 
 class UserTeamLogType(DjangoObjectType):
@@ -122,7 +122,7 @@ def checkIfMemberCanDoWhatTheyAreTold(team_data):
 
     return None
 
-
+# TODO: dodej logging
 class CreateTeam(graphene.Mutation):
     # preveri če member lahko opravlja svoje zadolžitve doda userteame pa binda team not
 
@@ -143,13 +143,13 @@ class CreateTeam(graphene.Mutation):
                                           product_owner=models.User.objects.get(id=team_data.po_id))
 
         po_user_team = models.UserTeam(member=models.User.objects.get(id=team_data.po_id),
-                                     team=team,
-                                     role=models.TeamRole.objects.get(id=2))
+                                       team=team,
+                                       role=models.TeamRole.objects.get(id=2))
         po_user_team.save()
 
         km_user_team = models.UserTeam(member=models.User.objects.get(id=team_data.km_id),
-                                     team=team,
-                                     role=models.TeamRole.objects.get(id=3))
+                                       team=team,
+                                       role=models.TeamRole.objects.get(id=3))
         km_user_team.save()
 
         for dev in team_data.members:
@@ -163,15 +163,16 @@ class CreateTeam(graphene.Mutation):
 
 class EditTeamInput(graphene.InputObjectType):
     team_id = graphene.Int(required=True)
-    name = graphene.String(required=False)
-    km_id = graphene.Int(required=False)
-    po_id = graphene.Int(required=False)
+    name = graphene.String(required=True)
+    km_id = graphene.Int(required=True)
+    po_id = graphene.Int(required=True)
     members = graphene.List(UserIdTeamRoleType)
 
 
 # add user to existing team
 # change km
 # change po
+# TODO: dodej logging
 class EditTeam(graphene.Mutation):
     class Arguments:
         team_data = EditTeamInput(required=True)
@@ -181,137 +182,114 @@ class EditTeam(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, team_data=None, ok=False):
+        err = checkIfMemberCanDoWhatTheyAreTold(team_data)
+        if err is not None:
+            raise GraphQLError(err)
+
         team = models.Team.objects.get(id=team_data.team_id)
+        team.name = team_data.name
+        team.save()
 
-        added_users_id = []
-        if team_data.members is not None:
-            added_users_id = [user.id for user in team_data.members]
+        # preveri za km pa po če sta ista če nista deaktiviraj in dodaj novga
+        if team.kanban_master.id != team_data.km_id:
+            km_user_team = list(models.UserTeam.objects.filter(member=team.kanban_master,
+                                                               role=models.TeamRole.objects.get(id=3),
+                                                               team=team))
+            if len(km_user_team) != 1:
+                raise GraphQLError("Nekaj je narobe z bazo (km)")
+            else:
+                km_user_team = km_user_team[0]
+            # deaktiviramo tastarga
+            km_user_team.is_active = False
+            km_user_team.save()
 
-        team_members = []
-        team_members_id = []
-        old_member_roles = {}
-        newly_added_users_ids = []
+            # pogleda če userteam za novga km že obstaja
+            km_user_team_new = list(models.UserTeam.objects.filter(member=models.User.objects.get(id=team_data.km_id),
+                                                                   role=models.TeamRole.objects.get(id=3),
+                                                                   team=team))
+            if len(km_user_team_new) == 1:
+                km_user_team_new = km_user_team_new[0]
+                km_user_team_new.is_active = True
+                km_user_team_new.save()
+            elif len(km_user_team_new) == 0:
+                km_user_team_new = models.UserTeam(member=models.User.objects.get(id=team_data.km_id),
+                                                   team=team,
+                                                   role=models.TeamRole.objects.get(id=3))
+                km_user_team_new.save()
+            else:
+                raise GraphQLError("Nekaj je narobe z bazo (km)")
 
-        if team_data.members is not None:
-            for member in team_data.members:
-                try:
-                    # če je že v ekipi ga povlečemo vn
-                    team_member = models.UserTeam.objects.get(team=team, member=models.User.objects.get(id=member.id))
-                    old_roles = list(team_member.roles.all())
-                    team_member.roles.through.objects.filter(userteam=team_member).delete()
-
-                    for role in member.roles:
-                        team_member.roles.add(models.TeamRole.objects.get(id=role))
-
-                    old_member_roles[team_member] = old_roles
-                    team_members.append(team_member)
-                    team_members_id.append(member.id)
-
-                except ObjectDoesNotExist:
-                    # nova dodaja v ekipo
-                    team_member = models.UserTeam(member=models.User.objects.get(id=member.id), team=team)
-                    team_member.save()
-                    newly_added_users_ids.append(team_member.id)
-                    for role in member.roles:
-                        team_member.roles.add(models.TeamRole.objects.get(id=role))
-                    team_members.append(team_member)
-                    team_members_id.append(member.id)
-
-        # get rest of team members
-        for team_member in list(models.UserTeam.objects.filter(team=team)):
-            if team_member.member.id not in team_members_id:
-                team_members.append(team_member)
-
-        no_po = 0
-        no_km = 0
-        no_dev = 0
-        error = None
-        for user in team_members:
-            u = models.User.objects.get(id=user.member.id)
-            if u is None:
-                error = 'Uporabnik: %d, ne obstaja' % user.member.id
-
-            if u.is_active is False:
-                error = 'Uporabnik: %s %s, ni aktiven!' % (u.first_name, u.last_name)
-
-            # preveri če je user zmožen ush assignanih team_rolov
-            user_roles = list(u.roles.filter())
-            team_roles = []
-            new_user_roles = [role.id for role in user.roles.all()]
-            for team_role in new_user_roles:
-                team_roles.append(models.UserRole.objects.get(id=team_role))
-                if team_role == 2:
-                    if (team_data.po_id != u.id) and (u.id in added_users_id):
-                        if team_data.po_id is None:
-                            error = 'ProductOwner vloga dana ampak ni dodeljana ekipi'
-                        else:
-                            error = 'Dodeljen ProductOwner: %d, ni isti kot: %d'  % (team_data.po_id, u.id)
-                    no_po += 1
-                elif team_role == 3:
-                    if team_data.km_id != u.id and (u.id in added_users_id):
-                        if team_data.km_id is None:
-                            error = 'KanbanMaster vloga dana ampak ni dodeljena ekipi'
-                        else:
-                            error = 'Dodeljen KanbanMaster: %d, ni isti kot: %d' % (team_data.km_id, u.id)
-                    no_km += 1
-                elif team_role == 4:
-                    no_dev += 1
-                else:
-                    error = 'Taka vloga ne obstaja: %d, id uporabnika: %d' % (team_role,  user.member.id)
-
-            if not all(e in user_roles for e in team_roles):
-                error = 'Uporabnik: %s %s, ne more upravljati dodeljenih vlog!' % (u.first_name, u.last_name)
-
-            # preveri da ni naenkrat km in po
-            if (models.UserRole.objects.get(id=3) in team_roles) and (models.UserRole.objects.get(id=2) in team_roles):
-                error = "KanbanMaster in ProductOwner ne smeta biti ista oseba!"
-
-        if (no_dev == 0) or (no_km != 1) or (no_po != 1):
-            error = 'Premalo število vlog v ekipi: stPO: %d, stKM: %d, stDev: %d' % (no_po, no_km, no_dev)
-
-        if error is not None:
-            # revert back to old roles
-            for user in team_members:
-                try:
-                    old_roles = old_member_roles[user]
-                    user.roles.through.objects.filter(userteam=team_member).delete()
-                    for role in old_roles:
-                        user.roles.add(role)
-                    user.save()
-                except KeyError:
-                    pass
-
-            for user_id in newly_added_users_ids:
-                models.UserTeam.objects.filter(id=user_id).delete()
-
-
-            raise GraphQLError(error)
-
-        # no errors save everything and add to log
-        for user in team_members:
-            if user.member.id in added_users_id:
-                if user.is_active is False:
-                    user.is_active = True
-                    user_team_log = models.UserTeamLog(action="User reactivated",
-                                                       userteam=user)
-                    user_team_log.save()
-            user.save()
-
-        for user_id in newly_added_users_ids:
-            user_team_log = models.UserTeamLog(action="User added to team", userteam=models.UserTeam.objects.get(id=user_id))
-            user_team_log.save()
-
-        if team_data.po_id is not None:
-            team.product_owner = models.User.objects.get(id=team_data.po_id)
-            team.save()
-
-        if team_data.km_id is not None:
             team.kanban_master = models.User.objects.get(id=team_data.km_id)
             team.save()
 
-        if team_data.name is not None:
-            team.name = team_data.name
+        # za novega productownerja
+        if team.product_owner.id != team_data.po_id:
+            po_user_team = list(models.UserTeam.objects.filter(member=team.product_owner,
+                                                               role=models.TeamRole.objects.get(id=2),
+                                                               team=team))
+
+            if len(po_user_team) != 1:
+                raise GraphQLError("Nekaj je narobe z bazo (po)")
+            else:
+                po_user_team = po_user_team[0]
+
+            # deaktiviramo tastarga
+            po_user_team.is_active = False
+            po_user_team.save()
+
+            # pogleda če userteam za novega že obstaja
+            po_user_team_new = list(models.UserTeam.objects.filter(member=models.User.objects.get(id=team_data.po_id),
+                                                                   role=models.TeamRole.objects.get(id=2),
+                                                                   team=team))
+            if len(po_user_team_new) == 1:
+                po_user_team_new = po_user_team_new[0]
+                po_user_team_new.is_active = True
+                po_user_team_new.save()
+            elif len(po_user_team_new) == 0:
+                po_user_team_new = models.UserTeam(member=models.User.objects.get(id=team_data.po_id),
+                                                   team=team,
+                                                   role=models.TeamRole.objects.get(id=2))
+                po_user_team_new.save()
+            else:
+                raise GraphQLError("Nekaj je narobe z bazo (po)")
+
+            team.product_owner = models.User.objects.get(id=team_data.po_id)
             team.save()
+
+        # dobi vse dev iz trenutne ekipe
+        devs_current = list(models.UserTeam.objects.filter(role=models.TeamRole.objects.get(id=4), team=team))
+        devs_current_user_ids = [dev.member.id for dev in devs_current]
+
+        devs_new_user_ids = [dev.id for dev in team_data.members]
+        to_deactivate_dev_ids = list(set(devs_current_user_ids) - set(devs_new_user_ids))
+        to_add_dev_ids = list(set(devs_new_user_ids) - set(devs_current_user_ids))
+
+        # aktivira dodane deve (če obstajajo)
+        # deaktivira deve
+        print(devs_current_user_ids)
+        print(devs_new_user_ids)
+        print("deac")
+        print(to_deactivate_dev_ids)
+        print("enbl")
+        print(to_add_dev_ids)
+        for dev in devs_current:
+            if dev.member.id in to_deactivate_dev_ids:
+                dev.is_active = False
+                dev.save()
+            elif dev.member.id in devs_new_user_ids:
+                dev.is_active = True
+                dev.save()
+                try:
+                    to_add_dev_ids.remove(dev.member.id)
+                except ValueError:
+                    pass
+
+        # ustvari nove userteame za deve ki še ne obstajajo
+        for dev_id in to_add_dev_ids:
+            dev_user_team = models.UserTeam(member=models.User.objects.get(id=dev_id),
+                                            team=team,
+                                            role=models.TeamRole.objects.get(id=4))
+            dev_user_team.save()
 
         return EditTeam(team=team, ok=True)
 

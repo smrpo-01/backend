@@ -293,7 +293,7 @@ class EditTeam(graphene.Mutation):
 
         return EditTeam(team=team, ok=True)
 
-
+'''
 class DeleteUserTeam(graphene.Mutation):
     # delete user from team (inactive)
     class Arguments:
@@ -333,7 +333,7 @@ class DeleteUserTeam(graphene.Mutation):
             user_team_log.save()
 
         return EditTeam(team=user_team.team, ok=True)
-
+'''
 
 class DeleteTeam(graphene.Mutation):
     # delete team (proper delete)
@@ -363,7 +363,23 @@ class DeleteTeam(graphene.Mutation):
         return DeleteTeam(ok=True)
 
 
+# TODO: logging
+class EditTeamMemberStatus(graphene.Mutation):
+    # delete team (proper delete)
+    class Arguments:
+        user_team_id = graphene.Int(required=True)
+        is_active = graphene.Boolean(required=True)
 
+    ok = graphene.Boolean()
+    user_team = graphene.Field(UserTeamType)
+
+    @staticmethod
+    def mutate(root, info, ok=False, user_team=None, user_team_id=None, is_active=False):
+        user_team = models.UserTeam.objects.get(id=user_team_id)
+        user_team.is_active = is_active
+        user_team.save()
+
+        return EditTeamMemberStatus(ok=True, user_team=user_team)
 
 class TeamQueries(graphene.ObjectType):
     all_team_roles = graphene.List(TeamRoleType)
@@ -387,5 +403,5 @@ class TeamQueries(graphene.ObjectType):
 class TeamMutations(graphene.ObjectType):
     create_team = CreateTeam.Field()
     edit_team = EditTeam.Field()
-    delete_user_team = DeleteUserTeam.Field()
     delete_team = DeleteTeam.Field()
+    edit_team_member_status = EditTeamMemberStatus.Field()

@@ -17,7 +17,9 @@ manage.py migrate
 manage.py flush
 
 # Nalaganje/shranjevanje podatkov
-manage.py dumpdata > data_dump.json
+# shranjevanje:
+python manage.py dumpdata --natural-foreign --exclude auth.permission --exclude contenttypes --indent 4 > data_dump.json
+# nalaganje:
 manage.py loaddata data_dump.json
 ```
 

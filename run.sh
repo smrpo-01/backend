@@ -12,6 +12,7 @@ echo [$0] port is------------------- $SERVER_PORT
 # python manage.py makemigrations
 # python manage.py migrate
 echo [$0] Starting Django Server...
+rm db.sqlite
 python manage.py makemigrations
 python manage.py migrate
 python manage.py loaddata data_dump.json

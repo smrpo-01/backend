@@ -30,7 +30,7 @@ class UserRoleType(DjangoObjectType):
 
 class UserQueries(graphene.ObjectType):
     all_users = graphene.Field(graphene.List(UserType),
-                               user_role=graphene.Int())
+                               user_role=graphene.Int(default_value=0))
     all_paginated_users = graphene.Field(UserPaginatedType,
                                          page=graphene.Int(),
                                          page_size=graphene.Int(default_value=3))
@@ -39,7 +39,7 @@ class UserQueries(graphene.ObjectType):
 
     def resolve_all_users(self, info, user_role):
         users = models.User.objects.all()
-        if user_role is None:
+        if user_role == 0:
             return users
 
         users_w_roles = [(user, [role.id for role in user.roles.filter()]) for user in users if user_role]

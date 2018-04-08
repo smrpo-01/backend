@@ -83,7 +83,7 @@ def get_board_json(board_id):
     board_json = {}
     board_json["boardName"] = board.name
     board_json["projects"] = [project.id for project in models.Project.objects.filter(board=board)]
-    board_json["columns"] = [get_column(c.id) for c in models.Column.objects.filter(board=board)]
+    board_json["columns"] = [get_column(c.id) for c in models.Column.objects.filter(board=board).filter(parent=None)]
     return board_json
 
 

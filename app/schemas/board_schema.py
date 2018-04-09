@@ -57,15 +57,19 @@ def save_column(parent, columns):
         save_column(col, column['columns'])
 
 
-def save_board_json(json_data):
+def save_board_json(json_data, edit=False):
     data = json.loads(json_data)
 
     error = validate_structure(data)
     if error:
         raise GraphQLError(error)
 
-    board = models.Board(name=data['boardName'])
-    board.save()
+    if edit:
+        board = models.Board.objects.get(pk=data['id'])
+        models.Column.objects.filter(board=board).delete()
+    else:
+        board = models.Board(name=data['boardName'])
+        board.save()
 
     for project_id in data['projects']:
         project = models.Project.objects.get(id=project_id)
@@ -151,6 +155,18 @@ class CreateBoard(graphene.Mutation):
     def mutate(root, info, json_string=None):
         board_json = save_board_json(json_string)
         return CreateBoard(board=json.dumps(board_json))
+
+
+class EditBoard(graphene.Mutation):
+    class Arguments:
+        json_string = graphene.String(required=True)
+
+    board = graphene.String()
+
+    @staticmethod
+    def mutate(root, info, json_string=None):
+        board_json = save_board_json(json_string, edit=True)
+        return EditBoard(board=json.dumps(board_json))
 
 
 class BoardMutations(graphene.ObjectType):

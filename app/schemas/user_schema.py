@@ -44,8 +44,9 @@ class UserQueries(graphene.ObjectType):
 
         users_w_roles = [(user, [role.id for role in user.roles.filter()]) for user in users if user_role]
         users_w_correct_roles = [user for (user, roles) in users_w_roles if user_role in roles]
+        only_active_users = [user for user in users_w_correct_roles if user.is_active is True]
 
-        return users_w_correct_roles
+        return only_active_users
 
     def resolve_all_paginated_users(self, info, page, page_size):
         p_size = page_size

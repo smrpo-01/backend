@@ -34,9 +34,9 @@ def validate_structure(data, edit_board=True):
         p += flatten(count_critical(column, 'priority')).count(True)
         a += flatten(count_critical(column, 'acceptance')).count(True)
 
-    if b != 2: return "Tabla mora imeta dva mejna stolpca."
+    if b != 2: return "Tabla mora imeti dva mejna stolpca."
     if p != 1: return "Tabla mora imeti en prioritetni stolpec."
-    if a != 1: return "Tabla mora imeti en stolpec za sprejemno testiranje"
+    if a != 1: return "Tabla mora imeti en stolpec za sprejemno testiranje."
     return None
 
 
@@ -86,7 +86,7 @@ def save_board_json(json_data):
         parent.save()
         save_column(parent, column['columns'])
 
-    return get_board_json(board.id)
+    return get_columns_json(board.id)
 
 
 def get_column(column_id):
@@ -103,11 +103,9 @@ def get_column(column_id):
     return column_json
 
 
-def get_board_json(board_id):
+def get_columns_json(board_id):
     board = models.Board.objects.get(pk=board_id)
     board_json = {}
-    board_json["boardName"] = board.name
-    board_json["projects"] = [project.name for project in models.Project.objects.filter(board=board)]
     board_json["columns"] = [get_column(c.id) for c in models.Column.objects.filter(board=board).filter(parent=None)]
     return board_json
 
@@ -116,10 +114,10 @@ class BoardType(DjangoObjectType):
     class Meta:
         model = models.Board
 
-    json_string = graphene.String()
+    columns = graphene.String()
 
-    def resolve_json_string(instance, info):
-        return json.dumps(get_board_json(instance.id))
+    def resolve_columns(instance, info):
+        return json.dumps(get_columns_json(instance.id))
 
 
 class ColumnType(DjangoObjectType):
@@ -128,23 +126,19 @@ class ColumnType(DjangoObjectType):
 
 
 class BoardQueries(graphene.ObjectType):
-    all_boards = graphene.List(BoardType)
+    all_boards = graphene.List(BoardType, id=graphene.Int(required=False))
     all_columns = graphene.List(ColumnType, id=graphene.String(required=False))
     get_column = graphene.Field(ColumnType)
-    get_board = graphene.types.json.JSONString(id=graphene.Int(required=True))
 
-    def resolve_all_boards(self, info):
+    def resolve_all_boards(self, info, id=None):
+        if id:
+            return [models.Board.objects.get(pk=id)]
         return models.Board.objects.all()
 
     def resolve_all_columns(self, info, id=None):
         if id:
             return [models.Column.objects.get(pk=id)]
         return models.Column.objects.all()
-
-    def resolve_get_board(self, info, id):
-        if id:
-            return get_board_json(id)
-        return None
 
 
 class CreateBoard(graphene.Mutation):

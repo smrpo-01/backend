@@ -69,6 +69,9 @@ def save_board_json(json_data, edit=False):
         board.name = data['boardName']
         board.save()
         models.Column.objects.filter(board=board).delete()
+        for p in board.projects.all():
+            p.board = None
+            p.save()
     else:
         board = models.Board(name=data['boardName'])
         board.save()

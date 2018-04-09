@@ -29,15 +29,23 @@ class UserRoleType(DjangoObjectType):
 
 
 class UserQueries(graphene.ObjectType):
-    all_users = graphene.List(UserType)
+    all_users = graphene.Field(graphene.List(UserType),
+                               user_role=graphene.Int(default_value=0))
     all_paginated_users = graphene.Field(UserPaginatedType,
                                          page=graphene.Int(),
                                          page_size=graphene.Int(default_value=3))
     all_user_roles = graphene.List(UserRoleType)
     current_user = graphene.Field(UserType)
 
-    def resolve_all_users(self, info):
-        return models.User.objects.all()
+    def resolve_all_users(self, info, user_role):
+        users = models.User.objects.all()
+        if user_role == 0:
+            return users
+
+        users_w_roles = [(user, [role.id for role in user.roles.filter()]) for user in users if user_role]
+        users_w_correct_roles = [user for (user, roles) in users_w_roles if user_role in roles]
+
+        return users_w_correct_roles
 
     def resolve_all_paginated_users(self, info, page, page_size):
         p_size = page_size

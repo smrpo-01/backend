@@ -17,7 +17,9 @@ manage.py migrate
 manage.py flush
 
 # Nalaganje/shranjevanje podatkov
-manage.py dumpdata > data_dump.json
+# shranjevanje:
+python manage.py dumpdata --natural-foreign --exclude auth.permission --exclude contenttypes --indent 4 > data_dump.json
+# nalaganje:
 manage.py loaddata data_dump.json
 ```
 
@@ -51,61 +53,55 @@ mutation Mutation {
   }
 }
 
+# Za team
+QUERIES:
 
-mutation Mutate {
-  createTeam(teamData: {
-      name: "test1", 
-      kmId: 25, 
-      poId: 28, 
-      members: [
-                {id: 25, roles: [3,4]},
-                {id: 28, roles: [2]},
-        		{id: 27, roles: []}
-                ]}) {
-    ok
-    team{
-    	id
-      kanbanMaster {
+query allTeams {
+    teamId -> String || Int
+    name -> String
+    kanbanMaster -> object {id, firstName, lastName, email, ...}
+    productOwner -> object {id, firstName, lastName, email, ...}
+    projects -> Array of Project objects {id, naziv, ...}
+    developers -> Array of {userId, firstname, lastName, isActive, email}
+}
+
+
+querry allUsers(userRole: !Integer) {
+    allUsers(userRole: $userRole) {
+        firstName,
+        lastName,
+        email,
         id
-      }
-      productOwner {
-        id
-      }
-      members{
-        email
-      }
-      
     }
-  }
 }
 
-// poId in kmId optional (če v memberjih tega ne spreminjaš)
-// po tem ukazu more met team pravilno število memberjev (1 km, 1 pm, >0 dev)
-mutation Mutate {
-	editTeam(teamData: 
-    {teamId: 13, poId: 43, kmId: 40, 
-      members: [
-        {id: 43, roles: [2]}, 
-        {id: 40, roles: [3,4]}, 
-        {id:41, roles: [4] }
-      ]})
-  {
-    ok
-    team {
-      id
-    }
-  }
+
+MUTACIJE:
+
+// Vsi dodani developerji so aktivni
+// kmId in poId se lahko podvoji v primeru da nastopa kot km in developer
+mutation addTeam {
+    name -> String
+    kmId -> Integer (kanban master id)
+    poId -> Integer (product owner id)
+    developers -> Array of {id: userId (mandatory), email (optional za debagiranje)}
 }
 
-// deactivira userja
-mutation Mutate {
-  deleteUserTeam(userTeamId: 46) {
-    ok
-    team {
-      id
-    }
-  }
+
+// Ne aktivira nobenega uporabnika, vendar lahko doda nove člane
+mutation editTeam {
+    teamId -> String || Integer (teamId)
+    name -> String
+    kmId -> Integer (kanban master id)
+    poId -> Integer (product owner id)
+    developers -> Array of {id: userId (mandatory), email (optional za debagiranje)}
 }
+
+mutation editTeamMemberStatus(userTeamId: $id) {
+    userTeamId: Integer
+    isActive: Boolean
+}
+
 
 
 mutation Mutate {

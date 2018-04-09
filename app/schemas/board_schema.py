@@ -23,8 +23,11 @@ def count_critical(column, critical):
     return [column[critical]] + [count_critical(c, critical) for c in column['columns']]
 
 
-def validate_structure(json_data):
-    data = json.loads(json_data)
+def validate_structure(data, edit_board=True):
+    if not edit_board: # dodajanje nove table
+        error = validate_columns(data['columns'])
+        if error:
+            return error
     b, p, a = 0, 0, 0
     for column in data['columns']:
         b += flatten(count_critical(column, 'boundary')).count(True)
@@ -57,7 +60,7 @@ def save_column(parent, columns):
 def save_board_json(json_data):
     data = json.loads(json_data)
 
-    error = validate_columns(data['columns'])
+    error = validate_structure(data)
     if error:
         raise GraphQLError(error)
 

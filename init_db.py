@@ -209,16 +209,16 @@ UserTeamLog(userteam=ug15, action="Uporabnik ustvarjen.").save()
 b1 = Board(name="Tabla 1")
 b1.save()
 
-p1 = Project(team=t1, name="Projekt 1 (s karticami)", customer="Mahnic", board=b1, project_code="PR-01")
+p1 = Project(team=t1, name="Projekt 1 (s karticami)", customer="Mahnic", board=b1, project_code="PR-01", date_end=datetime.date(2018,10,20))
 p1.save()
 
-p2 = Project(team=t1, name="Projekt 2 (s karticami)", customer="Furst", board=b1, project_code="PR-02")
+p2 = Project(team=t1, name="Projekt 2 (s karticami)", customer="Furst", board=b1, project_code="PR-02", date_end=datetime.date(2018,12,20))
 p2.save()
 
-p3 = Project(team=t2, name="Projekt 3", customer="Podgoršek", board=b1, project_code="PR-03")
+p3 = Project(team=t2, name="Projekt 3", customer="Podgoršek", board=b1, project_code="PR-03", date_end=datetime.date(2018,12,25))
 p3.save()
 
-p4 = Project(team=t3, name="Projekt 4", customer="Smolej", board=b1, project_code="PR-04")
+p4 = Project(team=t3, name="Projekt 4", customer="Smolej", board=b1, project_code="PR-04", date_end=datetime.date(2018,11,25))
 p4.save()
 
 col1 = Column(board=b1, name="Stolpec 1", position=0, wip=3, type="Tip stolpca 1")

@@ -112,6 +112,11 @@ def get_column(column_id):
     return column_json
 
 
+def get_user_board_ids(id):
+    u = models.User.objects.get(pk=id)
+    return list(set([p.board.id for team in u.teams.all() for p in team.projects.all() if p.board]))
+
+
 def get_columns_json(board_id):
     board = models.Board.objects.get(pk=board_id)
     board_json = {}
@@ -138,6 +143,7 @@ class BoardQueries(graphene.ObjectType):
     all_boards = graphene.List(BoardType, id=graphene.Int(required=False))
     all_columns = graphene.List(ColumnType, id=graphene.String(required=False))
     get_column = graphene.Field(ColumnType)
+    get_user_boards = graphene.List(BoardType, userId=graphene.Int(required=True))
 
     def resolve_all_boards(self, info, id=None):
         if id:
@@ -148,6 +154,13 @@ class BoardQueries(graphene.ObjectType):
         if id:
             return [models.Column.objects.get(pk=id)]
         return models.Column.objects.all()
+
+    def resolve_get_user_boards(self, info, userId=None):
+        u = models.User.objects.get(pk=userId)
+        ur = [r.id for r in u.roles.all() if r.id == 1]
+        if ur:
+            return models.Board.objects.all()
+        return [models.Board.objects.get(pk=b) for b in get_user_board_ids(userId)]
 
 
 class CreateBoard(graphene.Mutation):

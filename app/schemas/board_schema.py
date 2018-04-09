@@ -7,11 +7,33 @@ import json
 from graphql import GraphQLError
 
 
+def flatten(lst):
+    return sum(([x] if not isinstance(x, list) else flatten(x) for x in lst), [])
+
+
 def validate_columns(columns):
     for column in columns:
         if models.Column.objects.filter(pk=column['id']).exists():
             return "Stolpec z istim ID že obstaja."
         validate_columns(column['columns'])
+    return None
+
+
+def count_critical(column, critical):
+    return [column[critical]] + [count_critical(c, critical) for c in column['columns']]
+
+
+def validate_structure(json_data):
+    data = json.loads(json_data)
+    b, p, a = 0, 0, 0
+    for column in data['columns']:
+        b += flatten(count_critical(column, 'boundary')).count(True)
+        p += flatten(count_critical(column, 'priority')).count(True)
+        a += flatten(count_critical(column, 'acceptance')).count(True)
+
+    if b != 2: return "Tabla mora imeta dva mejna stolpca."
+    if p != 1: return "Tabla mora imeti en prioritetni stolpec."
+    if a != 1: return "Tabla mora imeti en stolpec za sprejemno testiranje"
     return None
 
 
@@ -82,7 +104,7 @@ def get_board_json(board_id):
     board = models.Board.objects.get(pk=board_id)
     board_json = {}
     board_json["boardName"] = board.name
-    board_json["projects"] = [project.id for project in models.Project.objects.filter(board=board)]
+    board_json["projects"] = [project.name for project in models.Project.objects.filter(board=board)]
     board_json["columns"] = [get_column(c.id) for c in models.Column.objects.filter(board=board).filter(parent=None)]
     return board_json
 

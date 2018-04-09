@@ -205,8 +205,8 @@ class CardType(models.Model):
 
 
 class Card(models.Model):
-    column = models.ForeignKey(Column, null=False, on_delete=models.CASCADE)
-    type = models.ForeignKey(CardType, null=False, on_delete=models.CASCADE, related_name='cards')
+    column = models.ForeignKey(Column, null=False, on_delete=models.CASCADE, related_name='cards')
+    type = models.ForeignKey(CardType, null=False, on_delete=models.CASCADE)
     description = models.TextField(blank=True, null=True, default="")
     name = models.CharField(max_length=255, null=True)
     estimate = models.FloatField()

@@ -66,6 +66,8 @@ def save_board_json(json_data, edit=False):
 
     if edit:
         board = models.Board.objects.get(pk=data['id'])
+        board.name = data['boardName']
+        board.save()
         models.Column.objects.filter(board=board).delete()
     else:
         board = models.Board(name=data['boardName'])

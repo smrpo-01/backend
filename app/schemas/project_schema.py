@@ -144,10 +144,19 @@ class DeleteProject(graphene.Mutation):
 
 
 class ProjectQueries(graphene.ObjectType):
-    all_projects = graphene.List(ProjectType)
+    all_projects = graphene.Field(graphene.List(ProjectType),
+                                  filtered=graphene.Int(default_value=0),
+                                  user_id=graphene.Int(default_value=-1))
 
-    def resolve_all_projects(self, info):
-        return models.Project.objects.all()
+    def resolve_all_projects(self, info, filtered, user_id):
+        if filtered == 0:
+            return models.Project.objects.all()
+        all_projects = list(models.Project.objects.all())
+        filtered_projects = [project for project in all_projects if project.board is None]
+        if user_id == -1:
+            return filtered_projects
+        only_this_km_projects = [project for project in filtered_projects if project.team.kanban_master.id == user_id]
+        return only_this_km_projects
 
 
 class ProjectMutations(graphene.ObjectType):

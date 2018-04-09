@@ -144,11 +144,14 @@ class DeleteProject(graphene.Mutation):
 
 
 class ProjectQueries(graphene.ObjectType):
-    all_projects = graphene.List(ProjectType)
+    all_projects = graphene.Field(graphene.List(ProjectType), filtered=graphene.Int(default_value=0))
 
-    def resolve_all_projects(self, info):
-        return models.Project.objects.all()
-
+    def resolve_all_projects(self, info, filtered):
+        if filtered == 0:
+            return models.Project.objects.all()
+        all_projects = list(models.Project.objects.all())
+        filtered_projects = [project for project in all_projects if project.board is None]
+        return filtered_projects
 
 class ProjectMutations(graphene.ObjectType):
     add_project = AddProject.Field()

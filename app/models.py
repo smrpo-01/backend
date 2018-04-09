@@ -168,7 +168,7 @@ class Board(models.Model):
 
 class Project(models.Model):
     team = models.ForeignKey(Team, null=True, on_delete=models.CASCADE)
-    board = models.ForeignKey(Board, null=True, on_delete=models.CASCADE)
+    board = models.ForeignKey(Board, null=True, default=None, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
     project_code = models.CharField(max_length=255, null=True, default="")
     customer = models.CharField(max_length=255, null=False, default="") # narocnik

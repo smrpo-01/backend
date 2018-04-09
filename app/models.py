@@ -72,7 +72,7 @@ class TeamRole(models.Model):
 
 
 class Setting(models.Model):
-    key = models.CharField(max_length=255, unique=True)
+    key = models.CharField(max_length=255, primary_key=True)
     value = models.CharField(max_length=255)
 
     def __str__(self):
@@ -171,9 +171,9 @@ class Project(models.Model):
     board = models.ForeignKey(Board, null=True, default=None, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
     project_code = models.CharField(max_length=255, null=True, default="")
-    customer = models.CharField(max_length=255, null=False, default="") # narocnik
+    customer = models.CharField(max_length=255, null=False, default="")
     date_start = models.DateField(default=timezone.now)
-    date_end = models.DateField(default=timezone.now()+datetime.timedelta(days=5))
+    date_end = models.DateField()
     is_active = models.BooleanField(default=True)
 
 
@@ -183,7 +183,9 @@ class Column(models.Model):
     name = models.CharField(max_length=255, null=False)
     position = models.IntegerField(default=0, null=False)
     wip = models.IntegerField(default=0, null=False)
-    type = models.CharField(max_length=255, null=False)
+    boundary = models.BooleanField(default=False)
+    priority = models.BooleanField(default=False)
+    acceptance = models.BooleanField(default=False)
     parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
 
 
@@ -203,13 +205,13 @@ class CardType(models.Model):
 
 
 class Card(models.Model):
-    column = models.ForeignKey(Column, null=False, on_delete=models.CASCADE)
-    type = models.ForeignKey(CardType, null=False, on_delete=models.CASCADE, related_name='cards')
+    column = models.ForeignKey(Column, null=False, on_delete=models.CASCADE, related_name='cards')
+    type = models.ForeignKey(CardType, null=False, on_delete=models.CASCADE)
     description = models.TextField(blank=True, null=True, default="")
     name = models.CharField(max_length=255, null=True)
     estimate = models.FloatField()
     project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
-    expiration = models.DateTimeField(default=timezone.now()+datetime.timedelta(days=5))
+    expiration = models.DateTimeField(default=timezone.now)
 
 
 class CardLog(models.Model):

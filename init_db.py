@@ -221,13 +221,13 @@ p3.save()
 p4 = Project(team=t3, name="Projekt 4", customer="Smolej", board=None, project_code="PR-04", date_end=datetime.date(2018,11,25))
 p4.save()
 
-col1 = Column(board=b1, name="Stolpec 1", position=0, wip=3, type="Tip stolpca 1")
+col1 = Column(board=b1, name="Stolpec 1", position=0, wip=3)
 col1.save()
 
-col2 = Column(board=b1, name="Stolpec 2", position=0, wip=4, type="Tip stolpca 2", parent=col1)
+col2 = Column(id="2", board=b1, name="Stolpec 2", position=0, wip=4, parent=col1)
 col2.save()
 
-col3 = Column(board=b1, name="Stolpec 3", position=1, wip=5, type="Tip stolpca 3", parent=col1)
+col3 = Column(id="3", board=b1, name="Stolpec 3", position=1, wip=5, parent=col1)
 col3.save()
 
 [CardType(i).save() for i in range(0,2)]

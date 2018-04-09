@@ -173,3 +173,4 @@ class EditBoard(graphene.Mutation):
 
 class BoardMutations(graphene.ObjectType):
     create_board = CreateBoard.Field()
+    edit_board = EditBoard.Field()

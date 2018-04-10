@@ -35,6 +35,13 @@ def validate_project(project_data):
             if project.date_start != date_start:
                 return "Kartice že obstajajo, datum pričetka se ne sme spremeniti!"
 
+    projects_w_this_code = models.Project.objects.filter(project_code=project_data.project_code)
+    if len(projects_w_this_code) != 0:
+        if project_data.id is None:
+            return "Projekt s to šifro že obstaja!"
+        else:
+            if projects_w_this_code[0].id != project_data.id:
+                return "Projekt s to šifro že obstaja!"
     return None
 
 

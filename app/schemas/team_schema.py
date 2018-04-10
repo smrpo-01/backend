@@ -126,7 +126,11 @@ class TeamQueries(graphene.ObjectType):
 def checkIfMemberCanDoWhatTheyAreTold(team_data):
     team = models.Team.objects.filter(name=team_data.name)
     if len(team) != 0:
-        return 'Ekipa s tem imenom že obstaja!'
+        if team_data.team_id is None:
+            return 'Ekipa s tem imenom že obstaja!'
+        else:
+            if team[0].id !=team_data.team_id:
+                return 'Ekipa s tem imenom že obstaja!'
 
 
     if team_data.km_id == team_data.po_id:
@@ -158,6 +162,7 @@ def checkIfMemberCanDoWhatTheyAreTold(team_data):
 # ----------------------------------------------------------------------------------------------------------------------
 
 class CreateTeamInput(graphene.InputObjectType):
+    team_id = graphene.Int(required=False)
     name = graphene.String(required=True)
     km_id = graphene.Int(required=True)
     po_id = graphene.Int(required=True)

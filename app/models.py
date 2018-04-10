@@ -170,7 +170,7 @@ class Project(models.Model):
     team = models.ForeignKey(Team, null=True, on_delete=models.CASCADE, related_name='projects')
     board = models.ForeignKey(Board, null=True, on_delete=models.CASCADE, related_name='projects')
     name = models.CharField(max_length=255, null=False)
-    project_code = models.CharField(max_length=255, null=True, default="")
+    project_code = models.CharField(max_length=255, null=True, default="", unique=True)
     customer = models.CharField(max_length=255, null=False, default="")
     date_start = models.DateField(default=timezone.now)
     date_end = models.DateField()

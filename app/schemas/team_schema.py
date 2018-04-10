@@ -124,6 +124,11 @@ class TeamQueries(graphene.ObjectType):
 # ----------------------------------------------------------------------------------------------------------------------
 
 def checkIfMemberCanDoWhatTheyAreTold(team_data):
+    team = models.Team.objects.filter(name=team_data.name)
+    if len(team) != 0:
+        return 'Ekipa s tem imenom že obstaja!'
+
+
     if team_data.km_id == team_data.po_id:
         return 'KanbanMaster in ProductOwner ne smeta biti ista oseba!'
 

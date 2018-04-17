@@ -4,6 +4,11 @@ from graphene_django.types import DjangoObjectType
 from .. import models
 
 
+class TaskType(DjangoObjectType):
+    class Meta:
+        model = models.Task
+
+
 class CardTypeType(DjangoObjectType):
     class Meta:
         model = models.CardType
@@ -34,7 +39,6 @@ class CardQueries(graphene.ObjectType):
             cards = list(models.Card.objects.all())
             cards_filtered = [card for card in cards if card.column.board_id == board_id]
             return cards_filtered
-
 
     all_card_types = graphene.List(CardTypeType)
 

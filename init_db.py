@@ -229,7 +229,7 @@
 
     col3 = Column(id="3", board=b1, name="Stolpec 3", position=1, wip=5, parent=col1)
     col3.save()
-    
+
     [CardType(i).save() for i in range(0,2)]
 
 

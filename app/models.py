@@ -205,12 +205,6 @@ class CardType(models.Model):
         return self.get_id_display()
 
 
-class Task(models.Model):
-    description = models.TextField(blank=True, null=True, default="")
-    done = models.BooleanField(default=False)
-    assignee = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
-
-
 class Card(models.Model):
     column = models.ForeignKey(Column, null=False, on_delete=models.CASCADE, related_name='cards')
     type = models.ForeignKey(CardType, null=False, on_delete=models.CASCADE)
@@ -220,7 +214,14 @@ class Card(models.Model):
     project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
     expiration = models.DateTimeField(default=timezone.now)
     owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
-    tasks = models.ManyToManyField(Task)
+    # tasks = models.ManyToManyField(Task)
+
+
+class Task(models.Model):
+    card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='tasks')
+    description = models.TextField(blank=True, null=True, default="")
+    done = models.BooleanField(default=False)
+    assignee = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
 
 
 class CardLog(models.Model):

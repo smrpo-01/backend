@@ -25,10 +25,16 @@ class CardLogType(DjangoObjectType):
 
 
 class CardQueries(graphene.ObjectType):
-    all_cards = graphene.List(CardType)
+    all_cards = graphene.Field(graphene.List(CardType), board_id=graphene.Int(default_value=-1))
 
-    def resolve_all_cards(self, info):
-        return models.Card.objects.all()
+    def resolve_all_cards(self, info, board_id):
+        if board_id == -1:
+            return models.Card.objects.all()
+        else:
+            cards = list(models.Card.objects.all())
+            cards_filtered = [card for card in cards if card.column.board_id == board_id]
+            return cards_filtered
+
 
     all_card_types = graphene.List(CardTypeType)
 

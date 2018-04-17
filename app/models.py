@@ -5,7 +5,8 @@ import datetime
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, password, first_name, last_name, is_superuser=False, is_admin=False, is_staff=False, **extra_fields):
+    def create_user(self, email, password, first_name, last_name, is_superuser=False, is_admin=False, is_staff=False,
+                    **extra_fields):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -111,7 +112,7 @@ class LoginAttempt(models.Model):
 
 
 class User(AbstractBaseUser):
-    email = models.EmailField(verbose_name='email address',max_length=255,unique=True,)
+    email = models.EmailField(verbose_name='email address', max_length=255, unique=True, )
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
@@ -204,6 +205,12 @@ class CardType(models.Model):
         return self.get_id_display()
 
 
+class Task(models.Model):
+    description = models.TextField(blank=True, null=True, default="")
+    done = models.BooleanField(default=False)
+    assignee = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
+
+
 class Card(models.Model):
     column = models.ForeignKey(Column, null=False, on_delete=models.CASCADE, related_name='cards')
     type = models.ForeignKey(CardType, null=False, on_delete=models.CASCADE)
@@ -212,6 +219,8 @@ class Card(models.Model):
     estimate = models.FloatField()
     project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
     expiration = models.DateTimeField(default=timezone.now)
+    owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
+    tasks = models.ManyToManyField(Task)
 
 
 class CardLog(models.Model):

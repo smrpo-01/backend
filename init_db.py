@@ -232,13 +232,33 @@ col3.save()
 
 [CardType(i).save() for i in range(0,2)]
 
+t1 = Task(description="To je description 1")
+t1.save()
+
+t2 = Task(description="To je description 2")
+t2.save()
+
+t3 = Task(description="To je description 3")
+t3.save()
+
+t4 = Task(description="To je description 4")
+t4.save()
+
+
 c1 = Card(column=col2, type=CardType.objects.get(id=0), description="Mellow", name="To je ime kartice", estimate=3.5, project=p1)
+c1.save()
+c1.tasks.add(t1)
+c1.tasks.add(t2)
 c1.save()
 
 c2 = Card(column=col2, type=CardType.objects.get(id=0), description="Meowww", name="To je kartica", estimate=1, project=p2)
 c2.save()
+c2.tasks.add(t3)
+c2.save()
 
 c3 = Card(column=col3, type=CardType.objects.get(id=1), description="Meowing all over the world.", name="Bllll", estimate=666, project=p2)
+c3.save()
+c3.tasks.add(t4)
 c3.save()
 
 CardLog(card=c1, from_column=col1, to_column=col2, action="Premik1").save()

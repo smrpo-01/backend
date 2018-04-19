@@ -24,9 +24,24 @@ class CardType(DjangoObjectType):
         model = models.Card
 
 
+class CardActionType(DjangoObjectType):
+    class Meta:
+        model = models.CardAction
+
+    name = graphene.String()
+
+    def resolve_name(instance, info):
+        return str(instance)
+
+
 class CardLogType(DjangoObjectType):
     class Meta:
         model = models.CardLog
+
+    log_string = graphene.String()
+
+    def resolve_log_string(instance, info):
+        return str(instance)
 
 
 class CardQueries(graphene.ObjectType):

@@ -157,8 +157,7 @@ class BoardQueries(graphene.ObjectType):
 
     def resolve_get_user_boards(self, info, userId=None):
         u = models.User.objects.get(pk=userId)
-        ur = [r.id for r in u.roles.all() if r.id == 1]
-        if ur:
+        if u in models.User.objects.filter(roles__id=1):
             return models.Board.objects.all()
         return [models.Board.objects.get(pk=b) for b in get_user_board_ids(userId)]
 

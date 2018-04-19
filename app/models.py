@@ -193,10 +193,12 @@ class Column(models.Model):
 class CardType(models.Model):
     NORMAL = 0
     SILVER_BULLET = 1
+    REJECTED = 2
 
     CARD_TYPES = (
         (NORMAL, 'Navadna kartica'),
-        (SILVER_BULLET, 'Nujna zahteva')
+        (SILVER_BULLET, 'Nujna zahteva'),
+        (REJECTED, 'Zavrnjena kartica')
     )
 
     id = models.PositiveIntegerField(choices=CARD_TYPES, default=NORMAL, primary_key=True)
@@ -214,7 +216,6 @@ class Card(models.Model):
     project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
     expiration = models.DateTimeField(default=timezone.now)
     owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
-    # tasks = models.ManyToManyField(Task)
 
 
 class Task(models.Model):
@@ -224,9 +225,30 @@ class Task(models.Model):
     assignee = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
 
 
+class CardAction(models.Model):
+    MOVE = 0
+    WIP_WARNING = 1
+    DELETE = 2
+
+    CARD_ACTION_TYPES = (
+        (MOVE, 'Premik'),
+        (WIP_WARNING, 'WIP omejitev je bila presežena.'),
+        (DELETE, 'Brisanje kartice')
+    )
+
+    id = models.PositiveIntegerField(choices=CARD_ACTION_TYPES, default=MOVE, primary_key=True)
+
+    def __str__(self):
+        return self.get_id_display()
+
+
 class CardLog(models.Model):
     card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='logs')
-    from_column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name='from_column_log')
-    to_column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name='to_column_log')
-    action = models.CharField(max_length=255)
+    from_column = models.ForeignKey(Column, default=None, on_delete=models.CASCADE, related_name='from_column_log')
+    to_column = models.ForeignKey(Column, default=None, on_delete=models.CASCADE, related_name='to_column_log')
+    action = models.ForeignKey(CardAction, default=0, on_delete=models.CASCADE, related_name='logs')
     timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return "(Čas: %s, Tip akcije: %s, Kartica: %s, Iz stolpca: %s, V stolpec: %s)\n" % \
+                (self.timestamp, str(self.action), self.card.id, self.from_column.id, self.to_column.id)

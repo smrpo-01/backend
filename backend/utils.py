@@ -1,5 +1,5 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-
+import datetime
 
 class HelperClass:
 
@@ -30,3 +30,7 @@ class HelperClass:
         else:
             ip = request.META.get('REMOTE_ADDR')
         return ip
+
+    @staticmethod
+    def get_si_date(date):
+        return datetime.datetime.strptime(date, '%d.%m.%Y')

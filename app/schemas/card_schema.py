@@ -8,6 +8,14 @@ import pytz
 from .. import models
 
 
+def get_first_column(card):
+    return models.CardLog.objects.filter(card=card).first().from_column
+
+
+def get_current_column(card):
+    return models.CardLog.objects.filter(card=card).last().to_column
+
+
 class TaskType(DjangoObjectType):
     class Meta:
         model = models.Task
@@ -33,6 +41,8 @@ class CardType(DjangoObjectType):
         card = instance
         localtz = pytz.timezone('Europe/Ljubljana')
 
+        # CardLog.objects.filter(timestamp__gte=fdate)
+
         from_cols = [c[0] for c in models.CardLog.objects.filter(card=card).values_list('from_column').distinct()]
         to_cols = [c[0] for c in models.CardLog.objects.filter(card=card).values_list('to_column').distinct()]
         cols = set(to_cols + from_cols)
@@ -43,14 +53,17 @@ class CardType(DjangoObjectType):
             column = models.Column.objects.get(id=col)
             per_column[column.name] = 0
 
-            if col in from_cols and col not in to_cols:
+            if col == get_first_column(card).id:
                 log = card.logs.filter(from_column__id=col).first()
+
                 project_start = card.project.date_start
                 start = localtz.localize(datetime.datetime(project_start.year, project_start.month, project_start.day))
+
                 diff = (log.timestamp - start).total_seconds() / 3600
                 per_column[column.name] = float("{0:.2f}".format(diff))
-            elif col in to_cols and col not in from_cols:
+            elif col == get_current_column(card).id:
                 log = card.logs.filter(to_column__id=col).first()
+
                 diff = (timezone.now() - log.timestamp).total_seconds() / 3600
                 per_column[column.name] = float("{0:.2f}".format(diff))
 

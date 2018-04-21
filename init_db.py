@@ -209,26 +209,49 @@ UserTeamLog(userteam=ug15, action="Uporabnik ustvarjen.").save()
 b1 = Board(name="Tabla 1")
 b1.save()
 
-p1 = Project(team=t1, name="Projekt 1 (s karticami)", customer="Mahnic", board=b1, project_code="PR-01", date_end=datetime.date(2018,10,20))
+p1 = Project(team=t1, name="Projekt 1 (s karticami)", customer="Mahnic", board=b1, project_code="PR-01", date_start=datetime.date(2018,4,10), date_end=datetime.date(2018,10,20))
 p1.save()
 
-p2 = Project(team=t1, name="Projekt 2 (s karticami)", customer="Furst", board=b1, project_code="PR-02", date_end=datetime.date(2018,12,20))
+p2 = Project(team=t1, name="Projekt 2 (s karticami)", customer="Furst", board=b1, project_code="PR-02", date_start=datetime.date(2018,4,10), date_end=datetime.date(2018,12,20))
 p2.save()
 
-p3 = Project(team=t2, name="Projekt 3", customer="Podgoršek", board=None, project_code="PR-03", date_end=datetime.date(2018,12,25))
+p3 = Project(team=t2, name="Projekt 3", customer="Podgoršek", board=None, project_code="PR-03", date_start=datetime.date(2018,4,10), date_end=datetime.date(2018,12,25))
 p3.save()
 
-p4 = Project(team=t3, name="Projekt 4", customer="Smolej", board=None, project_code="PR-04", date_end=datetime.date(2018,11,25))
+p4 = Project(team=t3, name="Projekt 4", customer="Smolej", board=None, project_code="PR-04", date_start=datetime.date(2018,4,10), date_end=datetime.date(2018,11,25))
 p4.save()
 
-col1 = Column(board=b1, name="Stolpec 1", position=0, wip=3)
+# Columns -----------------------------------------------------------------------
+
+col1 = Column(id="1", board=b1, name="Product Backlog", position=0, wip=0)
 col1.save()
 
-col2 = Column(id="2", board=b1, name="Stolpec 2", position=0, wip=4, parent=col1)
+col2 = Column(id="2", board=b1, name="Sprint Backlog", position=1, wip=0, priority=True)
 col2.save()
 
-col3 = Column(id="3", board=b1, name="Stolpec 3", position=1, wip=5, parent=col1)
+col3 = Column(id="3", board=b1, name="Development", position=2, wip=6)
 col3.save()
+
+col4 = Column(id="4", board=b1, name="Analysis & Design", position=0, wip=0, parent=col3, boundary=True)
+col4.save()
+
+col5 = Column(id="5", board=b1, name="Coding", position=1, wip=0, parent=col3)
+col5.save()
+
+col6 = Column(id="6", board=b1, name="Testing", position=2, wip=0, parent=col3)
+col6.save()
+
+col7 = Column(id="7", board=b1, name="Integration", position=3, wip=0, parent=col3)
+col7.save()
+
+col8 = Column(id="8", board=b1, name="Documentation", position=4, wip=0, parent=col3, boundary=True)
+col8.save()
+
+col9 = Column(id="9", board=b1, name="Acceptance Ready", position=3, wip=0, acceptance=True)
+col9.save()
+
+col10 = Column(id="10", board=b1, name="Done", position=4, wip=0)
+col10.save()
 
 [CardType(i).save() for i in range(3)]
 
@@ -260,10 +283,18 @@ t4.save()
 
 [CardAction(i).save() for i in range(3)]
 
-ca = CardAction.objects.all().first()
+ca = CardAction.objects.get(id=0) # move
 
-CardLog(card=c1, from_column=col1, to_column=col2, action=ca).save()
-CardLog(card=c1, from_column=col2, to_column=col3, action=ca).save()
-CardLog(card=c1, from_column=col3, to_column=col1, action=ca).save()
-CardLog(card=c3, from_column=col1, to_column=col3, action=ca).save()
-CardLog(card=c2, from_column=col1, to_column=col3, action=ca).save()
+CardLog(card=c1, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 14, 10, 0)).save()
+CardLog(card=c1, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 17, 16, 30)).save()
+CardLog(card=c1, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 18, 10, 0)).save()
+CardLog(card=c1, from_column=col6, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 18, 12, 0)).save()
+CardLog(card=c1, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 19, 8, 0)).save()
+CardLog(card=c1, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 19, 16, 0)).save()
+
+CardLog(card=c2, from_column=col4, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 15, 18, 0)).save()
+
+CardLog(card=c3, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 16, 17, 15)).save()
+CardLog(card=c3, from_column=col6, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 20, 7, 0)).save()
+
+# 2 projekta - 10 kartic + silver bullet

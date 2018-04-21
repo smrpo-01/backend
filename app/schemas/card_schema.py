@@ -1,5 +1,9 @@
 import graphene
 from graphene_django.types import DjangoObjectType
+from graphene.types.generic import GenericScalar
+from django.utils import timezone
+import datetime
+import pytz
 
 from .. import models
 
@@ -23,6 +27,37 @@ class CardType(DjangoObjectType):
     class Meta:
         model = models.Card
 
+    card_per_column_time = GenericScalar()
+
+    def resolve_card_per_column_time(instance, info):
+        card = instance
+        localtz = pytz.timezone('Europe/Ljubljana')
+
+        from_cols = [c[0] for c in models.CardLog.objects.filter(card=card).values_list('from_column').distinct()]
+        to_cols = [c[0] for c in models.CardLog.objects.filter(card=card).values_list('to_column').distinct()]
+        cols = set(to_cols + from_cols)
+
+        per_column = {}
+        print(cols)
+        for col in cols:
+            column = models.Column.objects.get(id=col)
+            per_column[column.name] = 0
+
+            if col in from_cols and col not in to_cols:
+                log = card.logs.filter(from_column__id=col).first()
+                project_start = card.project.date_start
+                start = localtz.localize(datetime.datetime(project_start.year, project_start.month, project_start.day))
+                diff = (log.timestamp - start).total_seconds() / 3600
+                per_column[column.name] = float("{0:.2f}".format(diff))
+            elif col in to_cols and col not in from_cols:
+                log = card.logs.filter(to_column__id=col).first()
+                diff = (timezone.now() - log.timestamp).total_seconds() / 3600
+                per_column[column.name] = float("{0:.2f}".format(diff))
+
+            for a, b in zip(card.logs.filter(from_column__id=col), card.logs.filter(to_column__id=col)):
+                per_column[column.name] += (a.timestamp - b.timestamp).total_seconds() / 3600
+        return per_column
+
 
 class CardActionType(DjangoObjectType):
     class Meta:
@@ -45,10 +80,12 @@ class CardLogType(DjangoObjectType):
 
 
 class CardQueries(graphene.ObjectType):
-    all_cards = graphene.Field(graphene.List(CardType), board_id=graphene.Int(default_value=-1))
+    all_cards = graphene.Field(graphene.List(CardType), card_id=graphene.String(default_value=-1), board_id=graphene.Int(default_value=-1))
 
-    def resolve_all_cards(self, info, board_id):
+    def resolve_all_cards(self, info, card_id, board_id):
         if board_id == -1:
+            if card_id != -1:
+                return [models.Card.objects.get(id=card_id)]
             return models.Card.objects.all()
         else:
             cards = list(models.Card.objects.all())

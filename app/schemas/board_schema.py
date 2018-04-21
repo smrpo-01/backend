@@ -1,5 +1,6 @@
 import graphene
 from graphene_django.types import DjangoObjectType
+from graphene.types.generic import GenericScalar
 
 from .. import models
 
@@ -129,9 +130,11 @@ class BoardType(DjangoObjectType):
         model = models.Board
 
     columns = graphene.String()
+    #columns = GenericScalar()
 
     def resolve_columns(instance, info):
         return json.dumps(get_columns_json(instance.id))
+        #return get_columns_json(instance.id)
 
 
 class ColumnType(DjangoObjectType):

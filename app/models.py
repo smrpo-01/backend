@@ -243,6 +243,9 @@ class CardAction(models.Model):
 
 
 class CardLog(models.Model):
+    class Meta:
+        ordering = ['timestamp', 'card']
+
     card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='logs')
     from_column = models.ForeignKey(Column, default=None, on_delete=models.CASCADE, related_name='from_column_log')
     to_column = models.ForeignKey(Column, default=None, on_delete=models.CASCADE, related_name='to_column_log')

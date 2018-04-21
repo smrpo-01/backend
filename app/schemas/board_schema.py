@@ -3,9 +3,12 @@ from graphene_django.types import DjangoObjectType
 from graphene.types.generic import GenericScalar
 
 from .. import models
+from backend.utils import HelperClass
 
 import json
 from graphql import GraphQLError
+
+from app.schemas.card_schema import *
 
 
 def flatten(lst):
@@ -131,6 +134,29 @@ class BoardType(DjangoObjectType):
 
     columns = graphene.String()
     #columns = GenericScalar()
+
+    estimate_min = graphene.Float()
+    estimate_max = graphene.Float()
+
+    project_start_date = graphene.String()
+    project_end_date = graphene.String()
+
+    card_types = graphene.List(CardTypeType)
+
+    def resolve_estimate_min(instance, info):
+        return min([min([c.estimate for c in p.card_set.all()]) for p in instance.projects.all()])
+
+    def resolve_estimate_max(instance, info):
+        return max([max([c.estimate for c in p.card_set.all()]) for p in instance.projects.all()])
+
+    def resolve_project_start_date(instance, info):
+        return str(HelperClass.to_si_date(min([p.date_start for p in instance.projects.all()])))
+
+    def resolve_project_end_date(instance, info):
+        return str(HelperClass.to_si_date(max([p.date_end for p in instance.projects.all()])))
+
+    def resolve_card_types(instance, info):
+        return list(set(flatten([[c.type for c in p.card_set.all()] for p in instance.projects.all()])))
 
     def resolve_columns(instance, info):
         return json.dumps(get_columns_json(instance.id))

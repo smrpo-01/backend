@@ -41,7 +41,7 @@ class CardType(DjangoObjectType):
         card = instance
         localtz = pytz.timezone('Europe/Ljubljana')
 
-        # CardLog.objects.filter(timestamp__gte=fdate)
+        # filtri
 
         from_cols = [c[0] for c in models.CardLog.objects.filter(card=card).values_list('from_column').distinct()]
         to_cols = [c[0] for c in models.CardLog.objects.filter(card=card).values_list('to_column').distinct()]

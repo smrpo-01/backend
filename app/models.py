@@ -216,6 +216,7 @@ class Card(models.Model):
     project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
     expiration = models.DateTimeField(default=timezone.now)
     owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(default=timezone.now)
 
 
 class Task(models.Model):

@@ -33,4 +33,16 @@ class HelperClass:
 
     @staticmethod
     def get_si_date(date):
+        """
+        :param date: datetime object
+        :return:
+        """
         return datetime.datetime.strptime(date, '%d.%m.%Y')
+
+    @staticmethod
+    def to_si_date(date):
+        """
+        :param date: datetime object
+        :return:
+        """
+        return datetime.datetime.strftime(date, '%d.%m.%Y')

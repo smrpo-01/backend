@@ -179,6 +179,9 @@ class Project(models.Model):
 
 
 class Column(models.Model):
+    class Meta:
+        ordering = ['parent__position', 'position']
+
     id = models.CharField(max_length=255, primary_key=True)
     board = models.ForeignKey(Board, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)

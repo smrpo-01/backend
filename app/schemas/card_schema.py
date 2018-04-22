@@ -9,6 +9,7 @@ from backend.utils import HelperClass
 from functools import reduce
 
 from .. import models
+from app.schemas.board_schema import *
 
 
 def get_first_column(card):
@@ -19,17 +20,23 @@ def get_current_column(card):
     return models.CardLog.objects.filter(card=card).last().to_column
 
 
-def card_per_column_time(card):
+def card_per_column_time(card, minimal=True):
     localtz = pytz.timezone('Europe/Ljubljana')
-
-    # filtri
 
     from_cols = [c[0] for c in models.CardLog.objects.filter(card=card).values_list('from_column').distinct()]
     to_cols = [c[0] for c in models.CardLog.objects.filter(card=card).values_list('to_column').distinct()]
     cols = set(to_cols + from_cols)
 
+    if minimal:
+        b = card.project.board
+        priority = models.Column.objects.get(board=b, priority=True)
+        backlogs = models.Column.objects.filter(board=b, position__lt=priority.position, parent=priority.parent)
+        [cols.remove(c.id) for c in backlogs if c.id in cols]
+        done_col = get_done_column(b)
+        if done_col.id in cols:
+            cols.remove(done_col.id)
+
     per_column = {}
-    print(cols)
     for col in cols:
         column = models.Column.objects.get(id=col)
         per_column[column.name] = 0
@@ -53,16 +60,36 @@ def card_per_column_time(card):
     return per_column
 
 
-def card_total_time(card):
-    data = card_per_column_time(card)
+def card_total_time(card, minimal=True):
+    data = card_per_column_time(card, minimal)
     return sum([v for _, v in data.items()])
+
+
+def get_done_column(board):
+    board_columns = board.column_set.all()
+    pos, par = board_columns.get(acceptance=True).position, board_columns.get(acceptance=True).parent
+    return board_columns.get(position=pos + 1, parent=par)
+
+
+def get_boundary_columns(board):
+    boundary = models.Column.objects.filter(board=board, boundary=True)
+    left, right = boundary
+    return left, right
+
+
+def done_cards(project_id):
+    project = models.Project.objects.get(id=project_id)
+    done_column = get_done_column(project.board)
+    project_cards = models.Card.objects.filter(project=project)
+    return [c for c in project_cards if get_current_column(c) == done_column]
 
 
 def filter_cards_avg_time(project_id, creation_start, creation_end, done_start, done_end, dev_start, dev_end, \
                           estimate_from, estimate_to, card_type):
     cards = models.Card.objects.all()
     if project_id:
-        cards = cards.filter(project=models.Project.objects.get(id=project_id))
+        project = models.Project.objects.get(id=project_id)
+        cards = cards.filter(project=project)
     if creation_start:
         start = HelperClass.get_si_date(creation_start)
         cards = cards.filter(date_created__gte=start)
@@ -70,17 +97,25 @@ def filter_cards_avg_time(project_id, creation_start, creation_end, done_start, 
         end = HelperClass.get_si_date(creation_end)
         cards = cards.filter(date_created__lte=end)
     if done_start:
-        # TODO
         start = HelperClass.get_si_date(done_start)
+        done_column = get_done_column(project.board)
+        valid_cards = models.CardLog.objects.filter(to_column=done_column, timestamp__gte=start).values_list('card', flat=True)
+        cards = cards.filter(pk__in=[c for c in valid_cards])
     if done_end:
-        # TODO
         end = HelperClass.get_si_date(done_end)
+        done_column = get_done_column(project.board)
+        valid_cards = models.CardLog.objects.filter(to_column=done_column, timestamp__lte=end).values_list('card', flat=True)
+        cards = cards.filter(pk__in=[c for c in valid_cards])
     if dev_start:
-        # TODO
         start = HelperClass.get_si_date(dev_start)
+        left, _ = get_boundary_columns(project.board)
+        valid_cards = models.CardLog.objects.filter(to_column=left, timestamp__gte=start).values_list('card', flat=True)
+        cards = cards.filter(pk__in=[c for c in valid_cards])
     if dev_end:
-        # TODO
         end = HelperClass.get_si_date(dev_end)
+        left, _ = get_boundary_columns(project.board)
+        valid_cards = models.CardLog.objects.filter(to_column=left, timestamp__lte=end).values_list('card', flat=True)
+        cards = cards.filter(pk__in=[c for c in valid_cards])
     if estimate_from:
         cards = cards.filter(estimate__gte=estimate_from)
     if estimate_to:
@@ -110,14 +145,14 @@ class CardType(DjangoObjectType):
     class Meta:
         model = models.Card
 
-    card_per_column_time = GenericScalar()
-    total_time = graphene.Float()
+    card_per_column_time = GenericScalar(minimal=graphene.Boolean(default_value=True))
+    total_time = graphene.Float(minimal=graphene.Boolean(default_value=True))
 
-    def resolve_card_per_column_time(instance, info):
-        return card_per_column_time(instance)
+    def resolve_card_per_column_time(instance, info, minimal):
+        return card_per_column_time(instance, minimal=minimal)
 
-    def resolve_total_time(instance, info):
-        return card_total_time(instance)
+    def resolve_total_time(instance, info, minimal):
+        return card_total_time(instance, minimal=minimal)
 
 
 class CardActionType(DjangoObjectType):
@@ -167,8 +202,11 @@ class CardQueries(graphene.ObjectType):
         dev_end=graphene.String(default_value=0),
         estimate_from=graphene.Float(default_value=0),
         estimate_to=graphene.Float(default_value=0),
-        card_type=graphene.List(graphene.String, default_value=0)
+        card_type=graphene.List(graphene.String, default_value=0),
+        minimal=graphene.Boolean(default_value=True)
     )
+    done_cards = graphene.List(CardType, project_id=graphene.Int(default_value=0))
+
 
     def resolve_all_cards(self, info, card_id, board_id):
         if board_id == -1:
@@ -192,11 +230,16 @@ class CardQueries(graphene.ObjectType):
                                  dev_end, estimate_from, estimate_to, card_type)
 
     def resolve_avg_lead_time(self, info, project_id, creation_start, creation_end, done_start, done_end, dev_start, \
-                              dev_end, estimate_from, estimate_to, card_type):
+                              dev_end, estimate_from, estimate_to, card_type, minimal):
         cards = filter_cards_avg_time(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
                               dev_end, estimate_from, estimate_to, card_type)
-        total_time = sum([card_total_time(c) for c in cards]) / len(cards)
+        total_time = sum([card_total_time(c, minimal) for c in cards]) / len(cards)
         return float("{0:.2f}".format(total_time))
+
+    def resolve_done_cards(self, info, project_id):
+        if project_id:
+            return done_cards(project_id)
+        return []
 
 
 class CardMutations(graphene.ObjectType):

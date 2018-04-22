@@ -293,6 +293,7 @@ CardLog(card=c1, from_column=col8, to_column=col9, action=ca, timestamp=datetime
 CardLog(card=c1, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 19, 16, 0)).save()
 
 CardLog(card=c2, from_column=col4, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 15, 18, 0)).save()
+CardLog(card=c2, from_column=col6, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 22, 14, 0)).save()
 
 CardLog(card=c3, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 16, 17, 15)).save()
 CardLog(card=c3, from_column=col6, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 20, 7, 0)).save()

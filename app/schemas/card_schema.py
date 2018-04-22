@@ -139,7 +139,9 @@ def cards_per_dev(cards):
 def estimate_per_dev(cards):
     per_dev = {}
     assignees = cards.values_list('assignee', flat=True)
-
+    for id in assignees:
+        u = models.User.objects.get(id=id)
+        per_dev[u.min_str()] = sum(cards.filter(assignee=u).values_list('estimate', flat=True))
     return per_dev
 
 
@@ -235,6 +237,18 @@ class CardQueries(graphene.ObjectType):
         estimate_to=graphene.Float(default_value=0),
         card_type=graphene.List(graphene.String, default_value=0)
     )
+    estimate_per_dev = GenericScalar(
+        project_id=graphene.Int(default_value=0),
+        creation_start=graphene.String(default_value=0),
+        creation_end=graphene.String(default_value=0),
+        done_start=graphene.String(default_value=0),
+        done_end=graphene.String(default_value=0),
+        dev_start=graphene.String(default_value=0),
+        dev_end=graphene.String(default_value=0),
+        estimate_from=graphene.Float(default_value=0),
+        estimate_to=graphene.Float(default_value=0),
+        card_type=graphene.List(graphene.String, default_value=0)
+    )
 
     def resolve_all_cards(self, info, card_id, board_id):
         if board_id == -1:
@@ -274,6 +288,12 @@ class CardQueries(graphene.ObjectType):
         cards = filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
                              dev_end, estimate_from, estimate_to, card_type)
         return cards_per_dev(cards)
+
+    def resolve_estimate_per_dev(self, info, project_id, creation_start, creation_end, done_start, done_end, dev_start, \
+                              dev_end, estimate_from, estimate_to, card_type):
+        cards = filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
+                             dev_end, estimate_from, estimate_to, card_type)
+        return estimate_per_dev(cards)
 
 class CardMutations(graphene.ObjectType):
     # TODO

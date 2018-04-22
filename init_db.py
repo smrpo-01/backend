@@ -255,17 +255,26 @@ col10.save()
 
 [CardType(i).save() for i in range(3)]
 
-c1 = Card(column=col2, type=CardType.objects.get(id=0), description="Mellow", name="To je ime kartice", estimate=3.5, project=p1)
+c1 = Card(column=col10, type=CardType.objects.get(id=0), description="Mellow", name="To je ime kartice", estimate=3.5, project=p1, assignee=dev1)
 c1.save()
 
-
-c2 = Card(column=col2, type=CardType.objects.get(id=0), description="Meowww", name="To je kartica", estimate=1, project=p2)
+c2 = Card(column=col7, type=CardType.objects.get(id=0), description="Meowww", name="To je kartica", estimate=1, project=p2, assignee=dev1)
 c2.save()
 
-
-c3 = Card(column=col3, type=CardType.objects.get(id=1), description="Meowing all over the world.", name="Bllll", estimate=666, project=p2)
+c3 = Card(column=col6, type=CardType.objects.get(id=1), description="Meowing all over the world.", name="Kartica", estimate=10, project=p1, assignee=dev1)
 c3.save()
 
+c4 = Card(column=col5, type=CardType.objects.get(id=0), description="Meowing all over the world.", name="Kartica 2", estimate=3, project=p1, assignee=dev1)
+c4.save()
+
+c5 = Card(column=col5, type=CardType.objects.get(id=0), description="Meowing all over the world.", name="Kartic 4", estimate=4, project=p1, assignee=dev2)
+c5.save()
+
+c6 = Card(column=col5, type=CardType.objects.get(id=0), description="Meowing all over the world.", name="Kartica 7", estimate=2, project=p1, assignee=dev2)
+c6.save()
+
+c7 = Card(column=col5, type=CardType.objects.get(id=0), description="Meowing all over the world.", name="kartica 21", estimate=1.5, project=p1, assignee=po)
+c7.save()
 
 t1 = Task(description="To je description 1", card=c1)
 t1.save()
@@ -285,6 +294,7 @@ t4.save()
 
 ca = CardAction.objects.get(id=0) # move
 
+CardLog(card=c1, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
 CardLog(card=c1, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 14, 10, 0)).save()
 CardLog(card=c1, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 17, 16, 30)).save()
 CardLog(card=c1, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 18, 10, 0)).save()
@@ -297,5 +307,10 @@ CardLog(card=c2, from_column=col6, to_column=col10, action=ca, timestamp=datetim
 
 CardLog(card=c3, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 16, 17, 15)).save()
 CardLog(card=c3, from_column=col6, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 20, 7, 0)).save()
+
+CardLog(card=c4, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
+CardLog(card=c5, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
+CardLog(card=c6, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
+CardLog(card=c7, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
 
 # 2 projekta - 10 kartic + silver bullet

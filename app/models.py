@@ -131,6 +131,9 @@ class User(AbstractBaseUser):
     def __str__(self):
         return "(%s, %s, %s, %s)\n" % (self.email, self.first_name, self.last_name, str(self.is_active))
 
+    def min_str(self):
+        return "%s %s (%s)" % (self.first_name, self.last_name, self.email)
+
     def has_perm(self, perm, obj=None):
         return True
 
@@ -220,6 +223,7 @@ class Card(models.Model):
     expiration = models.DateTimeField(default=timezone.now)
     owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
     date_created = models.DateTimeField(default=timezone.now)
+    assignee = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='cards_assigned')
 
 
 class Task(models.Model):

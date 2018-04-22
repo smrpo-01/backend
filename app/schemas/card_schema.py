@@ -127,22 +127,30 @@ def filter_cards(project_id, creation_start, creation_end, done_start, done_end,
 
 
 def cards_per_dev(cards):
-    per_dev = {}
     assignees = cards.values_list('assignee', flat=True)
     c = Counter(assignees)
+    result = []
     for id, count in c.items():
         u = models.User.objects.get(id=id)
-        per_dev[u.min_str()] = count
-    return per_dev
+        dict = {}
+        dict['name'] = u.first_name + ' ' + u.last_name
+        dict['email'] = u.email
+        dict['value'] = count
+        result.append(dict)
+    return result
 
 
 def estimate_per_dev(cards):
-    per_dev = {}
     assignees = cards.values_list('assignee', flat=True)
+    result = []
     for id in assignees:
         u = models.User.objects.get(id=id)
-        per_dev[u.min_str()] = sum(cards.filter(assignee=u).values_list('estimate', flat=True))
-    return per_dev
+        dict = {}
+        dict['name'] = u.first_name + ' ' + u.last_name
+        dict['email'] = u.email
+        dict['value'] = sum(cards.filter(assignee=u).values_list('estimate', flat=True))
+        result.append(dict)
+    return result
 
 
 class TaskType(DjangoObjectType):

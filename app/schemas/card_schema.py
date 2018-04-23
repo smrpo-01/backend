@@ -54,23 +54,23 @@ class CardQueries(graphene.ObjectType):
 
 class TasksInput(graphene.InputObjectType):
     id = graphene.Int(required=False)
-    description = graphene.String(required=False, default="")
-    done = graphene.Boolean(default=False)
+    description = graphene.String(required=False, default_value="")
+    done = graphene.Boolean(default_value=False)
     assignee_userteam_id = graphene.Int(required=False)
 
 
 class CardInput(graphene.InputObjectType):
     id = graphene.Int(required=False)
     column_id = graphene.String(required=True)
-    type_id = graphene.Int(required=False, default=0)
+    type_id = graphene.Int(required=False, default_value=0)
     project_id = graphene.Int(required=True)
     name = graphene.String(required=True)
     expiration = graphene.String(required=False,
-                                 default=str(datetime.datetime.now() + datetime.timedelta(5)).split(' ')[0])
+                                 default_value=str(datetime.datetime.now() + datetime.timedelta(5)).split(' ')[0])
     owner_userteam_id = graphene.Int(requred=False)
-    description = graphene.String(required=False, default="")
-    estimate = graphene.Float(required=False, default=1)
-    tasks = graphene.List(TasksInput)
+    description = graphene.String(required=False, default_value="")
+    estimate = graphene.Float(required=False, default_value=1)
+    tasks = graphene.List(TasksInput, default_value=[])
 
 
 class AddCard(graphene.Mutation):

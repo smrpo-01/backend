@@ -212,7 +212,7 @@ class Card(models.Model):
     name = models.CharField(max_length=255, null=True)
     estimate = models.FloatField()
     project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
-    expiration = models.DateTimeField(default=timezone.now)
+    expiration = models.DateField(default=timezone.now)
     owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
     # tasks = models.ManyToManyField(Task)
 

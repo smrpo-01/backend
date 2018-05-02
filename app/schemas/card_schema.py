@@ -61,7 +61,7 @@ class TasksInput(graphene.InputObjectType):
 
 class CardInput(graphene.InputObjectType):
     id = graphene.Int(required=False)
-    column_id = graphene.String(required=True)
+    column_id = graphene.String(required=False)
     type_id = graphene.Int(required=False, default_value=0)
     project_id = graphene.Int(required=True)
     name = graphene.String(required=True)
@@ -72,20 +72,41 @@ class CardInput(graphene.InputObjectType):
     estimate = graphene.Float(required=False, default_value=1)
     tasks = graphene.List(TasksInput, default_value=[])
 
+'''
+def is_parent_first(child):
+    if child is None or (child.parent is None and child.position == 0):
+        return True
+    else:
+        if child.position != 0:
+            return False
+        else:
+            return is_parent_first(child.parent)
+'''
 
 class AddCard(graphene.Mutation):
     class Arguments:
         card_data = CardInput(required=True)
+        board_id = graphene.Int(required=True)
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
 
     @staticmethod
-    def mutate(root, info, card=None, ok=False, card_data=None):
+    def mutate(root, info, card=None, ok=False, card_data=None, board_id=None):
         if card_data.owner_userteam_id is None:
             owner = None
         else:
             owner = models.UserTeam.objects.get(id=card_data.owner_userteam_id)
+
+        if card_data.column_id is None:
+            board = models.Board.objects.get(id=board_id)
+            if card_data.type_id == 0:
+                column_id = models.Column.objects.get(board=board, position=0, parent=None).id
+            else:
+                column_id = models.Column.objects.get(board=board, priority=True).id
+
+        else:
+            column_id = card_data.column_id
 
         # TODO: samo po lahko doda navadne, samo KM lahko doda posebne
         '''
@@ -96,7 +117,7 @@ class AddCard(graphene.Mutation):
             raise GraphQLError("Samo KM lahko dodaja silver bullet kartice") 
         '''
 
-        card = models.Card(column=models.Column.objects.get(id=card_data.column_id),
+        card = models.Card(column=models.Column.objects.get(id=column_id),
                            type=models.CardType.objects.get(id=card_data.type_id),
                            description=card_data.description,
                            name=card_data.name,
@@ -203,3 +224,5 @@ class CardMutations(graphene.ObjectType):
     edit_card = EditCard.Field()
     delete_card = DeleteCard.Field()
     move_card = MoveCard.Field()
+
+# {"boardName":"Tabla","projects":[],"columns":[{"id":"8c765c2e-c875-48b3-b1ee-237372fffcee","name":"Product Backlog","columns":[],"wip":"0","boundary":false,"priority":false,"acceptance":false},{"id":"24eaf24f-3c99-4a4f-b921-c787979fb3eb","name":"Sprint Backlog","columns":[],"wip":"0","boundary":false,"priority":true,"acceptance":false},{"id":"2cd1df29-f412-49a2-aaf4-0a9cb41f986e","name":"Development","columns":[{"id":"1eed19fd-3e33-4435-b732-fa18157157ae","name":"Analysis & design","columns":[],"wip":"3","b…,"acceptance":false}],"wip":"0","boundary":false,"priority":false,"acceptance":false},{"id":"e92dee63-1ca2-420f-9015-94a9b874c6ef","name":"Acceptance ready","columns":[],"wip":"4","boundary":true,"priority":false,"acceptance":true},{"id":"deaa9072-b748-48fa-a263-6a4d76f202da","name":"Acceptance","columns":[],"wip":"4","boundary":false,"priority":false,"acceptance":false},{"id":"88f62199-fccb-4d89-bb0e-600fa4fa0a62","name":"Done","columns":[],"wip":"0","boundary":false,"priority":false,"acceptance":false}]}

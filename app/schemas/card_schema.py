@@ -38,7 +38,7 @@ class CardQueries(graphene.ObjectType):
             return models.Card.objects.all()
         else:
             cards = list(models.Card.objects.all())
-            cards_filtered = [card for card in cards if card.column.board_id == board_id]
+            cards_filtered = [card for card in cards if card.column.board_id == board_id and not card.is_deleted]
             return cards_filtered
 
     all_card_types = graphene.List(CardTypeType)
@@ -162,6 +162,24 @@ class EditCard(graphene.Mutation):
         return EditCard(ok=True, card=card)
 
 
+class DeleteCard(graphene.Mutation):
+    class Arguments:
+        card_id = graphene.Int(required=True)
+        cause_of_deletion = graphene.String(required=True)
+
+    ok = graphene.Boolean()
+    card = graphene.Field(CardType)
+
+    @staticmethod
+    def mutate(root, info, ok=False, card=None, card_id=None, cause_of_deletion=None):
+        card = models.Card.objects.get(id=card_id)
+        card.is_deleted = True
+        card.cause_of_deletion = cause_of_deletion
+        card.save()
+        return DeleteCard(ok=True, card=card)
+
+
 class CardMutations(graphene.ObjectType):
     add_card = AddCard.Field()
     edit_card = EditCard.Field()
+    delete_card = DeleteCard.Field()

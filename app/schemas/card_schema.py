@@ -162,6 +162,25 @@ class EditCard(graphene.Mutation):
         return EditCard(ok=True, card=card)
 
 
+class MoveCard(graphene.Mutation):
+    class Arguments:
+        card_id = graphene.Int(required=True)
+        to_column_id = graphene.String(required=True)
+
+    ok = graphene.Boolean()
+    card = graphene.Field(CardType)
+
+    @staticmethod
+    def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None):
+        card = models.Card.objects.get(id=card_id)
+        # TODO: implementiraj Loge
+
+        card.column = models.Column.objects.get(id=to_column_id)
+        card.save()
+
+        return MoveCard(ok=True, card=card)
+
+
 class DeleteCard(graphene.Mutation):
     class Arguments:
         card_id = graphene.Int(required=True)
@@ -183,3 +202,4 @@ class CardMutations(graphene.ObjectType):
     add_card = AddCard.Field()
     edit_card = EditCard.Field()
     delete_card = DeleteCard.Field()
+    move_card = MoveCard.Field()

@@ -54,6 +54,7 @@ class AddProject(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, project=None, ok=False, project_data=None):
+
         date_start = datetime.datetime.strptime(project_data.date_start, "%Y-%m-%d").date()
         date_end = datetime.datetime.strptime(project_data.date_end, "%Y-%m-%d").date()
 

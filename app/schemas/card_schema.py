@@ -87,6 +87,15 @@ class AddCard(graphene.Mutation):
         else:
             owner = models.UserTeam.objects.get(id=card_data.owner_userteam_id)
 
+        # TODO: samo po lahko doda navadne, samo KM lahko doda posebne
+        '''
+        if info.context.user.nekineki da ni PO and type_id == 0:
+            raise GraphQLError("Samo PO lahko dodaja navadne kartice")
+        
+        if info.context.user.nekineki da ni KM and type_id == 1:
+            raise GraphQLError("Samo KM lahko dodaja silver bullet kartice") 
+        '''
+
         card = models.Card(column=models.Column.objects.get(id=card_data.column_id),
                            type=models.CardType.objects.get(id=card_data.type_id),
                            description=card_data.description,
@@ -108,5 +117,51 @@ class AddCard(graphene.Mutation):
         return AddCard(ok=True, card=card)
 
 
+class EditCard(graphene.Mutation):
+    class Arguments:
+        card_data = CardInput(required=True)
+
+    ok = graphene.Boolean()
+    card = graphene.Field(CardType)
+
+    @staticmethod
+    def mutate(root, info, card=None, ok=False, card_data=None):
+        if card_data.owner_userteam_id is None:
+            owner = None
+        else:
+            owner = models.UserTeam.objects.get(id=card_data.owner_userteam_id)
+
+        card = models.Card.objects.get(id=card_data.id)
+
+        # zbrišemo vse taske ker jih kasneje na novo dodamo not
+        models.Task.objects.filter(card=card).delete()
+
+        card.column = models.Column.objects.get(id=card_data.column_id)
+        card.type = models.CardType.objects.get(id=card_data.type_id)
+        card.description = card_data.description
+        card.name = card_data.name
+        card.estimate = card_data.estimate
+        card.project = models.Project.objects.get(id=card_data.project_id)
+        card.expiration = datetime.datetime.strptime(card_data.expiration, "%Y-%m-%d").date()
+        card.owner = owner
+        card.save()
+
+        # first delete all tasks assigned to card
+        # for task in tasks:
+        #    task.delete()
+
+        for task in card_data.tasks:
+            if task.assignee_userteam_id is None:
+                assignee = None
+            else:
+                assignee = models.UserTeam.objects.get(id=task.assignee_userteam_id)
+
+            task_entity = models.Task(card=card, description=task.description, done=task.done, assignee=assignee)
+            task_entity.save()
+
+        return EditCard(ok=True, card=card)
+
+
 class CardMutations(graphene.ObjectType):
     add_card = AddCard.Field()
+    edit_card = EditCard.Field()

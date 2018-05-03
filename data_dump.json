@@ -1,0 +1,809 @@
+[
+{
+    "model": "app.userrole",
+    "pk": 1,
+    "fields": {}
+},
+{
+    "model": "app.userrole",
+    "pk": 2,
+    "fields": {}
+},
+{
+    "model": "app.userrole",
+    "pk": 3,
+    "fields": {}
+},
+{
+    "model": "app.userrole",
+    "pk": 4,
+    "fields": {}
+},
+{
+    "model": "app.teamrole",
+    "pk": 2,
+    "fields": {}
+},
+{
+    "model": "app.teamrole",
+    "pk": 3,
+    "fields": {}
+},
+{
+    "model": "app.teamrole",
+    "pk": 4,
+    "fields": {}
+},
+{
+    "model": "app.setting",
+    "pk": "ip_lock_time",
+    "fields": {
+        "value": "1"
+    }
+},
+{
+    "model": "app.setting",
+    "pk": "max_attempts",
+    "fields": {
+        "value": "3"
+    }
+},
+{
+    "model": "app.loginattempt",
+    "pk": 1,
+    "fields": {
+        "ip": "127.0.0.1",
+        "unlock_date": "2018-05-03T15:41:42.712Z",
+        "counter": 0
+    }
+},
+{
+    "model": "app.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$100000$SAt1HuEzxfpo$MSsTkGZRNGunBMU2GrLDl/c5cFFStnm0EuYnzoAb7ZA=",
+        "last_login": null,
+        "email": "admin@demo.com",
+        "first_name": "Ad",
+        "last_name": "Min",
+        "is_active": true,
+        "is_admin": true,
+        "default_board_id": null,
+        "is_staff": true,
+        "is_superuser": true,
+        "roles": [
+            1
+        ]
+    }
+},
+{
+    "model": "app.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$100000$zGVdCqU7x9Qs$XL65eE5ss4HjBKTrg+UgeAEdrlcHke0DOXoXohoqqls=",
+        "last_login": null,
+        "email": "dev1@demo.com",
+        "first_name": "Dev",
+        "last_name": "Ena",
+        "is_active": true,
+        "is_admin": false,
+        "default_board_id": null,
+        "is_staff": false,
+        "is_superuser": false,
+        "roles": [
+            3,
+            4
+        ]
+    }
+},
+{
+    "model": "app.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$100000$hS5ZzGHsdLlD$e486eHAD09x51Usa4wk7Nvv/rLUiMS/6Cwc+b6xTLOU=",
+        "last_login": null,
+        "email": "dev2@demo.com",
+        "first_name": "Dev",
+        "last_name": "Dve",
+        "is_active": true,
+        "is_admin": false,
+        "default_board_id": null,
+        "is_staff": false,
+        "is_superuser": false,
+        "roles": [
+            4
+        ]
+    }
+},
+{
+    "model": "app.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$100000$FAyDnmi0bhJY$z+JrUYC1HwWxq7qSjHp8R8FEaXPlcq8pnIvp4ytxbOg=",
+        "last_login": null,
+        "email": "dev3@demo.com",
+        "first_name": "Dev",
+        "last_name": "Tri",
+        "is_active": true,
+        "is_admin": false,
+        "default_board_id": null,
+        "is_staff": false,
+        "is_superuser": false,
+        "roles": [
+            4
+        ]
+    }
+},
+{
+    "model": "app.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$100000$GOcsDZDt643t$m1Awa1oeewbjadHOwokXObbnpIrU1u0ozmNuOLFtd4Q=",
+        "last_login": null,
+        "email": "dev4@demo.com",
+        "first_name": "Dev",
+        "last_name": "\u0160ter",
+        "is_active": true,
+        "is_admin": false,
+        "default_board_id": null,
+        "is_staff": false,
+        "is_superuser": false,
+        "roles": [
+            4
+        ]
+    }
+},
+{
+    "model": "app.user",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$100000$fcCTbpVwIRY4$FtxX+xSCC79qE7OaYNIL2bNTCVTkT4ShwSmlJtITy6c=",
+        "last_login": null,
+        "email": "dev5@demo.com",
+        "first_name": "Dev",
+        "last_name": "Pet",
+        "is_active": true,
+        "is_admin": false,
+        "default_board_id": null,
+        "is_staff": false,
+        "is_superuser": false,
+        "roles": [
+            4
+        ]
+    }
+},
+{
+    "model": "app.user",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$100000$dkSYi7BHa0tO$Of78W3ryiLYR7d0+181Q0qnPN2KezpON04JZUmpsBwM=",
+        "last_login": "2018-05-03T15:41:42.746Z",
+        "email": "km@demo.com",
+        "first_name": "K",
+        "last_name": "M",
+        "is_active": true,
+        "is_admin": false,
+        "default_board_id": null,
+        "is_staff": false,
+        "is_superuser": false,
+        "roles": [
+            3
+        ]
+    }
+},
+{
+    "model": "app.user",
+    "pk": 8,
+    "fields": {
+        "password": "pbkdf2_sha256$100000$1wAlpR8HzHA9$Nwx/xKP/LVE6YTB2YvvpZ2wm+RnG7VkZBOv01q5jMhg=",
+        "last_login": "2018-05-03T15:42:42.195Z",
+        "email": "po@demo.com",
+        "first_name": "P",
+        "last_name": "O",
+        "is_active": true,
+        "is_admin": false,
+        "default_board_id": null,
+        "is_staff": false,
+        "is_superuser": false,
+        "roles": [
+            2,
+            4
+        ]
+    }
+},
+{
+    "model": "app.user",
+    "pk": 9,
+    "fields": {
+        "password": "pbkdf2_sha256$100000$f5JhPkrAvKUk$YcJ+WXHy/6+/keX2YrKZ9kFgkd3sqFRpd1vXZR3SAjA=",
+        "last_login": null,
+        "email": "wildcard@demo.com",
+        "first_name": "Wild",
+        "last_name": "Card",
+        "is_active": true,
+        "is_admin": false,
+        "default_board_id": null,
+        "is_staff": false,
+        "is_superuser": false,
+        "roles": [
+            1,
+            2,
+            3,
+            4
+        ]
+    }
+},
+{
+    "model": "app.user",
+    "pk": 10,
+    "fields": {
+        "password": "pbkdf2_sha256$100000$cq41XK3S58nI$IGTXA+Yy1vjYqWmMrLbgvrbLbRmuECI4dm+tSmK26Sk=",
+        "last_login": null,
+        "email": "po2@demo.com",
+        "first_name": "Prod",
+        "last_name": "Ownr",
+        "is_active": true,
+        "is_admin": false,
+        "default_board_id": null,
+        "is_staff": false,
+        "is_superuser": false,
+        "roles": [
+            2
+        ]
+    }
+},
+{
+    "model": "app.team",
+    "pk": 1,
+    "fields": {
+        "kanban_master": [
+            "km@demo.com"
+        ],
+        "product_owner": [
+            "po@demo.com"
+        ],
+        "name": "t1"
+    }
+},
+{
+    "model": "app.team",
+    "pk": 2,
+    "fields": {
+        "kanban_master": [
+            "dev1@demo.com"
+        ],
+        "product_owner": [
+            "po@demo.com"
+        ],
+        "name": "t2"
+    }
+},
+{
+    "model": "app.team",
+    "pk": 3,
+    "fields": {
+        "kanban_master": [
+            "wildcard@demo.com"
+        ],
+        "product_owner": [
+            "po2@demo.com"
+        ],
+        "name": "t3"
+    }
+},
+{
+    "model": "app.team",
+    "pk": 4,
+    "fields": {
+        "kanban_master": [
+            "km@demo.com"
+        ],
+        "product_owner": [
+            "wildcard@demo.com"
+        ],
+        "name": "t4"
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 1,
+    "fields": {
+        "member": [
+            "km@demo.com"
+        ],
+        "team": 1,
+        "role": 3,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 2,
+    "fields": {
+        "member": [
+            "po@demo.com"
+        ],
+        "team": 1,
+        "role": 2,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 3,
+    "fields": {
+        "member": [
+            "dev1@demo.com"
+        ],
+        "team": 1,
+        "role": 4,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 4,
+    "fields": {
+        "member": [
+            "dev2@demo.com"
+        ],
+        "team": 1,
+        "role": 4,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 5,
+    "fields": {
+        "member": [
+            "po@demo.com"
+        ],
+        "team": 1,
+        "role": 4,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 6,
+    "fields": {
+        "member": [
+            "dev2@demo.com"
+        ],
+        "team": 2,
+        "role": 4,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 7,
+    "fields": {
+        "member": [
+            "dev1@demo.com"
+        ],
+        "team": 2,
+        "role": 3,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 8,
+    "fields": {
+        "member": [
+            "po@demo.com"
+        ],
+        "team": 2,
+        "role": 2,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 9,
+    "fields": {
+        "member": [
+            "wildcard@demo.com"
+        ],
+        "team": 3,
+        "role": 3,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 10,
+    "fields": {
+        "member": [
+            "po2@demo.com"
+        ],
+        "team": 3,
+        "role": 2,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 11,
+    "fields": {
+        "member": [
+            "dev3@demo.com"
+        ],
+        "team": 3,
+        "role": 4,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 12,
+    "fields": {
+        "member": [
+            "dev4@demo.com"
+        ],
+        "team": 3,
+        "role": 4,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 13,
+    "fields": {
+        "member": [
+            "wildcard@demo.com"
+        ],
+        "team": 3,
+        "role": 4,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 14,
+    "fields": {
+        "member": [
+            "km@demo.com"
+        ],
+        "team": 4,
+        "role": 3,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 15,
+    "fields": {
+        "member": [
+            "wildcard@demo.com"
+        ],
+        "team": 4,
+        "role": 2,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 16,
+    "fields": {
+        "member": [
+            "po@demo.com"
+        ],
+        "team": 4,
+        "role": 4,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteam",
+    "pk": 17,
+    "fields": {
+        "member": [
+            "wildcard@demo.com"
+        ],
+        "team": 4,
+        "role": 4,
+        "is_active": true
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 1,
+    "fields": {
+        "userteam": 1,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:05.489Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 2,
+    "fields": {
+        "userteam": 2,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:05.593Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 3,
+    "fields": {
+        "userteam": 3,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:05.696Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 4,
+    "fields": {
+        "userteam": 4,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:05.801Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 5,
+    "fields": {
+        "userteam": 5,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:05.911Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 6,
+    "fields": {
+        "userteam": 6,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:06.027Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 7,
+    "fields": {
+        "userteam": 7,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:06.131Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 8,
+    "fields": {
+        "userteam": 8,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:06.239Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 9,
+    "fields": {
+        "userteam": 9,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:06.344Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 10,
+    "fields": {
+        "userteam": 10,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:06.456Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 11,
+    "fields": {
+        "userteam": 11,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:06.562Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 12,
+    "fields": {
+        "userteam": 12,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:06.664Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 13,
+    "fields": {
+        "userteam": 13,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:06.781Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 14,
+    "fields": {
+        "userteam": 14,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:06.883Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 15,
+    "fields": {
+        "userteam": 15,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:06.988Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 16,
+    "fields": {
+        "userteam": 16,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:07.096Z"
+    }
+},
+{
+    "model": "app.userteamlog",
+    "pk": 17,
+    "fields": {
+        "userteam": 17,
+        "action": "Uporabnik ustvarjen.",
+        "timestamp": "2018-05-03T15:40:07.203Z"
+    }
+},
+{
+    "model": "app.board",
+    "pk": 1,
+    "fields": {
+        "name": "Tabla"
+    }
+},
+{
+    "model": "app.project",
+    "pk": 1,
+    "fields": {
+        "team": 1,
+        "board": 1,
+        "name": "Projekt 1 (s karticami)",
+        "project_code": "PR-01",
+        "customer": "Mahnic",
+        "date_start": "2018-05-03",
+        "date_end": "2018-10-20",
+        "is_active": true
+    }
+},
+{
+    "model": "app.project",
+    "pk": 2,
+    "fields": {
+        "team": 1,
+        "board": null,
+        "name": "Projekt 2 (s karticami)",
+        "project_code": "PR-02",
+        "customer": "Furst",
+        "date_start": "2018-05-03",
+        "date_end": "2018-12-20",
+        "is_active": true
+    }
+},
+{
+    "model": "app.project",
+    "pk": 3,
+    "fields": {
+        "team": 2,
+        "board": null,
+        "name": "Projekt 3",
+        "project_code": "PR-03",
+        "customer": "Podgor\u0161ek",
+        "date_start": "2018-05-03",
+        "date_end": "2018-12-25",
+        "is_active": true
+    }
+},
+{
+    "model": "app.project",
+    "pk": 4,
+    "fields": {
+        "team": 3,
+        "board": null,
+        "name": "Projekt 4",
+        "project_code": "PR-04",
+        "customer": "Smolej",
+        "date_start": "2018-05-03",
+        "date_end": "2018-11-25",
+        "is_active": true
+    }
+},
+{
+    "model": "app.column",
+    "pk": "160978dc-98b5-4d67-ae7f-2b7648c83af1",
+    "fields": {
+        "board": 1,
+        "name": "first",
+        "position": 0,
+        "wip": 1,
+        "boundary": true,
+        "priority": true,
+        "acceptance": true,
+        "parent": null
+    }
+},
+{
+    "model": "app.column",
+    "pk": "933b3d0a-40ec-4969-83a2-2be607fb1a96",
+    "fields": {
+        "board": 1,
+        "name": "dem",
+        "position": 1,
+        "wip": 0,
+        "boundary": true,
+        "priority": false,
+        "acceptance": false,
+        "parent": null
+    }
+},
+{
+    "model": "app.cardtype",
+    "pk": 0,
+    "fields": {}
+},
+{
+    "model": "app.cardtype",
+    "pk": 1,
+    "fields": {}
+},
+{
+    "model": "app.card",
+    "pk": 1,
+    "fields": {
+        "column": "160978dc-98b5-4d67-ae7f-2b7648c83af1",
+        "type": 0,
+        "card_number": 1,
+        "description": "fdsa",
+        "name": "fdsa",
+        "estimate": 0.3,
+        "project": 1,
+        "expiration": "2018-05-11",
+        "owner": 7,
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 2,
+    "fields": {
+        "column": "160978dc-98b5-4d67-ae7f-2b7648c83af1",
+        "type": 1,
+        "card_number": 2,
+        "description": "fdsa",
+        "name": "silvr",
+        "estimate": 0.2,
+        "project": 1,
+        "expiration": "2018-05-17",
+        "owner": 8,
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.task",
+    "pk": 1,
+    "fields": {
+        "card": 2,
+        "description": "fdsfaa",
+        "done": false,
+        "assignee": 8
+    }
+}
+]

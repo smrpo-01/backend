@@ -52,7 +52,7 @@
     "model": "app.user",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$100000$v22ZIhJZ5eyS$D2QQXzYDTM3ahhqyTdnX/KLhkfLfUxmoYQkm6DjZgGs=",
+        "password": "pbkdf2_sha256$100000$PVZtaFJjtbew$YZLpvbd1r0Dy/9QY5wRnPl9uWIE9WAUZCGWMF5Lqxsw=",
         "last_login": null,
         "email": "admin@demo.com",
         "first_name": "Ad",
@@ -71,7 +71,7 @@
     "model": "app.user",
     "pk": 2,
     "fields": {
-        "password": "pbkdf2_sha256$100000$sx6A9Yj1vTwm$Dy/m7BWxxHXphIkFBLeEEGv64e5+vIach2GxOOnLCJ0=",
+        "password": "pbkdf2_sha256$100000$38I8xQqjcFuG$jI/hzVP4Cf9kdysclyxxw8GkQLTni0lRWP6HZRBJ/qs=",
         "last_login": null,
         "email": "dev1@demo.com",
         "first_name": "Dev",
@@ -91,7 +91,7 @@
     "model": "app.user",
     "pk": 3,
     "fields": {
-        "password": "pbkdf2_sha256$100000$cS5qMbaLgUWP$gCYxqDOi7FBrV/srSKb9mP3MG8MsYBPU2rGoI0V8K3E=",
+        "password": "pbkdf2_sha256$100000$uMT9Kv5cFlZ4$wEd2s0WHEUsz3onPthVVLAkrksaIkD/VkxbFEOMU9Fs=",
         "last_login": null,
         "email": "dev2@demo.com",
         "first_name": "Dev",
@@ -110,7 +110,7 @@
     "model": "app.user",
     "pk": 4,
     "fields": {
-        "password": "pbkdf2_sha256$100000$upvFkQyT88DJ$cbewBKq3cv3JAUEO/oiQYf3X1ImD0H/WcrvJTvbc7bI=",
+        "password": "pbkdf2_sha256$100000$NkhyrinhM8TB$vF77rGc8hDOqqOuem9nY84ASxeOYLmRCrejo/MoWrA4=",
         "last_login": null,
         "email": "dev3@demo.com",
         "first_name": "Dev",
@@ -129,7 +129,7 @@
     "model": "app.user",
     "pk": 5,
     "fields": {
-        "password": "pbkdf2_sha256$100000$A0i4PeMwo5Ky$JV1NOKz9IlA03jQ1F8cwS2sRzNBJ6/IrsWJWzEciqy0=",
+        "password": "pbkdf2_sha256$100000$93HSls4Jl6TW$u4bmvKDfiOWm5V5bJyZpaVWi1MxBhHP+8XGOB5TF5Xc=",
         "last_login": null,
         "email": "dev4@demo.com",
         "first_name": "Dev",
@@ -148,7 +148,7 @@
     "model": "app.user",
     "pk": 6,
     "fields": {
-        "password": "pbkdf2_sha256$100000$DIpkqPyqXjMm$OtfZ8yYVRKa9jdwwceVtKCfzmdb6PdnzKjQ7U9SCpig=",
+        "password": "pbkdf2_sha256$100000$kaifokkU7YhS$M57DUKJnfWbz7oC8muP1+UxV2HAqbpE5n1B87GMK2S0=",
         "last_login": null,
         "email": "dev5@demo.com",
         "first_name": "Dev",
@@ -167,7 +167,7 @@
     "model": "app.user",
     "pk": 7,
     "fields": {
-        "password": "pbkdf2_sha256$100000$wpEDK9N16sXk$esE9kt/gXc76UmBq3nt9AHB04sGk9aKPlJT2CnNlsEM=",
+        "password": "pbkdf2_sha256$100000$fSygDy0FOs4G$X9PPI/FJ1ugw/zgL7DXIVrvlwrzZQE2qNl5lLfnGnQo=",
         "last_login": null,
         "email": "km@demo.com",
         "first_name": "K",
@@ -186,7 +186,7 @@
     "model": "app.user",
     "pk": 8,
     "fields": {
-        "password": "pbkdf2_sha256$100000$QA9EeNb8Q6CE$y0MoA8GkJTXVPfuBeWUH70MgVkwvXnjKWaevM0QNM4Q=",
+        "password": "pbkdf2_sha256$100000$n79vuTxua8NN$af0c1hd49t74mWKL7e3hdQU4CXoCQ8XMK3k2qwXmT28=",
         "last_login": null,
         "email": "po@demo.com",
         "first_name": "P",
@@ -206,7 +206,7 @@
     "model": "app.user",
     "pk": 9,
     "fields": {
-        "password": "pbkdf2_sha256$100000$6AMfNmIPX5rg$BLvxnqNdqPMbTbDheBQWSrWmWxfJ0kiZyOUb+wmTefA=",
+        "password": "pbkdf2_sha256$100000$586dQy24Uu4Y$prR/H/OlSMxv8ofcR9SO8+NmUvfMREVI3L68Mq6BfU8=",
         "last_login": null,
         "email": "wildcard@demo.com",
         "first_name": "Wild",
@@ -228,7 +228,7 @@
     "model": "app.user",
     "pk": 10,
     "fields": {
-        "password": "pbkdf2_sha256$100000$AAiQ59TJ49IT$eRg/tIVN/Gz2gsJC7iJe/ohyEt0ctJzQhLrygTPvjgg=",
+        "password": "pbkdf2_sha256$100000$4qlSnxgMaRhO$loynOE7UB6Zzma5nPX8tm7FQy7QuMqO+tem2z4muBXo=",
         "last_login": null,
         "email": "po2@demo.com",
         "first_name": "Prod",
@@ -505,7 +505,7 @@
     "fields": {
         "userteam": 1,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:21.764Z"
+        "timestamp": "2018-05-03T18:57:09.319Z"
     }
 },
 {
@@ -514,7 +514,7 @@
     "fields": {
         "userteam": 2,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:21.884Z"
+        "timestamp": "2018-05-03T18:57:09.427Z"
     }
 },
 {
@@ -523,7 +523,7 @@
     "fields": {
         "userteam": 3,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:21.986Z"
+        "timestamp": "2018-05-03T18:57:09.525Z"
     }
 },
 {
@@ -532,7 +532,7 @@
     "fields": {
         "userteam": 4,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:22.087Z"
+        "timestamp": "2018-05-03T18:57:09.633Z"
     }
 },
 {
@@ -541,7 +541,7 @@
     "fields": {
         "userteam": 5,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:22.193Z"
+        "timestamp": "2018-05-03T18:57:09.741Z"
     }
 },
 {
@@ -550,7 +550,7 @@
     "fields": {
         "userteam": 6,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:22.298Z"
+        "timestamp": "2018-05-03T18:57:09.843Z"
     }
 },
 {
@@ -559,7 +559,7 @@
     "fields": {
         "userteam": 7,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:22.398Z"
+        "timestamp": "2018-05-03T18:57:09.944Z"
     }
 },
 {
@@ -568,7 +568,7 @@
     "fields": {
         "userteam": 8,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:22.505Z"
+        "timestamp": "2018-05-03T18:57:10.060Z"
     }
 },
 {
@@ -577,7 +577,7 @@
     "fields": {
         "userteam": 9,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:22.604Z"
+        "timestamp": "2018-05-03T18:57:10.165Z"
     }
 },
 {
@@ -586,7 +586,7 @@
     "fields": {
         "userteam": 10,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:22.714Z"
+        "timestamp": "2018-05-03T18:57:10.262Z"
     }
 },
 {
@@ -595,7 +595,7 @@
     "fields": {
         "userteam": 11,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:22.817Z"
+        "timestamp": "2018-05-03T18:57:10.371Z"
     }
 },
 {
@@ -604,7 +604,7 @@
     "fields": {
         "userteam": 12,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:22.921Z"
+        "timestamp": "2018-05-03T18:57:10.473Z"
     }
 },
 {
@@ -613,7 +613,7 @@
     "fields": {
         "userteam": 13,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:23.024Z"
+        "timestamp": "2018-05-03T18:57:10.574Z"
     }
 },
 {
@@ -622,7 +622,7 @@
     "fields": {
         "userteam": 14,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:23.131Z"
+        "timestamp": "2018-05-03T18:57:10.691Z"
     }
 },
 {
@@ -631,7 +631,7 @@
     "fields": {
         "userteam": 15,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:23.236Z"
+        "timestamp": "2018-05-03T18:57:10.806Z"
     }
 },
 {
@@ -640,7 +640,7 @@
     "fields": {
         "userteam": 16,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:23.340Z"
+        "timestamp": "2018-05-03T18:57:10.909Z"
     }
 },
 {
@@ -649,7 +649,14 @@
     "fields": {
         "userteam": 17,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T17:31:23.449Z"
+        "timestamp": "2018-05-03T18:57:11.012Z"
+    }
+},
+{
+    "model": "app.board",
+    "pk": 1,
+    "fields": {
+        "name": "Tabla 1"
     }
 },
 {
@@ -657,11 +664,11 @@
     "pk": 1,
     "fields": {
         "team": 1,
-        "board": null,
+        "board": 1,
         "name": "Projekt 1 (s karticami)",
         "project_code": "PR-01",
         "customer": "Mahnic",
-        "date_start": "2018-05-03",
+        "date_start": "2018-04-10",
         "date_end": "2018-10-20",
         "is_active": true
     }
@@ -671,11 +678,11 @@
     "pk": 2,
     "fields": {
         "team": 1,
-        "board": null,
+        "board": 1,
         "name": "Projekt 2 (s karticami)",
         "project_code": "PR-02",
         "customer": "Furst",
-        "date_start": "2018-05-03",
+        "date_start": "2018-04-10",
         "date_end": "2018-12-20",
         "is_active": true
     }
@@ -689,7 +696,7 @@
         "name": "Projekt 3",
         "project_code": "PR-03",
         "customer": "Podgor\u0161ek",
-        "date_start": "2018-05-03",
+        "date_start": "2018-04-10",
         "date_end": "2018-12-25",
         "is_active": true
     }
@@ -703,9 +710,149 @@
         "name": "Projekt 4",
         "project_code": "PR-04",
         "customer": "Smolej",
-        "date_start": "2018-05-03",
+        "date_start": "2018-04-10",
         "date_end": "2018-11-25",
         "is_active": true
+    }
+},
+{
+    "model": "app.column",
+    "pk": "1",
+    "fields": {
+        "board": 1,
+        "name": "Product Backlog",
+        "position": 0,
+        "wip": 0,
+        "boundary": false,
+        "priority": false,
+        "acceptance": false,
+        "parent": null
+    }
+},
+{
+    "model": "app.column",
+    "pk": "10",
+    "fields": {
+        "board": 1,
+        "name": "Done",
+        "position": 4,
+        "wip": 0,
+        "boundary": false,
+        "priority": false,
+        "acceptance": false,
+        "parent": null
+    }
+},
+{
+    "model": "app.column",
+    "pk": "2",
+    "fields": {
+        "board": 1,
+        "name": "Sprint Backlog",
+        "position": 1,
+        "wip": 0,
+        "boundary": false,
+        "priority": true,
+        "acceptance": false,
+        "parent": null
+    }
+},
+{
+    "model": "app.column",
+    "pk": "3",
+    "fields": {
+        "board": 1,
+        "name": "Development",
+        "position": 2,
+        "wip": 6,
+        "boundary": false,
+        "priority": false,
+        "acceptance": false,
+        "parent": null
+    }
+},
+{
+    "model": "app.column",
+    "pk": "4",
+    "fields": {
+        "board": 1,
+        "name": "Analysis & Design",
+        "position": 0,
+        "wip": 0,
+        "boundary": true,
+        "priority": false,
+        "acceptance": false,
+        "parent": "3"
+    }
+},
+{
+    "model": "app.column",
+    "pk": "5",
+    "fields": {
+        "board": 1,
+        "name": "Coding",
+        "position": 1,
+        "wip": 0,
+        "boundary": false,
+        "priority": false,
+        "acceptance": false,
+        "parent": "3"
+    }
+},
+{
+    "model": "app.column",
+    "pk": "6",
+    "fields": {
+        "board": 1,
+        "name": "Testing",
+        "position": 2,
+        "wip": 0,
+        "boundary": false,
+        "priority": false,
+        "acceptance": false,
+        "parent": "3"
+    }
+},
+{
+    "model": "app.column",
+    "pk": "7",
+    "fields": {
+        "board": 1,
+        "name": "Integration",
+        "position": 3,
+        "wip": 0,
+        "boundary": false,
+        "priority": false,
+        "acceptance": false,
+        "parent": "3"
+    }
+},
+{
+    "model": "app.column",
+    "pk": "8",
+    "fields": {
+        "board": 1,
+        "name": "Documentation",
+        "position": 4,
+        "wip": 0,
+        "boundary": true,
+        "priority": false,
+        "acceptance": false,
+        "parent": "3"
+    }
+},
+{
+    "model": "app.column",
+    "pk": "9",
+    "fields": {
+        "board": 1,
+        "name": "Acceptance Ready",
+        "position": 3,
+        "wip": 0,
+        "boundary": false,
+        "priority": false,
+        "acceptance": true,
+        "parent": null
     }
 },
 {
@@ -716,6 +863,11 @@
 {
     "model": "app.cardtype",
     "pk": 1,
+    "fields": {}
+},
+{
+    "model": "app.cardtype",
+    "pk": 2,
     "fields": {}
 }
 ]

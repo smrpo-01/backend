@@ -222,10 +222,15 @@ class DeleteCard(graphene.Mutation):
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
-
+    # TODO: Logi
     @staticmethod
     def mutate(root, info, ok=False, card=None, card_id=None, cause_of_deletion=None):
         card = models.Card.objects.get(id=card_id)
+
+        table=models.Column.objects.filter(board=card.project.board)
+        for col in table:
+            print(col.parent)
+
         card.is_deleted = True
         card.cause_of_deletion = cause_of_deletion
         card.save()

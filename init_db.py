@@ -255,26 +255,101 @@ col10.save()
 
 [CardType(i).save() for i in range(3)]
 
-c1 = Card(column=col10, type=CardType.objects.get(id=0), description="Mellow", name="To je ime kartice", estimate=3.5, project=p1, assignee=dev1)
+
+# Kartice projekt 1 -----------------------------------------------------------------
+
+c1 = Card(column=col10, type=CardType.objects.get(id=0), estimate=3.5, project=p1, assignee=dev1,
+          description="Administrator lahko dodaja, ureja in briše podatke o uporabnikih.", name="#1 Vzdrževanje uporabnikov")
 c1.save()
 
-c2 = Card(column=col7, type=CardType.objects.get(id=0), description="Meowww", name="To je kartica", estimate=1, project=p2, assignee=dev1)
+c2 = Card(column=col7, type=CardType.objects.get(id=0), estimate=1, project=p1, assignee=dev1,
+          description="KanbanMaster lahko kreira, ureja in briše podatke o razvojnih skupinah", name="#2 Vzdrževanje razvojnih skupin")
 c2.save()
 
-c3 = Card(column=col6, type=CardType.objects.get(id=1), description="Meowing all over the world.", name="Kartica", estimate=10, project=p1, assignee=dev1)
+c3 = Card(column=col6, type=CardType.objects.get(id=1), estimate=10, project=p1, assignee=dev1,
+          description="KanbanMaster lahko kreira, ureja in briše podatke o projektih.", name="#3 Vzdrževanje projektov")
 c3.save()
 
-c4 = Card(column=col5, type=CardType.objects.get(id=0), description="Meowing all over the world.", name="Kartica 2", estimate=3, project=p1, assignee=dev1)
+c4 = Card(column=col5, type=CardType.objects.get(id=0), estimate=3, project=p1, assignee=dev1,
+          description="Uporabnik se lahko prijavi v sistem z uporabniškim imenom in geslom.", name="#4 Prijava v sistem")
 c4.save()
 
-c5 = Card(column=col5, type=CardType.objects.get(id=0), description="Meowing all over the world.", name="Kartic 4", estimate=4, project=p1, assignee=dev2)
+c5 = Card(column=col5, type=CardType.objects.get(id=0), estimate=4, project=p1, assignee=dev2,
+          description="KanbanMaster lahko kreira novo tablo in (dokler je prazna) spreminja njeno strukturo.", name="#5 Kreiranje table")
 c5.save()
 
-c6 = Card(column=col5, type=CardType.objects.get(id=0), description="Meowing all over the world.", name="Kartica 7", estimate=2, project=p1, assignee=dev2)
+c6 = Card(column=col9, type=CardType.objects.get(id=0), estimate=2, project=p1, assignee=dev2,
+          description="Uporabnik lahko pregleduje tablo.", name="#6 Prikaz table")
 c6.save()
 
-c7 = Card(column=col5, type=CardType.objects.get(id=0), description="Meowing all over the world.", name="kartica 21", estimate=1.5, project=p1, assignee=po)
+c7 = Card(column=col8, type=CardType.objects.get(id=0), estimate=1.5, project=p1, assignee=dev1,
+          description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="#7 Kreiranje kartice")
 c7.save()
+
+c8 = Card(column=col9, type=CardType.objects.get(id=0), estimate=1.5, project=p1, assignee=dev2,
+          description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="#8 Prestavljanje kartice")
+c8.save()
+
+c9 = Card(column=col10, type=CardType.objects.get(id=0), estimate=1.5, project=p1, assignee=dev1,
+          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="#9 Prikaz podrobnosti kartice")
+c9.save()
+
+c10 = Card(column=col10, type=CardType.objects.get(id=0), estimate=1.5, project=p1, assignee=dev1,
+          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="#10 Kreiranje nove table s kopiranjem strukture")
+c10.save()
+
+c11 = Card(column=col6, type=CardType.objects.get(id=1), estimate=1.5, project=p1, assignee=po,
+          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="#11 Uporabniška dokumentacija")
+c11.save()
+
+
+# Kartice projekt 2 -----------------------------------------------------------------
+
+c12 = Card(column=col10, type=CardType.objects.get(id=0), estimate=4, project=p2, assignee=dev2,
+          description="Administrator lahko dodaja, ureja in briše podatke o uporabnikih.", name="#12 Posodabljanje vsebine kartice")
+c12.save()
+
+c13 = Card(column=col7, type=CardType.objects.get(id=0), estimate=1, project=p2, assignee=dev1,
+          description="KanbanMaster lahko kreira, ureja in briše podatke o razvojnih skupinah", name="#13 Brisanje kartice")
+c13.save()
+
+c14 = Card(column=col6, type=CardType.objects.get(id=1), estimate=1, project=p2, assignee=dev1,
+          description="KanbanMaster lahko kreira, ureja in briše podatke o projektih.", name="#14 Posodabljanje lastnosti stolpca")
+c14.save()
+
+c15 = Card(column=col5, type=CardType.objects.get(id=0), estimate=3, project=p2, assignee=dev2,
+          description="Uporabnik se lahko prijavi v sistem z uporabniškim imenom in geslom.", name="#15 Izračun povprečnega potrebnega časa")
+c15.save()
+
+c16 = Card(column=col7, type=CardType.objects.get(id=0), estimate=6, project=p2, assignee=dev1,
+          description="KanbanMaster lahko kreira novo tablo in (dokler je prazna) spreminja njeno strukturo.", name="#16 Izdelava kumulativnega diagrama delovnega toka")
+c16.save()
+
+c17 = Card(column=col9, type=CardType.objects.get(id=0), estimate=5, project=p2, assignee=dev2,
+          description="Uporabnik lahko pregleduje tablo.", name="#17 Izpis kršitev omejitve WIP")
+c17.save()
+
+c18 = Card(column=col8, type=CardType.objects.get(id=0), estimate=4, project=p2, assignee=dev1,
+          description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="#18 Prikaz 'kritičnih' kartic")
+c18.save()
+
+c19 = Card(column=col6, type=CardType.objects.get(id=0), estimate=1.5, project=p2, assignee=po,
+          description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="#19 Obveščanje o prekoračitvi roka")
+c19.save()
+
+c20 = Card(column=col10, type=CardType.objects.get(id=0), estimate=3, project=p2, assignee=dev1,
+          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="#20 Vgradnja pravil za prestavljanje kartic")
+c20.save()
+
+c21 = Card(column=col10, type=CardType.objects.get(id=0), estimate=2, project=p2, assignee=dev1,
+          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="#21 'Oženje' stolpcev")
+c21.save()
+
+c22 = Card(column=col6, type=CardType.objects.get(id=1), estimate=1.5, project=p2, assignee=dev2,
+          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="#22 Prilagodljiv prikaz kartice na tabli")
+c22.save()
+
+# -------------------------------------------------------------------------------
 
 t1 = Task(description="To je description 1", card=c1)
 t1.save()
@@ -294,23 +369,220 @@ t4.save()
 
 ca = CardAction.objects.get(id=0) # move
 
+# Project 1 - Logs
+
 CardLog(card=c1, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
 CardLog(card=c1, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 14, 10, 0)).save()
 CardLog(card=c1, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 17, 16, 30)).save()
 CardLog(card=c1, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 18, 10, 0)).save()
-CardLog(card=c1, from_column=col6, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 18, 12, 0)).save()
+CardLog(card=c1, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 18, 11, 30)).save()
+CardLog(card=c1, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 18, 12, 0)).save()
 CardLog(card=c1, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 19, 8, 0)).save()
 CardLog(card=c1, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 19, 16, 0)).save()
 
-CardLog(card=c2, from_column=col4, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 15, 18, 0)).save()
-CardLog(card=c2, from_column=col6, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 22, 14, 0)).save()
+CardLog(card=c2, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 18, 0)).save()
+CardLog(card=c2, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 15, 18, 0)).save()
+CardLog(card=c2, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 22, 14, 0)).save()
+CardLog(card=c2, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 23, 10, 0)).save()
+CardLog(card=c2, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 26, 11, 30)).save()
+CardLog(card=c2, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 27, 14, 0)).save()
+CardLog(card=c2, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
+CardLog(card=c2, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 5, 2, 14, 0)).save()
 
-CardLog(card=c3, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 16, 17, 15)).save()
-CardLog(card=c3, from_column=col6, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 20, 7, 0)).save()
+CardLog(card=c3, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 21, 18, 0)).save()
+CardLog(card=c3, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 22, 18, 0)).save()
+CardLog(card=c3, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
+CardLog(card=c3, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c3, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 24, 11, 30)).save()
+CardLog(card=c3, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 24, 14, 0)).save()
+CardLog(card=c3, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 5, 1, 8, 0)).save()
+CardLog(card=c3, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 5, 1, 14, 0)).save()
 
-CardLog(card=c4, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
-CardLog(card=c5, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
-CardLog(card=c6, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
-CardLog(card=c7, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
+CardLog(card=c4, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
+CardLog(card=c4, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
+CardLog(card=c4, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
+CardLog(card=c4, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c4, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 25, 11, 30)).save()
+CardLog(card=c4, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 25, 14, 0)).save()
+CardLog(card=c4, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
+CardLog(card=c4, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
 
-# 2 projekta - 10 kartic + silver bullet
+CardLog(card=c5, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
+CardLog(card=c5, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
+CardLog(card=c5, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
+CardLog(card=c5, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c5, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 25, 11, 30)).save()
+CardLog(card=c5, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 25, 14, 0)).save()
+CardLog(card=c5, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
+CardLog(card=c5, from_column=col9, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 28, 12, 0)).save() # acceptance -> analysis
+CardLog(card=c5, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
+CardLog(card=c5, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 30, 10, 0)).save()
+CardLog(card=c5, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 30, 11, 30)).save()
+CardLog(card=c5, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 30, 14, 0)).save()
+CardLog(card=c5, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 1, 8, 0)).save()
+CardLog(card=c5, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 5, 1, 14, 0)).save()
+
+CardLog(card=c6, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
+CardLog(card=c6, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
+CardLog(card=c6, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 24, 8, 0)).save()
+CardLog(card=c6, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c6, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 25, 11, 30)).save()
+CardLog(card=c6, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 25, 14, 0)).save()
+CardLog(card=c6, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
+CardLog(card=c6, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
+
+CardLog(card=c7, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 15, 18, 0)).save()
+CardLog(card=c7, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 15, 19, 0)).save()
+CardLog(card=c7, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 16, 14, 0)).save()
+CardLog(card=c7, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 17, 10, 0)).save()
+CardLog(card=c7, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 17, 11, 30)).save()
+CardLog(card=c7, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 18, 14, 0)).save()
+CardLog(card=c7, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 21, 8, 0)).save()
+CardLog(card=c7, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 22, 14, 0)).save()
+
+CardLog(card=c8, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
+CardLog(card=c8, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
+CardLog(card=c8, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
+CardLog(card=c8, from_column=col5, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 23, 18, 0)).save()
+CardLog(card=c8, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 24, 9, 0)).save()
+CardLog(card=c8, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c8, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 25, 11, 30)).save()
+CardLog(card=c8, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 25, 14, 0)).save()
+CardLog(card=c8, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
+CardLog(card=c8, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
+
+CardLog(card=c9, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
+CardLog(card=c9, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
+CardLog(card=c9, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
+CardLog(card=c9, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c9, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 26, 11, 30)).save()
+CardLog(card=c9, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 26, 14, 0)).save()
+CardLog(card=c9, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 27, 8, 0)).save()
+CardLog(card=c9, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
+
+CardLog(card=c10, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 19, 18, 0)).save()
+CardLog(card=c10, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 19, 19, 0)).save()
+CardLog(card=c10, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 21, 14, 0)).save()
+CardLog(card=c10, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c10, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 25, 15, 30)).save()
+CardLog(card=c10, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 25, 16, 0)).save()
+CardLog(card=c10, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
+CardLog(card=c10, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 28, 14, 0)).save()
+
+CardLog(card=c11, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 11, 18, 0)).save()
+CardLog(card=c11, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 11, 19, 0)).save()
+CardLog(card=c11, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 12, 14, 0)).save()
+CardLog(card=c11, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 12, 19, 0)).save()
+CardLog(card=c11, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 13, 11, 30)).save()
+CardLog(card=c11, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 14, 14, 0)).save()
+CardLog(card=c11, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 15, 8, 0)).save()
+CardLog(card=c11, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 16, 14, 0)).save()
+
+# Projekt 2
+
+CardLog(card=c12, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
+CardLog(card=c12, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 14, 10, 0)).save()
+CardLog(card=c12, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 17, 16, 30)).save()
+CardLog(card=c12, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 18, 10, 0)).save()
+CardLog(card=c12, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 18, 11, 30)).save()
+CardLog(card=c12, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 18, 12, 0)).save()
+CardLog(card=c12, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 19, 8, 0)).save()
+CardLog(card=c12, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 19, 16, 0)).save()
+
+CardLog(card=c13, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 14, 18, 0)).save()
+CardLog(card=c13, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 15, 18, 0)).save()
+CardLog(card=c13, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 22, 14, 0)).save()
+CardLog(card=c13, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 23, 10, 0)).save()
+CardLog(card=c13, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 26, 11, 30)).save()
+CardLog(card=c13, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 27, 14, 0)).save()
+CardLog(card=c13, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
+CardLog(card=c13, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 5, 2, 14, 0)).save()
+
+CardLog(card=c14, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 21, 18, 0)).save()
+CardLog(card=c14, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 22, 18, 0)).save()
+CardLog(card=c14, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
+CardLog(card=c14, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c14, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 24, 11, 30)).save()
+CardLog(card=c14, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 24, 14, 0)).save()
+CardLog(card=c14, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 5, 1, 8, 0)).save()
+CardLog(card=c14, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 5, 1, 14, 0)).save()
+
+CardLog(card=c15, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
+CardLog(card=c15, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
+CardLog(card=c15, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 18, 14, 0)).save()
+CardLog(card=c15, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 19, 10, 0)).save()
+CardLog(card=c15, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 19, 11, 30)).save()
+CardLog(card=c15, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 20, 14, 0)).save()
+CardLog(card=c15, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 21, 8, 0)).save()
+CardLog(card=c15, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 21, 14, 0)).save()
+
+CardLog(card=c16, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
+CardLog(card=c16, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
+CardLog(card=c16, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
+CardLog(card=c16, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c16, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 25, 11, 30)).save()
+CardLog(card=c16, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 25, 14, 0)).save()
+CardLog(card=c16, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 26, 8, 0)).save()
+CardLog(card=c16, from_column=col9, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 28, 12, 0)).save() # acceptance -> analysis
+CardLog(card=c16, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
+CardLog(card=c16, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 30, 10, 0)).save()
+CardLog(card=c16, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 30, 11, 30)).save()
+CardLog(card=c16, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 30, 14, 0)).save()
+CardLog(card=c16, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 1, 8, 0)).save()
+CardLog(card=c16, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 5, 1, 14, 0)).save()
+
+CardLog(card=c17, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
+CardLog(card=c17, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
+CardLog(card=c17, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 24, 8, 0)).save()
+CardLog(card=c17, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c17, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 25, 11, 30)).save()
+CardLog(card=c17, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 25, 14, 0)).save()
+CardLog(card=c17, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
+CardLog(card=c17, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
+
+CardLog(card=c18, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 15, 18, 0)).save()
+CardLog(card=c18, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 15, 19, 0)).save()
+CardLog(card=c18, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 16, 14, 0)).save()
+CardLog(card=c18, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 17, 10, 0)).save()
+CardLog(card=c18, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 17, 11, 30)).save()
+CardLog(card=c18, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 18, 14, 0)).save()
+CardLog(card=c18, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 21, 8, 0)).save()
+CardLog(card=c18, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 22, 14, 0)).save()
+
+CardLog(card=c19, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
+CardLog(card=c19, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
+CardLog(card=c19, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
+CardLog(card=c19, from_column=col5, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 23, 18, 0)).save()
+CardLog(card=c19, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 24, 9, 0)).save()
+CardLog(card=c19, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c19, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 25, 11, 30)).save()
+CardLog(card=c19, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 25, 14, 0)).save()
+CardLog(card=c19, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
+CardLog(card=c19, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
+
+CardLog(card=c20, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
+CardLog(card=c20, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
+CardLog(card=c20, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
+CardLog(card=c20, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c20, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 26, 11, 30)).save()
+CardLog(card=c20, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 26, 14, 0)).save()
+CardLog(card=c20, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 27, 8, 0)).save()
+CardLog(card=c20, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
+
+CardLog(card=c21, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 19, 18, 0)).save()
+CardLog(card=c21, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 19, 19, 0)).save()
+CardLog(card=c21, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 21, 14, 0)).save()
+CardLog(card=c21, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
+CardLog(card=c21, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 25, 15, 30)).save()
+CardLog(card=c21, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 25, 16, 0)).save()
+CardLog(card=c21, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
+CardLog(card=c21, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 28, 14, 0)).save()
+
+CardLog(card=c22, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 11, 18, 0)).save()
+CardLog(card=c22, from_column=col2, to_column=col4, action=ca, timestamp=datetime.datetime(2018, 4, 11, 19, 0)).save()
+CardLog(card=c22, from_column=col4, to_column=col5, action=ca, timestamp=datetime.datetime(2018, 4, 12, 14, 0)).save()
+CardLog(card=c22, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 12, 19, 0)).save()
+CardLog(card=c22, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 13, 11, 30)).save()
+CardLog(card=c22, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 14, 14, 0)).save()
+CardLog(card=c22, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 15, 8, 0)).save()
+CardLog(card=c22, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 4, 16, 14, 0)).save()

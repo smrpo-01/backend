@@ -141,7 +141,7 @@ def cards_per_dev(cards):
 
 
 def estimate_per_dev(cards):
-    assignees = cards.values_list('assignee', flat=True)
+    assignees = cards.values_list('assignee', flat=True).distinct()
     result = []
     for id in assignees:
         u = models.User.objects.get(id=id)

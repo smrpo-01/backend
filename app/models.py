@@ -212,7 +212,7 @@ class Card(models.Model):
     card_number = models.IntegerField(null=True)
     description = models.TextField(blank=True, null=True, default="")
     name = models.CharField(max_length=255, null=True)
-    estimate = models.FloatField()
+    estimate = models.FloatField(null=True)
     project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
     expiration = models.DateField(default=timezone.now, null=True)
     owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)

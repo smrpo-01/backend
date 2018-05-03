@@ -1,6 +1,7 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 import datetime
+from graphql import GraphQLError
 
 from .. import models
 
@@ -100,13 +101,20 @@ class AddCard(graphene.Mutation):
         else:
             owner = models.UserTeam.objects.get(id=card_data.owner_userteam_id)
 
+        board = models.Board.objects.get(id=board_id)
         if card_data.column_id is None:
-            board = models.Board.objects.get(id=board_id)
             if card_data.type_id == 0:
                 column_id = models.Column.objects.get(board=board, position=0, parent=None).id
             else:
                 column_id = models.Column.objects.get(board=board, priority=True).id
 
+        if card_data.type_id == 1:
+            column_id = models.Column.objects.get(board=board, priority=True).id
+            silver_bullet_cards = models.Card.objects.filter(column=models.Column.objects.get(id=column_id),
+                                                             type=models.CardType.objects.get(id=1))
+            print(len(silver_bullet_cards))
+            if len(silver_bullet_cards) != 0:
+                raise GraphQLError("V stolpcu z najvišjo prioriteto je lahko samo ena nujna zahteva.")
         else:
             column_id = card_data.column_id
         # TODO: Loge je treba dodt če pride do kršitve wip

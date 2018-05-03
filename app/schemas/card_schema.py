@@ -214,22 +214,39 @@ class MoveCard(graphene.Mutation):
 
         return MoveCard(ok=True, card=card)
 
-
 class DeleteCard(graphene.Mutation):
     class Arguments:
         card_id = graphene.Int(required=True)
         cause_of_deletion = graphene.String(required=True)
+        user_team_id = graphene.Int(required=True)
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
+
     # TODO: Logi
     @staticmethod
-    def mutate(root, info, ok=False, card=None, card_id=None, cause_of_deletion=None):
+    def mutate(root, info, ok=False, card=None, card_id=None, cause_of_deletion=None, user_team_id=None):
         card = models.Card.objects.get(id=card_id)
 
-        table=models.Column.objects.filter(board=card.project.board)
-        for col in table:
-            print(col.parent)
+        user_team = models.UserTeam.objects.get(id=user_team_id)
+        # PO lohka briše samo pred dev
+        if user_team.role == models.TeamRole.objects.get(id=2):
+            table = models.Column.objects.filter(board=card.project.board)
+            col_id_card = card.column_id
+            is_before = True
+            for col in table:
+                if col.boundary:
+                    is_before = False
+                    break
+                # print(col.children.get_queryset().all())
+                # print(col.name)
+                if col_id_card == col.id:
+                    break
+
+            if not is_before:
+                raise GraphQLError("Product owner lahko briše kartice samo pred začetkom razvoja.")
+        elif user_team.role == models.TeamRole.objects.get(id=4):
+            raise GraphQLError("Razvijalec ne more brisati kartic.")
 
         card.is_deleted = True
         card.cause_of_deletion = cause_of_deletion

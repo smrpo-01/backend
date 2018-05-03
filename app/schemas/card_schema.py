@@ -72,6 +72,7 @@ class CardInput(graphene.InputObjectType):
     estimate = graphene.Float(required=False, default_value=1)
     tasks = graphene.List(TasksInput, default_value=[])
 
+
 '''
 def is_parent_first(child):
     if child is None or (child.parent is None and child.position == 0):
@@ -82,6 +83,7 @@ def is_parent_first(child):
         else:
             return is_parent_first(child.parent)
 '''
+
 
 class AddCard(graphene.Mutation):
     class Arguments:
@@ -107,7 +109,7 @@ class AddCard(graphene.Mutation):
 
         else:
             column_id = card_data.column_id
-
+        # TODO: Loge je treba dodt če pride do kršitve wip
         # TODO: samo po lahko doda navadne, samo KM lahko doda posebne
         '''
         if info.context.user.nekineki da ni PO and type_id == 0:
@@ -117,8 +119,11 @@ class AddCard(graphene.Mutation):
             raise GraphQLError("Samo KM lahko dodaja silver bullet kartice") 
         '''
 
+        cards = models.Card.objects.filter(project=models.Project.objects.get(id=card_data.project_id))
+
         card = models.Card(column=models.Column.objects.get(id=column_id),
                            type=models.CardType.objects.get(id=card_data.type_id),
+                           card_number=len(cards) + 1,
                            description=card_data.description,
                            name=card_data.name,
                            estimate=card_data.estimate,

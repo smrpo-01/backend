@@ -419,7 +419,7 @@ CardLog(card=c5, from_column=col4, to_column=col5, action=ca, timestamp=datetime
 CardLog(card=c5, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 30, 10, 0)).save()
 CardLog(card=c5, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 30, 11, 30)).save()
 CardLog(card=c5, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 30, 14, 0)).save()
-CardLog(card=c5, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 1, 8, 0)).save()
+CardLog(card=c5, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 5, 1, 8, 0)).save()
 CardLog(card=c5, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 5, 1, 14, 0)).save()
 
 CardLog(card=c6, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
@@ -528,7 +528,7 @@ CardLog(card=c16, from_column=col4, to_column=col5, action=ca, timestamp=datetim
 CardLog(card=c16, from_column=col5, to_column=col6, action=ca, timestamp=datetime.datetime(2018, 4, 30, 10, 0)).save()
 CardLog(card=c16, from_column=col6, to_column=col7, action=ca, timestamp=datetime.datetime(2018, 4, 30, 11, 30)).save()
 CardLog(card=c16, from_column=col7, to_column=col8, action=ca, timestamp=datetime.datetime(2018, 4, 30, 14, 0)).save()
-CardLog(card=c16, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 4, 1, 8, 0)).save()
+CardLog(card=c16, from_column=col8, to_column=col9, action=ca, timestamp=datetime.datetime(2018, 5, 1, 8, 0)).save()
 CardLog(card=c16, from_column=col9, to_column=col10, action=ca, timestamp=datetime.datetime(2018, 5, 1, 14, 0)).save()
 
 CardLog(card=c17, from_column=col1, to_column=col2, action=ca, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()

@@ -128,12 +128,18 @@ def get_columns_json(board_id):
     return board_json
 
 
+class ColumnType(DjangoObjectType):
+    class Meta:
+        model = models.Column
+
+
 class BoardType(DjangoObjectType):
     class Meta:
         model = models.Board
 
     columns = graphene.String()
     #columns = GenericScalar()
+    columns_no_parents = graphene.List(ColumnType)
 
     estimate_min = graphene.Float()
     estimate_max = graphene.Float()
@@ -162,10 +168,8 @@ class BoardType(DjangoObjectType):
         return json.dumps(get_columns_json(instance.id))
         #return get_columns_json(instance.id)
 
-
-class ColumnType(DjangoObjectType):
-    class Meta:
-        model = models.Column
+    def resolve_columns_no_parents(instance, info):
+        return [col for col in instance.column_set.all() if not col.children.count()]
 
 
 class BoardQueries(graphene.ObjectType):

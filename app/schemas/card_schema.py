@@ -175,7 +175,7 @@ class CardType(DjangoObjectType):
 
     card_per_column_time = GenericScalar(minimal=graphene.Boolean(default_value=True))
     total_time = graphene.Float(minimal=graphene.Boolean(default_value=True))
-    travel_time = graphene.Float(column_from=graphene.Int(default_value=0), column_to=graphene.Int(default_value=0))
+    travel_time = graphene.Float(column_from=graphene.String(default_value=0), column_to=graphene.String(default_value=0))
 
     def resolve_card_per_column_time(instance, info, minimal):
         return card_per_column_time(instance, minimal=minimal)
@@ -186,9 +186,11 @@ class CardType(DjangoObjectType):
     def resolve_travel_time(instance, info, column_from, column_to):
         col_start = models.Column.objects.get(id=column_from)
         col_end = models.Column.objects.get(id=column_to)
-        start = instance.logs.filter(to_column=col_start).first().timestamp
-        end = instance.logs.filter(to_column=col_end).last().timestamp
-        return (end - start).total_seconds() / 3600
+        start = instance.logs.filter(from_column=col_start).first()
+        end = instance.logs.filter(to_column=col_end).last()
+        if not (start and end):
+            raise GraphQLError("Kartica ni bila v željenih stolpcih.")
+        return (end.timestamp - start.timestamp).total_seconds() / 3600
 
 
 class CardActionType(DjangoObjectType):

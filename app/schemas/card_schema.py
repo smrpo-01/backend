@@ -218,27 +218,30 @@ class MoveCard(graphene.Mutation):
     class Arguments:
         card_id = graphene.Int(required=True)
         to_column_id = graphene.String(required=True)
+        force = graphene.Boolean(required=False, default_value=False)
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
 
     @staticmethod
-    def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None):
+    def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None, force=False):
         card = models.Card.objects.get(id=card_id)
-
-        from_col = card.column
-        card.column = models.Column.objects.get(id=to_column_id)
-        card.save()
-
-        to_col = card.column
-
+        to_col = models.Column.objects.get(id=to_column_id)
         cards = models.Card.objects.filter(column=to_col)
 
         log_action = None
         if len(cards) > to_col.wip:
             log_action = "Presežena omejitev wip."
 
-        models.CardLog(from_col=from_col, to_column=to_col, action=log_action).save()
+        if force is False:
+            if log_action is not None:
+                raise GraphQLError("Presežena omejitev wip. Nadaljujem?")
+
+        from_col = card.column
+        card.column = to_col
+        card.save()
+
+        models.CardLog(card=card, from_column=from_col, to_column=to_col, action=log_action).save()
 
         return MoveCard(ok=True, card=card)
 

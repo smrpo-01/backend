@@ -6,6 +6,16 @@ from graphql import GraphQLError
 from .. import models
 
 
+class WhoCanEditType(graphene.ObjectType):
+    card_name = graphene.Boolean()
+    card_description = graphene.Boolean()
+    project_name = graphene.Boolean()
+    owner = graphene.Boolean()
+    date = graphene.Boolean()
+    estimate = graphene.Boolean()
+    tasks = graphene.Boolean()
+
+
 class TaskType(DjangoObjectType):
     class Meta:
         model = models.Task
@@ -56,6 +66,12 @@ class CardQueries(graphene.ObjectType):
         else:
             return models.CardLog.objects.filter(card=models.Card.objects.filter(id=card_id))
 
+    who_can_edit = graphene.Field(graphene.Field(WhoCanEditType),
+                                  card_id=graphene.Int(required=True),
+                                  user_team_id=graphene.Int(required=True))
+
+    def resolve_who_can_edit(self, info, card_id, user_team_id):
+        pass
 
 class TasksInput(graphene.InputObjectType):
     id = graphene.Int(required=False)
@@ -159,7 +175,7 @@ class AddCard(graphene.Mutation):
         cards = models.Card.objects.filter(column=models.Column.objects.get(id=column_id))
 
         log_action = None
-        if len(cards) > models.Column.objects.get(id=column_id).wip:
+        if (len(cards) > models.Column.objects.get(id=column_id).wip) and (models.Column.objects.get(id=column_id).wip != 0):
             log_action = "Presežena omejitev wip."
 
         models.CardLog(from_col=None, to_column=models.Column.objects.get(id=column_id), action=log_action).save()
@@ -230,7 +246,7 @@ class MoveCard(graphene.Mutation):
         cards = models.Card.objects.filter(column=to_col)
 
         log_action = None
-        if len(cards) > to_col.wip:
+        if (len(cards) > to_col.wip) and (to_col.wip != 0):
             log_action = "Presežena omejitev wip."
 
         if force is False:
@@ -295,4 +311,3 @@ class CardMutations(graphene.ObjectType):
     delete_card = DeleteCard.Field()
     move_card = MoveCard.Field()
 
-# {"boardName":"Tabla","projects":[],"columns":[{"id":"8c765c2e-c875-48b3-b1ee-237372fffcee","name":"Product Backlog","columns":[],"wip":"0","boundary":false,"priority":false,"acceptance":false},{"id":"24eaf24f-3c99-4a4f-b921-c787979fb3eb","name":"Sprint Backlog","columns":[],"wip":"0","boundary":false,"priority":true,"acceptance":false},{"id":"2cd1df29-f412-49a2-aaf4-0a9cb41f986e","name":"Development","columns":[{"id":"1eed19fd-3e33-4435-b732-fa18157157ae","name":"Analysis & design","columns":[],"wip":"3","b…,"acceptance":false}],"wip":"0","boundary":false,"priority":false,"acceptance":false},{"id":"e92dee63-1ca2-420f-9015-94a9b874c6ef","name":"Acceptance ready","columns":[],"wip":"4","boundary":true,"priority":false,"acceptance":true},{"id":"deaa9072-b748-48fa-a263-6a4d76f202da","name":"Acceptance","columns":[],"wip":"4","boundary":false,"priority":false,"acceptance":false},{"id":"88f62199-fccb-4d89-bb0e-600fa4fa0a62","name":"Done","columns":[],"wip":"0","boundary":false,"priority":false,"acceptance":false}]}

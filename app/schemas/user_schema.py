@@ -30,17 +30,22 @@ class UserRoleType(DjangoObjectType):
 
 class UserQueries(graphene.ObjectType):
     all_users = graphene.Field(graphene.List(UserType),
-                               user_role=graphene.Int(default_value=0))
+                               user_role=graphene.Int(default_value=0),
+                               user_id=graphene.Int(default_value=-1))
     all_paginated_users = graphene.Field(UserPaginatedType,
                                          page=graphene.Int(),
                                          page_size=graphene.Int(default_value=3))
     all_user_roles = graphene.List(UserRoleType)
     current_user = graphene.Field(UserType)
 
-    def resolve_all_users(self, info, user_role):
+    def resolve_all_users(self, info, user_role, user_id):
         users = models.User.objects.all()
-        if user_role == 0:
+
+        if user_role == 0 and user_id == -1:
             return users
+
+        if user_id != -1:
+            return models.User.objects.filter(id=user_id)
 
         users_w_roles = [(user, [role.id for role in user.roles.filter()]) for user in users if user_role]
         users_w_correct_roles = [user for (user, roles) in users_w_roles if user_role in roles]
@@ -141,7 +146,24 @@ class DeleteUser(graphene.Mutation):
         return DeleteUser(user=u)
 
 
+class SetDefaultBoardId(graphene.Mutation):
+    class Arguments:
+        user_id = graphene.Int(required=True)
+        board_id = graphene.Int(required=True)
+
+    ok = graphene.Boolean()
+    user = graphene.Field(UserType)
+
+    @staticmethod
+    def mutate(root, info, user_id=None, board_id=None):
+        u = models.User.objects.get(id=user_id)
+        u.default_board_id = board_id
+        u.save()
+        return SetDefaultBoardId(ok=True, user=u)
+
+
 class UserMutations(graphene.ObjectType):
     create_user = CreateUser.Field()
     edit_user = EditUser.Field()
     delete_user = DeleteUser.Field()
+    set_default_board_id = SetDefaultBoardId.Field()

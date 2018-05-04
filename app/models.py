@@ -117,6 +117,7 @@ class User(AbstractBaseUser):
     last_name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    default_board_id = models.IntegerField(default=None, null=True)
 
     roles = models.ManyToManyField(UserRole)
     teams = models.ManyToManyField('Team', through='UserTeam', related_name='members')
@@ -216,14 +217,16 @@ class CardType(models.Model):
 class Card(models.Model):
     column = models.ForeignKey(Column, null=False, on_delete=models.CASCADE, related_name='cards')
     type = models.ForeignKey(CardType, null=False, on_delete=models.CASCADE)
+    card_number = models.IntegerField(null=True)
     description = models.TextField(blank=True, null=True, default="")
     name = models.CharField(max_length=255, null=True)
-    estimate = models.FloatField()
+    estimate = models.FloatField(null=True)
     project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
-    expiration = models.DateTimeField(default=timezone.now)
-    owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
+    expiration = models.DateField(default=timezone.now, null=True)
+    owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE, related_name='cards_assigned')
     date_created = models.DateTimeField(default=timezone.now)
-    assignee = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='cards_assigned')
+    is_deleted = models.BooleanField(default=False)
+    cause_of_deletion = models.TextField(default="")
 
 
 class Task(models.Model):

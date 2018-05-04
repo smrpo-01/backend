@@ -1,56 +1,52 @@
 from app.models import *
+
 """
-
-
 ADMIN = 1
 PRODUCT_OWNER = 2
 KANBAN_MASTER = 3
 DEV = 4
-
-
 """
 
-Setting(key='ip_lock_time', value='1').save() # ip_lock_time = 3min
-Setting(key='max_attempts', value='3').save() # max num of failed attempts
+Setting(key='ip_lock_time', value='1').save()  # ip_lock_time = 3min
+Setting(key='max_attempts', value='3').save()  # max num of failed attempts
 
 [UserRole(i).save() for i in range(1, 5)]
 [TeamRole(i).save() for i in range(2, 5)]
 
 pwd = "demodemo1"
 
-admin = User.objects.create_superuser(email="admin@demo.com", password=pwd, first_name="Ad", last_name="Min",)
+admin = User.objects.create_superuser(email="admin@demo.com", password=pwd, first_name="Ad", last_name="Min", )
 admin.save()
 admin.roles.add(UserRole.objects.get(id=1))
 admin.save()
 
-dev1 = User.objects.create_user(email="dev1@demo.com", password=pwd, first_name="Dev", last_name="Ena",)
+dev1 = User.objects.create_user(email="dev1@demo.com", password=pwd, first_name="Dev", last_name="Ena", )
 dev1.save()
 dev1.roles.add(UserRole.objects.get(id=3))
 dev1.roles.add(UserRole.objects.get(id=4))
 dev1.save()
 
-dev2 = User.objects.create_user(email="dev2@demo.com", password=pwd, first_name="Dev", last_name="Dve",)
+dev2 = User.objects.create_user(email="dev2@demo.com", password=pwd, first_name="Dev", last_name="Dve", )
 dev2.save()
 dev2.roles.add(UserRole.objects.get(id=4))
 dev2.save()
 
-dev3 = User.objects.create_user(email="dev3@demo.com", password=pwd, first_name="Dev", last_name="Tri",)
+dev3 = User.objects.create_user(email="dev3@demo.com", password=pwd, first_name="Dev", last_name="Tri", )
 dev3.save()
 dev3.roles.add(UserRole.objects.get(id=4))
 dev3.save()
 
-dev4 = User.objects.create_user(email="dev4@demo.com", password=pwd, first_name="Dev", last_name="Šter",)
+dev4 = User.objects.create_user(email="dev4@demo.com", password=pwd, first_name="Dev", last_name="Šter", )
 dev4.save()
 dev4.roles.add(UserRole.objects.get(id=4))
 dev4.save()
 
-dev5 = User.objects.create_user(email="dev5@demo.com", password=pwd, first_name="Dev", last_name="Pet",)
+dev5 = User.objects.create_user(email="dev5@demo.com", password=pwd, first_name="Dev", last_name="Pet", )
 dev5.save()
 dev5.roles.add(UserRole.objects.get(id=4))
 dev5.save()
 
-
-km = User.objects.create_user(email="km@demo.com", password=pwd, first_name="K", last_name="M",)
+km = User.objects.create_user(email="km@demo.com", password=pwd, first_name="K", last_name="M", )
 km.save()
 km.roles.add(UserRole.objects.get(id=3))
 km.save()
@@ -73,7 +69,6 @@ po2 = User.objects.create_user(email="po2@demo.com", password=pwd, first_name="P
 po2.save()
 po2.roles.add(UserRole.objects.get(id=2))
 po2.save()
-
 
 t1 = Team.objects.create(kanban_master=km, product_owner=po, name="t1")
 t2 = Team.objects.create(kanban_master=dev1, product_owner=po, name="t2")
@@ -253,103 +248,112 @@ col9.save()
 col10 = Column(id="10", board=b1, name="Done", position=4, wip=0)
 col10.save()
 
+# -------------------------------------------------------------------------------
+
+[CardAction(i).save() for i in range(3)]
+
+ca = CardAction.objects.get(id=0) # move
+
+
 [CardType(i).save() for i in range(3)]
+
+dev1 = ug1
+dev2 = ug2
+po = ug3
 
 
 # Kartice projekt 1 -----------------------------------------------------------------
 
-c1 = Card(column=col10, type=CardType.objects.get(id=0), estimate=3.5, project=p1, assignee=dev1,
+c1 = Card(column=col10, type=CardType.objects.get(id=0), estimate=3.5, project=p1, owner=dev1,
           description="Administrator lahko dodaja, ureja in briše podatke o uporabnikih.", name="#1 Vzdrževanje uporabnikov")
 c1.save()
 
-c2 = Card(column=col7, type=CardType.objects.get(id=0), estimate=1, project=p1, assignee=dev1,
+c2 = Card(column=col7, type=CardType.objects.get(id=0), estimate=1, project=p1, owner=dev1,
           description="KanbanMaster lahko kreira, ureja in briše podatke o razvojnih skupinah", name="#2 Vzdrževanje razvojnih skupin")
 c2.save()
 
-c3 = Card(column=col6, type=CardType.objects.get(id=1), estimate=10, project=p1, assignee=dev1,
+c3 = Card(column=col6, type=CardType.objects.get(id=1), estimate=10, project=p1, owner=dev1,
           description="KanbanMaster lahko kreira, ureja in briše podatke o projektih.", name="#3 Vzdrževanje projektov")
 c3.save()
 
-c4 = Card(column=col5, type=CardType.objects.get(id=0), estimate=3, project=p1, assignee=dev1,
+c4 = Card(column=col5, type=CardType.objects.get(id=0), estimate=3, project=p1, owner=dev1,
           description="Uporabnik se lahko prijavi v sistem z uporabniškim imenom in geslom.", name="#4 Prijava v sistem")
 c4.save()
 
-c5 = Card(column=col5, type=CardType.objects.get(id=0), estimate=4, project=p1, assignee=dev2,
+c5 = Card(column=col5, type=CardType.objects.get(id=0), estimate=4, project=p1, owner=dev2,
           description="KanbanMaster lahko kreira novo tablo in (dokler je prazna) spreminja njeno strukturo.", name="#5 Kreiranje table")
 c5.save()
 
-c6 = Card(column=col9, type=CardType.objects.get(id=0), estimate=2, project=p1, assignee=dev2,
+c6 = Card(column=col9, type=CardType.objects.get(id=0), estimate=2, project=p1, owner=dev2,
           description="Uporabnik lahko pregleduje tablo.", name="#6 Prikaz table")
 c6.save()
 
-c7 = Card(column=col8, type=CardType.objects.get(id=0), estimate=1.5, project=p1, assignee=dev1,
+c7 = Card(column=col8, type=CardType.objects.get(id=0), estimate=1.5, project=p1, owner=dev1,
           description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="#7 Kreiranje kartice")
 c7.save()
 
-c8 = Card(column=col9, type=CardType.objects.get(id=0), estimate=1.5, project=p1, assignee=dev2,
+c8 = Card(column=col9, type=CardType.objects.get(id=0), estimate=1.5, project=p1, owner=dev2,
           description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="#8 Prestavljanje kartice")
 c8.save()
 
-c9 = Card(column=col10, type=CardType.objects.get(id=0), estimate=1.5, project=p1, assignee=dev1,
+c9 = Card(column=col10, type=CardType.objects.get(id=0), estimate=1.5, project=p1, owner=dev1,
           description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="#9 Prikaz podrobnosti kartice")
 c9.save()
 
-c10 = Card(column=col10, type=CardType.objects.get(id=0), estimate=1.5, project=p1, assignee=dev1,
+c10 = Card(column=col10, type=CardType.objects.get(id=0), estimate=1.5, project=p1, owner=dev1,
           description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="#10 Kreiranje nove table s kopiranjem strukture")
 c10.save()
 
-c11 = Card(column=col6, type=CardType.objects.get(id=1), estimate=1.5, project=p1, assignee=po,
+c11 = Card(column=col6, type=CardType.objects.get(id=1), estimate=1.5, project=p1, owner=po,
           description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="#11 Uporabniška dokumentacija")
 c11.save()
 
 
 # Kartice projekt 2 -----------------------------------------------------------------
 
-c12 = Card(column=col10, type=CardType.objects.get(id=0), estimate=4, project=p2, assignee=dev2,
+c12 = Card(column=col10, type=CardType.objects.get(id=0), estimate=4, project=p2, owner=dev2,
           description="Administrator lahko dodaja, ureja in briše podatke o uporabnikih.", name="#12 Posodabljanje vsebine kartice")
 c12.save()
 
-c13 = Card(column=col7, type=CardType.objects.get(id=0), estimate=1, project=p2, assignee=dev1,
+c13 = Card(column=col7, type=CardType.objects.get(id=0), estimate=1, project=p2, owner=dev1,
           description="KanbanMaster lahko kreira, ureja in briše podatke o razvojnih skupinah", name="#13 Brisanje kartice")
 c13.save()
 
-c14 = Card(column=col6, type=CardType.objects.get(id=1), estimate=1, project=p2, assignee=dev1,
+c14 = Card(column=col6, type=CardType.objects.get(id=1), estimate=1, project=p2, owner=dev1,
           description="KanbanMaster lahko kreira, ureja in briše podatke o projektih.", name="#14 Posodabljanje lastnosti stolpca")
 c14.save()
 
-c15 = Card(column=col5, type=CardType.objects.get(id=0), estimate=3, project=p2, assignee=dev2,
+c15 = Card(column=col5, type=CardType.objects.get(id=0), estimate=3, project=p2, owner=dev2,
           description="Uporabnik se lahko prijavi v sistem z uporabniškim imenom in geslom.", name="#15 Izračun povprečnega potrebnega časa")
 c15.save()
 
-c16 = Card(column=col7, type=CardType.objects.get(id=0), estimate=6, project=p2, assignee=dev1,
+c16 = Card(column=col7, type=CardType.objects.get(id=0), estimate=6, project=p2, owner=dev1,
           description="KanbanMaster lahko kreira novo tablo in (dokler je prazna) spreminja njeno strukturo.", name="#16 Izdelava kumulativnega diagrama delovnega toka")
 c16.save()
 
-c17 = Card(column=col9, type=CardType.objects.get(id=0), estimate=5, project=p2, assignee=dev2,
+c17 = Card(column=col9, type=CardType.objects.get(id=0), estimate=5, project=p2, owner=dev2,
           description="Uporabnik lahko pregleduje tablo.", name="#17 Izpis kršitev omejitve WIP")
 c17.save()
 
-c18 = Card(column=col8, type=CardType.objects.get(id=0), estimate=4, project=p2, assignee=dev1,
+c18 = Card(column=col8, type=CardType.objects.get(id=0), estimate=4, project=p2, owner=dev1,
           description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="#18 Prikaz 'kritičnih' kartic")
 c18.save()
 
-c19 = Card(column=col6, type=CardType.objects.get(id=0), estimate=1.5, project=p2, assignee=po,
+c19 = Card(column=col6, type=CardType.objects.get(id=0), estimate=1.5, project=p2, owner=po,
           description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="#19 Obveščanje o prekoračitvi roka")
 c19.save()
 
-c20 = Card(column=col10, type=CardType.objects.get(id=0), estimate=3, project=p2, assignee=dev1,
+c20 = Card(column=col10, type=CardType.objects.get(id=0), estimate=3, project=p2, owner=dev1,
           description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="#20 Vgradnja pravil za prestavljanje kartic")
 c20.save()
 
-c21 = Card(column=col10, type=CardType.objects.get(id=0), estimate=2, project=p2, assignee=dev1,
+c21 = Card(column=col10, type=CardType.objects.get(id=0), estimate=2, project=p2, owner=dev1,
           description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="#21 'Oženje' stolpcev")
 c21.save()
 
-c22 = Card(column=col6, type=CardType.objects.get(id=1), estimate=1.5, project=p2, assignee=dev2,
+c22 = Card(column=col6, type=CardType.objects.get(id=1), estimate=1.5, project=p2, owner=dev2,
           description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="#22 Prilagodljiv prikaz kartice na tabli")
 c22.save()
-
-# -------------------------------------------------------------------------------
 
 t1 = Task(description="To je description 1", card=c1)
 t1.save()
@@ -362,12 +366,6 @@ t3.save()
 
 t4 = Task(description="To je description 4", card=c3)
 t4.save()
-
-# -------------------------------------------------------------------------------
-
-[CardAction(i).save() for i in range(3)]
-
-ca = CardAction.objects.get(id=0) # move
 
 # Project 1 - Logs
 

@@ -65,6 +65,8 @@ class CardQueries(graphene.ObjectType):
             return models.CardLog.objects.all()
         else:
             return models.CardLog.objects.filter(card=models.Card.objects.filter(id=card_id))
+
+
 '''
     who_can_edit = graphene.Field(graphene.Field(WhoCanEditType),
                                   card_id=graphene.Int(required=True),
@@ -77,7 +79,6 @@ class CardQueries(graphene.ObjectType):
         if user_team.team.get() != card.project.get().team.get():
             raise GraphQLError("Uporabnik ne more spreminjati kartice druge ekipe!")
 '''
-
 
 
 class TasksInput(graphene.InputObjectType):
@@ -186,7 +187,8 @@ class AddCard(graphene.Mutation):
                 models.Column.objects.get(id=column_id).wip != 0):
             log_action = "Presežena omejitev wip."
 
-        models.CardLog(from_column=None, to_column=models.Column.objects.get(id=column_id), action=log_action).save()
+        models.CardLog(card=card, from_column=None, to_column=models.Column.objects.get(id=column_id),
+                       action=log_action).save()
 
         return AddCard(ok=True, card=card)
 

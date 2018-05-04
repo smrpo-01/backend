@@ -71,7 +71,13 @@ class CardQueries(graphene.ObjectType):
                                   user_team_id=graphene.Int(required=True))
 
     def resolve_who_can_edit(self, info, card_id, user_team_id):
+        '''user_team = models.UserTeam.objects.get(id=user_team_id)
+        card = models.Card.objects.get(id=card_id)
+
+        if user_team.team.get() != card.project.get().team.get():'''
         pass
+
+
 
 class TasksInput(graphene.InputObjectType):
     id = graphene.Int(required=False)
@@ -175,10 +181,11 @@ class AddCard(graphene.Mutation):
         cards = models.Card.objects.filter(column=models.Column.objects.get(id=column_id))
 
         log_action = None
-        if (len(cards) > models.Column.objects.get(id=column_id).wip) and (models.Column.objects.get(id=column_id).wip != 0):
+        if (len(cards) > models.Column.objects.get(id=column_id).wip) and (
+                models.Column.objects.get(id=column_id).wip != 0):
             log_action = "Presežena omejitev wip."
 
-        models.CardLog(from_col=None, to_column=models.Column.objects.get(id=column_id), action=log_action).save()
+        models.CardLog(from_column=None, to_column=models.Column.objects.get(id=column_id), action=log_action).save()
 
         return AddCard(ok=True, card=card)
 
@@ -310,4 +317,3 @@ class CardMutations(graphene.ObjectType):
     edit_card = EditCard.Field()
     delete_card = DeleteCard.Field()
     move_card = MoveCard.Field()
-

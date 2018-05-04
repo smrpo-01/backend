@@ -41,6 +41,37 @@ class CardLogType(DjangoObjectType):
         model = models.CardLog
 
 
+def where_is_card(card):
+    #   VRNE:
+    #   0 - če je pred mejnim stolpcem
+    #   1 - če je med mejnima stolpcema
+    #   2 - če je na koncu
+    table = list(models.Column.objects.filter(board=card.project.board))
+    first_boundary = list(models.Column.objects.filter(board=card.project.board, boundary=True))[0]
+    second_boundary = list(models.Column.objects.filter(board=card.project.board, boundary=True))[1]
+    col_id_card = card.column_id
+    first_b_index = None
+    second_b_index = None
+    for i in range(0, len(table)):
+        if table[i].id == first_boundary.id:
+            first_b_index = i
+        elif table[i].id == second_boundary.id:
+            second_b_index = i
+
+    first_half = table[:first_b_index]
+    middle = table[first_b_index:second_b_index + 1]
+
+    for col in first_half:
+        if col_id_card == col.id:
+            return 0
+
+    for col in middle:
+        if col_id_card == col.id:
+            return 1
+
+    return 2
+
+
 class CardQueries(graphene.ObjectType):
     all_cards = graphene.Field(graphene.List(CardType), board_id=graphene.Int(default_value=-1))
 
@@ -66,19 +97,28 @@ class CardQueries(graphene.ObjectType):
         else:
             return models.CardLog.objects.filter(card=models.Card.objects.filter(id=card_id))
 
-
-'''
-    who_can_edit = graphene.Field(graphene.Field(WhoCanEditType),
+    who_can_edit = graphene.Field(WhoCanEditType,
                                   card_id=graphene.Int(required=True),
                                   user_team_id=graphene.Int(required=True))
 
     def resolve_who_can_edit(self, info, card_id, user_team_id):
         user_team = models.UserTeam.objects.get(id=user_team_id)
         card = models.Card.objects.get(id=card_id)
-
-        if user_team.team.get() != card.project.get().team.get():
+        print(user_team.team.id)
+        print(card.project.team.id)
+        if user_team.team.id != card.project.team.id:
             raise GraphQLError("Uporabnik ne more spreminjati kartice druge ekipe!")
-'''
+
+        card_pos = where_is_card(card)
+
+        if card_pos == 0:
+            if user_team.role == models.TeamRole.objects.get(id=2):  # če je PO
+                if card.type_id == 1:
+                    raise GraphQLError("Product Owner lahko posodablja le normalne kartice")
+                else:
+                    return WhoCanEditType(card_name=True, card_description=True, project_name=True, owner=True,
+                                          date=True, estimate=True, tasks=True)
+
 
 
 class TasksInput(graphene.InputObjectType):
@@ -256,7 +296,7 @@ class MoveCard(graphene.Mutation):
         cards = models.Card.objects.filter(column=to_col)
 
         log_action = None
-        if (len(cards) > to_col.wip) and (to_col.wip != 0):
+        if (len(cards) > to_col.wip-1) and (to_col.wip != 0):
             log_action = "Presežena omejitev wip."
 
         if force is False:
@@ -288,19 +328,7 @@ class DeleteCard(graphene.Mutation):
         user_team = models.UserTeam.objects.get(id=user_team_id)
         # PO lohka briše samo pred dev
         if user_team.role == models.TeamRole.objects.get(id=2):
-            table = models.Column.objects.filter(board=card.project.board)
-            col_id_card = card.column_id
-            is_before = True
-            for col in table:
-                if col.boundary:
-                    is_before = False
-                    break
-                # print(col.children.get_queryset().all())
-                # print(col.name)
-                if col_id_card == col.id:
-                    break
-
-            if not is_before:
+            if where_is_card(card) == 1:
                 raise GraphQLError("Product owner lahko briše kartice samo pred začetkom razvoja.")
         elif user_team.role == models.TeamRole.objects.get(id=4):
             raise GraphQLError("Razvijalec ne more brisati kartic.")

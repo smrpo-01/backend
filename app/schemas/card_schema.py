@@ -72,6 +72,16 @@ def where_is_card(card):
     return 2
 
 
+def get_columns_absolute(columns, list_of_boards):
+    for col in columns:
+        if len(col.children.all()) == 0:
+            list_of_boards.append(col.id)
+        else:
+            list_of_boards = get_columns_absolute(list(col.children.all()), list_of_boards)
+
+    return list_of_boards
+
+
 class CardQueries(graphene.ObjectType):
     all_cards = graphene.Field(graphene.List(CardType), board_id=graphene.Int(default_value=-1))
 
@@ -102,8 +112,11 @@ class CardQueries(graphene.ObjectType):
                                   user_team_id=graphene.Int(required=True))
 
     def resolve_who_can_edit(self, info, card_id, user_team_id):
-        user_team = models.UserTeam.objects.get(id=user_team_id)
         card = models.Card.objects.get(id=card_id)
+        print(get_columns_absolute(list(models.Column.objects.filter(board=card.project.board, parent=None)), []))
+        '''
+        user_team = models.UserTeam.objects.get(id=user_team_id)
+        
         print(user_team.team.id)
         print(card.project.team.id)
         if user_team.team.id != card.project.team.id:
@@ -118,7 +131,7 @@ class CardQueries(graphene.ObjectType):
                 else:
                     return WhoCanEditType(card_name=True, card_description=True, project_name=True, owner=True,
                                           date=True, estimate=True, tasks=True)
-
+        '''
 
 
 class TasksInput(graphene.InputObjectType):

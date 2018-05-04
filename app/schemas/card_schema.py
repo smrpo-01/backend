@@ -24,9 +24,6 @@ def get_current_column(card):
 def card_per_column_time(card, minimal=True):
     localtz = pytz.timezone('Europe/Ljubljana')
 
-    #from_cols = [c[0] for c in models.CardLog.objects.filter(card=card).values_list('from_column').distinct()]
-    #to_cols = [c[0] for c in models.CardLog.objects.filter(card=card).values_list('to_column').distinct()]
-    #cols = set(to_cols + from_cols)
     b = card.project.board
     cols = models.Column.objects.filter(board=b)
 

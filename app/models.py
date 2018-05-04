@@ -229,7 +229,16 @@ class Task(models.Model):
 
 class CardLog(models.Model):
     card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='logs')
-    from_column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name='from_column_log')
+    from_column = models.ForeignKey(Column, null=True, on_delete=models.CASCADE, related_name='from_column_log')
     to_column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name='to_column_log')
-    action = models.CharField(max_length=255)
+    action = models.CharField(max_length=255, null=True)
     timestamp = models.DateTimeField(default=timezone.now)
+
+
+class CardLogCreateDelete(models.Model):
+    card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='logs_create_delete')
+    # če je 0 potem je to ustvarjena kartica, če je 1 je brisanje kartice
+    action = models.IntegerField(null=False)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+

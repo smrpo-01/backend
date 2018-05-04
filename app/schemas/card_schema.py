@@ -47,10 +47,14 @@ class CardQueries(graphene.ObjectType):
     def resolve_all_card_types(self, info):
         return models.CardType.objects.all()
 
-    all_card_logs = graphene.List(CardLogType)
+    all_card_logs = graphene.Field(graphene.List(CardLogType),
+                                   card_id=graphene.Int(default_value=-1))
 
-    def resolve_all_card_logs(self, info):
-        return models.CardLog.objects.all()
+    def resolve_all_card_logs(self, info, card_id):
+        if card_id == -1:
+            return models.CardLog.objects.all()
+        else:
+            return models.CardLog.objects.filter(card=models.Card.objects.filter(id=card_id))
 
 
 class TasksInput(graphene.InputObjectType):
@@ -148,6 +152,18 @@ class AddCard(graphene.Mutation):
 
             task_entity = models.Task(card=card, description=task.description, done=task.done, assignee=assignee)
             task_entity.save()
+
+        # kreacija kartice
+        models.CardLogCreateDelete(card=card, action=0).save()
+
+        cards = models.Card.objects.filter(column=models.Column.objects.get(id=column_id))
+
+        log_action = None
+        if len(cards) > models.Column.objects.get(id=column_id).wip:
+            log_action = "Presežena omejitev wip."
+
+        models.CardLog(from_col=None, to_column=models.Column.objects.get(id=column_id), action=log_action).save()
+
         return AddCard(ok=True, card=card)
 
 
@@ -196,6 +212,8 @@ class EditCard(graphene.Mutation):
         return EditCard(ok=True, card=card)
 
 
+# logi: omejitev wip, kreacija pa delete
+
 class MoveCard(graphene.Mutation):
     class Arguments:
         card_id = graphene.Int(required=True)
@@ -207,12 +225,23 @@ class MoveCard(graphene.Mutation):
     @staticmethod
     def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None):
         card = models.Card.objects.get(id=card_id)
-        # TODO: implementiraj Loge
 
+        from_col = card.column
         card.column = models.Column.objects.get(id=to_column_id)
         card.save()
 
+        to_col = card.column
+
+        cards = models.Card.objects.filter(column=to_col)
+
+        log_action = None
+        if len(cards) > to_col.wip:
+            log_action = "Presežena omejitev wip."
+
+        models.CardLog(from_col=from_col, to_column=to_col, action=log_action).save()
+
         return MoveCard(ok=True, card=card)
+
 
 class DeleteCard(graphene.Mutation):
     class Arguments:
@@ -223,7 +252,6 @@ class DeleteCard(graphene.Mutation):
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
 
-    # TODO: Logi
     @staticmethod
     def mutate(root, info, ok=False, card=None, card_id=None, cause_of_deletion=None, user_team_id=None):
         card = models.Card.objects.get(id=card_id)
@@ -251,6 +279,10 @@ class DeleteCard(graphene.Mutation):
         card.is_deleted = True
         card.cause_of_deletion = cause_of_deletion
         card.save()
+
+        # loggiraj da je kartica pobrisana
+        models.CardLogCreateDelete(card=card, action=1).save()
+
         return DeleteCard(ok=True, card=card)
 
 

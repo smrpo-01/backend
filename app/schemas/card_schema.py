@@ -65,17 +65,18 @@ class CardQueries(graphene.ObjectType):
             return models.CardLog.objects.all()
         else:
             return models.CardLog.objects.filter(card=models.Card.objects.filter(id=card_id))
-
+'''
     who_can_edit = graphene.Field(graphene.Field(WhoCanEditType),
                                   card_id=graphene.Int(required=True),
                                   user_team_id=graphene.Int(required=True))
 
     def resolve_who_can_edit(self, info, card_id, user_team_id):
-        '''user_team = models.UserTeam.objects.get(id=user_team_id)
+        user_team = models.UserTeam.objects.get(id=user_team_id)
         card = models.Card.objects.get(id=card_id)
 
-        if user_team.team.get() != card.project.get().team.get():'''
-        pass
+        if user_team.team.get() != card.project.get().team.get():
+            raise GraphQLError("Uporabnik ne more spreminjati kartice druge ekipe!")
+'''
 
 
 

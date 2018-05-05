@@ -171,12 +171,13 @@ class AddCard(graphene.Mutation):
     class Arguments:
         card_data = CardInput(required=True)
         board_id = graphene.Int(required=True)
+        user_id = graphene.Int(required=True)
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
 
     @staticmethod
-    def mutate(root, info, card=None, ok=False, card_data=None, board_id=None):
+    def mutate(root, info, card=None, ok=False, card_data=None, board_id=None, user_id=None):
         if card_data.owner_userteam_id is None:
             owner = None
         else:
@@ -199,14 +200,6 @@ class AddCard(graphene.Mutation):
         else:
             column_id = card_data.column_id
         # TODO: Loge je treba dodt če pride do kršitve wip
-        # TODO: samo po lahko doda navadne, samo KM lahko doda posebne
-        '''
-        if info.context.user.nekineki da ni PO and type_id == 0:
-            raise GraphQLError("Samo PO lahko dodaja navadne kartice")
-        
-        if info.context.user.nekineki da ni KM and type_id == 1:
-            raise GraphQLError("Samo KM lahko dodaja silver bullet kartice") 
-        '''
 
         cards = models.Card.objects.filter(project=models.Project.objects.get(id=card_data.project_id))
 
@@ -238,10 +231,19 @@ class AddCard(graphene.Mutation):
         log_action = None
         if (len(cards) > models.Column.objects.get(id=column_id).wip) and (
                 models.Column.objects.get(id=column_id).wip != 0):
-            log_action = "Presežena omejitev wip."
+            log_action = "Presežena omejitev wip ob kreaciji."
+
+        user_teams = models.UserTeam.objects.filter(
+            member=models.User.objects.get(id=user_id), team=card.project.team)
+
+        if len(user_teams) > 1:
+            for user_t in user_teams:
+                if user_t.role != models.TeamRole.objects.get(id=4):
+                    user_team = user_t
+                    break
 
         models.CardLog(card=card, from_column=None, to_column=models.Column.objects.get(id=column_id),
-                       action=log_action).save()
+                       action=log_action, user_team=user_team).save()
 
         return AddCard(ok=True, card=card)
 
@@ -298,29 +300,35 @@ class MoveCard(graphene.Mutation):
         card_id = graphene.Int(required=True)
         to_column_id = graphene.String(required=True)
         force = graphene.String(required=False, default_value="")
+        user_id = graphene.Int(required=True)
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
 
     @staticmethod
-    def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None, force=""):
+    def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None, force="", user_id=None):
         card = models.Card.objects.get(id=card_id)
         to_col = models.Column.objects.get(id=to_column_id)
         cards = models.Card.objects.filter(column=to_col)
+
+        # TODO: da izbere tapravga
+        user_team = models.UserTeam.objects.filter(member=models.User.objects.get(id=user_id), team=card.project.team)[
+            0]
 
         log_action = None
         if (len(cards) > to_col.wip - 1) and (to_col.wip != 0):
             log_action = force
 
         if force == "":
-            if log_action != "":
+            if log_action is not None:
                 raise GraphQLError("Presežena omejitev wip. Nadaljujem?")
 
         from_col = card.column
         card.column = to_col
         card.save()
 
-        models.CardLog(card=card, from_column=from_col, to_column=to_col, action=log_action).save()
+        models.CardLog(card=card, from_column=from_col, to_column=to_col, action=log_action,
+                       user_team=user_team)
 
         return MoveCard(ok=True, card=card)
 
@@ -329,7 +337,6 @@ class DeleteCard(graphene.Mutation):
     class Arguments:
         card_id = graphene.Int(required=True)
         cause_of_deletion = graphene.String(required=True)
-        user_team_id = graphene.Int(required=True)
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)

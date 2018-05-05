@@ -155,7 +155,6 @@ class CardInput(graphene.InputObjectType):
     tasks = graphene.List(TasksInput, default_value=[])
 
 
-
 class AddCard(graphene.Mutation):
     class Arguments:
         card_data = CardInput(required=True)
@@ -231,6 +230,9 @@ class AddCard(graphene.Mutation):
                     user_team = user_t
                     break
 
+        if user_team is None:
+            user_team = user_teams[0]
+
         models.CardLog(card=card, from_column=None, to_column=models.Column.objects.get(id=column_id),
                        action=log_action, user_team=user_team).save()
 
@@ -299,20 +301,36 @@ class MoveCard(graphene.Mutation):
         card = models.Card.objects.get(id=card_id)
         to_col = models.Column.objects.get(id=to_column_id)
         cards = models.Card.objects.filter(column=to_col)
+        from_col = card.column
+
+        user_teams = models.UserTeam.objects.filter(
+            member=models.User.objects.get(id=user_id), team=card.project.team)
+
+        if len(user_teams) > 1:
+            for user_t in user_teams:
+                if user_t.role == models.TeamRole.objects.get(id=2):
+                    user_team = user_t
+                    break
+
+        if user_team is None:
+            user_team = user_teams[0]
 
         col_list = get_columns_absolute(list(models.Column.objects.filter(board=card.project.board, parent=None)), [])
         to_col_inx = col_list.index(to_column_id)
         from_col_inx = col_list.index(card.column_id)
 
-        if abs(to_col_inx-from_col_inx) != 1:
-            raise GraphQLError("Ne moreš premikati za več kot ena v levo/desno.")
+        if abs(to_col_inx - from_col_inx) == 1:
+            pass
+        else:
+            if from_col.acceptance is True and user_team.role == models.TeamRole.objects.get(id=2):
+                priority_col = models.Column.objects.get(board=card.column.board, priority=True)
+                priority_col_inx = col_list.index(priority_col.id)
+                if to_col_inx > priority_col_inx:
+                    raise GraphQLError("Ne moreš premikati za več kot ena v levo/desno.")
+            else:
+                raise GraphQLError("Ne moreš premikati za več kot ena v levo/desno.")
 
-
-
-
-        # TODO: da izbere tapravga
-        user_team = models.UserTeam.objects.filter(member=models.User.objects.get(id=user_id), team=card.project.team)[
-            0]
+        # iz testiranja v levo ali priorty pa samo PO
 
         log_action = None
         if (len(cards) > to_col.wip - 1) and (to_col.wip != 0):
@@ -322,7 +340,6 @@ class MoveCard(graphene.Mutation):
             if log_action is not None:
                 raise GraphQLError("Presežena omejitev wip. Nadaljujem?")
 
-        from_col = card.column
         card.column = to_col
         card.save()
 

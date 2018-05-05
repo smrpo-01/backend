@@ -223,7 +223,7 @@ class AddCard(graphene.Mutation):
 
         user_teams = models.UserTeam.objects.filter(
             member=models.User.objects.get(id=user_id), team=card.project.team)
-
+        user_team = None
         if len(user_teams) > 1:
             for user_t in user_teams:
                 if user_t.role != models.TeamRole.objects.get(id=4):
@@ -305,7 +305,7 @@ class MoveCard(graphene.Mutation):
 
         user_teams = models.UserTeam.objects.filter(
             member=models.User.objects.get(id=user_id), team=card.project.team)
-
+        user_team = None
         if len(user_teams) > 1:
             for user_t in user_teams:
                 if user_t.role == models.TeamRole.objects.get(id=2):

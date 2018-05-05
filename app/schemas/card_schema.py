@@ -14,6 +14,7 @@ class WhoCanEditType(graphene.ObjectType):
     date = graphene.Boolean()
     estimate = graphene.Boolean()
     tasks = graphene.Boolean()
+    error = graphene.String()
 
 
 class TaskType(DjangoObjectType):
@@ -124,7 +125,7 @@ class CardQueries(graphene.ObjectType):
             user_team = user_teams[0]  # just for team and project and stuff
 
             if user_team.team.id != card.project.team.id:
-                raise GraphQLError("Uporabnik ne more spreminjati kartice druge ekipe!")
+                return WhoCanEditType(error="Uporabnik ne more spreminjati kartice druge ekipe!")
 
             card_pos = where_is_card(card)
 
@@ -136,7 +137,7 @@ class CardQueries(graphene.ObjectType):
                                                   owner=False,
                                                   date=False, estimate=False, tasks=True)
                         else:
-                            raise GraphQLError("Product Owner lahko posodablja le normalne kartice.")
+                            return WhoCanEditType(error="Product Owner lahko posodablja le normalne kartice.")
                     else:
                         return WhoCanEditType(card_name=True, card_description=True, project_name=True, owner=True,
                                               date=True, estimate=True, tasks=True)
@@ -147,7 +148,7 @@ class CardQueries(graphene.ObjectType):
                                                   owner=False,
                                                   date=False, estimate=False, tasks=True)
                         else:
-                            raise GraphQLError("Kanban master lahko posodablja le silver bullet kartice.")
+                            return WhoCanEditType(error="Kanban master lahko posodablja le silver bullet kartice.")
                     else:
                         return WhoCanEditType(card_name=True, card_description=True, project_name=True, owner=True,
                                               date=True, estimate=True, tasks=True)
@@ -160,7 +161,7 @@ class CardQueries(graphene.ObjectType):
                         return WhoCanEditType(card_name=False, card_description=False, project_name=False, owner=False,
                                               date=False, estimate=False, tasks=True)
                     else:
-                        raise GraphQLError("Product Owner ne more posodabljati kartice ko je že v razvoju.")
+                        return WhoCanEditType(error="Product Owner ne more posodabljati kartice ko je že v razvoju.")
 
                 elif 3 in user_team_roles:
                     if card.type_id == 0:
@@ -169,7 +170,7 @@ class CardQueries(graphene.ObjectType):
                                                   owner=False,
                                                   date=False, estimate=False, tasks=True)
                         else:
-                            raise GraphQLError("Kanban master lahko posodablja le silver bullet kartice.")
+                            return WhoCanEditType(error="Kanban master lahko posodablja le silver bullet kartice.")
                     else:
                         return WhoCanEditType(card_name=True, card_description=True, project_name=False, owner=False,
                                               date=False, estimate=False, tasks=True)
@@ -177,7 +178,7 @@ class CardQueries(graphene.ObjectType):
                     return WhoCanEditType(card_name=False, card_description=False, project_name=False, owner=False,
                                           date=False, estimate=False, tasks=True)
             else:
-                raise GraphQLError("Posodabljanje kartice ni dovoljeno.")
+                return WhoCanEditType(error="Posodabljanje kartice ni dovoljeno.")
 
 
 class TasksInput(graphene.InputObjectType):

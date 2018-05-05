@@ -11,10 +11,6 @@ from graphql import GraphQLError
 from app.schemas.card_schema import *
 
 
-def flatten(lst):
-    return sum(([x] if not isinstance(x, list) else flatten(x) for x in lst), [])
-
-
 def validate_columns(columns):
     for column in columns:
         if models.Column.objects.filter(pk=column['id']).exists():
@@ -34,9 +30,9 @@ def validate_structure(data, edit_board=True):
             return error
     b, p, a = 0, 0, 0
     for column in data['columns']:
-        b += flatten(count_critical(column, 'boundary')).count(True)
-        p += flatten(count_critical(column, 'priority')).count(True)
-        a += flatten(count_critical(column, 'acceptance')).count(True)
+        b += HelperClass.flatten(count_critical(column, 'boundary')).count(True)
+        p += HelperClass.flatten(count_critical(column, 'priority')).count(True)
+        a += HelperClass.flatten(count_critical(column, 'acceptance')).count(True)
 
     if b != 2: return "Tabla mora imeti dva mejna stolpca."
     if p != 1: return "Tabla mora imeti en prioritetni stolpec."
@@ -162,7 +158,7 @@ class BoardType(DjangoObjectType):
         return str(HelperClass.to_si_date(max([p.date_end for p in instance.projects.all()])))
 
     def resolve_card_types(instance, info):
-        return list(set(flatten([[c.type for c in p.card_set.all()] for p in instance.projects.all()])))
+        return list(set(HelperClass.flatten([[c.type for c in p.card_set.all()] for p in instance.projects.all()])))
 
     def resolve_columns(instance, info):
         return json.dumps(get_columns_json(instance.id))

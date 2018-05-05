@@ -154,6 +154,59 @@ def estimate_per_dev(cards):
     return result
 
 
+def column_order(board):
+    lst = HelperClass.flatten([c if not c.children.count() else list(c.children.all())
+                               for c in models.Column.objects.filter(board=board)])
+    return reduce(lambda l, x: l if x in l else l + [x], lst, [])
+
+
+def columns_between(col1, col2):
+    unique = column_order(col1.board)
+    return unique[unique.index(col1):(unique.index(col2) + 1)]
+
+
+def column_at_date(card, date):
+    logs = card.logs
+    column_set = set()
+
+    for a, b in logs.filter(timestamp__contains=date).values_list('from_column', 'to_column'):
+        column_set.update([a, b])
+
+    if not column_set:
+        log = logs.filter(timestamp__lte=date)
+        if log:
+            column_set.add(log.last().to_column.id)
+
+    return [models.Column.objects.get(id=id) for id in column_set]
+
+
+def cards_per_day(cards, date_from, date_to, column_from, column_to):
+    date_from = HelperClass.get_si_date(date_from)
+    date_to = HelperClass.get_si_date(date_to)
+    date = date_from
+
+    dates = {}
+    column_from = models.Column.objects.get(id=column_from)
+    column_to = models.Column.objects.get(id=column_to)
+    between = columns_between(column_from, column_to)
+
+    while date <= date_to:
+        tmp = {}
+        for col in between:
+           tmp[col.name] = 0
+
+        for card in cards:
+            columns = column_at_date(card, date.date())
+            for column in columns:
+                if column in between:
+                    tmp[column.name] += 1
+
+        dates[HelperClass.to_si_date(date)] = tmp
+        date += datetime.timedelta(days=1)
+
+    return dates
+
+
 class TaskType(DjangoObjectType):
     class Meta:
         model = models.Task
@@ -190,6 +243,7 @@ class CardType(DjangoObjectType):
         end = instance.logs.filter(to_column=col_end).last()
         if not (start and end):
             raise GraphQLError("Kartica ni bila v željenih stolpcih.")
+
         return (end.timestamp - start.timestamp).total_seconds() / 3600
 
 
@@ -268,6 +322,22 @@ class CardQueries(graphene.ObjectType):
         estimate_to=graphene.Float(default_value=0),
         card_type=graphene.List(graphene.String, default_value=0)
     )
+    cards_per_day = GenericScalar(
+        project_id=graphene.Int(default_value=0),
+        creation_start=graphene.String(default_value=0),
+        creation_end=graphene.String(default_value=0),
+        done_start=graphene.String(default_value=0),
+        done_end=graphene.String(default_value=0),
+        dev_start=graphene.String(default_value=0),
+        dev_end=graphene.String(default_value=0),
+        estimate_from=graphene.Float(default_value=0),
+        estimate_to=graphene.Float(default_value=0),
+        card_type=graphene.List(graphene.String, default_value=0),
+        date_from=graphene.String(default_value=0),
+        date_to=graphene.String(default_value=0),
+        column_from=graphene.String(default_value=0),
+        column_to=graphene.String(default_value=0)
+    )
 
     def resolve_all_cards(self, info, card_id, board_id):
         if board_id == -1:
@@ -313,6 +383,18 @@ class CardQueries(graphene.ObjectType):
         cards = filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
                              dev_end, estimate_from, estimate_to, card_type)
         return estimate_per_dev(cards)
+
+    def resolve_cards_per_day(self, info, project_id, creation_start, creation_end, done_start, done_end, dev_start, \
+                              dev_end, estimate_from, estimate_to, card_type, date_from, date_to, column_to, column_from):
+        col1 = models.Column.objects.get(id=column_from)
+        col2 = models.Column.objects.get(id=column_to)
+        columns = column_order(col1.board)
+        if columns.index(col1) > columns.index(col2):
+            raise GraphQLError("Drugi stolpec je levo od prvega.")
+
+        cards = filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
+                             dev_end, estimate_from, estimate_to, card_type)
+        return cards_per_day(cards, date_from, date_to, column_from, column_to)
 
 
 class TasksInput(graphene.InputObjectType):

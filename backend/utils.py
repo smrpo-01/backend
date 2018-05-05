@@ -45,4 +45,8 @@ class HelperClass:
         :param date: datetime object
         :return:
         """
-        return datetime.datetime.strftime(date, '%d.%m.%Y')
+        return datetime.datetime.strftime(date, '%-d.%-m.%Y')
+
+    @staticmethod
+    def flatten(lst):
+        return sum(([x] if not isinstance(x, list) else HelperClass.flatten(x) for x in lst), [])

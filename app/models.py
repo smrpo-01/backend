@@ -241,14 +241,16 @@ class CardLog(models.Model):
         ordering = ['timestamp', 'card']
 
     card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='logs')
-    from_column = models.ForeignKey(Column, default=None, on_delete=models.CASCADE, related_name='from_column_log')
-    to_column = models.ForeignKey(Column, default=None, on_delete=models.CASCADE, related_name='to_column_log')
+    from_column = models.ForeignKey(Column, default=None, null=True, on_delete=models.CASCADE, related_name='from_column_log')
+    to_column = models.ForeignKey(Column, default=None, null=True, on_delete=models.CASCADE, related_name='to_column_log')
     action = models.CharField(max_length=255, null=True)
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return "(Čas: %s, Tip akcije: %s, Kartica: %s, Iz stolpca: %s, V stolpec: %s)\n" % \
-                (self.timestamp, str(self.action), self.card.id, self.from_column.id, self.to_column.id)
+                (self.timestamp, str(self.action), self.card.id,
+                 self.from_column.id if self.from_column else "None",
+                 self.to_column.id if self.to_column else "None")
 
 
 class CardLogCreateDelete(models.Model):

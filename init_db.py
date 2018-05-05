@@ -579,3 +579,6 @@ CardLog(card=c22, from_column=col6, to_column=col7, action=None, timestamp=datet
 CardLog(card=c22, from_column=col7, to_column=col8, action=None, timestamp=datetime.datetime(2018, 4, 14, 14, 0)).save()
 CardLog(card=c22, from_column=col8, to_column=col9, action=None, timestamp=datetime.datetime(2018, 4, 15, 8, 0)).save()
 CardLog(card=c22, from_column=col9, to_column=col10, action=None, timestamp=datetime.datetime(2018, 4, 16, 14, 0)).save()
+
+
+# WIP warning

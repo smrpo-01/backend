@@ -375,6 +375,19 @@ class CardQueries(graphene.ObjectType):
         column_from=graphene.String(default_value=0),
         column_to=graphene.String(default_value=0)
     )
+    wip_logs = graphene.List(
+        CardLogType,
+        project_id=graphene.Int(default_value=0),
+        creation_start=graphene.String(default_value=0),
+        creation_end=graphene.String(default_value=0),
+        done_start=graphene.String(default_value=0),
+        done_end=graphene.String(default_value=0),
+        dev_start=graphene.String(default_value=0),
+        dev_end=graphene.String(default_value=0),
+        estimate_from=graphene.Float(default_value=0),
+        estimate_to=graphene.Float(default_value=0),
+        card_type=graphene.List(graphene.String, default_value=0)
+    )
     all_card_logs = graphene.Field(graphene.List(CardLogType), card_id=graphene.Int(default_value=-1))
     who_can_edit = graphene.Field(WhoCanEditType,
                                   card_id=graphene.Int(required=True),
@@ -467,6 +480,12 @@ class CardQueries(graphene.ObjectType):
         cards = filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
                              dev_end, estimate_from, estimate_to, card_type)
         return cards_per_day(cards, date_from, date_to, column_from, column_to)
+
+    def resolve_wip_logs(self, info, project_id, creation_start, creation_end, done_start, done_end, dev_start, \
+                              dev_end, estimate_from, estimate_to, card_type):
+        cards = filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
+                             dev_end, estimate_from, estimate_to, card_type)
+        return models.CardLog.objects.filter(action__isnull=False, card__in=cards)
 
 
 class TasksInput(graphene.InputObjectType):

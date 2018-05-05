@@ -52,7 +52,7 @@
     "model": "app.user",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$100000$QmLylk2DsiBI$kYJ+3UlnqgASZYmn8X1Wvjd20alADc4K6yiMyogSAg4=",
+        "password": "pbkdf2_sha256$100000$FyNPdzDEx6QP$0LQGdy+dXtBLVQPsUNSn0mb6R0pCgz1kpj9w/6qJOcA=",
         "last_login": null,
         "email": "admin@demo.com",
         "first_name": "Ad",
@@ -71,7 +71,7 @@
     "model": "app.user",
     "pk": 2,
     "fields": {
-        "password": "pbkdf2_sha256$100000$Mv0KR9xgFXiN$05gm0Hmc9R4NHw000fityzlphzFgFqWFzM4QM1oy6ow=",
+        "password": "pbkdf2_sha256$100000$vPkORbEDRccB$Y343iBkjo/ytBa7qcy2OKWiKtVyLtVA4UmWLd5rGEzk=",
         "last_login": null,
         "email": "dev1@demo.com",
         "first_name": "Dev",
@@ -91,7 +91,7 @@
     "model": "app.user",
     "pk": 3,
     "fields": {
-        "password": "pbkdf2_sha256$100000$u9hOhqnOj4FG$0UQDUCk+yI1ndeHXhr+Q5lSgAjersUD80GaPQNrTXHk=",
+        "password": "pbkdf2_sha256$100000$n3J8GL1KR0Jn$PAI3n0Qmsz8/4/gl85wyQsWduBRSV1UaZppkgFWoFmw=",
         "last_login": null,
         "email": "dev2@demo.com",
         "first_name": "Dev",
@@ -110,7 +110,7 @@
     "model": "app.user",
     "pk": 4,
     "fields": {
-        "password": "pbkdf2_sha256$100000$7OngEvU7qeV4$ABv9S6R/hIvemJKm+HUOI4R8V+j/1CIOiZvoMUz2mbU=",
+        "password": "pbkdf2_sha256$100000$zS0uN6qUylkk$NpzSZMV+aZ+3qfYx6/o6JfeAjBVbvaPpZ+E7hv8Ro04=",
         "last_login": null,
         "email": "dev3@demo.com",
         "first_name": "Dev",
@@ -129,7 +129,7 @@
     "model": "app.user",
     "pk": 5,
     "fields": {
-        "password": "pbkdf2_sha256$100000$xXwQG4ayBUw9$hV8Ywo8w19kOZ0VjGGlVlKQFo746u4PDLUwLfEIFWmA=",
+        "password": "pbkdf2_sha256$100000$fU5EBzgrkpXC$h6pgHFQjOfDGG/k5oeV530JmG3HD5LB0t4r0i9CiQCQ=",
         "last_login": null,
         "email": "dev4@demo.com",
         "first_name": "Dev",
@@ -148,7 +148,7 @@
     "model": "app.user",
     "pk": 6,
     "fields": {
-        "password": "pbkdf2_sha256$100000$mLSRjeCW0scp$eWGMZLu8Raejq1VzcfkKLoJjgBxtGJ9zp0yuKDfLfpU=",
+        "password": "pbkdf2_sha256$100000$8qLebXRfvgj6$uiLjsGLgEc4PG8ibJmkcRtlK09gsJzXwWX3DrLLz/78=",
         "last_login": null,
         "email": "dev5@demo.com",
         "first_name": "Dev",
@@ -167,7 +167,7 @@
     "model": "app.user",
     "pk": 7,
     "fields": {
-        "password": "pbkdf2_sha256$100000$MkTtHe6bADwI$BxkzBwX+gcCgnOedQQ1viAiLPo0CkeqEhZQ17xjK/r4=",
+        "password": "pbkdf2_sha256$100000$qGzk147jyRZn$+AHtEOSMjmfuaFzXlpmBFC0HLro4iexzSRVmxENgyZk=",
         "last_login": null,
         "email": "km@demo.com",
         "first_name": "K",
@@ -186,7 +186,7 @@
     "model": "app.user",
     "pk": 8,
     "fields": {
-        "password": "pbkdf2_sha256$100000$PkfrT6hHyUt8$RhPT61UcLbsPmAYIe5rnnVZPO6zQ0hBXK8cmyeeI9ow=",
+        "password": "pbkdf2_sha256$100000$WIwSqgOvgFgE$nh20vXVJfDoaSRRqrePwYFAMb9LuAzuqcP8rvAKVUAw=",
         "last_login": null,
         "email": "po@demo.com",
         "first_name": "P",
@@ -206,7 +206,7 @@
     "model": "app.user",
     "pk": 9,
     "fields": {
-        "password": "pbkdf2_sha256$100000$3Ptl7INydgt0$oSxOYWqcAs9ojkBIT9jXvXxQI9rPQNkMQo4iozyrJo4=",
+        "password": "pbkdf2_sha256$100000$SGEP5QEfgere$1S8dWcgvxUXMr7+62dpq6J/OPnjRtAQgeGx+6KrLsIo=",
         "last_login": null,
         "email": "wildcard@demo.com",
         "first_name": "Wild",
@@ -228,7 +228,7 @@
     "model": "app.user",
     "pk": 10,
     "fields": {
-        "password": "pbkdf2_sha256$100000$1gN4JgrKGGXk$En22K1++HdJoMFtUYPclIas/ORcH+fffB95ahXzT4K4=",
+        "password": "pbkdf2_sha256$100000$LLvnC4ayrcOn$wYpokuqo3Pepm1r22pBwFA9cskT7Lz0iepZu6wrZU4U=",
         "last_login": null,
         "email": "po2@demo.com",
         "first_name": "Prod",
@@ -505,7 +505,7 @@
     "fields": {
         "userteam": 1,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:49.867Z"
+        "timestamp": "2018-05-05T09:57:25.709Z"
     }
 },
 {
@@ -514,7 +514,7 @@
     "fields": {
         "userteam": 2,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:49.897Z"
+        "timestamp": "2018-05-05T09:57:25.741Z"
     }
 },
 {
@@ -523,7 +523,7 @@
     "fields": {
         "userteam": 3,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:49.926Z"
+        "timestamp": "2018-05-05T09:57:25.775Z"
     }
 },
 {
@@ -532,7 +532,7 @@
     "fields": {
         "userteam": 4,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:49.956Z"
+        "timestamp": "2018-05-05T09:57:25.808Z"
     }
 },
 {
@@ -541,7 +541,7 @@
     "fields": {
         "userteam": 5,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:49.986Z"
+        "timestamp": "2018-05-05T09:57:25.840Z"
     }
 },
 {
@@ -550,7 +550,7 @@
     "fields": {
         "userteam": 6,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:50.017Z"
+        "timestamp": "2018-05-05T09:57:25.874Z"
     }
 },
 {
@@ -559,7 +559,7 @@
     "fields": {
         "userteam": 7,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:50.046Z"
+        "timestamp": "2018-05-05T09:57:25.905Z"
     }
 },
 {
@@ -568,7 +568,7 @@
     "fields": {
         "userteam": 8,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:50.076Z"
+        "timestamp": "2018-05-05T09:57:25.937Z"
     }
 },
 {
@@ -577,7 +577,7 @@
     "fields": {
         "userteam": 9,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:50.106Z"
+        "timestamp": "2018-05-05T09:57:25.967Z"
     }
 },
 {
@@ -586,7 +586,7 @@
     "fields": {
         "userteam": 10,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:50.139Z"
+        "timestamp": "2018-05-05T09:57:26.000Z"
     }
 },
 {
@@ -595,7 +595,7 @@
     "fields": {
         "userteam": 11,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:50.171Z"
+        "timestamp": "2018-05-05T09:57:26.039Z"
     }
 },
 {
@@ -604,7 +604,7 @@
     "fields": {
         "userteam": 12,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:50.201Z"
+        "timestamp": "2018-05-05T09:57:26.076Z"
     }
 },
 {
@@ -613,7 +613,7 @@
     "fields": {
         "userteam": 13,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:50.232Z"
+        "timestamp": "2018-05-05T09:57:26.105Z"
     }
 },
 {
@@ -622,7 +622,7 @@
     "fields": {
         "userteam": 14,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:50.263Z"
+        "timestamp": "2018-05-05T09:57:26.134Z"
     }
 },
 {
@@ -631,7 +631,7 @@
     "fields": {
         "userteam": 15,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:50.293Z"
+        "timestamp": "2018-05-05T09:57:26.165Z"
     }
 },
 {
@@ -640,7 +640,7 @@
     "fields": {
         "userteam": 16,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:50.323Z"
+        "timestamp": "2018-05-05T09:57:26.196Z"
     }
 },
 {
@@ -649,7 +649,7 @@
     "fields": {
         "userteam": 17,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:09:50.357Z"
+        "timestamp": "2018-05-05T09:57:26.226Z"
     }
 },
 {
@@ -1307,28 +1307,13 @@
     }
 },
 {
-    "model": "app.cardaction",
-    "pk": 0,
-    "fields": {}
-},
-{
-    "model": "app.cardaction",
-    "pk": 1,
-    "fields": {}
-},
-{
-    "model": "app.cardaction",
-    "pk": 2,
-    "fields": {}
-},
-{
     "model": "app.cardlog",
     "pk": 1,
     "fields": {
         "card": 1,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-14T06:00:00Z"
     }
 },
@@ -1339,7 +1324,7 @@
         "card": 1,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-14T08:00:00Z"
     }
 },
@@ -1350,7 +1335,7 @@
         "card": 1,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T14:30:00Z"
     }
 },
@@ -1361,7 +1346,7 @@
         "card": 1,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-18T08:00:00Z"
     }
 },
@@ -1372,7 +1357,7 @@
         "card": 1,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-18T09:30:00Z"
     }
 },
@@ -1383,7 +1368,7 @@
         "card": 1,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-18T10:00:00Z"
     }
 },
@@ -1394,7 +1379,7 @@
         "card": 1,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-19T06:00:00Z"
     }
 },
@@ -1405,7 +1390,7 @@
         "card": 1,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-19T14:00:00Z"
     }
 },
@@ -1416,7 +1401,7 @@
         "card": 2,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-14T16:00:00Z"
     }
 },
@@ -1427,7 +1412,7 @@
         "card": 2,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-15T16:00:00Z"
     }
 },
@@ -1438,7 +1423,7 @@
         "card": 2,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-22T12:00:00Z"
     }
 },
@@ -1449,7 +1434,7 @@
         "card": 2,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T08:00:00Z"
     }
 },
@@ -1460,7 +1445,7 @@
         "card": 2,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-26T09:30:00Z"
     }
 },
@@ -1471,7 +1456,7 @@
         "card": 2,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-27T12:00:00Z"
     }
 },
@@ -1482,7 +1467,7 @@
         "card": 2,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T06:00:00Z"
     }
 },
@@ -1493,7 +1478,7 @@
         "card": 2,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-05-02T12:00:00Z"
     }
 },
@@ -1504,7 +1489,7 @@
         "card": 3,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-21T16:00:00Z"
     }
 },
@@ -1515,7 +1500,7 @@
         "card": 3,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-22T16:00:00Z"
     }
 },
@@ -1526,7 +1511,7 @@
         "card": 3,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T12:00:00Z"
     }
 },
@@ -1537,7 +1522,7 @@
         "card": 3,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -1548,7 +1533,7 @@
         "card": 3,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T09:30:00Z"
     }
 },
@@ -1559,7 +1544,7 @@
         "card": 3,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T12:00:00Z"
     }
 },
@@ -1570,7 +1555,7 @@
         "card": 3,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-05-01T06:00:00Z"
     }
 },
@@ -1581,7 +1566,7 @@
         "card": 3,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-05-01T12:00:00Z"
     }
 },
@@ -1592,7 +1577,7 @@
         "card": 4,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T16:00:00Z"
     }
 },
@@ -1603,7 +1588,7 @@
         "card": 4,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T17:00:00Z"
     }
 },
@@ -1614,7 +1599,7 @@
         "card": 4,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T12:00:00Z"
     }
 },
@@ -1625,7 +1610,7 @@
         "card": 4,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -1636,7 +1621,7 @@
         "card": 4,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T09:30:00Z"
     }
 },
@@ -1647,7 +1632,7 @@
         "card": 4,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T12:00:00Z"
     }
 },
@@ -1658,7 +1643,7 @@
         "card": 4,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T06:00:00Z"
     }
 },
@@ -1669,7 +1654,7 @@
         "card": 4,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-29T12:00:00Z"
     }
 },
@@ -1680,7 +1665,7 @@
         "card": 5,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T16:00:00Z"
     }
 },
@@ -1691,7 +1676,7 @@
         "card": 5,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T17:00:00Z"
     }
 },
@@ -1702,7 +1687,7 @@
         "card": 5,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T12:00:00Z"
     }
 },
@@ -1713,7 +1698,7 @@
         "card": 5,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -1724,7 +1709,7 @@
         "card": 5,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T09:30:00Z"
     }
 },
@@ -1735,7 +1720,7 @@
         "card": 5,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T12:00:00Z"
     }
 },
@@ -1746,7 +1731,7 @@
         "card": 5,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T06:00:00Z"
     }
 },
@@ -1757,7 +1742,7 @@
         "card": 5,
         "from_column": "9",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T10:00:00Z"
     }
 },
@@ -1768,7 +1753,7 @@
         "card": 5,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-29T12:00:00Z"
     }
 },
@@ -1779,7 +1764,7 @@
         "card": 5,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-30T08:00:00Z"
     }
 },
@@ -1790,7 +1775,7 @@
         "card": 5,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-30T09:30:00Z"
     }
 },
@@ -1801,7 +1786,7 @@
         "card": 5,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-30T12:00:00Z"
     }
 },
@@ -1812,7 +1797,7 @@
         "card": 5,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-05-01T06:00:00Z"
     }
 },
@@ -1823,7 +1808,7 @@
         "card": 5,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-05-01T12:00:00Z"
     }
 },
@@ -1834,7 +1819,7 @@
         "card": 6,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T16:00:00Z"
     }
 },
@@ -1845,7 +1830,7 @@
         "card": 6,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T17:00:00Z"
     }
 },
@@ -1856,7 +1841,7 @@
         "card": 6,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T06:00:00Z"
     }
 },
@@ -1867,7 +1852,7 @@
         "card": 6,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -1878,7 +1863,7 @@
         "card": 6,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T09:30:00Z"
     }
 },
@@ -1889,7 +1874,7 @@
         "card": 6,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T12:00:00Z"
     }
 },
@@ -1900,7 +1885,7 @@
         "card": 6,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T06:00:00Z"
     }
 },
@@ -1911,7 +1896,7 @@
         "card": 6,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-29T12:00:00Z"
     }
 },
@@ -1922,7 +1907,7 @@
         "card": 7,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-15T16:00:00Z"
     }
 },
@@ -1933,7 +1918,7 @@
         "card": 7,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-15T17:00:00Z"
     }
 },
@@ -1944,7 +1929,7 @@
         "card": 7,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-16T12:00:00Z"
     }
 },
@@ -1955,7 +1940,7 @@
         "card": 7,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T08:00:00Z"
     }
 },
@@ -1966,7 +1951,7 @@
         "card": 7,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T09:30:00Z"
     }
 },
@@ -1977,7 +1962,7 @@
         "card": 7,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-18T12:00:00Z"
     }
 },
@@ -1988,7 +1973,7 @@
         "card": 7,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-21T06:00:00Z"
     }
 },
@@ -1999,7 +1984,7 @@
         "card": 7,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-22T12:00:00Z"
     }
 },
@@ -2010,7 +1995,7 @@
         "card": 8,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T16:00:00Z"
     }
 },
@@ -2021,7 +2006,7 @@
         "card": 8,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T17:00:00Z"
     }
 },
@@ -2032,7 +2017,7 @@
         "card": 8,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T12:00:00Z"
     }
 },
@@ -2043,7 +2028,7 @@
         "card": 8,
         "from_column": "5",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T16:00:00Z"
     }
 },
@@ -2054,7 +2039,7 @@
         "card": 8,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T07:00:00Z"
     }
 },
@@ -2065,7 +2050,7 @@
         "card": 8,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -2076,7 +2061,7 @@
         "card": 8,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T09:30:00Z"
     }
 },
@@ -2087,7 +2072,7 @@
         "card": 8,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T12:00:00Z"
     }
 },
@@ -2098,7 +2083,7 @@
         "card": 8,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T06:00:00Z"
     }
 },
@@ -2109,7 +2094,7 @@
         "card": 8,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-29T12:00:00Z"
     }
 },
@@ -2120,7 +2105,7 @@
         "card": 9,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T16:00:00Z"
     }
 },
@@ -2131,7 +2116,7 @@
         "card": 9,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T17:00:00Z"
     }
 },
@@ -2142,7 +2127,7 @@
         "card": 9,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T12:00:00Z"
     }
 },
@@ -2153,7 +2138,7 @@
         "card": 9,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -2164,7 +2149,7 @@
         "card": 9,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-26T09:30:00Z"
     }
 },
@@ -2175,7 +2160,7 @@
         "card": 9,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-26T12:00:00Z"
     }
 },
@@ -2186,7 +2171,7 @@
         "card": 9,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-27T06:00:00Z"
     }
 },
@@ -2197,7 +2182,7 @@
         "card": 9,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-29T12:00:00Z"
     }
 },
@@ -2208,7 +2193,7 @@
         "card": 10,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-19T16:00:00Z"
     }
 },
@@ -2219,7 +2204,7 @@
         "card": 10,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-19T17:00:00Z"
     }
 },
@@ -2230,7 +2215,7 @@
         "card": 10,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-21T12:00:00Z"
     }
 },
@@ -2241,7 +2226,7 @@
         "card": 10,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -2252,7 +2237,7 @@
         "card": 10,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T13:30:00Z"
     }
 },
@@ -2263,7 +2248,7 @@
         "card": 10,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T14:00:00Z"
     }
 },
@@ -2274,7 +2259,7 @@
         "card": 10,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T06:00:00Z"
     }
 },
@@ -2285,7 +2270,7 @@
         "card": 10,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T12:00:00Z"
     }
 },
@@ -2296,7 +2281,7 @@
         "card": 11,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-11T16:00:00Z"
     }
 },
@@ -2307,7 +2292,7 @@
         "card": 11,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-11T17:00:00Z"
     }
 },
@@ -2318,7 +2303,7 @@
         "card": 11,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-12T12:00:00Z"
     }
 },
@@ -2329,7 +2314,7 @@
         "card": 11,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-12T17:00:00Z"
     }
 },
@@ -2340,7 +2325,7 @@
         "card": 11,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-13T09:30:00Z"
     }
 },
@@ -2351,7 +2336,7 @@
         "card": 11,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-14T12:00:00Z"
     }
 },
@@ -2362,7 +2347,7 @@
         "card": 11,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-15T06:00:00Z"
     }
 },
@@ -2373,7 +2358,7 @@
         "card": 11,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-16T12:00:00Z"
     }
 },
@@ -2384,7 +2369,7 @@
         "card": 12,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-14T06:00:00Z"
     }
 },
@@ -2395,7 +2380,7 @@
         "card": 12,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-14T08:00:00Z"
     }
 },
@@ -2406,7 +2391,7 @@
         "card": 12,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T14:30:00Z"
     }
 },
@@ -2417,7 +2402,7 @@
         "card": 12,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-18T08:00:00Z"
     }
 },
@@ -2428,7 +2413,7 @@
         "card": 12,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-18T09:30:00Z"
     }
 },
@@ -2439,7 +2424,7 @@
         "card": 12,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-18T10:00:00Z"
     }
 },
@@ -2450,7 +2435,7 @@
         "card": 12,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-19T06:00:00Z"
     }
 },
@@ -2461,7 +2446,7 @@
         "card": 12,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-19T14:00:00Z"
     }
 },
@@ -2472,7 +2457,7 @@
         "card": 13,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-14T16:00:00Z"
     }
 },
@@ -2483,7 +2468,7 @@
         "card": 13,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-15T16:00:00Z"
     }
 },
@@ -2494,7 +2479,7 @@
         "card": 13,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-22T12:00:00Z"
     }
 },
@@ -2505,7 +2490,7 @@
         "card": 13,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T08:00:00Z"
     }
 },
@@ -2516,7 +2501,7 @@
         "card": 13,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-26T09:30:00Z"
     }
 },
@@ -2527,7 +2512,7 @@
         "card": 13,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-27T12:00:00Z"
     }
 },
@@ -2538,7 +2523,7 @@
         "card": 13,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T06:00:00Z"
     }
 },
@@ -2549,7 +2534,7 @@
         "card": 13,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-05-02T12:00:00Z"
     }
 },
@@ -2560,7 +2545,7 @@
         "card": 14,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-21T16:00:00Z"
     }
 },
@@ -2571,7 +2556,7 @@
         "card": 14,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-22T16:00:00Z"
     }
 },
@@ -2582,7 +2567,7 @@
         "card": 14,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T12:00:00Z"
     }
 },
@@ -2593,7 +2578,7 @@
         "card": 14,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -2604,7 +2589,7 @@
         "card": 14,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T09:30:00Z"
     }
 },
@@ -2615,7 +2600,7 @@
         "card": 14,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T12:00:00Z"
     }
 },
@@ -2626,7 +2611,7 @@
         "card": 14,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-05-01T06:00:00Z"
     }
 },
@@ -2637,7 +2622,7 @@
         "card": 14,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-05-01T12:00:00Z"
     }
 },
@@ -2648,7 +2633,7 @@
         "card": 15,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T16:00:00Z"
     }
 },
@@ -2659,7 +2644,7 @@
         "card": 15,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T17:00:00Z"
     }
 },
@@ -2670,7 +2655,7 @@
         "card": 15,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-18T12:00:00Z"
     }
 },
@@ -2681,7 +2666,7 @@
         "card": 15,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-19T08:00:00Z"
     }
 },
@@ -2692,7 +2677,7 @@
         "card": 15,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-19T09:30:00Z"
     }
 },
@@ -2703,7 +2688,7 @@
         "card": 15,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-20T12:00:00Z"
     }
 },
@@ -2714,7 +2699,7 @@
         "card": 15,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-21T06:00:00Z"
     }
 },
@@ -2725,7 +2710,7 @@
         "card": 15,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-21T12:00:00Z"
     }
 },
@@ -2736,7 +2721,7 @@
         "card": 16,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T16:00:00Z"
     }
 },
@@ -2747,7 +2732,7 @@
         "card": 16,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T17:00:00Z"
     }
 },
@@ -2758,7 +2743,7 @@
         "card": 16,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T12:00:00Z"
     }
 },
@@ -2769,7 +2754,7 @@
         "card": 16,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -2780,7 +2765,7 @@
         "card": 16,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T09:30:00Z"
     }
 },
@@ -2791,7 +2776,7 @@
         "card": 16,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T12:00:00Z"
     }
 },
@@ -2802,7 +2787,7 @@
         "card": 16,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-26T06:00:00Z"
     }
 },
@@ -2813,7 +2798,7 @@
         "card": 16,
         "from_column": "9",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T10:00:00Z"
     }
 },
@@ -2824,7 +2809,7 @@
         "card": 16,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-29T12:00:00Z"
     }
 },
@@ -2835,7 +2820,7 @@
         "card": 16,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-30T08:00:00Z"
     }
 },
@@ -2846,7 +2831,7 @@
         "card": 16,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-30T09:30:00Z"
     }
 },
@@ -2857,7 +2842,7 @@
         "card": 16,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-30T12:00:00Z"
     }
 },
@@ -2868,7 +2853,7 @@
         "card": 16,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-05-01T06:00:00Z"
     }
 },
@@ -2879,7 +2864,7 @@
         "card": 16,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-05-01T12:00:00Z"
     }
 },
@@ -2890,7 +2875,7 @@
         "card": 17,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T16:00:00Z"
     }
 },
@@ -2901,7 +2886,7 @@
         "card": 17,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T17:00:00Z"
     }
 },
@@ -2912,7 +2897,7 @@
         "card": 17,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T06:00:00Z"
     }
 },
@@ -2923,7 +2908,7 @@
         "card": 17,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -2934,7 +2919,7 @@
         "card": 17,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T09:30:00Z"
     }
 },
@@ -2945,7 +2930,7 @@
         "card": 17,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T12:00:00Z"
     }
 },
@@ -2956,7 +2941,7 @@
         "card": 17,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T06:00:00Z"
     }
 },
@@ -2967,7 +2952,7 @@
         "card": 17,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-29T12:00:00Z"
     }
 },
@@ -2978,7 +2963,7 @@
         "card": 18,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-15T16:00:00Z"
     }
 },
@@ -2989,7 +2974,7 @@
         "card": 18,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-15T17:00:00Z"
     }
 },
@@ -3000,7 +2985,7 @@
         "card": 18,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-16T12:00:00Z"
     }
 },
@@ -3011,7 +2996,7 @@
         "card": 18,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T08:00:00Z"
     }
 },
@@ -3022,7 +3007,7 @@
         "card": 18,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T09:30:00Z"
     }
 },
@@ -3033,7 +3018,7 @@
         "card": 18,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-18T12:00:00Z"
     }
 },
@@ -3044,7 +3029,7 @@
         "card": 18,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-21T06:00:00Z"
     }
 },
@@ -3055,7 +3040,7 @@
         "card": 18,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-22T12:00:00Z"
     }
 },
@@ -3066,7 +3051,7 @@
         "card": 19,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T16:00:00Z"
     }
 },
@@ -3077,7 +3062,7 @@
         "card": 19,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T17:00:00Z"
     }
 },
@@ -3088,7 +3073,7 @@
         "card": 19,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T12:00:00Z"
     }
 },
@@ -3099,7 +3084,7 @@
         "card": 19,
         "from_column": "5",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T16:00:00Z"
     }
 },
@@ -3110,7 +3095,7 @@
         "card": 19,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T07:00:00Z"
     }
 },
@@ -3121,7 +3106,7 @@
         "card": 19,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -3132,7 +3117,7 @@
         "card": 19,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T09:30:00Z"
     }
 },
@@ -3143,7 +3128,7 @@
         "card": 19,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T12:00:00Z"
     }
 },
@@ -3154,7 +3139,7 @@
         "card": 19,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T06:00:00Z"
     }
 },
@@ -3165,7 +3150,7 @@
         "card": 19,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-29T12:00:00Z"
     }
 },
@@ -3176,7 +3161,7 @@
         "card": 20,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T16:00:00Z"
     }
 },
@@ -3187,7 +3172,7 @@
         "card": 20,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-17T17:00:00Z"
     }
 },
@@ -3198,7 +3183,7 @@
         "card": 20,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-23T12:00:00Z"
     }
 },
@@ -3209,7 +3194,7 @@
         "card": 20,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -3220,7 +3205,7 @@
         "card": 20,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-26T09:30:00Z"
     }
 },
@@ -3231,7 +3216,7 @@
         "card": 20,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-26T12:00:00Z"
     }
 },
@@ -3242,7 +3227,7 @@
         "card": 20,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-27T06:00:00Z"
     }
 },
@@ -3253,7 +3238,7 @@
         "card": 20,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-29T12:00:00Z"
     }
 },
@@ -3264,7 +3249,7 @@
         "card": 21,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-19T16:00:00Z"
     }
 },
@@ -3275,7 +3260,7 @@
         "card": 21,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-19T17:00:00Z"
     }
 },
@@ -3286,7 +3271,7 @@
         "card": 21,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-21T12:00:00Z"
     }
 },
@@ -3297,7 +3282,7 @@
         "card": 21,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-24T08:00:00Z"
     }
 },
@@ -3308,7 +3293,7 @@
         "card": 21,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T13:30:00Z"
     }
 },
@@ -3319,7 +3304,7 @@
         "card": 21,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-25T14:00:00Z"
     }
 },
@@ -3330,7 +3315,7 @@
         "card": 21,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T06:00:00Z"
     }
 },
@@ -3341,7 +3326,7 @@
         "card": 21,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-28T12:00:00Z"
     }
 },
@@ -3352,7 +3337,7 @@
         "card": 22,
         "from_column": "1",
         "to_column": "2",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-11T16:00:00Z"
     }
 },
@@ -3363,7 +3348,7 @@
         "card": 22,
         "from_column": "2",
         "to_column": "4",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-11T17:00:00Z"
     }
 },
@@ -3374,7 +3359,7 @@
         "card": 22,
         "from_column": "4",
         "to_column": "5",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-12T12:00:00Z"
     }
 },
@@ -3385,7 +3370,7 @@
         "card": 22,
         "from_column": "5",
         "to_column": "6",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-12T17:00:00Z"
     }
 },
@@ -3396,7 +3381,7 @@
         "card": 22,
         "from_column": "6",
         "to_column": "7",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-13T09:30:00Z"
     }
 },
@@ -3407,7 +3392,7 @@
         "card": 22,
         "from_column": "7",
         "to_column": "8",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-14T12:00:00Z"
     }
 },
@@ -3418,7 +3403,7 @@
         "card": 22,
         "from_column": "8",
         "to_column": "9",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-15T06:00:00Z"
     }
 },
@@ -3429,7 +3414,7 @@
         "card": 22,
         "from_column": "9",
         "to_column": "10",
-        "action": 0,
+        "action": null,
         "timestamp": "2018-04-16T12:00:00Z"
     }
 }

@@ -45,7 +45,7 @@ class HelperClass:
         :param date: datetime object
         :return:
         """
-        return datetime.datetime.strftime(date, '%-d.%-m.%Y')
+        return datetime.datetime.strftime(date, '%d.%m.%Y').replace('.0', '.')
 
     @staticmethod
     def flatten(lst):

@@ -236,23 +236,6 @@ class Task(models.Model):
     assignee = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
 
 
-class CardAction(models.Model):
-    MOVE = 0
-    WIP_WARNING = 1
-    DELETE = 2
-
-    CARD_ACTION_TYPES = (
-        (MOVE, 'Premik'),
-        (WIP_WARNING, 'WIP omejitev je bila presežena.'),
-        (DELETE, 'Brisanje kartice')
-    )
-
-    id = models.PositiveIntegerField(choices=CARD_ACTION_TYPES, default=MOVE, primary_key=True)
-
-    def __str__(self):
-        return self.get_id_display()
-
-
 class CardLog(models.Model):
     class Meta:
         ordering = ['timestamp', 'card']
@@ -260,9 +243,16 @@ class CardLog(models.Model):
     card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='logs')
     from_column = models.ForeignKey(Column, default=None, on_delete=models.CASCADE, related_name='from_column_log')
     to_column = models.ForeignKey(Column, default=None, on_delete=models.CASCADE, related_name='to_column_log')
-    action = models.ForeignKey(CardAction, default=0, on_delete=models.CASCADE, related_name='logs')
+    action = models.CharField(max_length=255, null=True)
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return "(Čas: %s, Tip akcije: %s, Kartica: %s, Iz stolpca: %s, V stolpec: %s)\n" % \
                 (self.timestamp, str(self.action), self.card.id, self.from_column.id, self.to_column.id)
+
+
+class CardLogCreateDelete(models.Model):
+    card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='logs_create_delete')
+    # če je 0 potem je to ustvarjena kartica, če je 1 je brisanje kartice
+    action = models.IntegerField(null=False)
+    timestamp = models.DateTimeField(default=timezone.now)

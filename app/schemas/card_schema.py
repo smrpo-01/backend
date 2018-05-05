@@ -15,6 +15,46 @@ from .. import models
 from app.schemas.board_schema import *
 
 
+def where_is_card(card):
+    #   VRNE:
+    #   0 - če je pred mejnim stolpcem
+    #   1 - če je med mejnima stolpcema
+    #   2 - če je na koncu
+    table = list(models.Column.objects.filter(board=card.project.board))
+    first_boundary = list(models.Column.objects.filter(board=card.project.board, boundary=True))[0]
+    second_boundary = list(models.Column.objects.filter(board=card.project.board, boundary=True))[1]
+    col_id_card = card.column_id
+    first_b_index = None
+    second_b_index = None
+    for i in range(0, len(table)):
+        if table[i].id == first_boundary.id:
+            first_b_index = i
+        elif table[i].id == second_boundary.id:
+            second_b_index = i
+
+    first_half = table[:first_b_index]
+    middle = table[first_b_index:second_b_index + 1]
+
+    for col in first_half:
+        if col_id_card == col.id:
+            return 0
+
+    for col in middle:
+        if col_id_card == col.id:
+            return 1
+
+    return 2
+
+
+def get_columns_absolute(columns, list_of_columns):
+    for col in columns:
+        if len(col.children.all()) == 0:
+            list_of_columns.append(col)
+        else:
+            list_of_columns = get_columns_absolute(list(col.children.all()), list_of_columns)
+    return list_of_columns
+
+
 def get_first_column(card):
     return models.CardLog.objects.filter(card=card).first().from_column
 
@@ -207,6 +247,16 @@ def cards_per_day(cards, date_from, date_to, column_from, column_to):
     return dates
 
 
+class WhoCanEditType(graphene.ObjectType):
+    card_name = graphene.Boolean()
+    card_description = graphene.Boolean()
+    project_name = graphene.Boolean()
+    owner = graphene.Boolean()
+    date = graphene.Boolean()
+    estimate = graphene.Boolean()
+    tasks = graphene.Boolean()
+
+
 class TaskType(DjangoObjectType):
     class Meta:
         model = models.Task
@@ -245,16 +295,6 @@ class CardType(DjangoObjectType):
             raise GraphQLError("Kartica ni bila v željenih stolpcih.")
 
         return (end.timestamp - start.timestamp).total_seconds() / 3600
-
-
-class CardActionType(DjangoObjectType):
-    class Meta:
-        model = models.CardAction
-
-    name = graphene.String()
-
-    def resolve_name(instance, info):
-        return str(instance)
 
 
 class CardLogType(DjangoObjectType):
@@ -338,6 +378,11 @@ class CardQueries(graphene.ObjectType):
         column_from=graphene.String(default_value=0),
         column_to=graphene.String(default_value=0)
     )
+    all_card_logs = graphene.Field(graphene.List(CardLogType), card_id=graphene.Int(default_value=-1))
+    who_can_edit = graphene.Field(WhoCanEditType,
+                                  card_id=graphene.Int(required=True),
+                                  user_team_id=graphene.Int(required=True))
+
 
     def resolve_all_cards(self, info, card_id, board_id):
         if board_id == -1:
@@ -354,6 +399,35 @@ class CardQueries(graphene.ObjectType):
 
     def resolve_all_card_logs(self, info):
         return models.CardLog.objects.all()
+
+    def resolve_all_card_logs(self, info, card_id):
+        if card_id == -1:
+            return models.CardLog.objects.all()
+        else:
+            return models.CardLog.objects.filter(card=models.Card.objects.filter(id=card_id))
+
+
+    def resolve_who_can_edit(self, info, card_id, user_team_id):
+        card = models.Card.objects.get(id=card_id)
+        print(get_columns_absolute(list(models.Column.objects.filter(board=card.project.board, parent=None)), []))
+        '''
+        user_team = models.UserTeam.objects.get(id=user_team_id)
+        
+        print(user_team.team.id)
+        print(card.project.team.id)
+        if user_team.team.id != card.project.team.id:
+            raise GraphQLError("Uporabnik ne more spreminjati kartice druge ekipe!")
+
+        card_pos = where_is_card(card)
+
+        if card_pos == 0:
+            if user_team.role == models.TeamRole.objects.get(id=2):  # če je PO
+                if card.type_id == 1:
+                    raise GraphQLError("Product Owner lahko posodablja le normalne kartice")
+                else:
+                    return WhoCanEditType(card_name=True, card_description=True, project_name=True, owner=True,
+                                          date=True, estimate=True, tasks=True)
+        '''
 
     def resolve_filter_cards(self, info, project_id, creation_start, creation_end, done_start, done_end, dev_start, \
                                  dev_end, estimate_from, estimate_to, card_type):
@@ -492,6 +566,20 @@ class AddCard(graphene.Mutation):
 
             task_entity = models.Task(card=card, description=task.description, done=task.done, assignee=assignee)
             task_entity.save()
+
+        # kreacija kartice
+        models.CardLogCreateDelete(card=card, action=0).save()
+
+        cards = models.Card.objects.filter(column=models.Column.objects.get(id=column_id))
+
+        log_action = None
+        if (len(cards) > models.Column.objects.get(id=column_id).wip) and (
+                models.Column.objects.get(id=column_id).wip != 0):
+            log_action = "Presežena omejitev wip."
+
+        models.CardLog(card=card, from_column=None, to_column=models.Column.objects.get(id=column_id),
+                       action=log_action).save()
+
         return AddCard(ok=True, card=card)
 
 
@@ -540,21 +628,36 @@ class EditCard(graphene.Mutation):
         return EditCard(ok=True, card=card)
 
 
+# logi: omejitev wip, kreacija pa delete
+
 class MoveCard(graphene.Mutation):
     class Arguments:
         card_id = graphene.Int(required=True)
         to_column_id = graphene.String(required=True)
+        force = graphene.Boolean(required=False, default_value=False)
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
 
     @staticmethod
-    def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None):
+    def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None, force=False):
         card = models.Card.objects.get(id=card_id)
-        # TODO: implementiraj Loge
+        to_col = models.Column.objects.get(id=to_column_id)
+        cards = models.Card.objects.filter(column=to_col)
 
-        card.column = models.Column.objects.get(id=to_column_id)
+        log_action = None
+        if (len(cards) > to_col.wip-1) and (to_col.wip != 0):
+            log_action = "Presežena omejitev wip."
+
+        if force is False:
+            if log_action is not None:
+                raise GraphQLError("Presežena omejitev wip. Nadaljujem?")
+
+        from_col = card.column
+        card.column = to_col
         card.save()
+
+        models.CardLog(card=card, from_column=from_col, to_column=to_col, action=log_action).save()
 
         return MoveCard(ok=True, card=card)
 
@@ -563,16 +666,30 @@ class DeleteCard(graphene.Mutation):
     class Arguments:
         card_id = graphene.Int(required=True)
         cause_of_deletion = graphene.String(required=True)
+        user_team_id = graphene.Int(required=True)
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
 
     @staticmethod
-    def mutate(root, info, ok=False, card=None, card_id=None, cause_of_deletion=None):
+    def mutate(root, info, ok=False, card=None, card_id=None, cause_of_deletion=None, user_team_id=None):
         card = models.Card.objects.get(id=card_id)
+
+        user_team = models.UserTeam.objects.get(id=user_team_id)
+        # PO lohka briše samo pred dev
+        if user_team.role == models.TeamRole.objects.get(id=2):
+            if where_is_card(card) == 1:
+                raise GraphQLError("Product owner lahko briše kartice samo pred začetkom razvoja.")
+        elif user_team.role == models.TeamRole.objects.get(id=4):
+            raise GraphQLError("Razvijalec ne more brisati kartic.")
+
         card.is_deleted = True
         card.cause_of_deletion = cause_of_deletion
         card.save()
+
+        # loggiraj da je kartica pobrisana
+        models.CardLogCreateDelete(card=card, action=1).save()
+
         return DeleteCard(ok=True, card=card)
 
 
@@ -581,5 +698,3 @@ class CardMutations(graphene.ObjectType):
     edit_card = EditCard.Field()
     delete_card = DeleteCard.Field()
     move_card = MoveCard.Field()
-
-# {"boardName":"Tabla","projects":[],"columns":[{"id":"8c765c2e-c875-48b3-b1ee-237372fffcee","name":"Product Backlog","columns":[],"wip":"0","boundary":false,"priority":false,"acceptance":false},{"id":"24eaf24f-3c99-4a4f-b921-c787979fb3eb","name":"Sprint Backlog","columns":[],"wip":"0","boundary":false,"priority":true,"acceptance":false},{"id":"2cd1df29-f412-49a2-aaf4-0a9cb41f986e","name":"Development","columns":[{"id":"1eed19fd-3e33-4435-b732-fa18157157ae","name":"Analysis & design","columns":[],"wip":"3","b…,"acceptance":false}],"wip":"0","boundary":false,"priority":false,"acceptance":false},{"id":"e92dee63-1ca2-420f-9015-94a9b874c6ef","name":"Acceptance ready","columns":[],"wip":"4","boundary":true,"priority":false,"acceptance":true},{"id":"deaa9072-b748-48fa-a263-6a4d76f202da","name":"Acceptance","columns":[],"wip":"4","boundary":false,"priority":false,"acceptance":false},{"id":"88f62199-fccb-4d89-bb0e-600fa4fa0a62","name":"Done","columns":[],"wip":"0","boundary":false,"priority":false,"acceptance":false}]}

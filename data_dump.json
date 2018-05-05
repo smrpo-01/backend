@@ -49,6 +49,15 @@
     }
 },
 {
+    "model": "app.loginattempt",
+    "pk": 1,
+    "fields": {
+        "ip": "127.0.0.1",
+        "unlock_date": "2018-05-05T17:04:17.103Z",
+        "counter": 0
+    }
+},
+{
     "model": "app.user",
     "pk": 1,
     "fields": {
@@ -168,7 +177,7 @@
     "pk": 7,
     "fields": {
         "password": "pbkdf2_sha256$100000$mM1VQ0jdtmug$bwCe+xuLbSV2Lj4H3THpmyPVBQ9cTRHbkXn6LOzsSCE=",
-        "last_login": null,
+        "last_login": "2018-05-05T20:06:37.053Z",
         "email": "km@demo.com",
         "first_name": "K",
         "last_name": "M",

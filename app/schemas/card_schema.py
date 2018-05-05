@@ -290,13 +290,18 @@ class CardType(DjangoObjectType):
     def resolve_travel_time(instance, info, column_from, column_to):
         col_start = models.Column.objects.get(id=column_from)
         col_end = models.Column.objects.get(id=column_to)
+
+        columns = models.Column.objects.filter(board=col_start.board, parent=None)
+        columns = get_columns_absolute(columns, [])
+        if columns.index(col_start) > columns.index(col_end):
+            raise GraphQLError("Drugi stolpec je levo od prvega.")
+
         start = instance.logs.filter(to_column=col_start, action=None).first()
         end = instance.logs.filter(to_column=col_end, action=None).last()
         if start == end or start == None:
             start = instance.logs.filter(from_column=col_start, action=None).first()
 
         if not (start and end):
-            print(start, end)
             raise GraphQLError("Kartica ni bila v željenih stolpcih.")
 
         return abs((end.timestamp - start.timestamp).total_seconds()) / 3600

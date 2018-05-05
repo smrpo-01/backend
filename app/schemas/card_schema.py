@@ -155,17 +155,6 @@ class CardInput(graphene.InputObjectType):
     tasks = graphene.List(TasksInput, default_value=[])
 
 
-'''
-def is_parent_first(child):
-    if child is None or (child.parent is None and child.position == 0):
-        return True
-    else:
-        if child.position != 0:
-            return False
-        else:
-            return is_parent_first(child.parent)
-'''
-
 
 class AddCard(graphene.Mutation):
     class Arguments:
@@ -311,6 +300,16 @@ class MoveCard(graphene.Mutation):
         to_col = models.Column.objects.get(id=to_column_id)
         cards = models.Card.objects.filter(column=to_col)
 
+        col_list = get_columns_absolute(list(models.Column.objects.filter(board=card.project.board, parent=None)), [])
+        to_col_inx = col_list.index(to_column_id)
+        from_col_inx = col_list.index(card.column_id)
+
+        if abs(to_col_inx-from_col_inx) != 1:
+            raise GraphQLError("Ne moreš premikati za več kot ena v levo/desno.")
+
+
+
+
         # TODO: da izbere tapravga
         user_team = models.UserTeam.objects.filter(member=models.User.objects.get(id=user_id), team=card.project.team)[
             0]
@@ -328,7 +327,7 @@ class MoveCard(graphene.Mutation):
         card.save()
 
         models.CardLog(card=card, from_column=from_col, to_column=to_col, action=log_action,
-                       user_team=user_team)
+                       user_team=user_team).save()
 
         return MoveCard(ok=True, card=card)
 

@@ -194,14 +194,9 @@ def estimate_per_dev(cards):
     return result
 
 
-def column_order(board):
-    lst = HelperClass.flatten([c if not c.children.count() else list(c.children.all())
-                               for c in models.Column.objects.filter(board=board)])
-    return reduce(lambda l, x: l if x in l else l + [x], lst, [])
-
-
 def columns_between(col1, col2):
-    unique = column_order(col1.board)
+    columns = models.Column.objects.filter(board=col1.board, parent=None)
+    unique = get_columns_absolute(columns, [])
     return unique[unique.index(col1):(unique.index(col2) + 1)]
 
 
@@ -462,7 +457,8 @@ class CardQueries(graphene.ObjectType):
                               dev_end, estimate_from, estimate_to, card_type, date_from, date_to, column_to, column_from):
         col1 = models.Column.objects.get(id=column_from)
         col2 = models.Column.objects.get(id=column_to)
-        columns = column_order(col1.board)
+        columns = models.Column.objects.filter(board=col1.board, parent=None)
+        columns = get_columns_absolute(columns, [])
         if columns.index(col1) > columns.index(col2):
             raise GraphQLError("Drugi stolpec je levo od prvega.")
 

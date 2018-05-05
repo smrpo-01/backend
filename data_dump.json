@@ -52,7 +52,7 @@
     "model": "app.user",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$100000$FyNPdzDEx6QP$0LQGdy+dXtBLVQPsUNSn0mb6R0pCgz1kpj9w/6qJOcA=",
+        "password": "pbkdf2_sha256$100000$plzuaJmEkNyZ$tgbuS3/IBUKtoUq25tVhbIJOd+2H8/v6G5/nWV7i+y8=",
         "last_login": null,
         "email": "admin@demo.com",
         "first_name": "Ad",
@@ -71,7 +71,7 @@
     "model": "app.user",
     "pk": 2,
     "fields": {
-        "password": "pbkdf2_sha256$100000$vPkORbEDRccB$Y343iBkjo/ytBa7qcy2OKWiKtVyLtVA4UmWLd5rGEzk=",
+        "password": "pbkdf2_sha256$100000$7NZhZgLV65Au$UA4B1J5A693Us92qDRFfmMJx36MAbPOloSRB922mWcA=",
         "last_login": null,
         "email": "dev1@demo.com",
         "first_name": "Dev",
@@ -91,7 +91,7 @@
     "model": "app.user",
     "pk": 3,
     "fields": {
-        "password": "pbkdf2_sha256$100000$n3J8GL1KR0Jn$PAI3n0Qmsz8/4/gl85wyQsWduBRSV1UaZppkgFWoFmw=",
+        "password": "pbkdf2_sha256$100000$451x8dkVMOc4$hmTwxEFbL0l2RIoTFG6p58C/eAQ8BWRGO2kWR7T9PsE=",
         "last_login": null,
         "email": "dev2@demo.com",
         "first_name": "Dev",
@@ -110,7 +110,7 @@
     "model": "app.user",
     "pk": 4,
     "fields": {
-        "password": "pbkdf2_sha256$100000$zS0uN6qUylkk$NpzSZMV+aZ+3qfYx6/o6JfeAjBVbvaPpZ+E7hv8Ro04=",
+        "password": "pbkdf2_sha256$100000$smJDlLwBzQTz$VTHeKP3dY0zJ2XQpfvHl3Z2bSAqgXW7K+G4kE775hVI=",
         "last_login": null,
         "email": "dev3@demo.com",
         "first_name": "Dev",
@@ -129,7 +129,7 @@
     "model": "app.user",
     "pk": 5,
     "fields": {
-        "password": "pbkdf2_sha256$100000$fU5EBzgrkpXC$h6pgHFQjOfDGG/k5oeV530JmG3HD5LB0t4r0i9CiQCQ=",
+        "password": "pbkdf2_sha256$100000$PwmadhwUON4f$94UaYWu1QPwvOjPU+B+ESOGBIrwWenA++lW7I0dzojM=",
         "last_login": null,
         "email": "dev4@demo.com",
         "first_name": "Dev",
@@ -148,7 +148,7 @@
     "model": "app.user",
     "pk": 6,
     "fields": {
-        "password": "pbkdf2_sha256$100000$8qLebXRfvgj6$uiLjsGLgEc4PG8ibJmkcRtlK09gsJzXwWX3DrLLz/78=",
+        "password": "pbkdf2_sha256$100000$Fcx9Nl8StLeW$2dz9vCWOLUOSC/A14KON5C8trMfeOtpUl6i2KkqeQWo=",
         "last_login": null,
         "email": "dev5@demo.com",
         "first_name": "Dev",
@@ -167,7 +167,7 @@
     "model": "app.user",
     "pk": 7,
     "fields": {
-        "password": "pbkdf2_sha256$100000$qGzk147jyRZn$+AHtEOSMjmfuaFzXlpmBFC0HLro4iexzSRVmxENgyZk=",
+        "password": "pbkdf2_sha256$100000$vSeLOG1gfFsV$sOLFKhGopwLg3rlgK06JeO9oB2RGcIZhXz7VlTsv/Y0=",
         "last_login": null,
         "email": "km@demo.com",
         "first_name": "K",
@@ -186,7 +186,7 @@
     "model": "app.user",
     "pk": 8,
     "fields": {
-        "password": "pbkdf2_sha256$100000$WIwSqgOvgFgE$nh20vXVJfDoaSRRqrePwYFAMb9LuAzuqcP8rvAKVUAw=",
+        "password": "pbkdf2_sha256$100000$7XxcALXPzSpL$7fN6dMK2TGDzf6CD4XNU/OlkVMecYB/vNz1a/+pdVLw=",
         "last_login": null,
         "email": "po@demo.com",
         "first_name": "P",
@@ -206,7 +206,7 @@
     "model": "app.user",
     "pk": 9,
     "fields": {
-        "password": "pbkdf2_sha256$100000$SGEP5QEfgere$1S8dWcgvxUXMr7+62dpq6J/OPnjRtAQgeGx+6KrLsIo=",
+        "password": "pbkdf2_sha256$100000$x4PiME7keNqw$9GDMkEddF5EjOjwrnYYAAngUJkXq0walyESRaYmz3T0=",
         "last_login": null,
         "email": "wildcard@demo.com",
         "first_name": "Wild",
@@ -228,7 +228,7 @@
     "model": "app.user",
     "pk": 10,
     "fields": {
-        "password": "pbkdf2_sha256$100000$LLvnC4ayrcOn$wYpokuqo3Pepm1r22pBwFA9cskT7Lz0iepZu6wrZU4U=",
+        "password": "pbkdf2_sha256$100000$pjoeI0JZB8He$OkxKMF9EGSS1teYb+B/nMO1DIvnjWLZPWf1PjO6e5Xs=",
         "last_login": null,
         "email": "po2@demo.com",
         "first_name": "Prod",
@@ -505,7 +505,7 @@
     "fields": {
         "userteam": 1,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:25.709Z"
+        "timestamp": "2018-05-05T10:58:28.201Z"
     }
 },
 {
@@ -514,7 +514,7 @@
     "fields": {
         "userteam": 2,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:25.741Z"
+        "timestamp": "2018-05-05T10:58:28.225Z"
     }
 },
 {
@@ -523,7 +523,7 @@
     "fields": {
         "userteam": 3,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:25.775Z"
+        "timestamp": "2018-05-05T10:58:28.249Z"
     }
 },
 {
@@ -532,7 +532,7 @@
     "fields": {
         "userteam": 4,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:25.808Z"
+        "timestamp": "2018-05-05T10:58:28.274Z"
     }
 },
 {
@@ -541,7 +541,7 @@
     "fields": {
         "userteam": 5,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:25.840Z"
+        "timestamp": "2018-05-05T10:58:28.300Z"
     }
 },
 {
@@ -550,7 +550,7 @@
     "fields": {
         "userteam": 6,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:25.874Z"
+        "timestamp": "2018-05-05T10:58:28.323Z"
     }
 },
 {
@@ -559,7 +559,7 @@
     "fields": {
         "userteam": 7,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:25.905Z"
+        "timestamp": "2018-05-05T10:58:28.353Z"
     }
 },
 {
@@ -568,7 +568,7 @@
     "fields": {
         "userteam": 8,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:25.937Z"
+        "timestamp": "2018-05-05T10:58:28.390Z"
     }
 },
 {
@@ -577,7 +577,7 @@
     "fields": {
         "userteam": 9,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:25.967Z"
+        "timestamp": "2018-05-05T10:58:28.422Z"
     }
 },
 {
@@ -586,7 +586,7 @@
     "fields": {
         "userteam": 10,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:26.000Z"
+        "timestamp": "2018-05-05T10:58:28.457Z"
     }
 },
 {
@@ -595,7 +595,7 @@
     "fields": {
         "userteam": 11,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:26.039Z"
+        "timestamp": "2018-05-05T10:58:28.491Z"
     }
 },
 {
@@ -604,7 +604,7 @@
     "fields": {
         "userteam": 12,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:26.076Z"
+        "timestamp": "2018-05-05T10:58:28.523Z"
     }
 },
 {
@@ -613,7 +613,7 @@
     "fields": {
         "userteam": 13,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:26.105Z"
+        "timestamp": "2018-05-05T10:58:28.552Z"
     }
 },
 {
@@ -622,7 +622,7 @@
     "fields": {
         "userteam": 14,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:26.134Z"
+        "timestamp": "2018-05-05T10:58:28.582Z"
     }
 },
 {
@@ -631,7 +631,7 @@
     "fields": {
         "userteam": 15,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:26.165Z"
+        "timestamp": "2018-05-05T10:58:28.612Z"
     }
 },
 {
@@ -640,7 +640,7 @@
     "fields": {
         "userteam": 16,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:26.196Z"
+        "timestamp": "2018-05-05T10:58:28.642Z"
     }
 },
 {
@@ -649,7 +649,7 @@
     "fields": {
         "userteam": 17,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T09:57:26.226Z"
+        "timestamp": "2018-05-05T10:58:28.671Z"
     }
 },
 {

@@ -297,23 +297,23 @@ class MoveCard(graphene.Mutation):
     class Arguments:
         card_id = graphene.Int(required=True)
         to_column_id = graphene.String(required=True)
-        force = graphene.Boolean(required=False, default_value=False)
+        force = graphene.String(required=False, default_value="")
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
 
     @staticmethod
-    def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None, force=False):
+    def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None, force=""):
         card = models.Card.objects.get(id=card_id)
         to_col = models.Column.objects.get(id=to_column_id)
         cards = models.Card.objects.filter(column=to_col)
 
         log_action = None
-        if (len(cards) > to_col.wip-1) and (to_col.wip != 0):
-            log_action = "Presežena omejitev wip."
+        if (len(cards) > to_col.wip - 1) and (to_col.wip != 0):
+            log_action = force
 
-        if force is False:
-            if log_action is not None:
+        if force == "":
+            if log_action != "":
                 raise GraphQLError("Presežena omejitev wip. Nadaljujem?")
 
         from_col = card.column
@@ -335,16 +335,8 @@ class DeleteCard(graphene.Mutation):
     card = graphene.Field(CardType)
 
     @staticmethod
-    def mutate(root, info, ok=False, card=None, card_id=None, cause_of_deletion=None, user_team_id=None):
+    def mutate(root, info, ok=False, card=None, card_id=None, cause_of_deletion=None):
         card = models.Card.objects.get(id=card_id)
-
-        user_team = models.UserTeam.objects.get(id=user_team_id)
-        # PO lohka briše samo pred dev
-        if user_team.role == models.TeamRole.objects.get(id=2):
-            if where_is_card(card) == 1:
-                raise GraphQLError("Product owner lahko briše kartice samo pred začetkom razvoja.")
-        elif user_team.role == models.TeamRole.objects.get(id=4):
-            raise GraphQLError("Razvijalec ne more brisati kartic.")
 
         card.is_deleted = True
         card.cause_of_deletion = cause_of_deletion

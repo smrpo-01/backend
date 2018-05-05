@@ -385,7 +385,7 @@ class MoveCard(graphene.Mutation):
         to_col_inx = col_list.index(to_column_id)
         from_col_inx = col_list.index(card.column_id)
 
-        if abs(to_col_inx - from_col_inx) == 1:
+        if abs(to_col_inx - from_col_inx) <= 1:
             pass
         else:
             if from_col.acceptance is True and user_team.role == models.TeamRole.objects.get(id=2):

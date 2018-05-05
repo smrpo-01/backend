@@ -329,6 +329,23 @@ class EditCard(graphene.Mutation):
         return EditCard(ok=True, card=card)
 
 
+class SetDoneTask(graphene.Mutation):
+    class Arguments:
+        task_id = graphene.Int(required=True)
+        done = graphene.Boolean(required=True)
+
+    ok = graphene.Boolean()
+    task = graphene.Field(TaskType)
+
+    @staticmethod
+    def mutate(root, info, task_id=None, done=None):
+        task = models.Task.objects.get(id=task_id)
+        task.done = done
+        task.save()
+
+        return SetDoneTask(task=task, ok=True)
+
+
 # logi: omejitev wip, kreacija pa delete
 
 class MoveCard(graphene.Mutation):
@@ -422,3 +439,4 @@ class CardMutations(graphene.ObjectType):
     edit_card = EditCard.Field()
     delete_card = DeleteCard.Field()
     move_card = MoveCard.Field()
+    set_done_task = SetDoneTask.Field()

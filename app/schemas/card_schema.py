@@ -200,6 +200,10 @@ def columns_between(col1, col2):
     return unique[unique.index(col1):(unique.index(col2) + 1)]
 
 
+def sort_columns(columns):
+    return sorted(columns, key=lambda column: get_columns_absolute(columns, []).index(column))
+
+
 def column_at_date(card, date):
     logs = card.logs
     column_set = set()
@@ -211,7 +215,7 @@ def column_at_date(card, date):
         log = logs.filter(timestamp__lte=date, action=None)
         if log:
             column_set.add(log.last().to_column.id)
-
+            
     return [models.Column.objects.get(id=id) for id in column_set]
 
 
@@ -286,9 +290,11 @@ class CardType(DjangoObjectType):
         col_end = models.Column.objects.get(id=column_to)
         start = instance.logs.filter(to_column=col_start, action=None).first()
         end = instance.logs.filter(to_column=col_end, action=None).last()
-        if start == end:
+        if start == end or start == None:
             start = instance.logs.filter(from_column=col_start, action=None).first()
+
         if not (start and end):
+            print(start, end)
             raise GraphQLError("Kartica ni bila v željenih stolpcih.")
 
         return abs((end.timestamp - start.timestamp).total_seconds()) / 3600

@@ -95,7 +95,7 @@ def card_per_column_time(card, minimal=True):
             per_column[col.name] = float("{0:.2f}".format(diff))
 
         for a, b in zip(card.logs.filter(from_column=col), card.logs.filter(to_column=col)):
-            per_column[col.name] += (a.timestamp - b.timestamp).total_seconds() / 3600
+            per_column[col.name] += abs((a.timestamp - b.timestamp).total_seconds()) / 3600
     return per_column
 
 
@@ -160,8 +160,8 @@ def filter_cards(project_id, creation_start, creation_end, done_start, done_end,
     if estimate_to:
         cards = cards.filter(estimate__lte=estimate_to)
     if card_type:
-        type_ids = [t.split('_')[1] for t in card_type]
-        cards = cards.filter(reduce(lambda x, y: x | y, [Q(type__id=id) for id in type_ids]))
+        type_ids = [t.split('_')[1] for t in card_type if t]
+        if type_ids: cards = cards.filter(reduce(lambda x, y: x | y, [Q(type__id=id) for id in type_ids]))
     return cards
 
 
@@ -284,12 +284,14 @@ class CardType(DjangoObjectType):
     def resolve_travel_time(instance, info, column_from, column_to):
         col_start = models.Column.objects.get(id=column_from)
         col_end = models.Column.objects.get(id=column_to)
-        start = instance.logs.filter(from_column=col_start).first()
+        start = instance.logs.filter(to_column=col_start).first()
         end = instance.logs.filter(to_column=col_end).last()
+        if start == end:
+            start = instance.logs.filter(from_column=col_start).first()
         if not (start and end):
             raise GraphQLError("Kartica ni bila v željenih stolpcih.")
 
-        return (end.timestamp - start.timestamp).total_seconds() / 3600
+        return abs((end.timestamp - start.timestamp).total_seconds()) / 3600
 
 
 class CardLogType(DjangoObjectType):

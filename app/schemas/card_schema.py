@@ -105,7 +105,7 @@ class CardQueries(graphene.ObjectType):
         if card_id == -1:
             return models.CardLog.objects.all()
         else:
-            return models.CardLog.objects.filter(card=models.Card.objects.filter(id=card_id))
+            return models.CardLog.objects.filter(card=models.Card.objects.get(id=card_id))
 
     who_can_edit = graphene.Field(WhoCanEditType,
                                   card_id=graphene.Int(required=True),
@@ -229,7 +229,6 @@ class AddCard(graphene.Mutation):
                 raise GraphQLError("V stolpcu z najvišjo prioriteto je lahko samo ena nujna zahteva.")
         else:
             column_id = card_data.column_id
-        # TODO: Loge je treba dodt če pride do kršitve wip
 
         cards = models.Card.objects.filter(project=models.Project.objects.get(id=card_data.project_id))
 
@@ -382,6 +381,7 @@ class MoveCard(graphene.Mutation):
             if log_action is not None:
                 raise GraphQLError("Presežena omejitev wip. Nadaljujem?")
 
+       # log_action = force
         card.column = to_col
         card.save()
 

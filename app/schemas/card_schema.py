@@ -345,7 +345,7 @@ class MoveCard(graphene.Mutation):
     def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None, force="", user_id=None):
         card = models.Card.objects.get(id=card_id)
         to_col = models.Column.objects.get(id=to_column_id)
-        cards = models.Card.objects.filter(column=to_col)
+        cards = models.Card.objects.filter(column=to_col, project=card.project)
         from_col = card.column
 
         user_teams = models.UserTeam.objects.filter(

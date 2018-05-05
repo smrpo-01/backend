@@ -94,7 +94,7 @@ def filter_cards(project_id, creation_start, creation_end, done_start, done_end,
         cards = cards.filter(date_created__gte=start)
     if creation_end:
         end = HelperClass.get_si_date(creation_end)
-        cards = cards.filter(date_created__lte=end)
+        cards = cards.filter(date_created__lte=end+datetime.timedelta(days=1))
     if done_start:
         start = HelperClass.get_si_date(done_start)
         done_column = get_done_column(project.board)

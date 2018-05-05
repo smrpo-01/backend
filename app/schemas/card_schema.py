@@ -77,6 +77,7 @@ def card_per_column_time(card, minimal=True):
         cols = cols.exclude(id=done_col.id)
 
     per_column = {}
+    cols = sort_columns(cols)
     for col in cols:
         per_column[col.name] = 0
 
@@ -201,7 +202,8 @@ def columns_between(col1, col2):
 
 
 def sort_columns(columns):
-    return sorted(columns, key=lambda column: get_columns_absolute(columns, []).index(column))
+    columns = get_columns_absolute(columns, [])
+    return sorted(columns, key=lambda column: columns.index(column))
 
 
 def column_at_date(card, date):
@@ -215,7 +217,7 @@ def column_at_date(card, date):
         log = logs.filter(timestamp__lte=date, action=None)
         if log:
             column_set.add(log.last().to_column.id)
-            
+
     return [models.Column.objects.get(id=id) for id in column_set]
 
 

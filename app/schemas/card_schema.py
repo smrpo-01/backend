@@ -122,7 +122,10 @@ class CardQueries(graphene.ObjectType):
             user_teams = models.UserTeam.objects.filter(member=models.User.objects.get(id=user_id),
                                                         team=card.project.team)
             user_team_roles = [user_team.role.id for user_team in user_teams]
-            user_team = user_teams[0]  # just for team and project and stuff
+            try:
+                user_team = user_teams[0]  # just for team and project and stuff
+            except:
+                return WhoCanEditType(error="Uporabnik ne more spreminjati kartice druge ekipe!")
 
             if user_team.team.id != card.project.team.id:
                 return WhoCanEditType(error="Uporabnik ne more spreminjati kartice druge ekipe!")

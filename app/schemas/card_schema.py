@@ -490,7 +490,9 @@ class CardQueries(graphene.ObjectType):
                               dev_end, estimate_from, estimate_to, card_type):
         cards = filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
                              dev_end, estimate_from, estimate_to, card_type)
-        return models.CardLog.objects.filter(action__isnull=False, card__in=cards)
+        logs = models.CardLog.objects.filter(action__isnull=False, card__in=cards)
+        columns = models.Column.objects.filter(board=logs.first().to_column.board, parent=None)
+        return sorted(logs, key=lambda k: get_columns_absolute(columns, []).index(k.to_column))
 
 
 class TasksInput(graphene.InputObjectType):

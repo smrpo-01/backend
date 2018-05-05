@@ -402,7 +402,7 @@ class MoveCard(graphene.Mutation):
         if (len(cards) > to_col.wip - 1) and (to_col.wip != 0):
             log_action = force
 
-        if(len(cards) != 0):
+        if abs(to_col_inx - from_col_inx) != 0:
             if force == "":
                 if log_action is not None:
                     raise GraphQLError("Presežena omejitev wip. Nadaljujem?")

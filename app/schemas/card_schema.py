@@ -299,9 +299,14 @@ class CardLogType(DjangoObjectType):
         model = models.CardLog
 
     log_string = graphene.String()
+    si_timestamp = graphene.String()
+
 
     def resolve_log_string(instance, info):
         return str(instance)
+
+    def resolve_si_timestamp(instance, info):
+        return HelperClass.to_si_timestamp(instance.timestamp)
 
 
 class CardQueries(graphene.ObjectType):

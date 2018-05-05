@@ -56,11 +56,11 @@ def get_columns_absolute(columns, list_of_columns):
 
 
 def get_first_column(card):
-    return models.CardLog.objects.filter(card=card).first().from_column
+    return models.CardLog.objects.filter(card=card, action=None).first().from_column
 
 
 def get_current_column(card):
-    return models.CardLog.objects.filter(card=card).last().to_column
+    return models.CardLog.objects.filter(card=card, action=None).last().to_column
 
 
 def card_per_column_time(card, minimal=True):
@@ -81,7 +81,7 @@ def card_per_column_time(card, minimal=True):
         per_column[col.name] = 0
 
         if col == get_first_column(card):
-            log = card.logs.filter(from_column=col).first()
+            log = card.logs.filter(from_column=col, action=None).first()
 
             project_start = card.project.date_start
             start = localtz.localize(datetime.datetime(project_start.year, project_start.month, project_start.day))
@@ -89,13 +89,13 @@ def card_per_column_time(card, minimal=True):
             diff = (log.timestamp - start).total_seconds() / 3600
             per_column[col.name] = float("{0:.2f}".format(diff))
         elif col == get_current_column(card):
-            log = card.logs.filter(to_column=col).first()
+            log = card.logs.filter(to_column=col, action=None).first()
 
             diff = (timezone.now() - log.timestamp).total_seconds() / 3600
             per_column[col.name] = float("{0:.2f}".format(diff))
 
-        for a, b in zip(card.logs.filter(from_column=col), card.logs.filter(to_column=col)):
-            per_column[col.name] += abs((a.timestamp - b.timestamp).total_seconds()) / 3600
+        for a, b in zip(card.logs.filter(from_column=col, action=None), card.logs.filter(to_column=col, action=None)):
+            per_column[col.name] += (a.timestamp - b.timestamp).total_seconds() / 3600
     return per_column
 
 
@@ -204,11 +204,11 @@ def column_at_date(card, date):
     logs = card.logs
     column_set = set()
 
-    for a, b in logs.filter(timestamp__contains=date).values_list('from_column', 'to_column'):
+    for a, b in logs.filter(timestamp__contains=date, action=None).values_list('from_column', 'to_column'):
         column_set.update([a, b])
 
     if not column_set:
-        log = logs.filter(timestamp__lte=date)
+        log = logs.filter(timestamp__lte=date, action=None)
         if log:
             column_set.add(log.last().to_column.id)
 
@@ -284,10 +284,10 @@ class CardType(DjangoObjectType):
     def resolve_travel_time(instance, info, column_from, column_to):
         col_start = models.Column.objects.get(id=column_from)
         col_end = models.Column.objects.get(id=column_to)
-        start = instance.logs.filter(to_column=col_start).first()
-        end = instance.logs.filter(to_column=col_end).last()
+        start = instance.logs.filter(to_column=col_start, action=None).first()
+        end = instance.logs.filter(to_column=col_end, action=None).last()
         if start == end:
-            start = instance.logs.filter(from_column=col_start).first()
+            start = instance.logs.filter(from_column=col_start, action=None).first()
         if not (start and end):
             raise GraphQLError("Kartica ni bila v željenih stolpcih.")
 
@@ -509,28 +509,18 @@ class CardInput(graphene.InputObjectType):
     tasks = graphene.List(TasksInput, default_value=[])
 
 
-'''
-def is_parent_first(child):
-    if child is None or (child.parent is None and child.position == 0):
-        return True
-    else:
-        if child.position != 0:
-            return False
-        else:
-            return is_parent_first(child.parent)
-'''
-
 
 class AddCard(graphene.Mutation):
     class Arguments:
         card_data = CardInput(required=True)
         board_id = graphene.Int(required=True)
+        user_id = graphene.Int(required=True)
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
 
     @staticmethod
-    def mutate(root, info, card=None, ok=False, card_data=None, board_id=None):
+    def mutate(root, info, card=None, ok=False, card_data=None, board_id=None, user_id=None):
         if card_data.owner_userteam_id is None:
             owner = None
         else:
@@ -553,14 +543,6 @@ class AddCard(graphene.Mutation):
         else:
             column_id = card_data.column_id
         # TODO: Loge je treba dodt če pride do kršitve wip
-        # TODO: samo po lahko doda navadne, samo KM lahko doda posebne
-        '''
-        if info.context.user.nekineki da ni PO and type_id == 0:
-            raise GraphQLError("Samo PO lahko dodaja navadne kartice")
-        
-        if info.context.user.nekineki da ni KM and type_id == 1:
-            raise GraphQLError("Samo KM lahko dodaja silver bullet kartice") 
-        '''
 
         cards = models.Card.objects.filter(project=models.Project.objects.get(id=card_data.project_id))
 
@@ -592,10 +574,19 @@ class AddCard(graphene.Mutation):
         log_action = None
         if (len(cards) > models.Column.objects.get(id=column_id).wip) and (
                 models.Column.objects.get(id=column_id).wip != 0):
-            log_action = "Presežena omejitev wip."
+            log_action = "Presežena omejitev wip ob kreaciji."
+
+        user_teams = models.UserTeam.objects.filter(
+            member=models.User.objects.get(id=user_id), team=card.project.team)
+
+        if len(user_teams) > 1:
+            for user_t in user_teams:
+                if user_t.role != models.TeamRole.objects.get(id=4):
+                    user_team = user_t
+                    break
 
         models.CardLog(card=card, from_column=None, to_column=models.Column.objects.get(id=column_id),
-                       action=log_action).save()
+                       action=log_action, user_team=user_team).save()
 
         return AddCard(ok=True, card=card)
 
@@ -651,22 +642,37 @@ class MoveCard(graphene.Mutation):
     class Arguments:
         card_id = graphene.Int(required=True)
         to_column_id = graphene.String(required=True)
-        force = graphene.Boolean(required=False, default_value=False)
+        force = graphene.String(required=False, default_value="")
+        user_id = graphene.Int(required=True)
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
 
     @staticmethod
-    def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None, force=False):
+    def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None, force="", user_id=None):
         card = models.Card.objects.get(id=card_id)
         to_col = models.Column.objects.get(id=to_column_id)
         cards = models.Card.objects.filter(column=to_col)
 
-        log_action = None
-        if (len(cards) > to_col.wip-1) and (to_col.wip != 0):
-            log_action = "Presežena omejitev wip."
+        col_list = get_columns_absolute(list(models.Column.objects.filter(board=card.project.board, parent=None)), [])
+        to_col_inx = col_list.index(to_column_id)
+        from_col_inx = col_list.index(card.column_id)
 
-        if force is False:
+        if abs(to_col_inx-from_col_inx) != 1:
+            raise GraphQLError("Ne moreš premikati za več kot ena v levo/desno.")
+
+
+
+
+        # TODO: da izbere tapravga
+        user_team = models.UserTeam.objects.filter(member=models.User.objects.get(id=user_id), team=card.project.team)[
+            0]
+
+        log_action = None
+        if (len(cards) > to_col.wip - 1) and (to_col.wip != 0):
+            log_action = force
+
+        if force == "":
             if log_action is not None:
                 raise GraphQLError("Presežena omejitev wip. Nadaljujem?")
 
@@ -674,7 +680,8 @@ class MoveCard(graphene.Mutation):
         card.column = to_col
         card.save()
 
-        models.CardLog(card=card, from_column=from_col, to_column=to_col, action=log_action).save()
+        models.CardLog(card=card, from_column=from_col, to_column=to_col, action=log_action,
+                       user_team=user_team).save()
 
         return MoveCard(ok=True, card=card)
 
@@ -683,22 +690,13 @@ class DeleteCard(graphene.Mutation):
     class Arguments:
         card_id = graphene.Int(required=True)
         cause_of_deletion = graphene.String(required=True)
-        user_team_id = graphene.Int(required=True)
 
     ok = graphene.Boolean()
     card = graphene.Field(CardType)
 
     @staticmethod
-    def mutate(root, info, ok=False, card=None, card_id=None, cause_of_deletion=None, user_team_id=None):
+    def mutate(root, info, ok=False, card=None, card_id=None, cause_of_deletion=None):
         card = models.Card.objects.get(id=card_id)
-
-        user_team = models.UserTeam.objects.get(id=user_team_id)
-        # PO lohka briše samo pred dev
-        if user_team.role == models.TeamRole.objects.get(id=2):
-            if where_is_card(card) == 1:
-                raise GraphQLError("Product owner lahko briše kartice samo pred začetkom razvoja.")
-        elif user_team.role == models.TeamRole.objects.get(id=4):
-            raise GraphQLError("Razvijalec ne more brisati kartic.")
 
         card.is_deleted = True
         card.cause_of_deletion = cause_of_deletion

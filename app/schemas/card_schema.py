@@ -109,29 +109,71 @@ class CardQueries(graphene.ObjectType):
 
     who_can_edit = graphene.Field(WhoCanEditType,
                                   card_id=graphene.Int(required=True),
-                                  user_team_id=graphene.Int(required=True))
+                                  user_id=graphene.Int(required=True))
 
-    def resolve_who_can_edit(self, info, card_id, user_team_id):
+    def resolve_who_can_edit(self, info, card_id, user_id):
         card = models.Card.objects.get(id=card_id)
-        print(get_columns_absolute(list(models.Column.objects.filter(board=card.project.board, parent=None)), []))
-        '''
-        user_team = models.UserTeam.objects.get(id=user_team_id)
-        
-        print(user_team.team.id)
-        print(card.project.team.id)
+
+        user_teams = models.UserTeam.objects.filter(member=models.User.objects.get(id=user_id), team=card.project.team)
+        user_team_roles = [user_team.role.id for user_team in user_teams]
+        user_team = user_teams[0] # just for team and project and stuff
+
         if user_team.team.id != card.project.team.id:
             raise GraphQLError("Uporabnik ne more spreminjati kartice druge ekipe!")
 
         card_pos = where_is_card(card)
 
         if card_pos == 0:
-            if user_team.role == models.TeamRole.objects.get(id=2):  # če je PO
+            if 2 in user_team_roles:
                 if card.type_id == 1:
-                    raise GraphQLError("Product Owner lahko posodablja le normalne kartice")
+                    if 4 in user_team_roles:
+                        return WhoCanEditType(card_name=False, card_description=False, project_name=False, owner=False,
+                                              date=False, estimate=False, tasks=True)
+                    else:
+                        raise GraphQLError("Product Owner lahko posodablja le normalne kartice.")
                 else:
                     return WhoCanEditType(card_name=True, card_description=True, project_name=True, owner=True,
                                           date=True, estimate=True, tasks=True)
-        '''
+            elif 3 in user_team_roles:
+                if card.type_id == 0:
+                    if 4 in user_team_roles:
+                        return WhoCanEditType(card_name=False, card_description=False, project_name=False, owner=False,
+                                              date=False, estimate=False, tasks=True)
+                    else:
+                        raise GraphQLError("Kanban master lahko posodablja le silver bullet kartice.")
+                else:
+                    return WhoCanEditType(card_name=True, card_description=True, project_name=True, owner=True,
+                                          date=True, estimate=True, tasks=True)
+            else:
+                return WhoCanEditType(card_name=False, card_description=False, project_name=False, owner=False,
+                               date=False, estimate=False, tasks=True)
+        elif card_pos == 1:
+            if 2 in user_team_roles:
+                if 4 in user_team_roles:
+                    return WhoCanEditType(card_name=False, card_description=False, project_name=False, owner=False,
+                                          date=False, estimate=False, tasks=True)
+                else:
+                    raise GraphQLError("Product Owner ne more posodabljati kartice ko je že v razvoju.")
+
+            elif 3 in user_team_roles:
+                if card.type_id == 0:
+                    if 4 in user_team_roles:
+                        return WhoCanEditType(card_name=False, card_description=False, project_name=False, owner=False,
+                                              date=False, estimate=False, tasks=True)
+                    else:
+                        raise GraphQLError("Kanban master lahko posodablja le silver bullet kartice.")
+                else:
+                    return WhoCanEditType(card_name=True, card_description=True, project_name=False, owner=False,
+                                          date=False, estimate=False, tasks=True)
+            else:
+                return WhoCanEditType(card_name=False, card_description=False, project_name=False, owner=False,
+                                      date=False, estimate=False, tasks=True)
+        else:
+            raise GraphQLError("Posodabljanje kartice ni dovoljeno.")
+
+
+
+
 
 
 class TasksInput(graphene.InputObjectType):

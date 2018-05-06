@@ -66,13 +66,13 @@ def get_current_column(card):
 def card_per_column_time(card, minimal=True, column_from=None, column_to=None):
     localtz = pytz.timezone('Europe/Ljubljana')
 
-    b = card.project.board
-    cols = models.Column.objects.filter(board=b)
+    board = card.project.board
+    cols = models.Column.objects.filter(board=board)
 
     if minimal:
-        priority = models.Column.objects.get(board=b, priority=True)
-        backlogs = models.Column.objects.filter(board=b, position__lt=priority.position, parent=priority.parent)
-        done_col = get_done_column(b)
+        priority = models.Column.objects.get(board=board, priority=True)
+        backlogs = models.Column.objects.filter(board=board, position__lt=priority.position, parent=priority.parent)
+        done_col = get_done_column(board)
         cols = cols.exclude(id__in=[c.id for c in backlogs])
         cols = cols.exclude(id=done_col.id)
 
@@ -85,7 +85,7 @@ def card_per_column_time(card, minimal=True, column_from=None, column_to=None):
         per_column[col.name] = 0
 
         if col == get_first_column(card):
-            log = card.logs.filter(from_column=col, action=None).first()
+            log = card.logs.filter(to_column=col, action=None).first()
 
             project_start = card.project.date_start
             start = localtz.localize(datetime.datetime(project_start.year, project_start.month, project_start.day))
@@ -96,6 +96,8 @@ def card_per_column_time(card, minimal=True, column_from=None, column_to=None):
             log = card.logs.filter(to_column=col, action=None).first()
 
             diff = (timezone.now() - log.timestamp).total_seconds() / 3600
+            if col == get_done_column(board):
+                diff = 0
             per_column[col.name] = float("{0:.2f}".format(diff))
 
         for a, b in zip(card.logs.filter(from_column=col, action=None), card.logs.filter(to_column=col, action=None)):
@@ -221,7 +223,7 @@ def column_at_date(card, date):
         if log:
             column_set.add(log.last().to_column.id)
 
-    return [models.Column.objects.get(id=id) for id in column_set]
+    return [models.Column.objects.get(id=id) for id in column_set if id]
 
 
 def cards_per_day(cards, date_from, date_to, column_from, column_to):
@@ -307,7 +309,7 @@ class CardType(DjangoObjectType):
             
             if columns.index(column_from) > columns.index(column_to):
                 raise GraphQLError("Drugi stolpec je levo od prvega.")
-        return card_total_time(instance, minimal, column_from, column_to)
+        return float("{0:.2f}".format(card_total_time(instance, minimal, column_from, column_to)))
 
 
 class CardLogType(DjangoObjectType):

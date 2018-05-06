@@ -165,7 +165,9 @@ class BoardType(DjangoObjectType):
         #return get_columns_json(instance.id)
 
     def resolve_columns_no_parents(instance, info):
-        return [col for col in instance.column_set.all() if not col.children.count()]
+        columns = instance.column_set.filter(parent=None)
+        columns = get_columns_absolute(columns, [])
+        return sort_columns(columns)
 
 
 class BoardQueries(graphene.ObjectType):

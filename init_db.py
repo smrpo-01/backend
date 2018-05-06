@@ -267,7 +267,7 @@ c2 = Card(column=col7, type=CardType.objects.get(id=0), estimate=1, project=p1, 
           description="KanbanMaster lahko kreira, ureja in briše podatke o razvojnih skupinah", name="Vzdrževanje razvojnih skupin", card_number=2)
 c2.save()
 
-c3 = Card(column=col6, type=CardType.objects.get(id=1), estimate=10, project=p1, owner=dev1, date_created=datetime.datetime(2018, 4, 11, 10, 0),
+c3 = Card(column=col6, type=CardType.objects.get(id=0), estimate=10, project=p1, owner=dev1, date_created=datetime.datetime(2018, 4, 11, 10, 0),
           description="KanbanMaster lahko kreira, ureja in briše podatke o projektih.", name="Vzdrževanje projektov", card_number=3)
 c3.save()
 
@@ -314,7 +314,7 @@ c13 = Card(column=col7, type=CardType.objects.get(id=0), estimate=1, project=p2,
           description="KanbanMaster lahko kreira, ureja in briše podatke o razvojnih skupinah", name="Brisanje kartice", card_number=13)
 c13.save()
 
-c14 = Card(column=col6, type=CardType.objects.get(id=1), estimate=1, project=p2, owner=dev1, date_created=datetime.datetime(2018, 4, 11, 10, 0),
+c14 = Card(column=col6, type=CardType.objects.get(id=0), estimate=1, project=p2, owner=dev1, date_created=datetime.datetime(2018, 4, 11, 10, 0),
           description="KanbanMaster lahko kreira, ureja in briše podatke o projektih.", name="Posodabljanje lastnosti stolpca", card_number=14)
 c14.save()
 
@@ -364,6 +364,7 @@ t4.save()
 
 # Project 1 - Logs
 
+CardLog(card=c1, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 10, 10, 0)).save()
 CardLog(card=c1, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
 CardLog(card=c1, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 14, 10, 0)).save()
 CardLog(card=c1, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 16, 30)).save()
@@ -373,6 +374,7 @@ CardLog(card=c1, from_column=col7, to_column=col8, action=None, user_team=dev1, 
 CardLog(card=c1, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 19, 8, 0)).save()
 CardLog(card=c1, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 19, 16, 0)).save()
 
+CardLog(card=c2, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 10, 10, 0)).save()
 CardLog(card=c2, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 14, 18, 0)).save()
 CardLog(card=c2, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 15, 18, 0)).save()
 CardLog(card=c2, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 22, 14, 0)).save()
@@ -382,7 +384,8 @@ CardLog(card=c2, from_column=col7, to_column=col8, action=None, user_team=dev1, 
 CardLog(card=c2, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
 CardLog(card=c2, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 5, 2, 14, 0)).save()
 
-CardLog(card=c3, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 21, 18, 0)).save()
+CardLog(card=c3, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 11, 10, 0)).save()
+CardLog(card=c3, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 16, 12, 0)).save()
 CardLog(card=c3, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 22, 18, 0)).save()
 CardLog(card=c3, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
 CardLog(card=c3, from_column=col5, to_column=col6, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
@@ -391,6 +394,7 @@ CardLog(card=c3, from_column=col7, to_column=col8, action=None, user_team=dev1, 
 CardLog(card=c3, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 5, 1, 8, 0)).save()
 CardLog(card=c3, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 5, 1, 14, 0)).save()
 
+CardLog(card=c4, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 12, 10, 0)).save()
 CardLog(card=c4, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
 CardLog(card=c4, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
 CardLog(card=c4, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
@@ -400,6 +404,7 @@ CardLog(card=c4, from_column=col7, to_column=col8, action=None, user_team=dev1, 
 CardLog(card=c4, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
 CardLog(card=c4, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
 
+CardLog(card=c5, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 13, 10, 0)).save()
 CardLog(card=c5, from_column=col1, to_column=col2, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
 CardLog(card=c5, from_column=col2, to_column=col4, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
 CardLog(card=c5, from_column=col4, to_column=col5, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
@@ -415,6 +420,7 @@ CardLog(card=c5, from_column=col7, to_column=col8, action=None, user_team=dev2, 
 CardLog(card=c5, from_column=col8, to_column=col9, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 5, 1, 8, 0)).save()
 CardLog(card=c5, from_column=col9, to_column=col10, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 5, 1, 14, 0)).save()
 
+CardLog(card=c6, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 15, 10, 0)).save()
 CardLog(card=c6, from_column=col1, to_column=col2, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
 CardLog(card=c6, from_column=col2, to_column=col4, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
 CardLog(card=c6, from_column=col4, to_column=col5, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 24, 8, 0)).save()
@@ -424,6 +430,7 @@ CardLog(card=c6, from_column=col7, to_column=col8, action=None, user_team=dev2, 
 CardLog(card=c6, from_column=col8, to_column=col9, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
 CardLog(card=c6, from_column=col9, to_column=col10, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
 
+CardLog(card=c7, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 14, 10, 0)).save()
 CardLog(card=c7, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 15, 18, 0)).save()
 CardLog(card=c7, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 15, 19, 0)).save()
 CardLog(card=c7, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 16, 14, 0)).save()
@@ -433,6 +440,7 @@ CardLog(card=c7, from_column=col7, to_column=col8, action=None, user_team=dev1, 
 CardLog(card=c7, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 21, 8, 0)).save()
 CardLog(card=c7, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 22, 14, 0)).save()
 
+CardLog(card=c8, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 16, 10, 0)).save()
 CardLog(card=c8, from_column=col1, to_column=col2, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
 CardLog(card=c8, from_column=col2, to_column=col4, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
 CardLog(card=c8, from_column=col4, to_column=col5, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
@@ -444,8 +452,9 @@ CardLog(card=c8, from_column=col7, to_column=col8, action=None, user_team=dev2, 
 CardLog(card=c8, from_column=col8, to_column=col9, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
 CardLog(card=c8, from_column=col9, to_column=col10, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
 
-CardLog(card=c9, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
-CardLog(card=c9, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
+CardLog(card=c9, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 18, 10, 0)).save()
+CardLog(card=c9, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 18, 18, 0)).save()
+CardLog(card=c9, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 18, 19, 0)).save()
 CardLog(card=c9, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
 CardLog(card=c9, from_column=col5, to_column=col6, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
 CardLog(card=c9, from_column=col6, to_column=col7, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 26, 11, 30)).save()
@@ -453,6 +462,7 @@ CardLog(card=c9, from_column=col7, to_column=col8, action=None, user_team=dev1, 
 CardLog(card=c9, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 27, 8, 0)).save()
 CardLog(card=c9, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
 
+CardLog(card=c10, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 10, 0)).save()
 CardLog(card=c10, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 19, 18, 0)).save()
 CardLog(card=c10, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 19, 19, 0)).save()
 CardLog(card=c10, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 21, 14, 0)).save()
@@ -462,7 +472,7 @@ CardLog(card=c10, from_column=col7, to_column=col8, action=None, user_team=dev1,
 CardLog(card=c10, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
 CardLog(card=c10, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 28, 14, 0)).save()
 
-CardLog(card=c11, from_column=col1, to_column=col2, action=None, user_team=po, timestamp=datetime.datetime(2018, 4, 11, 18, 0)).save()
+CardLog(card=c11, from_column=None, to_column=col2, action=None, user_team=po, timestamp=datetime.datetime(2018, 4, 11, 10, 0)).save()
 CardLog(card=c11, from_column=col2, to_column=col4, action=None, user_team=po, timestamp=datetime.datetime(2018, 4, 11, 19, 0)).save()
 CardLog(card=c11, from_column=col4, to_column=col5, action=None, user_team=po, timestamp=datetime.datetime(2018, 4, 12, 14, 0)).save()
 CardLog(card=c11, from_column=col5, to_column=col6, action=None, user_team=po, timestamp=datetime.datetime(2018, 4, 12, 19, 0)).save()
@@ -473,6 +483,7 @@ CardLog(card=c11, from_column=col9, to_column=col10, action=None, user_team=po, 
 
 # Projekt 2
 
+CardLog(card=c12, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 10, 10, 0)).save()
 CardLog(card=c12, from_column=col1, to_column=col2, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 14, 8, 0)).save()
 CardLog(card=c12, from_column=col2, to_column=col4, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 14, 10, 0)).save()
 CardLog(card=c12, from_column=col4, to_column=col5, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 16, 30)).save()
@@ -482,6 +493,7 @@ CardLog(card=c12, from_column=col7, to_column=col8, action=None, user_team=dev2,
 CardLog(card=c12, from_column=col8, to_column=col9, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 19, 8, 0)).save()
 CardLog(card=c12, from_column=col9, to_column=col10, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 19, 16, 0)).save()
 
+CardLog(card=c13, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 12, 10, 0)).save()
 CardLog(card=c13, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 14, 18, 0)).save()
 CardLog(card=c13, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 15, 18, 0)).save()
 CardLog(card=c13, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 22, 14, 0)).save()
@@ -491,6 +503,7 @@ CardLog(card=c13, from_column=col7, to_column=col8, action=None, user_team=dev1,
 CardLog(card=c13, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
 CardLog(card=c13, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 5, 2, 14, 0)).save()
 
+CardLog(card=c14, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 11, 10, 0)).save()
 CardLog(card=c14, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 21, 18, 0)).save()
 CardLog(card=c14, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 22, 18, 0)).save()
 CardLog(card=c14, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
@@ -500,6 +513,7 @@ CardLog(card=c14, from_column=col7, to_column=col8, action=None, user_team=dev1,
 CardLog(card=c14, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 5, 1, 8, 0)).save()
 CardLog(card=c14, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 5, 1, 14, 0)).save()
 
+CardLog(card=c15, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 10, 0)).save()
 CardLog(card=c15, from_column=col1, to_column=col2, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
 CardLog(card=c15, from_column=col2, to_column=col4, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
 CardLog(card=c15, from_column=col4, to_column=col5, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 18, 14, 0)).save()
@@ -509,6 +523,7 @@ CardLog(card=c15, from_column=col7, to_column=col8, action=None, user_team=dev2,
 CardLog(card=c15, from_column=col8, to_column=col9, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 21, 8, 0)).save()
 CardLog(card=c15, from_column=col9, to_column=col10, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 21, 14, 0)).save()
 
+CardLog(card=c16, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 14, 10, 0)).save()
 CardLog(card=c16, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
 CardLog(card=c16, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
 CardLog(card=c16, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
@@ -524,6 +539,7 @@ CardLog(card=c16, from_column=col7, to_column=col8, action=None, user_team=dev1,
 CardLog(card=c16, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 5, 1, 8, 0)).save()
 CardLog(card=c16, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 5, 1, 14, 0)).save()
 
+CardLog(card=c17, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 11, 10, 0)).save()
 CardLog(card=c17, from_column=col1, to_column=col2, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
 CardLog(card=c17, from_column=col2, to_column=col4, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
 CardLog(card=c17, from_column=col4, to_column=col5, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 24, 8, 0)).save()
@@ -533,6 +549,7 @@ CardLog(card=c17, from_column=col7, to_column=col8, action=None, user_team=dev2,
 CardLog(card=c17, from_column=col8, to_column=col9, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
 CardLog(card=c17, from_column=col9, to_column=col10, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
 
+CardLog(card=c18, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 14, 10, 0)).save()
 CardLog(card=c18, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 15, 18, 0)).save()
 CardLog(card=c18, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 15, 19, 0)).save()
 CardLog(card=c18, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 16, 14, 0)).save()
@@ -542,6 +559,7 @@ CardLog(card=c18, from_column=col7, to_column=col8, action=None, user_team=dev1,
 CardLog(card=c18, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 21, 8, 0)).save()
 CardLog(card=c18, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 22, 14, 0)).save()
 
+CardLog(card=c19, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 13, 10, 0)).save()
 CardLog(card=c19, from_column=col1, to_column=col2, action=None, user_team=po, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
 CardLog(card=c19, from_column=col2, to_column=col4, action=None, user_team=po, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
 CardLog(card=c19, from_column=col4, to_column=col5, action=None, user_team=po, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
@@ -553,6 +571,7 @@ CardLog(card=c19, from_column=col7, to_column=col8, action=None, user_team=po, t
 CardLog(card=c19, from_column=col8, to_column=col9, action=None, user_team=po, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
 CardLog(card=c19, from_column=col9, to_column=col10, action=None, user_team=po, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
 
+CardLog(card=c20, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 15, 10, 0)).save()
 CardLog(card=c20, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
 CardLog(card=c20, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
 CardLog(card=c20, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
@@ -562,6 +581,7 @@ CardLog(card=c20, from_column=col7, to_column=col8, action=None, user_team=dev1,
 CardLog(card=c20, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 27, 8, 0)).save()
 CardLog(card=c20, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 29, 14, 0)).save()
 
+CardLog(card=c21, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 18, 10, 0)).save()
 CardLog(card=c21, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 19, 18, 0)).save()
 CardLog(card=c21, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 19, 19, 0)).save()
 CardLog(card=c21, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 21, 14, 0)).save()
@@ -571,14 +591,14 @@ CardLog(card=c21, from_column=col7, to_column=col8, action=None, user_team=dev1,
 CardLog(card=c21, from_column=col8, to_column=col9, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 28, 8, 0)).save()
 CardLog(card=c21, from_column=col9, to_column=col10, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 28, 14, 0)).save()
 
-CardLog(card=c22, from_column=col1, to_column=col2, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 11, 18, 0)).save()
-CardLog(card=c22, from_column=col2, to_column=col4, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 11, 19, 0)).save()
-CardLog(card=c22, from_column=col4, to_column=col5, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 12, 14, 0)).save()
-CardLog(card=c22, from_column=col5, to_column=col6, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 12, 19, 0)).save()
-CardLog(card=c22, from_column=col6, to_column=col7, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 13, 11, 30)).save()
-CardLog(card=c22, from_column=col7, to_column=col8, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 14, 14, 0)).save()
-CardLog(card=c22, from_column=col8, to_column=col9, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 15, 8, 0)).save()
-CardLog(card=c22, from_column=col9, to_column=col10, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 16, 14, 0)).save()
+CardLog(card=c22, from_column=None, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 18, 10, 0)).save()
+CardLog(card=c22, from_column=col2, to_column=col4, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 19, 19, 0)).save()
+CardLog(card=c22, from_column=col4, to_column=col5, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 20, 14, 0)).save()
+CardLog(card=c22, from_column=col5, to_column=col6, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 21, 19, 0)).save()
+CardLog(card=c22, from_column=col6, to_column=col7, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 22, 11, 30)).save()
+CardLog(card=c22, from_column=col7, to_column=col8, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 24, 14, 0)).save()
+CardLog(card=c22, from_column=col8, to_column=col9, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 26, 8, 0)).save()
+CardLog(card=c22, from_column=col9, to_column=col10, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 28, 14, 0)).save()
 
 # WIP warning
 CardLog(card=c1, from_column=col4, to_column=col5, action="Naredil sem nedevoljen premik 1", user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 16, 32)).save()

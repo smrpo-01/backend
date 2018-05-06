@@ -49,19 +49,10 @@
     }
 },
 {
-    "model": "app.loginattempt",
-    "pk": 1,
-    "fields": {
-        "ip": "127.0.0.1",
-        "unlock_date": "2018-05-05T17:04:17.103Z",
-        "counter": 0
-    }
-},
-{
     "model": "app.user",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$100000$8iNRdfco81ed$eV81CZQFMaeNO4XVsTOwc6mvnE98P7TDUINfOgG85Ww=",
+        "password": "pbkdf2_sha256$100000$akBnMYvE8mev$2gngZwVsxVGsMjxsVwUweBv+uRrhO9YqK7Ra8FSz/ek=",
         "last_login": null,
         "email": "admin@demo.com",
         "first_name": "Ad",
@@ -80,7 +71,7 @@
     "model": "app.user",
     "pk": 2,
     "fields": {
-        "password": "pbkdf2_sha256$100000$Z4cfcehqIKqG$+i4danz+l1vlkeGafBzOfy7hb0L0Ctmvi/eRyTt49Kk=",
+        "password": "pbkdf2_sha256$100000$beZU3GpiMkUu$tPKyQ8ilCjUVz59DEzdkyqz+XJS6gDxBOwzz5Iq8YjY=",
         "last_login": null,
         "email": "dev1@demo.com",
         "first_name": "Dev",
@@ -100,7 +91,7 @@
     "model": "app.user",
     "pk": 3,
     "fields": {
-        "password": "pbkdf2_sha256$100000$QJDjVbxCKuSp$xyK+Jkza3XQXVVuUbH/O9x1qtVA5jJsxERiCU27g22k=",
+        "password": "pbkdf2_sha256$100000$9FZx9wvoGUEu$f5fIhAx7h0zUE/accame2/9jZqDZdIbKC00NoJqR2Aw=",
         "last_login": null,
         "email": "dev2@demo.com",
         "first_name": "Dev",
@@ -119,7 +110,7 @@
     "model": "app.user",
     "pk": 4,
     "fields": {
-        "password": "pbkdf2_sha256$100000$iCVFT2oDT2A2$Yrlu/uwmVo/UyLDeoMN07k3JQkCfCtT0IBahMRApito=",
+        "password": "pbkdf2_sha256$100000$4RdJNHTBeJtF$hF5DxQnSr+teoEys/FSW6MvxBxW6SV/W97xpSzlWZUY=",
         "last_login": null,
         "email": "dev3@demo.com",
         "first_name": "Dev",
@@ -138,7 +129,7 @@
     "model": "app.user",
     "pk": 5,
     "fields": {
-        "password": "pbkdf2_sha256$100000$Gc5BkehgAuv7$AnlWOjU+lgIqkps/fwck445MDbWMs/nUFf+sk8pwCZg=",
+        "password": "pbkdf2_sha256$100000$RtlRtmDxcM1e$W5BN2gfEO22+onNE5OpaExd+XmjE/21purNZeTjeOCg=",
         "last_login": null,
         "email": "dev4@demo.com",
         "first_name": "Dev",
@@ -157,7 +148,7 @@
     "model": "app.user",
     "pk": 6,
     "fields": {
-        "password": "pbkdf2_sha256$100000$etmUf7BY5JCY$X2EkC2rVwZe8scHWqow5H9CFqSXQEKxDmzJX9P/D5nY=",
+        "password": "pbkdf2_sha256$100000$Q2DQ9mnDGw6h$K2vfs3Y0DNJtG6i03823k2loSCibhc09UWrDssGMu/g=",
         "last_login": null,
         "email": "dev5@demo.com",
         "first_name": "Dev",
@@ -176,8 +167,8 @@
     "model": "app.user",
     "pk": 7,
     "fields": {
-        "password": "pbkdf2_sha256$100000$mM1VQ0jdtmug$bwCe+xuLbSV2Lj4H3THpmyPVBQ9cTRHbkXn6LOzsSCE=",
-        "last_login": "2018-05-05T20:06:37.053Z",
+        "password": "pbkdf2_sha256$100000$rVoQ0tMkex1S$9n8aIxUZkw/kNSmLrMev7EOkVTYixrsN4rBbbYM3Bq8=",
+        "last_login": null,
         "email": "km@demo.com",
         "first_name": "K",
         "last_name": "M",
@@ -195,7 +186,7 @@
     "model": "app.user",
     "pk": 8,
     "fields": {
-        "password": "pbkdf2_sha256$100000$SfLXUExC05ms$J5JOSz/yUMgoNPcAi7amdi88hO2zW2Unes5/Ll5BOEw=",
+        "password": "pbkdf2_sha256$100000$QQ40nhIUwJ4f$LtSFrcMtQCeEsln8Pnz5aFehY+qZc9o6Sl9rQbHy/RE=",
         "last_login": null,
         "email": "po@demo.com",
         "first_name": "P",
@@ -215,7 +206,7 @@
     "model": "app.user",
     "pk": 9,
     "fields": {
-        "password": "pbkdf2_sha256$100000$JGZUhTETonuz$//RwgxLEDxvhJovjE8TlGIKY4kKDQmUlefiaZfXnnXI=",
+        "password": "pbkdf2_sha256$100000$U5A0G0iJ5ozM$5Om0IUzwzRR7YY7jOy8wRmvwnU3nML+RLchUYwIUugw=",
         "last_login": null,
         "email": "wildcard@demo.com",
         "first_name": "Wild",
@@ -237,7 +228,7 @@
     "model": "app.user",
     "pk": 10,
     "fields": {
-        "password": "pbkdf2_sha256$100000$A5GNMnKKaIrX$XONSG6uev+d6aO+BYlitsxZKa61pk3dNxZ76rScXTcs=",
+        "password": "pbkdf2_sha256$100000$lpBVvVAXZBBF$tREIKGlqd4WCDOeE60XlyvYrsZajuyW4ec9sqksnJqM=",
         "last_login": null,
         "email": "po2@demo.com",
         "first_name": "Prod",
@@ -514,7 +505,7 @@
     "fields": {
         "userteam": 1,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.504Z"
+        "timestamp": "2018-05-06T08:12:02.943Z"
     }
 },
 {
@@ -523,7 +514,7 @@
     "fields": {
         "userteam": 2,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.524Z"
+        "timestamp": "2018-05-06T08:12:02.962Z"
     }
 },
 {
@@ -532,7 +523,7 @@
     "fields": {
         "userteam": 3,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.545Z"
+        "timestamp": "2018-05-06T08:12:02.982Z"
     }
 },
 {
@@ -541,7 +532,7 @@
     "fields": {
         "userteam": 4,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.566Z"
+        "timestamp": "2018-05-06T08:12:03.001Z"
     }
 },
 {
@@ -550,7 +541,7 @@
     "fields": {
         "userteam": 5,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.585Z"
+        "timestamp": "2018-05-06T08:12:03.021Z"
     }
 },
 {
@@ -559,7 +550,7 @@
     "fields": {
         "userteam": 6,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.599Z"
+        "timestamp": "2018-05-06T08:12:03.040Z"
     }
 },
 {
@@ -568,7 +559,7 @@
     "fields": {
         "userteam": 7,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.617Z"
+        "timestamp": "2018-05-06T08:12:03.059Z"
     }
 },
 {
@@ -577,7 +568,7 @@
     "fields": {
         "userteam": 8,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.637Z"
+        "timestamp": "2018-05-06T08:12:03.079Z"
     }
 },
 {
@@ -586,7 +577,7 @@
     "fields": {
         "userteam": 9,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.657Z"
+        "timestamp": "2018-05-06T08:12:03.098Z"
     }
 },
 {
@@ -595,7 +586,7 @@
     "fields": {
         "userteam": 10,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.677Z"
+        "timestamp": "2018-05-06T08:12:03.117Z"
     }
 },
 {
@@ -604,7 +595,7 @@
     "fields": {
         "userteam": 11,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.696Z"
+        "timestamp": "2018-05-06T08:12:03.137Z"
     }
 },
 {
@@ -613,7 +604,7 @@
     "fields": {
         "userteam": 12,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.715Z"
+        "timestamp": "2018-05-06T08:12:03.156Z"
     }
 },
 {
@@ -622,7 +613,7 @@
     "fields": {
         "userteam": 13,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.734Z"
+        "timestamp": "2018-05-06T08:12:03.175Z"
     }
 },
 {
@@ -631,7 +622,7 @@
     "fields": {
         "userteam": 14,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.753Z"
+        "timestamp": "2018-05-06T08:12:03.194Z"
     }
 },
 {
@@ -640,7 +631,7 @@
     "fields": {
         "userteam": 15,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.773Z"
+        "timestamp": "2018-05-06T08:12:03.214Z"
     }
 },
 {
@@ -649,7 +640,7 @@
     "fields": {
         "userteam": 16,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.793Z"
+        "timestamp": "2018-05-06T08:12:03.233Z"
     }
 },
 {
@@ -658,7 +649,7 @@
     "fields": {
         "userteam": 17,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-05T15:54:59.813Z"
+        "timestamp": "2018-05-06T08:12:03.251Z"
     }
 },
 {
@@ -890,7 +881,7 @@
         "name": "Vzdr\u017eevanje uporabnikov",
         "estimate": 3.5,
         "project": 1,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-10T08:00:00Z",
         "is_deleted": false,
@@ -908,7 +899,7 @@
         "name": "Vzdr\u017eevanje razvojnih skupin",
         "estimate": 1.0,
         "project": 1,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-10T08:00:00Z",
         "is_deleted": false,
@@ -920,13 +911,13 @@
     "pk": 3,
     "fields": {
         "column": "6",
-        "type": 1,
+        "type": 0,
         "card_number": 3,
         "description": "KanbanMaster lahko kreira, ureja in bri\u0161e podatke o projektih.",
         "name": "Vzdr\u017eevanje projektov",
         "estimate": 10.0,
         "project": 1,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-11T08:00:00Z",
         "is_deleted": false,
@@ -944,7 +935,7 @@
         "name": "Prijava v sistem",
         "estimate": 3.0,
         "project": 1,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-12T08:00:00Z",
         "is_deleted": false,
@@ -962,7 +953,7 @@
         "name": "Kreiranje table",
         "estimate": 4.0,
         "project": 1,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 4,
         "date_created": "2018-04-13T08:00:00Z",
         "is_deleted": false,
@@ -980,7 +971,7 @@
         "name": "Prikaz table",
         "estimate": 2.0,
         "project": 1,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 4,
         "date_created": "2018-04-15T08:00:00Z",
         "is_deleted": false,
@@ -998,7 +989,7 @@
         "name": "Kreiranje kartice",
         "estimate": 1.5,
         "project": 1,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-14T08:00:00Z",
         "is_deleted": false,
@@ -1016,7 +1007,7 @@
         "name": "Prestavljanje kartice",
         "estimate": 1.5,
         "project": 1,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 4,
         "date_created": "2018-04-16T08:00:00Z",
         "is_deleted": false,
@@ -1034,7 +1025,7 @@
         "name": "Prikaz podrobnosti kartice",
         "estimate": 1.5,
         "project": 1,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-18T08:00:00Z",
         "is_deleted": false,
@@ -1052,7 +1043,7 @@
         "name": "Kreiranje nove table s kopiranjem strukture",
         "estimate": 1.5,
         "project": 1,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-17T08:00:00Z",
         "is_deleted": false,
@@ -1070,7 +1061,7 @@
         "name": "Uporabni\u0161ka dokumentacija",
         "estimate": 1.5,
         "project": 1,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 5,
         "date_created": "2018-04-11T08:00:00Z",
         "is_deleted": false,
@@ -1088,7 +1079,7 @@
         "name": "Posodabljanje vsebine kartice",
         "estimate": 4.0,
         "project": 2,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 4,
         "date_created": "2018-04-10T08:00:00Z",
         "is_deleted": false,
@@ -1106,7 +1097,7 @@
         "name": "Brisanje kartice",
         "estimate": 1.0,
         "project": 2,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-12T08:00:00Z",
         "is_deleted": false,
@@ -1118,13 +1109,13 @@
     "pk": 14,
     "fields": {
         "column": "6",
-        "type": 1,
+        "type": 0,
         "card_number": 14,
         "description": "KanbanMaster lahko kreira, ureja in bri\u0161e podatke o projektih.",
         "name": "Posodabljanje lastnosti stolpca",
         "estimate": 1.0,
         "project": 2,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-11T08:00:00Z",
         "is_deleted": false,
@@ -1142,7 +1133,7 @@
         "name": "Izra\u010dun povpre\u010dnega potrebnega \u010dasa",
         "estimate": 3.0,
         "project": 2,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 4,
         "date_created": "2018-04-17T08:00:00Z",
         "is_deleted": false,
@@ -1160,7 +1151,7 @@
         "name": "Izdelava kumulativnega diagrama delovnega toka",
         "estimate": 6.0,
         "project": 2,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-14T08:00:00Z",
         "is_deleted": false,
@@ -1178,7 +1169,7 @@
         "name": "Izpis kr\u0161itev omejitve WIP",
         "estimate": 5.0,
         "project": 2,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 4,
         "date_created": "2018-04-11T08:00:00Z",
         "is_deleted": false,
@@ -1196,7 +1187,7 @@
         "name": "Prikaz 'kriti\u010dnih' kartic",
         "estimate": 4.0,
         "project": 2,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-14T08:00:00Z",
         "is_deleted": false,
@@ -1214,7 +1205,7 @@
         "name": "Obve\u0161\u010danje o prekora\u010ditvi roka",
         "estimate": 1.5,
         "project": 2,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 5,
         "date_created": "2018-04-13T08:00:00Z",
         "is_deleted": false,
@@ -1232,7 +1223,7 @@
         "name": "Vgradnja pravil za prestavljanje kartic",
         "estimate": 3.0,
         "project": 2,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-15T08:00:00Z",
         "is_deleted": false,
@@ -1250,7 +1241,7 @@
         "name": "'O\u017eenje' stolpcev",
         "estimate": 2.0,
         "project": 2,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 3,
         "date_created": "2018-04-18T08:00:00Z",
         "is_deleted": false,
@@ -1268,7 +1259,7 @@
         "name": "Prilagodljiv prikaz kartice na tabli",
         "estimate": 1.5,
         "project": 2,
-        "expiration": "2018-05-05",
+        "expiration": "2018-05-06",
         "owner": 4,
         "date_created": "2018-04-11T08:00:00Z",
         "is_deleted": false,
@@ -1320,6 +1311,18 @@
     "pk": 1,
     "fields": {
         "card": 1,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-10T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 2,
+    "fields": {
+        "card": 1,
         "from_column": "1",
         "to_column": "2",
         "user_team": 3,
@@ -1329,7 +1332,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 2,
+    "pk": 3,
     "fields": {
         "card": 1,
         "from_column": "2",
@@ -1341,7 +1344,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 3,
+    "pk": 4,
     "fields": {
         "card": 1,
         "from_column": "4",
@@ -1353,7 +1356,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 4,
+    "pk": 5,
     "fields": {
         "card": 1,
         "from_column": "5",
@@ -1365,7 +1368,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 5,
+    "pk": 6,
     "fields": {
         "card": 1,
         "from_column": "6",
@@ -1377,7 +1380,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 6,
+    "pk": 7,
     "fields": {
         "card": 1,
         "from_column": "7",
@@ -1389,7 +1392,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 7,
+    "pk": 8,
     "fields": {
         "card": 1,
         "from_column": "8",
@@ -1401,7 +1404,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 8,
+    "pk": 9,
     "fields": {
         "card": 1,
         "from_column": "9",
@@ -1413,7 +1416,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 9,
+    "pk": 10,
+    "fields": {
+        "card": 2,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-10T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 11,
     "fields": {
         "card": 2,
         "from_column": "1",
@@ -1425,7 +1440,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 10,
+    "pk": 12,
     "fields": {
         "card": 2,
         "from_column": "2",
@@ -1437,7 +1452,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 11,
+    "pk": 13,
     "fields": {
         "card": 2,
         "from_column": "4",
@@ -1449,7 +1464,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 12,
+    "pk": 14,
     "fields": {
         "card": 2,
         "from_column": "5",
@@ -1461,7 +1476,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 13,
+    "pk": 15,
     "fields": {
         "card": 2,
         "from_column": "6",
@@ -1473,7 +1488,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 14,
+    "pk": 16,
     "fields": {
         "card": 2,
         "from_column": "7",
@@ -1485,7 +1500,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 15,
+    "pk": 17,
     "fields": {
         "card": 2,
         "from_column": "8",
@@ -1497,7 +1512,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 16,
+    "pk": 18,
     "fields": {
         "card": 2,
         "from_column": "9",
@@ -1509,19 +1524,31 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 17,
+    "pk": 19,
+    "fields": {
+        "card": 3,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-11T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 20,
     "fields": {
         "card": 3,
         "from_column": "1",
         "to_column": "2",
         "user_team": 3,
         "action": null,
-        "timestamp": "2018-04-21T16:00:00Z"
+        "timestamp": "2018-04-16T10:00:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 18,
+    "pk": 21,
     "fields": {
         "card": 3,
         "from_column": "2",
@@ -1533,7 +1560,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 19,
+    "pk": 22,
     "fields": {
         "card": 3,
         "from_column": "4",
@@ -1545,7 +1572,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 20,
+    "pk": 23,
     "fields": {
         "card": 3,
         "from_column": "5",
@@ -1557,7 +1584,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 21,
+    "pk": 24,
     "fields": {
         "card": 3,
         "from_column": "6",
@@ -1569,7 +1596,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 22,
+    "pk": 25,
     "fields": {
         "card": 3,
         "from_column": "7",
@@ -1581,7 +1608,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 23,
+    "pk": 26,
     "fields": {
         "card": 3,
         "from_column": "8",
@@ -1593,7 +1620,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 24,
+    "pk": 27,
     "fields": {
         "card": 3,
         "from_column": "9",
@@ -1605,7 +1632,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 25,
+    "pk": 28,
+    "fields": {
+        "card": 4,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-12T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 29,
     "fields": {
         "card": 4,
         "from_column": "1",
@@ -1617,7 +1656,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 26,
+    "pk": 30,
     "fields": {
         "card": 4,
         "from_column": "2",
@@ -1629,7 +1668,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 27,
+    "pk": 31,
     "fields": {
         "card": 4,
         "from_column": "4",
@@ -1641,7 +1680,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 28,
+    "pk": 32,
     "fields": {
         "card": 4,
         "from_column": "5",
@@ -1653,7 +1692,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 29,
+    "pk": 33,
     "fields": {
         "card": 4,
         "from_column": "6",
@@ -1665,7 +1704,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 30,
+    "pk": 34,
     "fields": {
         "card": 4,
         "from_column": "7",
@@ -1677,7 +1716,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 31,
+    "pk": 35,
     "fields": {
         "card": 4,
         "from_column": "8",
@@ -1689,7 +1728,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 32,
+    "pk": 36,
     "fields": {
         "card": 4,
         "from_column": "9",
@@ -1701,7 +1740,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 33,
+    "pk": 37,
+    "fields": {
+        "card": 5,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-13T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 38,
     "fields": {
         "card": 5,
         "from_column": "1",
@@ -1713,7 +1764,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 34,
+    "pk": 39,
     "fields": {
         "card": 5,
         "from_column": "2",
@@ -1725,7 +1776,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 35,
+    "pk": 40,
     "fields": {
         "card": 5,
         "from_column": "4",
@@ -1737,7 +1788,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 36,
+    "pk": 41,
     "fields": {
         "card": 5,
         "from_column": "5",
@@ -1749,7 +1800,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 37,
+    "pk": 42,
     "fields": {
         "card": 5,
         "from_column": "6",
@@ -1761,7 +1812,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 38,
+    "pk": 43,
     "fields": {
         "card": 5,
         "from_column": "7",
@@ -1773,7 +1824,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 39,
+    "pk": 44,
     "fields": {
         "card": 5,
         "from_column": "8",
@@ -1785,7 +1836,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 40,
+    "pk": 45,
     "fields": {
         "card": 5,
         "from_column": "9",
@@ -1797,7 +1848,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 41,
+    "pk": 46,
     "fields": {
         "card": 5,
         "from_column": "4",
@@ -1809,7 +1860,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 42,
+    "pk": 47,
     "fields": {
         "card": 5,
         "from_column": "5",
@@ -1821,7 +1872,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 43,
+    "pk": 48,
     "fields": {
         "card": 5,
         "from_column": "6",
@@ -1833,7 +1884,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 44,
+    "pk": 49,
     "fields": {
         "card": 5,
         "from_column": "7",
@@ -1845,7 +1896,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 45,
+    "pk": 50,
     "fields": {
         "card": 5,
         "from_column": "8",
@@ -1857,7 +1908,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 46,
+    "pk": 51,
     "fields": {
         "card": 5,
         "from_column": "9",
@@ -1869,7 +1920,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 47,
+    "pk": 52,
+    "fields": {
+        "card": 6,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-15T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 53,
     "fields": {
         "card": 6,
         "from_column": "1",
@@ -1881,7 +1944,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 48,
+    "pk": 54,
     "fields": {
         "card": 6,
         "from_column": "2",
@@ -1893,7 +1956,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 49,
+    "pk": 55,
     "fields": {
         "card": 6,
         "from_column": "4",
@@ -1905,7 +1968,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 50,
+    "pk": 56,
     "fields": {
         "card": 6,
         "from_column": "5",
@@ -1917,7 +1980,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 51,
+    "pk": 57,
     "fields": {
         "card": 6,
         "from_column": "6",
@@ -1929,7 +1992,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 52,
+    "pk": 58,
     "fields": {
         "card": 6,
         "from_column": "7",
@@ -1941,7 +2004,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 53,
+    "pk": 59,
     "fields": {
         "card": 6,
         "from_column": "8",
@@ -1953,7 +2016,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 54,
+    "pk": 60,
     "fields": {
         "card": 6,
         "from_column": "9",
@@ -1965,7 +2028,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 55,
+    "pk": 61,
+    "fields": {
+        "card": 7,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-14T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 62,
     "fields": {
         "card": 7,
         "from_column": "1",
@@ -1977,7 +2052,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 56,
+    "pk": 63,
     "fields": {
         "card": 7,
         "from_column": "2",
@@ -1989,7 +2064,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 57,
+    "pk": 64,
     "fields": {
         "card": 7,
         "from_column": "4",
@@ -2001,7 +2076,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 58,
+    "pk": 65,
     "fields": {
         "card": 7,
         "from_column": "5",
@@ -2013,7 +2088,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 59,
+    "pk": 66,
     "fields": {
         "card": 7,
         "from_column": "6",
@@ -2025,7 +2100,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 60,
+    "pk": 67,
     "fields": {
         "card": 7,
         "from_column": "7",
@@ -2037,7 +2112,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 61,
+    "pk": 68,
     "fields": {
         "card": 7,
         "from_column": "8",
@@ -2049,7 +2124,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 62,
+    "pk": 69,
     "fields": {
         "card": 7,
         "from_column": "9",
@@ -2061,7 +2136,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 63,
+    "pk": 70,
+    "fields": {
+        "card": 8,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-16T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 71,
     "fields": {
         "card": 8,
         "from_column": "1",
@@ -2073,7 +2160,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 64,
+    "pk": 72,
     "fields": {
         "card": 8,
         "from_column": "2",
@@ -2085,7 +2172,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 65,
+    "pk": 73,
     "fields": {
         "card": 8,
         "from_column": "4",
@@ -2097,7 +2184,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 66,
+    "pk": 74,
     "fields": {
         "card": 8,
         "from_column": "5",
@@ -2109,7 +2196,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 67,
+    "pk": 75,
     "fields": {
         "card": 8,
         "from_column": "4",
@@ -2121,7 +2208,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 68,
+    "pk": 76,
     "fields": {
         "card": 8,
         "from_column": "5",
@@ -2133,7 +2220,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 69,
+    "pk": 77,
     "fields": {
         "card": 8,
         "from_column": "6",
@@ -2145,7 +2232,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 70,
+    "pk": 78,
     "fields": {
         "card": 8,
         "from_column": "7",
@@ -2157,7 +2244,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 71,
+    "pk": 79,
     "fields": {
         "card": 8,
         "from_column": "8",
@@ -2169,7 +2256,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 72,
+    "pk": 80,
     "fields": {
         "card": 8,
         "from_column": "9",
@@ -2181,31 +2268,43 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 73,
+    "pk": 81,
+    "fields": {
+        "card": 9,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-18T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 82,
     "fields": {
         "card": 9,
         "from_column": "1",
         "to_column": "2",
         "user_team": 3,
         "action": null,
-        "timestamp": "2018-04-17T16:00:00Z"
+        "timestamp": "2018-04-18T16:00:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 74,
+    "pk": 83,
     "fields": {
         "card": 9,
         "from_column": "2",
         "to_column": "4",
         "user_team": 3,
         "action": null,
-        "timestamp": "2018-04-17T17:00:00Z"
+        "timestamp": "2018-04-18T17:00:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 75,
+    "pk": 84,
     "fields": {
         "card": 9,
         "from_column": "4",
@@ -2217,7 +2316,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 76,
+    "pk": 85,
     "fields": {
         "card": 9,
         "from_column": "5",
@@ -2229,7 +2328,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 77,
+    "pk": 86,
     "fields": {
         "card": 9,
         "from_column": "6",
@@ -2241,7 +2340,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 78,
+    "pk": 87,
     "fields": {
         "card": 9,
         "from_column": "7",
@@ -2253,7 +2352,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 79,
+    "pk": 88,
     "fields": {
         "card": 9,
         "from_column": "8",
@@ -2265,7 +2364,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 80,
+    "pk": 89,
     "fields": {
         "card": 9,
         "from_column": "9",
@@ -2277,7 +2376,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 81,
+    "pk": 90,
+    "fields": {
+        "card": 10,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 91,
     "fields": {
         "card": 10,
         "from_column": "1",
@@ -2289,7 +2400,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 82,
+    "pk": 92,
     "fields": {
         "card": 10,
         "from_column": "2",
@@ -2301,7 +2412,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 83,
+    "pk": 93,
     "fields": {
         "card": 10,
         "from_column": "4",
@@ -2313,7 +2424,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 84,
+    "pk": 94,
     "fields": {
         "card": 10,
         "from_column": "5",
@@ -2325,7 +2436,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 85,
+    "pk": 95,
     "fields": {
         "card": 10,
         "from_column": "6",
@@ -2337,7 +2448,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 86,
+    "pk": 96,
     "fields": {
         "card": 10,
         "from_column": "7",
@@ -2349,7 +2460,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 87,
+    "pk": 97,
     "fields": {
         "card": 10,
         "from_column": "8",
@@ -2361,7 +2472,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 88,
+    "pk": 98,
     "fields": {
         "card": 10,
         "from_column": "9",
@@ -2373,19 +2484,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 89,
+    "pk": 99,
     "fields": {
         "card": 11,
-        "from_column": "1",
+        "from_column": null,
         "to_column": "2",
         "user_team": 5,
         "action": null,
-        "timestamp": "2018-04-11T16:00:00Z"
+        "timestamp": "2018-04-11T08:00:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 90,
+    "pk": 100,
     "fields": {
         "card": 11,
         "from_column": "2",
@@ -2397,7 +2508,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 91,
+    "pk": 101,
     "fields": {
         "card": 11,
         "from_column": "4",
@@ -2409,7 +2520,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 92,
+    "pk": 102,
     "fields": {
         "card": 11,
         "from_column": "5",
@@ -2421,7 +2532,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 93,
+    "pk": 103,
     "fields": {
         "card": 11,
         "from_column": "6",
@@ -2433,7 +2544,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 94,
+    "pk": 104,
     "fields": {
         "card": 11,
         "from_column": "7",
@@ -2445,7 +2556,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 95,
+    "pk": 105,
     "fields": {
         "card": 11,
         "from_column": "8",
@@ -2457,7 +2568,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 96,
+    "pk": 106,
     "fields": {
         "card": 11,
         "from_column": "9",
@@ -2469,7 +2580,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 97,
+    "pk": 107,
+    "fields": {
+        "card": 12,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-10T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 108,
     "fields": {
         "card": 12,
         "from_column": "1",
@@ -2481,7 +2604,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 98,
+    "pk": 109,
     "fields": {
         "card": 12,
         "from_column": "2",
@@ -2493,7 +2616,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 99,
+    "pk": 110,
     "fields": {
         "card": 12,
         "from_column": "4",
@@ -2505,7 +2628,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 100,
+    "pk": 111,
     "fields": {
         "card": 12,
         "from_column": "5",
@@ -2517,7 +2640,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 101,
+    "pk": 112,
     "fields": {
         "card": 12,
         "from_column": "6",
@@ -2529,7 +2652,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 102,
+    "pk": 113,
     "fields": {
         "card": 12,
         "from_column": "7",
@@ -2541,7 +2664,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 103,
+    "pk": 114,
     "fields": {
         "card": 12,
         "from_column": "8",
@@ -2553,7 +2676,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 104,
+    "pk": 115,
     "fields": {
         "card": 12,
         "from_column": "9",
@@ -2565,7 +2688,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 105,
+    "pk": 116,
+    "fields": {
+        "card": 13,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-12T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 117,
     "fields": {
         "card": 13,
         "from_column": "1",
@@ -2577,7 +2712,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 106,
+    "pk": 118,
     "fields": {
         "card": 13,
         "from_column": "2",
@@ -2589,7 +2724,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 107,
+    "pk": 119,
     "fields": {
         "card": 13,
         "from_column": "4",
@@ -2601,7 +2736,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 108,
+    "pk": 120,
     "fields": {
         "card": 13,
         "from_column": "5",
@@ -2613,7 +2748,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 109,
+    "pk": 121,
     "fields": {
         "card": 13,
         "from_column": "6",
@@ -2625,7 +2760,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 110,
+    "pk": 122,
     "fields": {
         "card": 13,
         "from_column": "7",
@@ -2637,7 +2772,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 111,
+    "pk": 123,
     "fields": {
         "card": 13,
         "from_column": "8",
@@ -2649,7 +2784,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 112,
+    "pk": 124,
     "fields": {
         "card": 13,
         "from_column": "9",
@@ -2661,7 +2796,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 113,
+    "pk": 125,
+    "fields": {
+        "card": 14,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-11T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 126,
     "fields": {
         "card": 14,
         "from_column": "1",
@@ -2673,7 +2820,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 114,
+    "pk": 127,
     "fields": {
         "card": 14,
         "from_column": "2",
@@ -2685,7 +2832,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 115,
+    "pk": 128,
     "fields": {
         "card": 14,
         "from_column": "4",
@@ -2697,7 +2844,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 116,
+    "pk": 129,
     "fields": {
         "card": 14,
         "from_column": "5",
@@ -2709,7 +2856,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 117,
+    "pk": 130,
     "fields": {
         "card": 14,
         "from_column": "6",
@@ -2721,7 +2868,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 118,
+    "pk": 131,
     "fields": {
         "card": 14,
         "from_column": "7",
@@ -2733,7 +2880,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 119,
+    "pk": 132,
     "fields": {
         "card": 14,
         "from_column": "8",
@@ -2745,7 +2892,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 120,
+    "pk": 133,
     "fields": {
         "card": 14,
         "from_column": "9",
@@ -2757,7 +2904,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 121,
+    "pk": 134,
+    "fields": {
+        "card": 15,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 135,
     "fields": {
         "card": 15,
         "from_column": "1",
@@ -2769,7 +2928,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 122,
+    "pk": 136,
     "fields": {
         "card": 15,
         "from_column": "2",
@@ -2781,7 +2940,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 123,
+    "pk": 137,
     "fields": {
         "card": 15,
         "from_column": "4",
@@ -2793,7 +2952,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 124,
+    "pk": 138,
     "fields": {
         "card": 15,
         "from_column": "5",
@@ -2805,7 +2964,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 125,
+    "pk": 139,
     "fields": {
         "card": 15,
         "from_column": "6",
@@ -2817,7 +2976,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 126,
+    "pk": 140,
     "fields": {
         "card": 15,
         "from_column": "7",
@@ -2829,7 +2988,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 127,
+    "pk": 141,
     "fields": {
         "card": 15,
         "from_column": "8",
@@ -2841,7 +3000,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 128,
+    "pk": 142,
     "fields": {
         "card": 15,
         "from_column": "9",
@@ -2853,7 +3012,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 129,
+    "pk": 143,
+    "fields": {
+        "card": 16,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-14T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 144,
     "fields": {
         "card": 16,
         "from_column": "1",
@@ -2865,7 +3036,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 130,
+    "pk": 145,
     "fields": {
         "card": 16,
         "from_column": "2",
@@ -2877,7 +3048,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 131,
+    "pk": 146,
     "fields": {
         "card": 16,
         "from_column": "4",
@@ -2889,7 +3060,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 132,
+    "pk": 147,
     "fields": {
         "card": 16,
         "from_column": "5",
@@ -2901,7 +3072,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 133,
+    "pk": 148,
     "fields": {
         "card": 16,
         "from_column": "6",
@@ -2913,7 +3084,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 134,
+    "pk": 149,
     "fields": {
         "card": 16,
         "from_column": "7",
@@ -2925,7 +3096,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 135,
+    "pk": 150,
     "fields": {
         "card": 16,
         "from_column": "8",
@@ -2937,7 +3108,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 136,
+    "pk": 151,
     "fields": {
         "card": 16,
         "from_column": "9",
@@ -2949,7 +3120,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 137,
+    "pk": 152,
     "fields": {
         "card": 16,
         "from_column": "4",
@@ -2961,7 +3132,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 138,
+    "pk": 153,
     "fields": {
         "card": 16,
         "from_column": "5",
@@ -2973,7 +3144,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 139,
+    "pk": 154,
     "fields": {
         "card": 16,
         "from_column": "6",
@@ -2985,7 +3156,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 140,
+    "pk": 155,
     "fields": {
         "card": 16,
         "from_column": "7",
@@ -2997,7 +3168,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 141,
+    "pk": 156,
     "fields": {
         "card": 16,
         "from_column": "8",
@@ -3009,7 +3180,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 142,
+    "pk": 157,
     "fields": {
         "card": 16,
         "from_column": "9",
@@ -3021,7 +3192,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 143,
+    "pk": 158,
+    "fields": {
+        "card": 17,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-11T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 159,
     "fields": {
         "card": 17,
         "from_column": "1",
@@ -3033,7 +3216,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 144,
+    "pk": 160,
     "fields": {
         "card": 17,
         "from_column": "2",
@@ -3045,7 +3228,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 145,
+    "pk": 161,
     "fields": {
         "card": 17,
         "from_column": "4",
@@ -3057,7 +3240,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 146,
+    "pk": 162,
     "fields": {
         "card": 17,
         "from_column": "5",
@@ -3069,7 +3252,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 147,
+    "pk": 163,
     "fields": {
         "card": 17,
         "from_column": "6",
@@ -3081,7 +3264,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 148,
+    "pk": 164,
     "fields": {
         "card": 17,
         "from_column": "7",
@@ -3093,7 +3276,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 149,
+    "pk": 165,
     "fields": {
         "card": 17,
         "from_column": "8",
@@ -3105,7 +3288,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 150,
+    "pk": 166,
     "fields": {
         "card": 17,
         "from_column": "9",
@@ -3117,7 +3300,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 151,
+    "pk": 167,
+    "fields": {
+        "card": 18,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-14T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 168,
     "fields": {
         "card": 18,
         "from_column": "1",
@@ -3129,7 +3324,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 152,
+    "pk": 169,
     "fields": {
         "card": 18,
         "from_column": "2",
@@ -3141,7 +3336,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 153,
+    "pk": 170,
     "fields": {
         "card": 18,
         "from_column": "4",
@@ -3153,7 +3348,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 154,
+    "pk": 171,
     "fields": {
         "card": 18,
         "from_column": "5",
@@ -3165,7 +3360,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 155,
+    "pk": 172,
     "fields": {
         "card": 18,
         "from_column": "6",
@@ -3177,7 +3372,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 156,
+    "pk": 173,
     "fields": {
         "card": 18,
         "from_column": "7",
@@ -3189,7 +3384,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 157,
+    "pk": 174,
     "fields": {
         "card": 18,
         "from_column": "8",
@@ -3201,7 +3396,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 158,
+    "pk": 175,
     "fields": {
         "card": 18,
         "from_column": "9",
@@ -3213,7 +3408,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 159,
+    "pk": 176,
+    "fields": {
+        "card": 19,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-13T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 177,
     "fields": {
         "card": 19,
         "from_column": "1",
@@ -3225,7 +3432,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 160,
+    "pk": 178,
     "fields": {
         "card": 19,
         "from_column": "2",
@@ -3237,7 +3444,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 161,
+    "pk": 179,
     "fields": {
         "card": 19,
         "from_column": "4",
@@ -3249,7 +3456,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 162,
+    "pk": 180,
     "fields": {
         "card": 19,
         "from_column": "5",
@@ -3261,7 +3468,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 163,
+    "pk": 181,
     "fields": {
         "card": 19,
         "from_column": "4",
@@ -3273,7 +3480,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 164,
+    "pk": 182,
     "fields": {
         "card": 19,
         "from_column": "5",
@@ -3285,7 +3492,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 165,
+    "pk": 183,
     "fields": {
         "card": 19,
         "from_column": "6",
@@ -3297,7 +3504,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 166,
+    "pk": 184,
     "fields": {
         "card": 19,
         "from_column": "7",
@@ -3309,7 +3516,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 167,
+    "pk": 185,
     "fields": {
         "card": 19,
         "from_column": "8",
@@ -3321,7 +3528,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 168,
+    "pk": 186,
     "fields": {
         "card": 19,
         "from_column": "9",
@@ -3333,7 +3540,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 169,
+    "pk": 187,
+    "fields": {
+        "card": 20,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-15T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 188,
     "fields": {
         "card": 20,
         "from_column": "1",
@@ -3345,7 +3564,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 170,
+    "pk": 189,
     "fields": {
         "card": 20,
         "from_column": "2",
@@ -3357,7 +3576,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 171,
+    "pk": 190,
     "fields": {
         "card": 20,
         "from_column": "4",
@@ -3369,7 +3588,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 172,
+    "pk": 191,
     "fields": {
         "card": 20,
         "from_column": "5",
@@ -3381,7 +3600,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 173,
+    "pk": 192,
     "fields": {
         "card": 20,
         "from_column": "6",
@@ -3393,7 +3612,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 174,
+    "pk": 193,
     "fields": {
         "card": 20,
         "from_column": "7",
@@ -3405,7 +3624,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 175,
+    "pk": 194,
     "fields": {
         "card": 20,
         "from_column": "8",
@@ -3417,7 +3636,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 176,
+    "pk": 195,
     "fields": {
         "card": 20,
         "from_column": "9",
@@ -3429,7 +3648,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 177,
+    "pk": 196,
+    "fields": {
+        "card": 21,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-18T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 197,
     "fields": {
         "card": 21,
         "from_column": "1",
@@ -3441,7 +3672,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 178,
+    "pk": 198,
     "fields": {
         "card": 21,
         "from_column": "2",
@@ -3453,7 +3684,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 179,
+    "pk": 199,
     "fields": {
         "card": 21,
         "from_column": "4",
@@ -3465,7 +3696,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 180,
+    "pk": 200,
     "fields": {
         "card": 21,
         "from_column": "5",
@@ -3477,7 +3708,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 181,
+    "pk": 201,
     "fields": {
         "card": 21,
         "from_column": "6",
@@ -3489,7 +3720,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 182,
+    "pk": 202,
     "fields": {
         "card": 21,
         "from_column": "7",
@@ -3501,7 +3732,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 183,
+    "pk": 203,
     "fields": {
         "card": 21,
         "from_column": "8",
@@ -3513,7 +3744,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 184,
+    "pk": 204,
     "fields": {
         "card": 21,
         "from_column": "9",
@@ -3525,103 +3756,103 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 185,
+    "pk": 205,
     "fields": {
         "card": 22,
-        "from_column": "1",
+        "from_column": null,
         "to_column": "2",
-        "user_team": 4,
+        "user_team": 3,
         "action": null,
-        "timestamp": "2018-04-11T16:00:00Z"
+        "timestamp": "2018-04-18T08:00:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 186,
+    "pk": 206,
     "fields": {
         "card": 22,
         "from_column": "2",
         "to_column": "4",
         "user_team": 4,
         "action": null,
-        "timestamp": "2018-04-11T17:00:00Z"
+        "timestamp": "2018-04-19T17:00:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 187,
+    "pk": 207,
     "fields": {
         "card": 22,
         "from_column": "4",
         "to_column": "5",
         "user_team": 4,
         "action": null,
-        "timestamp": "2018-04-12T12:00:00Z"
+        "timestamp": "2018-04-20T12:00:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 188,
+    "pk": 208,
     "fields": {
         "card": 22,
         "from_column": "5",
         "to_column": "6",
         "user_team": 4,
         "action": null,
-        "timestamp": "2018-04-12T17:00:00Z"
+        "timestamp": "2018-04-21T17:00:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 189,
+    "pk": 209,
     "fields": {
         "card": 22,
         "from_column": "6",
         "to_column": "7",
         "user_team": 4,
         "action": null,
-        "timestamp": "2018-04-13T09:30:00Z"
+        "timestamp": "2018-04-22T09:30:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 190,
+    "pk": 210,
     "fields": {
         "card": 22,
         "from_column": "7",
         "to_column": "8",
         "user_team": 4,
         "action": null,
-        "timestamp": "2018-04-14T12:00:00Z"
+        "timestamp": "2018-04-24T12:00:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 191,
+    "pk": 211,
     "fields": {
         "card": 22,
         "from_column": "8",
         "to_column": "9",
         "user_team": 4,
         "action": null,
-        "timestamp": "2018-04-15T06:00:00Z"
+        "timestamp": "2018-04-26T06:00:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 192,
+    "pk": 212,
     "fields": {
         "card": 22,
         "from_column": "9",
         "to_column": "10",
         "user_team": 4,
         "action": null,
-        "timestamp": "2018-04-16T12:00:00Z"
+        "timestamp": "2018-04-28T12:00:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 193,
+    "pk": 213,
     "fields": {
         "card": 1,
         "from_column": "4",
@@ -3633,7 +3864,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 194,
+    "pk": 214,
     "fields": {
         "card": 5,
         "from_column": "2",
@@ -3645,7 +3876,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 195,
+    "pk": 215,
     "fields": {
         "card": 6,
         "from_column": "2",
@@ -3657,19 +3888,19 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 196,
+    "pk": 216,
     "fields": {
         "card": 11,
         "from_column": "6",
         "to_column": "7",
         "user_team": 5,
         "action": "Naredil sem nedevoljen premik 4",
-        "timestamp": "2018-04-18T18:10:00Z"
+        "timestamp": "2018-04-13T18:10:00Z"
     }
 },
 {
     "model": "app.cardlog",
-    "pk": 197,
+    "pk": 217,
     "fields": {
         "card": 12,
         "from_column": "5",
@@ -3681,7 +3912,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 198,
+    "pk": 218,
     "fields": {
         "card": 14,
         "from_column": "2",
@@ -3693,7 +3924,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 199,
+    "pk": 219,
     "fields": {
         "card": 17,
         "from_column": "4",
@@ -3705,7 +3936,7 @@
 },
 {
     "model": "app.cardlog",
-    "pk": 200,
+    "pk": 220,
     "fields": {
         "card": 22,
         "from_column": "7",

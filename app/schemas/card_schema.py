@@ -144,7 +144,7 @@ def filter_cards(project_id, creation_start, creation_end, done_start, done_end,
     if done_end:
         end = HelperClass.get_si_date(done_end)
         done_column = get_done_column(project.board)
-        valid_cards = models.CardLog.objects.filter(to_column=done_column, timestamp__lte=end+datetime.timedelta(days=1)).values_list('card', flat=True)
+        valid_cards = models.CardLog.objects.filter(to_column=done_column, timestamp__lt=end+datetime.timedelta(days=1)).values_list('card', flat=True)
         cards = cards.filter(pk__in=[c for c in valid_cards])
     if dev_start:
         start = HelperClass.get_si_date(dev_start)
@@ -154,7 +154,7 @@ def filter_cards(project_id, creation_start, creation_end, done_start, done_end,
     if dev_end:
         end = HelperClass.get_si_date(dev_end)
         left, _ = get_boundary_columns(project.board)
-        valid_cards = models.CardLog.objects.filter(to_column=left, timestamp__lte=end+datetime.timedelta(days=1)).values_list('card', flat=True)
+        valid_cards = models.CardLog.objects.filter(to_column=left, timestamp__lt=end+datetime.timedelta(days=1)).values_list('card', flat=True)
         cards = cards.filter(pk__in=[c for c in valid_cards])
     if estimate_from:
         cards = cards.filter(estimate__gte=estimate_from)
@@ -300,6 +300,8 @@ class CardType(DjangoObjectType):
         end = instance.logs.filter(to_column=col_end, action=None).last()
         if start == end or start == None:
             start = instance.logs.filter(from_column=col_start, action=None).first()
+        if not end:
+            end = instance.logs.filter(from_column=col_end, action=None).last()
 
         if not (start and end):
             raise GraphQLError("Kartica ni bila v željenih stolpcih.")

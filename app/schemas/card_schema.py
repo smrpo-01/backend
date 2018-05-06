@@ -63,7 +63,7 @@ def get_current_column(card):
     return models.CardLog.objects.filter(card=card, action=None).last().to_column
 
 
-def card_per_column_time(card, minimal=True):
+def card_per_column_time(card, minimal=True, column_from=None, column_to=None):
     localtz = pytz.timezone('Europe/Ljubljana')
 
     b = card.project.board
@@ -75,6 +75,9 @@ def card_per_column_time(card, minimal=True):
         done_col = get_done_column(b)
         cols = cols.exclude(id__in=[c.id for c in backlogs])
         cols = cols.exclude(id=done_col.id)
+
+    if column_from and column_to:
+        cols = columns_between(column_from, column_to)
 
     per_column = {}
     cols = sort_columns(cols)
@@ -100,8 +103,8 @@ def card_per_column_time(card, minimal=True):
     return per_column
 
 
-def card_total_time(card, minimal=True):
-    data = card_per_column_time(card, minimal)
+def card_total_time(card, minimal=True, column_from=None, column_to=None):
+    data = card_per_column_time(card, minimal, column_from, column_to)
     return sum([v for _, v in data.items()])
 
 
@@ -277,36 +280,34 @@ class CardType(DjangoObjectType):
     class Meta:
         model = models.Card
 
-    card_per_column_time = GenericScalar(minimal=graphene.Boolean(default_value=True))
-    total_time = graphene.Float(minimal=graphene.Boolean(default_value=True))
-    travel_time = graphene.Float(column_from=graphene.String(default_value=0), column_to=graphene.String(default_value=0))
+    card_per_column_time = GenericScalar(
+        minimal=graphene.Boolean(default_value=True),
+        column_from=graphene.String(),
+        column_to=graphene.String()
+    )
+    travel_time = graphene.Float(
+        minimal=graphene.Boolean(default_value=True),
+        column_from=graphene.String(),
+        column_to=graphene.String()
+    )
 
-    def resolve_card_per_column_time(instance, info, minimal):
-        return card_per_column_time(instance, minimal=minimal)
+    def resolve_card_per_column_time(instance, info, minimal, column_from=None, column_to=None):
+        if column_from and column_to:
+            column_from = models.Column.objects.get(id=column_from)
+            column_to = models.Column.objects.get(id=column_to)
+        return card_per_column_time(instance, minimal, column_from, column_to)
 
-    def resolve_total_time(instance, info, minimal):
-        return card_total_time(instance, minimal=minimal)
+    def resolve_travel_time(instance, info, minimal, column_from=None, column_to=None):
+        if column_from and column_to:
+            column_from = models.Column.objects.get(id=column_from)
+            column_to = models.Column.objects.get(id=column_to)
 
-    def resolve_travel_time(instance, info, column_from, column_to):
-        col_start = models.Column.objects.get(id=column_from)
-        col_end = models.Column.objects.get(id=column_to)
-
-        columns = models.Column.objects.filter(board=col_start.board, parent=None)
-        columns = get_columns_absolute(columns, [])
-        if columns.index(col_start) > columns.index(col_end):
-            raise GraphQLError("Drugi stolpec je levo od prvega.")
-
-        start = instance.logs.filter(to_column=col_start, action=None).first()
-        end = instance.logs.filter(to_column=col_end, action=None).last()
-        if start == end or start == None:
-            start = instance.logs.filter(from_column=col_start, action=None).first()
-        if not end:
-            end = instance.logs.filter(from_column=col_end, action=None).last()
-
-        if not (start and end):
-            raise GraphQLError("Kartica ni bila v željenih stolpcih.")
-
-        return abs((end.timestamp - start.timestamp).total_seconds()) / 3600
+            columns = models.Column.objects.filter(board=column_from.board, parent=None)
+            columns = get_columns_absolute(columns, [])
+            
+            if columns.index(column_from) > columns.index(column_to):
+                raise GraphQLError("Drugi stolpec je levo od prvega.")
+        return card_total_time(instance, minimal, column_from, column_to)
 
 
 class CardLogType(DjangoObjectType):
@@ -352,7 +353,9 @@ class CardQueries(graphene.ObjectType):
         estimate_from=graphene.Float(default_value=0),
         estimate_to=graphene.Float(default_value=0),
         card_type=graphene.List(graphene.String, default_value=0),
-        minimal=graphene.Boolean(default_value=True)
+        minimal=graphene.Boolean(default_value=True),
+        column_from=graphene.String(),
+        column_to=graphene.String()
     )
     done_cards = graphene.List(CardType, project_id=graphene.Int(default_value=0))
     cards_per_dev = GenericScalar(
@@ -465,10 +468,14 @@ class CardQueries(graphene.ObjectType):
                             dev_end, estimate_from, estimate_to, card_type)
 
     def resolve_avg_lead_time(self, info, project_id, creation_start, creation_end, done_start, done_end, dev_start, \
-                              dev_end, estimate_from, estimate_to, card_type, minimal):
+                              dev_end, estimate_from, estimate_to, card_type, minimal, column_from=None, column_to=None):
         cards = filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
                              dev_end, estimate_from, estimate_to, card_type)
-        total_time = sum([card_total_time(c, minimal) for c in cards]) / len(cards)
+
+        if column_from and column_to:
+            column_from = models.Column.objects.get(id=column_from)
+            column_to = models.Column.objects.get(id=column_to)
+        total_time = sum([card_total_time(c, minimal, column_from, column_to) for c in cards]) / len(cards)
         return float("{0:.2f}".format(total_time))
 
     def resolve_done_cards(self, info, project_id):

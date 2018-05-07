@@ -1,14 +1,14 @@
 import graphene
 from graphene_django.types import DjangoObjectType
+from graphene.types.generic import GenericScalar
 
 from .. import models
+from backend.utils import HelperClass
 
 import json
 from graphql import GraphQLError
 
-
-def flatten(lst):
-    return sum(([x] if not isinstance(x, list) else flatten(x) for x in lst), [])
+from app.schemas.card_schema import *
 
 
 def validate_columns(columns):
@@ -30,9 +30,9 @@ def validate_structure(data, edit_board=True):
             return error
     b, p, a = 0, 0, 0
     for column in data['columns']:
-        b += flatten(count_critical(column, 'boundary')).count(True)
-        p += flatten(count_critical(column, 'priority')).count(True)
-        a += flatten(count_critical(column, 'acceptance')).count(True)
+        b += HelperClass.flatten(count_critical(column, 'boundary')).count(True)
+        p += HelperClass.flatten(count_critical(column, 'priority')).count(True)
+        a += HelperClass.flatten(count_critical(column, 'acceptance')).count(True)
 
     if b != 2: return "Tabla mora imeti dva mejna stolpca."
     if p != 1: return "Tabla mora imeti en prioritetni stolpec."
@@ -124,19 +124,50 @@ def get_columns_json(board_id):
     return board_json
 
 
+class ColumnType(DjangoObjectType):
+    class Meta:
+        model = models.Column
+
+
 class BoardType(DjangoObjectType):
     class Meta:
         model = models.Board
 
     columns = graphene.String()
+    #columns = GenericScalar()
+    columns_no_parents = graphene.List(ColumnType)
+
+    estimate_min = graphene.Float()
+    estimate_max = graphene.Float()
+
+    project_start_date = graphene.String()
+    project_end_date = graphene.String()
+
+    card_types = graphene.List(CardTypeType)
+
+    def resolve_estimate_min(instance, info):
+        return min([min([c.estimate for c in p.card_set.all()]) for p in instance.projects.all()])
+
+    def resolve_estimate_max(instance, info):
+        return max([max([c.estimate for c in p.card_set.all()]) for p in instance.projects.all()])
+
+    def resolve_project_start_date(instance, info):
+        return str(HelperClass.to_si_date(min([p.date_start for p in instance.projects.all()])))
+
+    def resolve_project_end_date(instance, info):
+        return str(HelperClass.to_si_date(max([p.date_end for p in instance.projects.all()])))
+
+    def resolve_card_types(instance, info):
+        return list(set(HelperClass.flatten([[c.type for c in p.card_set.all()] for p in instance.projects.all()])))
 
     def resolve_columns(instance, info):
         return json.dumps(get_columns_json(instance.id))
+        #return get_columns_json(instance.id)
 
-
-class ColumnType(DjangoObjectType):
-    class Meta:
-        model = models.Column
+    def resolve_columns_no_parents(instance, info):
+        columns = instance.column_set.filter(parent=None)
+        columns = get_columns_absolute(columns, [])
+        return sort_columns(columns)
 
 
 class BoardQueries(graphene.ObjectType):
@@ -157,8 +188,7 @@ class BoardQueries(graphene.ObjectType):
 
     def resolve_get_user_boards(self, info, userId=None):
         u = models.User.objects.get(pk=userId)
-        ur = [r.id for r in u.roles.all() if r.id == 1]
-        if ur:
+        if u in models.User.objects.filter(roles__id=1):
             return models.Board.objects.all()
         return [models.Board.objects.get(pk=b) for b in get_user_board_ids(userId)]
 

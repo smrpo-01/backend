@@ -1,5 +1,5 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-
+import datetime
 
 class HelperClass:
 
@@ -30,3 +30,27 @@ class HelperClass:
         else:
             ip = request.META.get('REMOTE_ADDR')
         return ip
+
+    @staticmethod
+    def get_si_date(date):
+        """
+        :param date: datetime object
+        :return:
+        """
+        return datetime.datetime.strptime(date, '%d.%m.%Y')
+
+    @staticmethod
+    def to_si_date(date):
+        """
+        :param date: datetime object
+        :return:
+        """
+        return datetime.datetime.strftime(date, '%d.%m.%Y').replace('.0', '.')
+
+    @staticmethod
+    def to_si_timestamp(timestamp):
+        return datetime.datetime.strftime(timestamp, '%X %d.%m.%Y').replace('.0','.').replace(' 0', ' ')
+
+    @staticmethod
+    def flatten(lst):
+        return sum(([x] if not isinstance(x, list) else HelperClass.flatten(x) for x in lst), [])

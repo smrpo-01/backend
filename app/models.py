@@ -132,6 +132,9 @@ class User(AbstractBaseUser):
     def __str__(self):
         return "(%s, %s, %s, %s)\n" % (self.email, self.first_name, self.last_name, str(self.is_active))
 
+    def min_str(self):
+        return "%s %s (%s)" % (self.first_name, self.last_name, self.email)
+
     def has_perm(self, perm, obj=None):
         return True
 
@@ -180,6 +183,9 @@ class Project(models.Model):
 
 
 class Column(models.Model):
+    class Meta:
+        ordering = ['parent__position', 'position']
+
     id = models.CharField(max_length=255, primary_key=True)
     board = models.ForeignKey(Board, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
@@ -194,10 +200,12 @@ class Column(models.Model):
 class CardType(models.Model):
     NORMAL = 0
     SILVER_BULLET = 1
+    REJECTED = 2
 
     CARD_TYPES = (
         (NORMAL, 'Navadna kartica'),
-        (SILVER_BULLET, 'Nujna zahteva')
+        (SILVER_BULLET, 'Nujna zahteva'),
+        (REJECTED, 'Zavrnjena kartica')
     )
 
     id = models.PositiveIntegerField(choices=CARD_TYPES, default=NORMAL, primary_key=True)
@@ -215,7 +223,8 @@ class Card(models.Model):
     estimate = models.FloatField(null=True)
     project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
     expiration = models.DateField(default=timezone.now, null=True)
-    owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
+    owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE, related_name='cards_assigned')
+    date_created = models.DateTimeField(default=timezone.now)
     is_deleted = models.BooleanField(default=False)
     color_rejected = models.BooleanField(default=False)
     cause_of_deletion = models.TextField(default="")
@@ -229,6 +238,9 @@ class Task(models.Model):
 
 
 class CardLog(models.Model):
+    class Meta:
+        ordering = ['timestamp', 'card']
+
     card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='logs')
     from_column = models.ForeignKey(Column, null=True, on_delete=models.CASCADE, related_name='from_column_log')
     to_column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name='to_column_log')
@@ -236,11 +248,15 @@ class CardLog(models.Model):
     action = models.CharField(max_length=255, null=True)
     timestamp = models.DateTimeField(default=timezone.now)
 
+    def __str__(self):
+        return "(Čas: %s, Tip akcije: %s, Kartica: %s, Iz stolpca: %s, V stolpec: %s)\n" % \
+                (self.timestamp, str(self.action), self.card.id,
+                 self.from_column.id if self.from_column else "None",
+                 self.to_column.id if self.to_column else "None")
+
 
 class CardLogCreateDelete(models.Model):
     card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='logs_create_delete')
     # če je 0 potem je to ustvarjena kartica, če je 1 je brisanje kartice
     action = models.IntegerField(null=False)
     timestamp = models.DateTimeField(default=timezone.now)
-
-

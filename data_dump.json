@@ -49,10 +49,19 @@
     }
 },
 {
+    "model": "app.loginattempt",
+    "pk": 1,
+    "fields": {
+        "ip": "127.0.0.1",
+        "unlock_date": "2018-05-07T11:18:54.301Z",
+        "counter": 0
+    }
+},
+{
     "model": "app.user",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$100000$PVZtaFJjtbew$YZLpvbd1r0Dy/9QY5wRnPl9uWIE9WAUZCGWMF5Lqxsw=",
+        "password": "pbkdf2_sha256$100000$jKp0Q5zNFflV$TmyqtohYfo0ub9FGDOkeQULRz5c/1MYr0jckPg8UBV8=",
         "last_login": null,
         "email": "admin@demo.com",
         "first_name": "Ad",
@@ -71,7 +80,7 @@
     "model": "app.user",
     "pk": 2,
     "fields": {
-        "password": "pbkdf2_sha256$100000$38I8xQqjcFuG$jI/hzVP4Cf9kdysclyxxw8GkQLTni0lRWP6HZRBJ/qs=",
+        "password": "pbkdf2_sha256$100000$kUfnhQBn8OAa$AToeT7A7NzvT8bb6nO6+XXpFitcaOMTocOr++qGcrQI=",
         "last_login": null,
         "email": "dev1@demo.com",
         "first_name": "Dev",
@@ -91,7 +100,7 @@
     "model": "app.user",
     "pk": 3,
     "fields": {
-        "password": "pbkdf2_sha256$100000$uMT9Kv5cFlZ4$wEd2s0WHEUsz3onPthVVLAkrksaIkD/VkxbFEOMU9Fs=",
+        "password": "pbkdf2_sha256$100000$5uAdK0nawgRr$iYoK7qomMurg5zKxkvLzd899zRR9mX7EwRPKwCk2vTM=",
         "last_login": null,
         "email": "dev2@demo.com",
         "first_name": "Dev",
@@ -110,7 +119,7 @@
     "model": "app.user",
     "pk": 4,
     "fields": {
-        "password": "pbkdf2_sha256$100000$NkhyrinhM8TB$vF77rGc8hDOqqOuem9nY84ASxeOYLmRCrejo/MoWrA4=",
+        "password": "pbkdf2_sha256$100000$FFWwlxBrEyFU$Nqm7SwfmUbsQHorKYzGbKUIrWuetkoQOFXUlF9bLtNs=",
         "last_login": null,
         "email": "dev3@demo.com",
         "first_name": "Dev",
@@ -129,7 +138,7 @@
     "model": "app.user",
     "pk": 5,
     "fields": {
-        "password": "pbkdf2_sha256$100000$93HSls4Jl6TW$u4bmvKDfiOWm5V5bJyZpaVWi1MxBhHP+8XGOB5TF5Xc=",
+        "password": "pbkdf2_sha256$100000$hVlodP56VJ7j$IyT96kvL/KRaW2YRXrJjZsF5OqMTWH0O83i31LjxDAM=",
         "last_login": null,
         "email": "dev4@demo.com",
         "first_name": "Dev",
@@ -148,7 +157,7 @@
     "model": "app.user",
     "pk": 6,
     "fields": {
-        "password": "pbkdf2_sha256$100000$kaifokkU7YhS$M57DUKJnfWbz7oC8muP1+UxV2HAqbpE5n1B87GMK2S0=",
+        "password": "pbkdf2_sha256$100000$6uW0vQibli8d$WW65nh2wGGZfr9hVIo5AYy/qZ8QXhXnE814D1KTqiDM=",
         "last_login": null,
         "email": "dev5@demo.com",
         "first_name": "Dev",
@@ -167,8 +176,8 @@
     "model": "app.user",
     "pk": 7,
     "fields": {
-        "password": "pbkdf2_sha256$100000$fSygDy0FOs4G$X9PPI/FJ1ugw/zgL7DXIVrvlwrzZQE2qNl5lLfnGnQo=",
-        "last_login": null,
+        "password": "pbkdf2_sha256$100000$XUEx6kL9vF3L$i7nR/3RBVzPGUM3o7WQSmBvDnlxBcIhS531lVTGdST8=",
+        "last_login": "2018-05-07T11:19:21.224Z",
         "email": "km@demo.com",
         "first_name": "K",
         "last_name": "M",
@@ -186,7 +195,7 @@
     "model": "app.user",
     "pk": 8,
     "fields": {
-        "password": "pbkdf2_sha256$100000$n79vuTxua8NN$af0c1hd49t74mWKL7e3hdQU4CXoCQ8XMK3k2qwXmT28=",
+        "password": "pbkdf2_sha256$100000$INRic7Pm1tlP$qYGeGevc3/2cmkXTZ6PU3RSYeRZYhSQ6bGBRGc0YFn0=",
         "last_login": null,
         "email": "po@demo.com",
         "first_name": "P",
@@ -206,7 +215,7 @@
     "model": "app.user",
     "pk": 9,
     "fields": {
-        "password": "pbkdf2_sha256$100000$586dQy24Uu4Y$prR/H/OlSMxv8ofcR9SO8+NmUvfMREVI3L68Mq6BfU8=",
+        "password": "pbkdf2_sha256$100000$AqDaLoD67wUL$s+Fz4agkbB3whV43Oez479B+ry1u3Sf9kPuWvQTJVOA=",
         "last_login": null,
         "email": "wildcard@demo.com",
         "first_name": "Wild",
@@ -228,7 +237,7 @@
     "model": "app.user",
     "pk": 10,
     "fields": {
-        "password": "pbkdf2_sha256$100000$4qlSnxgMaRhO$loynOE7UB6Zzma5nPX8tm7FQy7QuMqO+tem2z4muBXo=",
+        "password": "pbkdf2_sha256$100000$wfOKZg3101eM$DqdzRhQT07KNzoP4dRNfMw+bIg/jAPLtjCtSvzk35Qg=",
         "last_login": null,
         "email": "po2@demo.com",
         "first_name": "Prod",
@@ -505,7 +514,7 @@
     "fields": {
         "userteam": 1,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:09.319Z"
+        "timestamp": "2018-05-07T11:18:32.471Z"
     }
 },
 {
@@ -514,7 +523,7 @@
     "fields": {
         "userteam": 2,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:09.427Z"
+        "timestamp": "2018-05-07T11:18:32.497Z"
     }
 },
 {
@@ -523,7 +532,7 @@
     "fields": {
         "userteam": 3,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:09.525Z"
+        "timestamp": "2018-05-07T11:18:32.548Z"
     }
 },
 {
@@ -532,7 +541,7 @@
     "fields": {
         "userteam": 4,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:09.633Z"
+        "timestamp": "2018-05-07T11:18:32.587Z"
     }
 },
 {
@@ -541,7 +550,7 @@
     "fields": {
         "userteam": 5,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:09.741Z"
+        "timestamp": "2018-05-07T11:18:32.627Z"
     }
 },
 {
@@ -550,7 +559,7 @@
     "fields": {
         "userteam": 6,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:09.843Z"
+        "timestamp": "2018-05-07T11:18:32.675Z"
     }
 },
 {
@@ -559,7 +568,7 @@
     "fields": {
         "userteam": 7,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:09.944Z"
+        "timestamp": "2018-05-07T11:18:32.715Z"
     }
 },
 {
@@ -568,7 +577,7 @@
     "fields": {
         "userteam": 8,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:10.060Z"
+        "timestamp": "2018-05-07T11:18:32.749Z"
     }
 },
 {
@@ -577,7 +586,7 @@
     "fields": {
         "userteam": 9,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:10.165Z"
+        "timestamp": "2018-05-07T11:18:32.782Z"
     }
 },
 {
@@ -586,7 +595,7 @@
     "fields": {
         "userteam": 10,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:10.262Z"
+        "timestamp": "2018-05-07T11:18:32.818Z"
     }
 },
 {
@@ -595,7 +604,7 @@
     "fields": {
         "userteam": 11,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:10.371Z"
+        "timestamp": "2018-05-07T11:18:32.850Z"
     }
 },
 {
@@ -604,7 +613,7 @@
     "fields": {
         "userteam": 12,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:10.473Z"
+        "timestamp": "2018-05-07T11:18:32.882Z"
     }
 },
 {
@@ -613,7 +622,7 @@
     "fields": {
         "userteam": 13,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:10.574Z"
+        "timestamp": "2018-05-07T11:18:32.921Z"
     }
 },
 {
@@ -622,7 +631,7 @@
     "fields": {
         "userteam": 14,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:10.691Z"
+        "timestamp": "2018-05-07T11:18:32.952Z"
     }
 },
 {
@@ -631,7 +640,7 @@
     "fields": {
         "userteam": 15,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:10.806Z"
+        "timestamp": "2018-05-07T11:18:32.979Z"
     }
 },
 {
@@ -640,7 +649,7 @@
     "fields": {
         "userteam": 16,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:10.909Z"
+        "timestamp": "2018-05-07T11:18:33.007Z"
     }
 },
 {
@@ -649,7 +658,7 @@
     "fields": {
         "userteam": 17,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-03T18:57:11.012Z"
+        "timestamp": "2018-05-07T11:18:33.043Z"
     }
 },
 {
@@ -869,5 +878,2661 @@
     "model": "app.cardtype",
     "pk": 2,
     "fields": {}
+},
+{
+    "model": "app.card",
+    "pk": 1,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 1,
+        "description": "Administrator lahko dodaja, ureja in bri\u0161e podatke o uporabnikih.",
+        "name": "Vzdr\u017eevanje uporabnikov",
+        "estimate": 3.5,
+        "project": 1,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-10T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 2,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 2,
+        "description": "KanbanMaster lahko kreira, ureja in bri\u0161e podatke o razvojnih skupinah",
+        "name": "Vzdr\u017eevanje razvojnih skupin",
+        "estimate": 1.0,
+        "project": 1,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-10T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 3,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 3,
+        "description": "KanbanMaster lahko kreira, ureja in bri\u0161e podatke o projektih.",
+        "name": "Vzdr\u017eevanje projektov",
+        "estimate": 10.0,
+        "project": 1,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-11T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 4,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 4,
+        "description": "Uporabnik se lahko prijavi v sistem z uporabni\u0161kim imenom in geslom.",
+        "name": "Prijava v sistem",
+        "estimate": 3.0,
+        "project": 1,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-12T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 5,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 5,
+        "description": "KanbanMaster lahko kreira novo tablo in (dokler je prazna) spreminja njeno strukturo.",
+        "name": "Kreiranje table",
+        "estimate": 4.0,
+        "project": 1,
+        "expiration": "2018-05-07",
+        "owner": 4,
+        "date_created": "2018-04-13T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 6,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 6,
+        "description": "Uporabnik lahko pregleduje tablo.",
+        "name": "Prikaz table",
+        "estimate": 2.0,
+        "project": 1,
+        "expiration": "2018-05-07",
+        "owner": 4,
+        "date_created": "2018-04-15T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 7,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 7,
+        "description": "Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.",
+        "name": "Kreiranje kartice",
+        "estimate": 1.5,
+        "project": 1,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-14T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 8,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 8,
+        "description": "Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.",
+        "name": "Prestavljanje kartice",
+        "estimate": 1.5,
+        "project": 1,
+        "expiration": "2018-05-07",
+        "owner": 4,
+        "date_created": "2018-04-16T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 9,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 9,
+        "description": "Uporabnik lahko izpi\u0161e vsebino kartice, ki se nahaja na tabli.",
+        "name": "Prikaz podrobnosti kartice",
+        "estimate": 1.5,
+        "project": 1,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-18T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 10,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 10,
+        "description": "Uporabnik lahko izpi\u0161e vsebino kartice, ki se nahaja na tabli.",
+        "name": "Kreiranje nove table s kopiranjem strukture",
+        "estimate": 1.5,
+        "project": 1,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-17T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 11,
+    "fields": {
+        "column": "10",
+        "type": 1,
+        "card_number": 11,
+        "description": "Uporabnik lahko izpi\u0161e vsebino kartice, ki se nahaja na tabli.",
+        "name": "Uporabni\u0161ka dokumentacija",
+        "estimate": 1.5,
+        "project": 1,
+        "expiration": "2018-05-07",
+        "owner": 5,
+        "date_created": "2018-04-11T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 12,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 12,
+        "description": "Administrator lahko dodaja, ureja in bri\u0161e podatke o uporabnikih.",
+        "name": "Posodabljanje vsebine kartice",
+        "estimate": 4.0,
+        "project": 2,
+        "expiration": "2018-05-07",
+        "owner": 4,
+        "date_created": "2018-04-10T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 13,
+    "fields": {
+        "column": "2",
+        "type": 0,
+        "card_number": 13,
+        "description": "KanbanMaster lahko kreira, ureja in bri\u0161e podatke o razvojnih skupinah",
+        "name": "Brisanje kartice",
+        "estimate": 1.0,
+        "project": 2,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-12T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 14,
+    "fields": {
+        "column": "4",
+        "type": 0,
+        "card_number": 14,
+        "description": "KanbanMaster lahko kreira, ureja in bri\u0161e podatke o projektih.",
+        "name": "Posodabljanje lastnosti stolpca",
+        "estimate": 1.0,
+        "project": 2,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-11T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 15,
+    "fields": {
+        "column": "1",
+        "type": 0,
+        "card_number": 15,
+        "description": "Uporabnik se lahko prijavi v sistem z uporabni\u0161kim imenom in geslom.",
+        "name": "Izra\u010dun povpre\u010dnega potrebnega \u010dasa",
+        "estimate": 3.0,
+        "project": 2,
+        "expiration": "2018-05-07",
+        "owner": 4,
+        "date_created": "2018-04-17T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 16,
+    "fields": {
+        "column": "7",
+        "type": 0,
+        "card_number": 16,
+        "description": "KanbanMaster lahko kreira novo tablo in (dokler je prazna) spreminja njeno strukturo.",
+        "name": "Izdelava kumulativnega diagrama delovnega toka",
+        "estimate": 6.0,
+        "project": 2,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-14T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 17,
+    "fields": {
+        "column": "9",
+        "type": 0,
+        "card_number": 17,
+        "description": "Uporabnik lahko pregleduje tablo.",
+        "name": "Izpis kr\u0161itev omejitve WIP",
+        "estimate": 5.0,
+        "project": 2,
+        "expiration": "2018-05-07",
+        "owner": 4,
+        "date_created": "2018-04-11T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 18,
+    "fields": {
+        "column": "8",
+        "type": 0,
+        "card_number": 18,
+        "description": "Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.",
+        "name": "Prikaz 'kriti\u010dnih' kartic",
+        "estimate": 4.0,
+        "project": 2,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-14T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 19,
+    "fields": {
+        "column": "6",
+        "type": 0,
+        "card_number": 19,
+        "description": "Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.",
+        "name": "Obve\u0161\u010danje o prekora\u010ditvi roka",
+        "estimate": 1.5,
+        "project": 2,
+        "expiration": "2018-05-07",
+        "owner": 5,
+        "date_created": "2018-04-13T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 20,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 20,
+        "description": "Uporabnik lahko izpi\u0161e vsebino kartice, ki se nahaja na tabli.",
+        "name": "Vgradnja pravil za prestavljanje kartic",
+        "estimate": 3.0,
+        "project": 2,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-15T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 21,
+    "fields": {
+        "column": "10",
+        "type": 0,
+        "card_number": 21,
+        "description": "Uporabnik lahko izpi\u0161e vsebino kartice, ki se nahaja na tabli.",
+        "name": "'O\u017eenje' stolpcev",
+        "estimate": 2.0,
+        "project": 2,
+        "expiration": "2018-05-07",
+        "owner": 3,
+        "date_created": "2018-04-18T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.card",
+    "pk": 22,
+    "fields": {
+        "column": "6",
+        "type": 1,
+        "card_number": 22,
+        "description": "Uporabnik lahko izpi\u0161e vsebino kartice, ki se nahaja na tabli.",
+        "name": "Prilagodljiv prikaz kartice na tabli",
+        "estimate": 1.5,
+        "project": 2,
+        "expiration": "2018-05-07",
+        "owner": 4,
+        "date_created": "2018-04-11T08:00:00Z",
+        "is_deleted": false,
+        "cause_of_deletion": ""
+    }
+},
+{
+    "model": "app.task",
+    "pk": 1,
+    "fields": {
+        "card": 1,
+        "description": "To je description 1",
+        "done": false,
+        "assignee": null
+    }
+},
+{
+    "model": "app.task",
+    "pk": 2,
+    "fields": {
+        "card": 1,
+        "description": "To je description 2",
+        "done": false,
+        "assignee": null
+    }
+},
+{
+    "model": "app.task",
+    "pk": 3,
+    "fields": {
+        "card": 2,
+        "description": "To je description 3",
+        "done": false,
+        "assignee": null
+    }
+},
+{
+    "model": "app.task",
+    "pk": 4,
+    "fields": {
+        "card": 3,
+        "description": "To je description 4",
+        "done": false,
+        "assignee": null
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 1,
+    "fields": {
+        "card": 1,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-10T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 2,
+    "fields": {
+        "card": 1,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-14T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 3,
+    "fields": {
+        "card": 1,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-14T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 4,
+    "fields": {
+        "card": 1,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T14:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 5,
+    "fields": {
+        "card": 1,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-18T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 6,
+    "fields": {
+        "card": 1,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-18T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 7,
+    "fields": {
+        "card": 1,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-18T10:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 8,
+    "fields": {
+        "card": 1,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-19T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 9,
+    "fields": {
+        "card": 1,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-19T14:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 10,
+    "fields": {
+        "card": 2,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-10T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 11,
+    "fields": {
+        "card": 2,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-14T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 12,
+    "fields": {
+        "card": 2,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-15T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 13,
+    "fields": {
+        "card": 2,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-22T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 14,
+    "fields": {
+        "card": 2,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-23T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 15,
+    "fields": {
+        "card": 2,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-26T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 16,
+    "fields": {
+        "card": 2,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-27T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 17,
+    "fields": {
+        "card": 2,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-28T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 18,
+    "fields": {
+        "card": 2,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-05-02T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 19,
+    "fields": {
+        "card": 3,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-11T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 20,
+    "fields": {
+        "card": 3,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-16T10:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 21,
+    "fields": {
+        "card": 3,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-22T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 22,
+    "fields": {
+        "card": 3,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-23T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 23,
+    "fields": {
+        "card": 3,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-24T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 24,
+    "fields": {
+        "card": 3,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-24T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 25,
+    "fields": {
+        "card": 3,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-24T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 26,
+    "fields": {
+        "card": 3,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-05-01T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 27,
+    "fields": {
+        "card": 3,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-05-01T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 28,
+    "fields": {
+        "card": 4,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-12T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 29,
+    "fields": {
+        "card": 4,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 30,
+    "fields": {
+        "card": 4,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 31,
+    "fields": {
+        "card": 4,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-23T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 32,
+    "fields": {
+        "card": 4,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-24T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 33,
+    "fields": {
+        "card": 4,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-25T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 34,
+    "fields": {
+        "card": 4,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-25T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 35,
+    "fields": {
+        "card": 4,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-28T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 36,
+    "fields": {
+        "card": 4,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-29T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 37,
+    "fields": {
+        "card": 5,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-13T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 38,
+    "fields": {
+        "card": 5,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-17T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 39,
+    "fields": {
+        "card": 5,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-17T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 40,
+    "fields": {
+        "card": 5,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-23T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 41,
+    "fields": {
+        "card": 5,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-24T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 42,
+    "fields": {
+        "card": 5,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-25T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 43,
+    "fields": {
+        "card": 5,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-25T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 44,
+    "fields": {
+        "card": 5,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-28T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 45,
+    "fields": {
+        "card": 5,
+        "from_column": "9",
+        "to_column": "4",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-28T10:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 46,
+    "fields": {
+        "card": 5,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-29T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 47,
+    "fields": {
+        "card": 5,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-30T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 48,
+    "fields": {
+        "card": 5,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-30T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 49,
+    "fields": {
+        "card": 5,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-30T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 50,
+    "fields": {
+        "card": 5,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-05-01T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 51,
+    "fields": {
+        "card": 5,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-05-01T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 52,
+    "fields": {
+        "card": 6,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-15T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 53,
+    "fields": {
+        "card": 6,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-17T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 54,
+    "fields": {
+        "card": 6,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-17T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 55,
+    "fields": {
+        "card": 6,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-24T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 56,
+    "fields": {
+        "card": 6,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-24T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 57,
+    "fields": {
+        "card": 6,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-25T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 58,
+    "fields": {
+        "card": 6,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-25T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 59,
+    "fields": {
+        "card": 6,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-28T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 60,
+    "fields": {
+        "card": 6,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-29T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 61,
+    "fields": {
+        "card": 7,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-14T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 62,
+    "fields": {
+        "card": 7,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-15T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 63,
+    "fields": {
+        "card": 7,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-15T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 64,
+    "fields": {
+        "card": 7,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-16T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 65,
+    "fields": {
+        "card": 7,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 66,
+    "fields": {
+        "card": 7,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 67,
+    "fields": {
+        "card": 7,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-18T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 68,
+    "fields": {
+        "card": 7,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-21T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 69,
+    "fields": {
+        "card": 7,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-22T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 70,
+    "fields": {
+        "card": 8,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-16T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 71,
+    "fields": {
+        "card": 8,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-17T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 72,
+    "fields": {
+        "card": 8,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-17T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 73,
+    "fields": {
+        "card": 8,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-23T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 74,
+    "fields": {
+        "card": 8,
+        "from_column": "5",
+        "to_column": "4",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-23T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 75,
+    "fields": {
+        "card": 8,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-24T07:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 76,
+    "fields": {
+        "card": 8,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-24T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 77,
+    "fields": {
+        "card": 8,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-25T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 78,
+    "fields": {
+        "card": 8,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-25T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 79,
+    "fields": {
+        "card": 8,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-28T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 80,
+    "fields": {
+        "card": 8,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-29T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 81,
+    "fields": {
+        "card": 9,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-18T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 82,
+    "fields": {
+        "card": 9,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-18T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 83,
+    "fields": {
+        "card": 9,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-18T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 84,
+    "fields": {
+        "card": 9,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-23T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 85,
+    "fields": {
+        "card": 9,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-24T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 86,
+    "fields": {
+        "card": 9,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-26T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 87,
+    "fields": {
+        "card": 9,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-26T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 88,
+    "fields": {
+        "card": 9,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-27T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 89,
+    "fields": {
+        "card": 9,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-29T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 90,
+    "fields": {
+        "card": 10,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 91,
+    "fields": {
+        "card": 10,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-19T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 92,
+    "fields": {
+        "card": 10,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-19T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 93,
+    "fields": {
+        "card": 10,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-21T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 94,
+    "fields": {
+        "card": 10,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-24T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 95,
+    "fields": {
+        "card": 10,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-25T13:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 96,
+    "fields": {
+        "card": 10,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-25T14:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 97,
+    "fields": {
+        "card": 10,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-28T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 98,
+    "fields": {
+        "card": 10,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-28T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 99,
+    "fields": {
+        "card": 11,
+        "from_column": null,
+        "to_column": "2",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-11T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 100,
+    "fields": {
+        "card": 11,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-11T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 101,
+    "fields": {
+        "card": 11,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-12T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 102,
+    "fields": {
+        "card": 11,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-12T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 103,
+    "fields": {
+        "card": 11,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-13T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 104,
+    "fields": {
+        "card": 11,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-14T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 105,
+    "fields": {
+        "card": 11,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-15T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 106,
+    "fields": {
+        "card": 11,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-16T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 107,
+    "fields": {
+        "card": 12,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-10T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 108,
+    "fields": {
+        "card": 12,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-14T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 109,
+    "fields": {
+        "card": 12,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-14T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 110,
+    "fields": {
+        "card": 12,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-17T14:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 111,
+    "fields": {
+        "card": 12,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-18T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 112,
+    "fields": {
+        "card": 12,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-18T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 113,
+    "fields": {
+        "card": 12,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-18T10:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 114,
+    "fields": {
+        "card": 12,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-19T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 115,
+    "fields": {
+        "card": 12,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-19T14:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 116,
+    "fields": {
+        "card": 13,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-12T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 117,
+    "fields": {
+        "card": 13,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-14T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 118,
+    "fields": {
+        "card": 14,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-11T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 119,
+    "fields": {
+        "card": 14,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-21T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 120,
+    "fields": {
+        "card": 14,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-22T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 121,
+    "fields": {
+        "card": 15,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 122,
+    "fields": {
+        "card": 16,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-14T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 123,
+    "fields": {
+        "card": 16,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 124,
+    "fields": {
+        "card": 16,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 125,
+    "fields": {
+        "card": 16,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-23T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 126,
+    "fields": {
+        "card": 16,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-24T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 127,
+    "fields": {
+        "card": 16,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-25T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 128,
+    "fields": {
+        "card": 16,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-25T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 129,
+    "fields": {
+        "card": 16,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-26T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 130,
+    "fields": {
+        "card": 16,
+        "from_column": "9",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-28T10:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 131,
+    "fields": {
+        "card": 16,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-29T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 132,
+    "fields": {
+        "card": 16,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-30T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 133,
+    "fields": {
+        "card": 16,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-30T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 134,
+    "fields": {
+        "card": 17,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-11T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 135,
+    "fields": {
+        "card": 17,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-17T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 136,
+    "fields": {
+        "card": 17,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-17T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 137,
+    "fields": {
+        "card": 17,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-24T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 138,
+    "fields": {
+        "card": 17,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-24T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 139,
+    "fields": {
+        "card": 17,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-25T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 140,
+    "fields": {
+        "card": 17,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-25T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 141,
+    "fields": {
+        "card": 17,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-28T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 142,
+    "fields": {
+        "card": 18,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-14T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 143,
+    "fields": {
+        "card": 18,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-15T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 144,
+    "fields": {
+        "card": 18,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-15T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 145,
+    "fields": {
+        "card": 18,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-16T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 146,
+    "fields": {
+        "card": 18,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 147,
+    "fields": {
+        "card": 18,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 148,
+    "fields": {
+        "card": 18,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-18T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 149,
+    "fields": {
+        "card": 19,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-13T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 150,
+    "fields": {
+        "card": 19,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-17T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 151,
+    "fields": {
+        "card": 19,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-17T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 152,
+    "fields": {
+        "card": 19,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-23T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 153,
+    "fields": {
+        "card": 19,
+        "from_column": "5",
+        "to_column": "4",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-23T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 154,
+    "fields": {
+        "card": 19,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-24T07:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 155,
+    "fields": {
+        "card": 19,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 5,
+        "action": null,
+        "timestamp": "2018-04-24T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 156,
+    "fields": {
+        "card": 20,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-15T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 157,
+    "fields": {
+        "card": 20,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 158,
+    "fields": {
+        "card": 20,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-17T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 159,
+    "fields": {
+        "card": 20,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-23T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 160,
+    "fields": {
+        "card": 20,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-24T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 161,
+    "fields": {
+        "card": 20,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-26T09:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 162,
+    "fields": {
+        "card": 20,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-26T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 163,
+    "fields": {
+        "card": 20,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-27T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 164,
+    "fields": {
+        "card": 20,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-29T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 165,
+    "fields": {
+        "card": 21,
+        "from_column": null,
+        "to_column": "1",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-18T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 166,
+    "fields": {
+        "card": 21,
+        "from_column": "1",
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-19T16:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 167,
+    "fields": {
+        "card": 21,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-19T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 168,
+    "fields": {
+        "card": 21,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-21T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 169,
+    "fields": {
+        "card": 21,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-24T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 170,
+    "fields": {
+        "card": 21,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-25T13:30:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 171,
+    "fields": {
+        "card": 21,
+        "from_column": "7",
+        "to_column": "8",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-25T14:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 172,
+    "fields": {
+        "card": 21,
+        "from_column": "8",
+        "to_column": "9",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-28T06:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 173,
+    "fields": {
+        "card": 21,
+        "from_column": "9",
+        "to_column": "10",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-28T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 174,
+    "fields": {
+        "card": 22,
+        "from_column": null,
+        "to_column": "2",
+        "user_team": 3,
+        "action": null,
+        "timestamp": "2018-04-18T08:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 175,
+    "fields": {
+        "card": 22,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-19T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 176,
+    "fields": {
+        "card": 22,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-20T12:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 177,
+    "fields": {
+        "card": 22,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 4,
+        "action": null,
+        "timestamp": "2018-04-21T17:00:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 178,
+    "fields": {
+        "card": 1,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 3,
+        "action": "Naredil sem nedevoljen premik 1",
+        "timestamp": "2018-04-17T14:32:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 179,
+    "fields": {
+        "card": 5,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 4,
+        "action": "Naredil sem nedevoljen premik 2",
+        "timestamp": "2018-04-29T07:55:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 180,
+    "fields": {
+        "card": 6,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": "Naredil sem nedevoljen premik 3",
+        "timestamp": "2018-04-17T17:40:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 181,
+    "fields": {
+        "card": 11,
+        "from_column": "6",
+        "to_column": "7",
+        "user_team": 5,
+        "action": "Naredil sem nedevoljen premik 4",
+        "timestamp": "2018-04-13T18:10:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 182,
+    "fields": {
+        "card": 12,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 4,
+        "action": "Naredil sem nedevoljen premik 5",
+        "timestamp": "2018-04-18T09:22:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 183,
+    "fields": {
+        "card": 14,
+        "from_column": "2",
+        "to_column": "4",
+        "user_team": 3,
+        "action": "Naredil sem nedevoljen premik 6",
+        "timestamp": "2018-04-24T14:32:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 184,
+    "fields": {
+        "card": 17,
+        "from_column": "4",
+        "to_column": "5",
+        "user_team": 4,
+        "action": "Naredil sem nedevoljen premik 7",
+        "timestamp": "2018-04-17T17:40:00Z"
+    }
+},
+{
+    "model": "app.cardlog",
+    "pk": 185,
+    "fields": {
+        "card": 22,
+        "from_column": "5",
+        "to_column": "6",
+        "user_team": 4,
+        "action": "Naredil sem nedevoljen premik 8",
+        "timestamp": "2018-04-21T18:10:00Z"
+    }
 }
 ]

@@ -787,15 +787,15 @@ class MoveCard(graphene.Mutation):
             user_team = user_teams[0]
 
         col_list = get_columns_absolute(list(models.Column.objects.filter(board=card.project.board, parent=None)), [])
-        to_col_inx = col_list.index(to_column_id)
-        from_col_inx = col_list.index(card.column_id)
+        to_col_inx = col_list.index(models.Column.objects.get(id=to_column_id))
+        from_col_inx = col_list.index(card.column)
 
         if abs(to_col_inx - from_col_inx) <= 1:
             pass
         else:
             if from_col.acceptance is True and user_team.role == models.TeamRole.objects.get(id=2):
                 priority_col = models.Column.objects.get(board=card.column.board, priority=True)
-                priority_col_inx = col_list.index(priority_col.id)
+                priority_col_inx = col_list.index(models.Column.objects.get(id=priority_col.id))
                 if to_col_inx > priority_col_inx:
                     raise GraphQLError("Ne moreš premikati za več kot ena v levo/desno.")
                 else:

@@ -224,7 +224,7 @@ col1.save()
 col2 = Column(id="2", board=b1, name="Sprint Backlog", position=1, wip=0, priority=True)
 col2.save()
 
-col3 = Column(id="3", board=b1, name="Development", position=2, wip=6)
+col3 = Column(id="3", board=b1, name="Development", position=2, wip=0)
 col3.save()
 
 col4 = Column(id="4", board=b1, name="Analysis & Design", position=0, wip=0, parent=col3, boundary=True)

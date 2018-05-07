@@ -146,9 +146,13 @@ class BoardType(DjangoObjectType):
     card_types = graphene.List(CardTypeType)
 
     def resolve_estimate_min(instance, info):
+        if all([len(p.card_set.all()) == 0 for p in instance.projects.all()]):
+            return 1
         return min([min([c.estimate for c in p.card_set.all()]) for p in instance.projects.all()])
 
     def resolve_estimate_max(instance, info):
+        if all([len(p.card_set.all()) == 0 for p in instance.projects.all()]):
+            return 1
         return max([max([c.estimate for c in p.card_set.all()]) for p in instance.projects.all()])
 
     def resolve_project_start_date(instance, info):

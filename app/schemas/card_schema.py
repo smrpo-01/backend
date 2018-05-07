@@ -90,18 +90,18 @@ def card_per_column_time(card, minimal=True, column_from=None, column_to=None):
             project_start = card.project.date_start
             start = localtz.localize(datetime.datetime(project_start.year, project_start.month, project_start.day))
 
-            diff = (log.timestamp - start).total_seconds() / 3600
+            diff = abs((log.timestamp - start).total_seconds()) / 3600
             per_column[col.name] = float("{0:.2f}".format(diff))
         elif col == get_current_column(card):
             log = card.logs.filter(to_column=col).first()
 
-            diff = (timezone.now() - log.timestamp).total_seconds() / 3600
+            diff = abs((timezone.now() - log.timestamp).total_seconds()) / 3600
             if col == get_done_column(board):
                 diff = 0
             per_column[col.name] = float("{0:.2f}".format(diff))
 
         for a, b in zip(card.logs.filter(from_column=col), card.logs.filter(to_column=col)):
-            per_column[col.name] += (a.timestamp - b.timestamp).total_seconds() / 3600
+            per_column[col.name] += abs((a.timestamp - b.timestamp).total_seconds()) / 3600
     return per_column
 
 

@@ -752,7 +752,7 @@ class SetDoneTask(graphene.Mutation):
         task = models.Task.objects.get(id=task_id)
 
         result = schema.execute('{whoCanEdit(cardId: '+str(task.card_id)+', userId: '+str(user_id)+'){error}}')
-        if result.data['whoCanEdit']['error'] != "":
+        if result.data['whoCanEdit']['error'] is None:
             raise GraphQLError(result.data['whoCanEdit']['error'])
 
         task.done = done

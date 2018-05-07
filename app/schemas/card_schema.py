@@ -56,11 +56,11 @@ def get_columns_absolute(columns, list_of_columns):
 
 
 def get_first_column(card):
-    return models.CardLog.objects.filter(card=card, action=None).first().from_column
+    return models.CardLog.objects.filter(card=card).first().from_column
 
 
 def get_current_column(card):
-    return models.CardLog.objects.filter(card=card, action=None).last().to_column
+    return models.CardLog.objects.filter(card=card).last().to_column
 
 
 def card_per_column_time(card, minimal=True, column_from=None, column_to=None):
@@ -85,7 +85,7 @@ def card_per_column_time(card, minimal=True, column_from=None, column_to=None):
         per_column[col.name] = 0
 
         if col == get_first_column(card):
-            log = card.logs.filter(to_column=col, action=None).first()
+            log = card.logs.filter(to_column=col).first()
 
             project_start = card.project.date_start
             start = localtz.localize(datetime.datetime(project_start.year, project_start.month, project_start.day))
@@ -93,14 +93,14 @@ def card_per_column_time(card, minimal=True, column_from=None, column_to=None):
             diff = (log.timestamp - start).total_seconds() / 3600
             per_column[col.name] = float("{0:.2f}".format(diff))
         elif col == get_current_column(card):
-            log = card.logs.filter(to_column=col, action=None).first()
+            log = card.logs.filter(to_column=col).first()
 
             diff = (timezone.now() - log.timestamp).total_seconds() / 3600
             if col == get_done_column(board):
                 diff = 0
             per_column[col.name] = float("{0:.2f}".format(diff))
 
-        for a, b in zip(card.logs.filter(from_column=col, action=None), card.logs.filter(to_column=col, action=None)):
+        for a, b in zip(card.logs.filter(from_column=col), card.logs.filter(to_column=col)):
             per_column[col.name] += (a.timestamp - b.timestamp).total_seconds() / 3600
     return per_column
 
@@ -215,11 +215,11 @@ def column_at_date(card, date):
     logs = card.logs
     column_set = set()
 
-    for a, b in logs.filter(timestamp__contains=date, action=None).values_list('from_column', 'to_column'):
+    for a, b in logs.filter(timestamp__contains=date).values_list('from_column', 'to_column'):
         column_set.update([a, b])
 
     if not column_set:
-        log = logs.filter(timestamp__lte=date, action=None)
+        log = logs.filter(timestamp__lte=date)
         if log:
             column_set.add(log.last().to_column.id)
 

@@ -138,7 +138,7 @@ class CardQueries(graphene.ObjectType):
                 return WhoCanEditType(error="Uporabnik ne more spreminjati kartice druge ekipe!")
 
             card_pos = where_is_card(card)
-            print(card_pos)
+            #print(card_pos)
 
             if card_pos == 0:
                 if 2 in user_team_roles:
@@ -240,7 +240,7 @@ class AddCard(graphene.Mutation):
             column_id = models.Column.objects.get(board=board, priority=True).id
             silver_bullet_cards = models.Card.objects.filter(column=models.Column.objects.get(id=column_id),
                                                              type=models.CardType.objects.get(id=1))
-            print(len(silver_bullet_cards))
+            #print(len(silver_bullet_cards))
             if len(silver_bullet_cards) != 0:
                 raise GraphQLError("V stolpcu z najvišjo prioriteto je lahko samo ena nujna zahteva.")
         else:

@@ -432,9 +432,6 @@ class CardQueries(graphene.ObjectType):
     def resolve_all_card_types(self, info):
         return models.CardType.objects.all()
 
-    def resolve_all_card_logs(self, info):
-        return models.CardLog.objects.all()
-
     def resolve_all_card_logs(self, info, card_id):
         if card_id == -1:
             return models.CardLog.objects.all()

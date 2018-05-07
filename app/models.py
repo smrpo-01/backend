@@ -209,6 +209,11 @@ class Column(models.Model):
             col = col.parent
         return any(lst)
 
+    def can_edit(self):
+        cards = Card.objects.filter(column=Column.objects.get(id=self.id))
+        print(len(cards))
+        return self.num_of_cards() == 0
+
 
 class CardType(models.Model):
     NORMAL = 0
@@ -239,6 +244,7 @@ class Card(models.Model):
     owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE, related_name='cards_assigned')
     date_created = models.DateTimeField(default=timezone.now)
     is_deleted = models.BooleanField(default=False)
+    color_rejected = models.BooleanField(default=False)
     cause_of_deletion = models.TextField(default="")
 
 
@@ -262,9 +268,9 @@ class CardLog(models.Model):
 
     def __str__(self):
         return "(Čas: %s, Tip akcije: %s, Kartica: %s, Iz stolpca: %s, V stolpec: %s)\n" % \
-                (self.timestamp, str(self.action), self.card.id,
-                 self.from_column.id if self.from_column else "None",
-                 self.to_column.id if self.to_column else "None")
+               (self.timestamp, str(self.action), self.card.id,
+                self.from_column.id if self.from_column else "None",
+                self.to_column.id if self.to_column else "None")
 
 
 class CardLogCreateDelete(models.Model):

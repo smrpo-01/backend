@@ -10,6 +10,7 @@ from functools import reduce
 from collections import Counter
 import datetime
 from graphql import GraphQLError
+from backend.utils import HelperClass
 
 from .. import models
 from app.schemas.board_schema import *
@@ -650,7 +651,7 @@ class AddCard(graphene.Mutation):
                            name=card_data.name,
                            estimate=card_data.estimate,
                            project=models.Project.objects.get(id=card_data.project_id),
-                           expiration=datetime.datetime.strptime(card_data.expiration, "%Y-%m-%d").date(),
+                           expiration=HelperClass.get_si_date(card_data.expiration),
                            owner=owner)
         card.save()
 
@@ -716,7 +717,7 @@ class EditCard(graphene.Mutation):
         card.name = card_data.name
         card.estimate = card_data.estimate
         card.project = models.Project.objects.get(id=card_data.project_id)
-        card.expiration = datetime.datetime.strptime(card_data.expiration, "%Y-%m-%d").date()
+        card.expiration = HelperClass.get_si_date(card_data.expiration),
         card.owner = owner
         card.save()
 

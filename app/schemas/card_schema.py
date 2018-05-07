@@ -411,7 +411,9 @@ class CardQueries(graphene.ObjectType):
         dev_end=graphene.String(default_value=0),
         estimate_from=graphene.Float(default_value=0),
         estimate_to=graphene.Float(default_value=0),
-        card_type=graphene.List(graphene.String, default_value=0)
+        card_type=graphene.List(graphene.String, default_value=0),
+        date_from=graphene.String(),
+        date_to=graphene.String()
     )
     all_card_logs = graphene.Field(graphene.List(CardLogType), card_id=graphene.Int(default_value=-1))
     who_can_edit = graphene.Field(WhoCanEditType,
@@ -511,10 +513,16 @@ class CardQueries(graphene.ObjectType):
         return cards_per_day(cards, date_from, date_to, column_from, column_to)
 
     def resolve_wip_logs(self, info, project_id, creation_start, creation_end, done_start, done_end, dev_start, \
-                              dev_end, estimate_from, estimate_to, card_type):
+                              dev_end, estimate_from, estimate_to, card_type, date_from=None, date_to=None):
         cards = filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
                              dev_end, estimate_from, estimate_to, card_type)
         logs = models.CardLog.objects.filter(action__isnull=False, card__in=cards)
+        if date_from:
+            start = HelperClass.get_si_date(date_from)
+            logs = logs.filter(timestamp__gte=start)
+        if date_to:
+            end = HelperClass.get_si_date(date_to)
+            logs = logs.filter(timestamp__lte=end + datetime.timedelta(days=1))
         columns = models.Column.objects.filter(board=logs.first().to_column.board, parent=None)
         return sorted(logs, key=lambda k: get_columns_absolute(columns, []).index(k.to_column))
 

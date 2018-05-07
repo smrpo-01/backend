@@ -113,7 +113,9 @@ class CardQueries(graphene.ObjectType):
                                   user_id=graphene.Int(required=True))
 
     def resolve_who_can_edit(self, info, card_id=None, user_id=None):
+        print("KAJ")
         if card_id is None:
+            print("test")
             return WhoCanEditType(card_name=True, card_description=True, project_name=True, owner=True,
                                   date=True, estimate=True, tasks=True)
         else:
@@ -131,6 +133,7 @@ class CardQueries(graphene.ObjectType):
                 return WhoCanEditType(error="Uporabnik ne more spreminjati kartice druge ekipe!")
 
             card_pos = where_is_card(card)
+            print(card_pos)
 
             if card_pos == 0:
                 if 2 in user_team_roles:

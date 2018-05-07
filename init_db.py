@@ -310,15 +310,15 @@ c12 = Card(column=col10, type=CardType.objects.get(id=0), estimate=4, project=p2
           description="Administrator lahko dodaja, ureja in briše podatke o uporabnikih.", name="Posodabljanje vsebine kartice", card_number=12)
 c12.save()
 
-c13 = Card(column=col7, type=CardType.objects.get(id=0), estimate=1, project=p2, owner=dev1, date_created=datetime.datetime(2018, 4, 12, 10, 0),
+c13 = Card(column=col2, type=CardType.objects.get(id=0), estimate=1, project=p2, owner=dev1, date_created=datetime.datetime(2018, 4, 12, 10, 0),
           description="KanbanMaster lahko kreira, ureja in briše podatke o razvojnih skupinah", name="Brisanje kartice", card_number=13)
 c13.save()
 
-c14 = Card(column=col6, type=CardType.objects.get(id=0), estimate=1, project=p2, owner=dev1, date_created=datetime.datetime(2018, 4, 11, 10, 0),
+c14 = Card(column=col4, type=CardType.objects.get(id=0), estimate=1, project=p2, owner=dev1, date_created=datetime.datetime(2018, 4, 11, 10, 0),
           description="KanbanMaster lahko kreira, ureja in briše podatke o projektih.", name="Posodabljanje lastnosti stolpca", card_number=14)
 c14.save()
 
-c15 = Card(column=col5, type=CardType.objects.get(id=0), estimate=3, project=p2, owner=dev2, date_created=datetime.datetime(2018, 4, 17, 10, 0),
+c15 = Card(column=col1, type=CardType.objects.get(id=0), estimate=3, project=p2, owner=dev2, date_created=datetime.datetime(2018, 4, 17, 10, 0),
           description="Uporabnik se lahko prijavi v sistem z uporabniškim imenom in geslom.", name="Izračun povprečnega potrebnega časa", card_number=15)
 c15.save()
 
@@ -495,21 +495,12 @@ CardLog(card=c12, from_column=col9, to_column=col10, action=None, user_team=dev2
 
 CardLog(card=c13, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 12, 10, 0)).save()
 CardLog(card=c13, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 14, 18, 0)).save()
-CardLog(card=c13, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 15, 18, 0)).save()
-CardLog(card=c13, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 22, 14, 0)).save()
-CardLog(card=c13, from_column=col5, to_column=col6, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 23, 10, 0)).save()
-CardLog(card=c13, from_column=col6, to_column=col7, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 26, 11, 30)).save()
 
 CardLog(card=c14, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 11, 10, 0)).save()
 CardLog(card=c14, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 21, 18, 0)).save()
 CardLog(card=c14, from_column=col2, to_column=col4, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 22, 18, 0)).save()
-CardLog(card=c14, from_column=col4, to_column=col5, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 23, 14, 0)).save()
-CardLog(card=c14, from_column=col5, to_column=col6, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 24, 10, 0)).save()
 
 CardLog(card=c15, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 10, 0)).save()
-CardLog(card=c15, from_column=col1, to_column=col2, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()
-CardLog(card=c15, from_column=col2, to_column=col4, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 17, 19, 0)).save()
-CardLog(card=c15, from_column=col4, to_column=col5, action=None, user_team=dev2, timestamp=datetime.datetime(2018, 4, 18, 14, 0)).save()
 
 CardLog(card=c16, from_column=None, to_column=col1, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 14, 10, 0)).save()
 CardLog(card=c16, from_column=col1, to_column=col2, action=None, user_team=dev1, timestamp=datetime.datetime(2018, 4, 17, 18, 0)).save()

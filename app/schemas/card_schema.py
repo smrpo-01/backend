@@ -523,6 +523,8 @@ class CardQueries(graphene.ObjectType):
         if date_to:
             end = HelperClass.get_si_date(date_to)
             logs = logs.filter(timestamp__lte=end + datetime.timedelta(days=1))
+        if not logs:
+            return []
         columns = models.Column.objects.filter(board=logs.first().to_column.board, parent=None)
         return sorted(logs, key=lambda k: get_columns_absolute(columns, []).index(k.to_column))
 

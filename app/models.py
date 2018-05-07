@@ -217,6 +217,7 @@ class Card(models.Model):
     expiration = models.DateField(default=timezone.now, null=True)
     owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
     is_deleted = models.BooleanField(default=False)
+    color_rejected = models.BooleanField(default=False)
     cause_of_deletion = models.TextField(default="")
 
 

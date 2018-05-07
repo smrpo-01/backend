@@ -396,6 +396,9 @@ class MoveCard(graphene.Mutation):
                 priority_col_inx = col_list.index(priority_col.id)
                 if to_col_inx > priority_col_inx:
                     raise GraphQLError("Ne moreš premikati za več kot ena v levo/desno.")
+                else:
+                    card.color_rejected = True
+                    card.save()
             else:
                 raise GraphQLError("Ne moreš premikati za več kot ena v levo/desno.")
 

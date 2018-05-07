@@ -326,10 +326,8 @@ class EditCard(graphene.Mutation):
 
         for task in card_data.tasks:
             if task.assignee_userteam_id is None:
-				# TODO: prever če pride do tega klica
                 assignee = None
             else:
-				# TODO: prever če pride do tega klica
                 assignee = models.UserTeam.objects.get(id=task.assignee_userteam_id)
 
             task_entity = models.Task(card=card, description=task.description, done=task.done, assignee=assignee)
@@ -371,7 +369,7 @@ class MoveCard(graphene.Mutation):
     def mutate(root, info, ok=False, card=None, card_id=None, to_column_id=None, force="", user_id=None):
         card = models.Card.objects.get(id=card_id)
         to_col = models.Column.objects.get(id=to_column_id)
-        cards = models.Card.objects.filter(column=to_col, project=card.project)
+        cards = models.Card.objects.filter(column=to_col, project=card.project, is_deleted=False)
         from_col = card.column
 
         user_teams = models.UserTeam.objects.filter(

@@ -24,7 +24,7 @@ def count_critical(column, critical):
 
 
 def validate_structure(data, edit_board=True):
-    if not edit_board: # dodajanje nove table
+    if not edit_board:  # dodajanje nove table
         error = validate_columns(data['columns'])
         if error:
             return error
@@ -134,7 +134,7 @@ class BoardType(DjangoObjectType):
         model = models.Board
 
     columns = graphene.String()
-    #columns = GenericScalar()
+    # columns = GenericScalar()
     columns_no_parents = graphene.List(ColumnType)
 
     estimate_min = graphene.Float()
@@ -162,7 +162,7 @@ class BoardType(DjangoObjectType):
 
     def resolve_columns(instance, info):
         return json.dumps(get_columns_json(instance.id))
-        #return get_columns_json(instance.id)
+        # return get_columns_json(instance.id)
 
     def resolve_columns_no_parents(instance, info):
         columns = instance.column_set.filter(parent=None)
@@ -170,11 +170,17 @@ class BoardType(DjangoObjectType):
         return sort_columns(columns)
 
 
+class CanEditColType(graphene.ObjectType):
+    id_col = graphene.String()
+    can_edit = graphene.Boolean()
+
+
 class BoardQueries(graphene.ObjectType):
     all_boards = graphene.List(BoardType, id=graphene.Int(required=False))
     all_columns = graphene.List(ColumnType, id=graphene.String(required=False))
     get_column = graphene.Field(ColumnType)
     get_user_boards = graphene.List(BoardType, userId=graphene.Int(required=True))
+    what_columns_can_edit = graphene.List(CanEditColType, board_id=graphene.Int(required=True))
 
     def resolve_all_boards(self, info, id=None):
         if id:
@@ -191,6 +197,15 @@ class BoardQueries(graphene.ObjectType):
         if u in models.User.objects.filter(roles__id=1):
             return models.Board.objects.all()
         return [models.Board.objects.get(pk=b) for b in get_user_board_ids(userId)]
+
+    def resolve_what_columns_can_edit(self, info, board_id):
+        col_list = models.Column.objects.filter(board=models.Board.objects.get(id=board_id))
+        lst = []
+        for column in col_list:
+            lst.append(CanEditColType(id_col=column.id, can_edit=column.can_edit()))
+
+
+        return lst
 
 
 class CreateBoard(graphene.Mutation):

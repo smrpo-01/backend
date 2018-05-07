@@ -429,6 +429,8 @@ class CardQueries(graphene.ObjectType):
             cards_filtered = [card for card in cards if card.column.board_id == board_id and not card.is_deleted]
             return cards_filtered
 
+
+
     def resolve_all_card_types(self, info):
         return models.CardType.objects.all()
 
@@ -632,7 +634,8 @@ class AddCard(graphene.Mutation):
         if card_data.type_id == 1:
             column_id = models.Column.objects.get(board=board, priority=True).id
             silver_bullet_cards = models.Card.objects.filter(column=models.Column.objects.get(id=column_id),
-                                                             type=models.CardType.objects.get(id=1))
+                                                             type=models.CardType.objects.get(id=1),
+                                                             project=models.Project.objects.get(id=card_data.project_id))
             if len(silver_bullet_cards) != 0:
                 raise GraphQLError("V stolpcu z najvišjo prioriteto je lahko samo ena nujna zahteva.")
         else:

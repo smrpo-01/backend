@@ -224,22 +224,22 @@ col1.save()
 col2 = Column(id="2", board=b1, name="Sprint Backlog", position=1, wip=0, priority=True)
 col2.save()
 
-col3 = Column(id="3", board=b1, name="Development", position=2, wip=6)
+col3 = Column(id="3", board=b1, name="Development", position=2, wip=0)
 col3.save()
 
-col4 = Column(id="4", board=b1, name="Analysis & Design", position=0, wip=0, parent=col3, boundary=True)
+col4 = Column(id="4", board=b1, name="Analysis & Design", position=0, wip=2, parent=col3, boundary=True)
 col4.save()
 
-col5 = Column(id="5", board=b1, name="Coding", position=1, wip=0, parent=col3)
+col5 = Column(id="5", board=b1, name="Coding", position=1, wip=2, parent=col3)
 col5.save()
 
-col6 = Column(id="6", board=b1, name="Testing", position=2, wip=0, parent=col3)
+col6 = Column(id="6", board=b1, name="Testing", position=2, wip=3, parent=col3)
 col6.save()
 
-col7 = Column(id="7", board=b1, name="Integration", position=3, wip=0, parent=col3)
+col7 = Column(id="7", board=b1, name="Integration", position=3, wip=1, parent=col3)
 col7.save()
 
-col8 = Column(id="8", board=b1, name="Documentation", position=4, wip=0, parent=col3, boundary=True)
+col8 = Column(id="8", board=b1, name="Documentation", position=4, wip=4, parent=col3, boundary=True)
 col8.save()
 
 col9 = Column(id="9", board=b1, name="Acceptance Ready", position=3, wip=0, acceptance=True)
@@ -260,94 +260,94 @@ po = ug3
 # Kartice projekt 1 -----------------------------------------------------------------
 
 c1 = Card(column=col10, type=CardType.objects.get(id=0), estimate=3.5, project=p1, owner=dev1, date_created=datetime.datetime(2018, 4, 10, 10, 0),
-          description="Administrator lahko dodaja, ureja in briše podatke o uporabnikih.", name="Vzdrževanje uporabnikov", card_number=1)
+          description="Administrator lahko dodaja, ureja in briše podatke o uporabnikih.", name="Vzdrževanje uporabnikov", card_number=1, expiration=datetime.date(2018, 5, 27))
 c1.save()
 
 c2 = Card(column=col10, type=CardType.objects.get(id=0), estimate=1, project=p1, owner=dev1, date_created=datetime.datetime(2018, 4, 10, 10, 0),
-          description="KanbanMaster lahko kreira, ureja in briše podatke o razvojnih skupinah", name="Vzdrževanje razvojnih skupin", card_number=2)
+          description="KanbanMaster lahko kreira, ureja in briše podatke o razvojnih skupinah", name="Vzdrževanje razvojnih skupin", card_number=2, expiration=datetime.date(2018, 5, 27))
 c2.save()
 
 c3 = Card(column=col10, type=CardType.objects.get(id=0), estimate=10, project=p1, owner=dev1, date_created=datetime.datetime(2018, 4, 11, 10, 0),
-          description="KanbanMaster lahko kreira, ureja in briše podatke o projektih.", name="Vzdrževanje projektov", card_number=3)
+          description="KanbanMaster lahko kreira, ureja in briše podatke o projektih.", name="Vzdrževanje projektov", card_number=3, expiration=datetime.date(2018, 5, 27))
 c3.save()
 
 c4 = Card(column=col10, type=CardType.objects.get(id=0), estimate=3, project=p1, owner=dev1, date_created=datetime.datetime(2018, 4, 12, 10, 0),
-          description="Uporabnik se lahko prijavi v sistem z uporabniškim imenom in geslom.", name="Prijava v sistem", card_number=4)
+          description="Uporabnik se lahko prijavi v sistem z uporabniškim imenom in geslom.", name="Prijava v sistem", card_number=4, expiration=datetime.date(2018, 5, 27))
 c4.save()
 
 c5 = Card(column=col10, type=CardType.objects.get(id=0), estimate=4, project=p1, owner=dev2, date_created=datetime.datetime(2018, 4, 13, 10, 0),
-          description="KanbanMaster lahko kreira novo tablo in (dokler je prazna) spreminja njeno strukturo.", name="Kreiranje table", card_number=5)
+          description="KanbanMaster lahko kreira novo tablo in (dokler je prazna) spreminja njeno strukturo.", name="Kreiranje table", card_number=5, expiration=datetime.date(2018, 5, 27))
 c5.save()
 
 c6 = Card(column=col10, type=CardType.objects.get(id=0), estimate=2, project=p1, owner=dev2, date_created=datetime.datetime(2018, 4, 15, 10, 0),
-          description="Uporabnik lahko pregleduje tablo.", name="Prikaz table", card_number=6)
+          description="Uporabnik lahko pregleduje tablo.", name="Prikaz table", card_number=6, expiration=datetime.date(2018, 5, 27))
 c6.save()
 
 c7 = Card(column=col10, type=CardType.objects.get(id=0), estimate=1.5, project=p1, owner=dev1, date_created=datetime.datetime(2018, 4, 14, 10, 0),
-          description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="Kreiranje kartice", card_number=7)
+          description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="Kreiranje kartice", card_number=7, expiration=datetime.date(2018, 5, 27))
 c7.save()
 
 c8 = Card(column=col10, type=CardType.objects.get(id=0), estimate=1.5, project=p1, owner=dev2, date_created=datetime.datetime(2018, 4, 16, 10, 0),
-          description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="Prestavljanje kartice", card_number=8)
+          description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="Prestavljanje kartice", card_number=8, expiration=datetime.date(2018, 5, 27))
 c8.save()
 
 c9 = Card(column=col10, type=CardType.objects.get(id=0), estimate=1.5, project=p1, owner=dev1, date_created=datetime.datetime(2018, 4, 18, 10, 0),
-          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="Prikaz podrobnosti kartice", card_number=9)
+          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="Prikaz podrobnosti kartice", card_number=9, expiration=datetime.date(2018, 5, 27))
 c9.save()
 
 c10 = Card(column=col10, type=CardType.objects.get(id=0), estimate=1.5, project=p1, owner=dev1, date_created=datetime.datetime(2018, 4, 17, 10, 0),
-          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="Kreiranje nove table s kopiranjem strukture", card_number=10)
+          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="Kreiranje nove table s kopiranjem strukture", card_number=10, expiration=datetime.date(2018, 5, 27))
 c10.save()
 
 c11 = Card(column=col10, type=CardType.objects.get(id=1), estimate=1.5, project=p1, owner=po, date_created=datetime.datetime(2018, 4, 11, 10, 0),
-          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="Uporabniška dokumentacija", card_number=11)
+          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="Uporabniška dokumentacija", card_number=11, expiration=datetime.date(2018, 5, 27))
 c11.save()
 
 
 # Kartice projekt 2 -----------------------------------------------------------------
 
 c12 = Card(column=col10, type=CardType.objects.get(id=0), estimate=4, project=p2, owner=dev2, date_created=datetime.datetime(2018, 4, 10, 10, 0),
-          description="Administrator lahko dodaja, ureja in briše podatke o uporabnikih.", name="Posodabljanje vsebine kartice", card_number=12)
+          description="Administrator lahko dodaja, ureja in briše podatke o uporabnikih.", name="Posodabljanje vsebine kartice", card_number=12, expiration=datetime.date(2018, 5, 27))
 c12.save()
 
 c13 = Card(column=col2, type=CardType.objects.get(id=0), estimate=1, project=p2, owner=dev1, date_created=datetime.datetime(2018, 4, 12, 10, 0),
-          description="KanbanMaster lahko kreira, ureja in briše podatke o razvojnih skupinah", name="Brisanje kartice", card_number=13)
+          description="KanbanMaster lahko kreira, ureja in briše podatke o razvojnih skupinah", name="Brisanje kartice", card_number=13, expiration=datetime.date(2018, 5, 27))
 c13.save()
 
 c14 = Card(column=col4, type=CardType.objects.get(id=0), estimate=1, project=p2, owner=dev1, date_created=datetime.datetime(2018, 4, 11, 10, 0),
-          description="KanbanMaster lahko kreira, ureja in briše podatke o projektih.", name="Posodabljanje lastnosti stolpca", card_number=14)
+          description="KanbanMaster lahko kreira, ureja in briše podatke o projektih.", name="Posodabljanje lastnosti stolpca", card_number=14, expiration=datetime.date(2018, 5, 27))
 c14.save()
 
 c15 = Card(column=col1, type=CardType.objects.get(id=0), estimate=3, project=p2, owner=dev2, date_created=datetime.datetime(2018, 4, 17, 10, 0),
-          description="Uporabnik se lahko prijavi v sistem z uporabniškim imenom in geslom.", name="Izračun povprečnega potrebnega časa", card_number=15)
+          description="Uporabnik se lahko prijavi v sistem z uporabniškim imenom in geslom.", name="Izračun povprečnega potrebnega časa", card_number=15, expiration=datetime.date(2018, 5, 27))
 c15.save()
 
 c16 = Card(column=col7, type=CardType.objects.get(id=0), estimate=6, project=p2, owner=dev1, date_created=datetime.datetime(2018, 4, 14, 10, 0),
-          description="KanbanMaster lahko kreira novo tablo in (dokler je prazna) spreminja njeno strukturo.", name="Izdelava kumulativnega diagrama delovnega toka", card_number=16)
+          description="KanbanMaster lahko kreira novo tablo in (dokler je prazna) spreminja njeno strukturo.", name="Izdelava kumulativnega diagrama delovnega toka", card_number=16, expiration=datetime.date(2018, 5, 27))
 c16.save()
 
 c17 = Card(column=col9, type=CardType.objects.get(id=0), estimate=5, project=p2, owner=dev2, date_created=datetime.datetime(2018, 4, 11, 10, 0),
-          description="Uporabnik lahko pregleduje tablo.", name="Izpis kršitev omejitve WIP", card_number=17)
+          description="Uporabnik lahko pregleduje tablo.", name="Izpis kršitev omejitve WIP", card_number=17, expiration=datetime.date(2018, 5, 27))
 c17.save()
 
 c18 = Card(column=col8, type=CardType.objects.get(id=0), estimate=4, project=p2, owner=dev1, date_created=datetime.datetime(2018, 4, 14, 10, 0),
-          description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="Prikaz 'kritičnih' kartic", card_number=18)
+          description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="Prikaz 'kritičnih' kartic", card_number=18, expiration=datetime.date(2018, 5, 27))
 c18.save()
 
 c19 = Card(column=col6, type=CardType.objects.get(id=0), estimate=1.5, project=p2, owner=po, date_created=datetime.datetime(2018, 4, 13, 10, 0),
-          description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="Obveščanje o prekoračitvi roka", card_number=19)
+          description="Uporabnik lahko v okviru svojih pristojnosti kreira novo kartico.", name="Obveščanje o prekoračitvi roka", card_number=19, expiration=datetime.date(2018, 5, 27))
 c19.save()
 
 c20 = Card(column=col10, type=CardType.objects.get(id=0), estimate=3, project=p2, owner=dev1, date_created=datetime.datetime(2018, 4, 15, 10, 0),
-          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="Vgradnja pravil za prestavljanje kartic", card_number=20)
+          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="Vgradnja pravil za prestavljanje kartic", card_number=20, expiration=datetime.date(2018, 5, 27))
 c20.save()
 
 c21 = Card(column=col10, type=CardType.objects.get(id=0), estimate=2, project=p2, owner=dev1, date_created=datetime.datetime(2018, 4, 18, 10, 0),
-          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="'Oženje' stolpcev", card_number=21)
+          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="'Oženje' stolpcev", card_number=21, expiration=datetime.date(2018, 5, 27))
 c21.save()
 
 c22 = Card(column=col6, type=CardType.objects.get(id=1), estimate=1.5, project=p2, owner=dev2, date_created=datetime.datetime(2018, 4, 11, 10, 0),
-          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="Prilagodljiv prikaz kartice na tabli", card_number=22)
+          description="Uporabnik lahko izpiše vsebino kartice, ki se nahaja na tabli.", name="Prilagodljiv prikaz kartice na tabli", card_number=22, expiration=datetime.date(2018, 5, 27))
 c22.save()
 
 t1 = Task(description="To je description 1", card=c1)

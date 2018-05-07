@@ -239,6 +239,7 @@ class Card(models.Model):
     owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE, related_name='cards_assigned')
     date_created = models.DateTimeField(default=timezone.now)
     is_deleted = models.BooleanField(default=False)
+    color_rejected = models.BooleanField(default=False)
     cause_of_deletion = models.TextField(default="")
 
 

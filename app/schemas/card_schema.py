@@ -39,10 +39,6 @@ def where_is_card(card):
         return 1
 
 
-
-
-
-
 def get_columns_absolute(columns, list_of_columns):
     for col in columns:
         if len(col.children.all()) == 0:
@@ -137,16 +133,19 @@ def filter_cards(project_id, creation_start, creation_end, done_start, done_end,
         cards = cards.filter(date_created__gte=start)
     if creation_end:
         end = HelperClass.get_si_date(creation_end)
-        cards = cards.filter(date_created__lte=end+datetime.timedelta(days=1))
+        cards = cards.filter(date_created__lte=end + datetime.timedelta(days=1))
     if done_start:
         start = HelperClass.get_si_date(done_start)
         done_column = get_done_column(project.board)
-        valid_cards = models.CardLog.objects.filter(to_column=done_column, timestamp__gte=start).values_list('card', flat=True)
+        valid_cards = models.CardLog.objects.filter(to_column=done_column, timestamp__gte=start).values_list('card',
+                                                                                                             flat=True)
         cards = cards.filter(pk__in=[c for c in valid_cards])
     if done_end:
         end = HelperClass.get_si_date(done_end)
         done_column = get_done_column(project.board)
-        valid_cards = models.CardLog.objects.filter(to_column=done_column, timestamp__lt=end+datetime.timedelta(days=1)).values_list('card', flat=True)
+        valid_cards = models.CardLog.objects.filter(to_column=done_column,
+                                                    timestamp__lt=end + datetime.timedelta(days=1)).values_list('card',
+                                                                                                                flat=True)
         cards = cards.filter(pk__in=[c for c in valid_cards])
     if dev_start:
         start = HelperClass.get_si_date(dev_start)
@@ -156,7 +155,9 @@ def filter_cards(project_id, creation_start, creation_end, done_start, done_end,
     if dev_end:
         end = HelperClass.get_si_date(dev_end)
         left, _ = get_boundary_columns(project.board)
-        valid_cards = models.CardLog.objects.filter(to_column=left, timestamp__lt=end+datetime.timedelta(days=1)).values_list('card', flat=True)
+        valid_cards = models.CardLog.objects.filter(to_column=left,
+                                                    timestamp__lt=end + datetime.timedelta(days=1)).values_list('card',
+                                                                                                                flat=True)
         cards = cards.filter(pk__in=[c for c in valid_cards])
     if estimate_from:
         cards = cards.filter(estimate__gte=estimate_from)
@@ -236,7 +237,7 @@ def cards_per_day(cards, date_from, date_to, column_from, column_to):
     while date <= date_to:
         tmp = {}
         for col in between:
-           tmp[col.name] = 0
+            tmp[col.name] = 0
 
         for card in cards:
             columns = column_at_date(card, date.date())
@@ -304,7 +305,7 @@ class CardType(DjangoObjectType):
 
             columns = models.Column.objects.filter(board=column_from.board, parent=None)
             columns = get_columns_absolute(columns, [])
-            
+
             if columns.index(column_from) > columns.index(column_to):
                 raise GraphQLError("Drugi stolpec je levo od prvega.")
         return float("{0:.2f}".format(card_total_time(instance, minimal, column_from, column_to)))
@@ -317,7 +318,6 @@ class CardLogType(DjangoObjectType):
     log_string = graphene.String()
     si_timestamp = graphene.String()
 
-
     def resolve_log_string(instance, info):
         return str(instance)
 
@@ -326,7 +326,8 @@ class CardLogType(DjangoObjectType):
 
 
 class CardQueries(graphene.ObjectType):
-    all_cards = graphene.Field(graphene.List(CardType), card_id=graphene.Int(default_value=-1), board_id=graphene.Int(default_value=-1))
+    all_cards = graphene.Field(graphene.List(CardType), card_id=graphene.Int(default_value=-1),
+                               board_id=graphene.Int(default_value=-1))
     all_card_logs = graphene.List(CardLogType)
     all_card_types = graphene.List(CardTypeType)
     filter_cards = graphene.List(
@@ -341,7 +342,7 @@ class CardQueries(graphene.ObjectType):
         estimate_from=graphene.Float(default_value=0),
         estimate_to=graphene.Float(default_value=0),
         card_type=graphene.List(graphene.String, default_value=0)
-        )
+    )
     avg_lead_time = graphene.Float(
         project_id=graphene.Int(default_value=0),
         creation_start=graphene.String(default_value=0),
@@ -418,7 +419,6 @@ class CardQueries(graphene.ObjectType):
                                   card_id=graphene.Int(required=True),
                                   user_team_id=graphene.Int(required=True))
 
-
     def resolve_all_cards(self, info, card_id, board_id):
         if board_id == -1:
             if card_id != -1:
@@ -444,7 +444,6 @@ class CardQueries(graphene.ObjectType):
     who_can_edit = graphene.Field(WhoCanEditType,
                                   card_id=graphene.Int(required=False, default_value=None),
                                   user_id=graphene.Int(required=True))
-
 
     def resolve_who_can_edit(self, info, card_id=None, user_id=None):
         if card_id is None:
@@ -526,12 +525,13 @@ class CardQueries(graphene.ObjectType):
                 return WhoCanEditType(error="Posodabljanje kartice ni dovoljeno.")
 
     def resolve_filter_cards(self, info, project_id, creation_start, creation_end, done_start, done_end, dev_start, \
-                                 dev_end, estimate_from, estimate_to, card_type):
+                             dev_end, estimate_from, estimate_to, card_type):
         return filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
                             dev_end, estimate_from, estimate_to, card_type)
 
     def resolve_avg_lead_time(self, info, project_id, creation_start, creation_end, done_start, done_end, dev_start, \
-                              dev_end, estimate_from, estimate_to, card_type, minimal, column_from=None, column_to=None):
+                              dev_end, estimate_from, estimate_to, card_type, minimal, column_from=None,
+                              column_to=None):
         cards = filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
                              dev_end, estimate_from, estimate_to, card_type)
 
@@ -553,13 +553,14 @@ class CardQueries(graphene.ObjectType):
         return cards_per_dev(cards)
 
     def resolve_estimate_per_dev(self, info, project_id, creation_start, creation_end, done_start, done_end, dev_start, \
-                              dev_end, estimate_from, estimate_to, card_type):
+                                 dev_end, estimate_from, estimate_to, card_type):
         cards = filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
                              dev_end, estimate_from, estimate_to, card_type)
         return estimate_per_dev(cards)
 
     def resolve_cards_per_day(self, info, project_id, creation_start, creation_end, done_start, done_end, dev_start, \
-                              dev_end, estimate_from, estimate_to, card_type, date_from, date_to, column_to, column_from):
+                              dev_end, estimate_from, estimate_to, card_type, date_from, date_to, column_to,
+                              column_from):
         col1 = models.Column.objects.get(id=column_from)
         col2 = models.Column.objects.get(id=column_to)
         columns = models.Column.objects.filter(board=col1.board, parent=None)
@@ -572,7 +573,7 @@ class CardQueries(graphene.ObjectType):
         return cards_per_day(cards, date_from, date_to, column_from, column_to)
 
     def resolve_wip_logs(self, info, project_id, creation_start, creation_end, done_start, done_end, dev_start, \
-                              dev_end, estimate_from, estimate_to, card_type, date_from=None, date_to=None):
+                         dev_end, estimate_from, estimate_to, card_type, date_from=None, date_to=None):
         cards = filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, \
                              dev_end, estimate_from, estimate_to, card_type)
         logs = models.CardLog.objects.filter(action__isnull=False, card__in=cards)
@@ -634,7 +635,7 @@ class AddCard(graphene.Mutation):
             column_id = models.Column.objects.get(board=board, priority=True).id
             silver_bullet_cards = models.Card.objects.filter(column=models.Column.objects.get(id=column_id),
                                                              type=models.CardType.objects.get(id=1))
-            #print(len(silver_bullet_cards))
+            # print(len(silver_bullet_cards))
             if len(silver_bullet_cards) != 0:
                 raise GraphQLError("V stolpcu z najvišjo prioriteto je lahko samo ena nujna zahteva.")
         else:
@@ -738,14 +739,24 @@ class EditCard(graphene.Mutation):
 class SetDoneTask(graphene.Mutation):
     class Arguments:
         task_id = graphene.Int(required=True)
+        user_id = graphene.Int(required=True)
         done = graphene.Boolean(required=True)
 
     ok = graphene.Boolean()
     task = graphene.Field(TaskType)
 
     @staticmethod
-    def mutate(root, info, task_id=None, done=None):
+    def mutate(root, info, task_id=None, done=None, user_id=None):
+        schema = graphene.Schema(query=CardQueries)
+
+
+
         task = models.Task.objects.get(id=task_id)
+
+        result = schema.execute('{whoCanEdit(cardId: '+str(task.card_id)+', userId: '+str(user_id)+'){error}}')
+        if result.data['whoCanEdit']['error'] != "":
+            raise GraphQLError(result.data['whoCanEdit']['error'])
+
         task.done = done
         task.save()
 

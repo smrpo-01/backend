@@ -329,7 +329,7 @@ class CardLogType(DjangoObjectType):
 
 
 class CardQueries(graphene.ObjectType):
-    all_cards = graphene.Field(graphene.List(CardType), card_id=graphene.String(default_value=-1), board_id=graphene.Int(default_value=-1))
+    all_cards = graphene.Field(graphene.List(CardType), card_id=graphene.Int(default_value=-1), board_id=graphene.Int(default_value=-1))
     all_card_logs = graphene.List(CardLogType)
     all_card_types = graphene.List(CardTypeType)
     filter_cards = graphene.List(

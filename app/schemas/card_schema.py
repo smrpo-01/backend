@@ -323,8 +323,10 @@ class EditCard(graphene.Mutation):
 
         for task in card_data.tasks:
             if task.assignee_userteam_id is None:
+				# TODO: prever če pride do tega klica
                 assignee = None
             else:
+				# TODO: prever če pride do tega klica
                 assignee = models.UserTeam.objects.get(id=task.assignee_userteam_id)
 
             task_entity = models.Task(card=card, description=task.description, done=task.done, assignee=assignee)

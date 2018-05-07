@@ -227,19 +227,19 @@ col2.save()
 col3 = Column(id="3", board=b1, name="Development", position=2, wip=0)
 col3.save()
 
-col4 = Column(id="4", board=b1, name="Analysis & Design", position=0, wip=0, parent=col3, boundary=True)
+col4 = Column(id="4", board=b1, name="Analysis & Design", position=0, wip=2, parent=col3, boundary=True)
 col4.save()
 
-col5 = Column(id="5", board=b1, name="Coding", position=1, wip=0, parent=col3)
+col5 = Column(id="5", board=b1, name="Coding", position=1, wip=2, parent=col3)
 col5.save()
 
-col6 = Column(id="6", board=b1, name="Testing", position=2, wip=0, parent=col3)
+col6 = Column(id="6", board=b1, name="Testing", position=2, wip=3, parent=col3)
 col6.save()
 
-col7 = Column(id="7", board=b1, name="Integration", position=3, wip=0, parent=col3)
+col7 = Column(id="7", board=b1, name="Integration", position=3, wip=1, parent=col3)
 col7.save()
 
-col8 = Column(id="8", board=b1, name="Documentation", position=4, wip=0, parent=col3, boundary=True)
+col8 = Column(id="8", board=b1, name="Documentation", position=4, wip=4, parent=col3, boundary=True)
 col8.save()
 
 col9 = Column(id="9", board=b1, name="Acceptance Ready", position=3, wip=0, acceptance=True)

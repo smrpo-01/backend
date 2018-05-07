@@ -20,30 +20,27 @@ def where_is_card(card):
     #   0 - če je pred mejnim stolpcem
     #   1 - če je med mejnima stolpcema
     #   2 - če je na koncu
-    table = list(models.Column.objects.filter(board=card.project.board))
+
+    columns = list(models.Column.objects.filter(board=card.project.board))
+    list_columns = get_columns_absolute(columns, [])
+
     first_boundary = list(models.Column.objects.filter(board=card.project.board, boundary=True))[0]
     second_boundary = list(models.Column.objects.filter(board=card.project.board, boundary=True))[1]
-    col_id_card = card.column_id
-    first_b_index = None
-    second_b_index = None
-    for i in range(0, len(table)):
-        if table[i].id == first_boundary.id:
-            first_b_index = i
-        elif table[i].id == second_boundary.id:
-            second_b_index = i
 
-    first_half = table[:first_b_index]
-    middle = table[first_b_index:second_b_index + 1]
+    first_b_index = list_columns.index(first_boundary)
+    second_b_index = list_columns.index(second_boundary)
+    column_index = list_columns.index(card.column)
 
-    for col in first_half:
-        if col_id_card == col.id:
-            return 0
+    if column_index < first_b_index:
+        return 0
+    elif column_index > second_b_index:
+        return 2
+    else:
+        return 1
 
-    for col in middle:
-        if col_id_card == col.id:
-            return 1
 
-    return 2
+
+
 
 
 def get_columns_absolute(columns, list_of_columns):
@@ -475,7 +472,7 @@ class CardQueries(graphene.ObjectType):
                 return WhoCanEditType(error="Uporabnik ne more spreminjati kartice druge ekipe!")
 
             card_pos = where_is_card(card)
-            #print(card_pos)
+            print(card_pos)
 
             if card_pos == 0:
                 if 2 in user_team_roles:

@@ -720,7 +720,7 @@ class EditCard(graphene.Mutation):
         card.name = card_data.name
         card.estimate = card_data.estimate
         card.project = models.Project.objects.get(id=card_data.project_id)
-        card.expiration = HelperClass.get_si_date(card_data.expiration),
+        card.expiration = HelperClass.get_si_date(card_data.expiration)
         card.owner = owner
         card.priority = card_data.priority
         card.save()

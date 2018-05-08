@@ -245,6 +245,7 @@ class Card(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     is_deleted = models.BooleanField(default=False)
     color_rejected = models.BooleanField(default=False)
+    priority = models.TextField(default="Must have") # Could
     cause_of_deletion = models.TextField(default="")
 
 

@@ -725,7 +725,7 @@ class EditCard(graphene.Mutation):
         card.save()
 
         # first delete all tasks assigned to card
-        # for task in tasks:
+        # for task in tasks:#
         #    task.delete()
 
         for task in card_data.tasks:

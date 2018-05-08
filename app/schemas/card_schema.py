@@ -233,7 +233,7 @@ def cards_per_day(cards, date_from, date_to, column_from, column_to):
     dates = {}
     column_from = models.Column.objects.get(id=column_from)
     column_to = models.Column.objects.get(id=column_to)
-    between = columns_between(column_from, column_to)
+    between = columns_between(column_from, column_to)[::-1]
 
     while date <= date_to:
         tmp = {}

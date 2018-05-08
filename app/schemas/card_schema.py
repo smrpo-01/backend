@@ -454,7 +454,7 @@ class CardQueries(graphene.ObjectType):
             card = models.Card.objects.get(id=card_id)
 
             user_teams = models.UserTeam.objects.filter(member=models.User.objects.get(id=user_id),
-                                                        team=card.project.team)
+                                                        team=card.project.team, is_active=True)
             user_team_roles = [user_team.role.id for user_team in user_teams]
             try:
                 user_team = user_teams[0]  # just for team and project and stuff

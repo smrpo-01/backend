@@ -260,6 +260,7 @@ class WhoCanEditType(graphene.ObjectType):
     date = graphene.Boolean()
     estimate = graphene.Boolean()
     tasks = graphene.Boolean()
+    priority = graphene.Boolean(default_value=False)
     error = graphene.String()
 
 
@@ -448,7 +449,7 @@ class CardQueries(graphene.ObjectType):
     def resolve_who_can_edit(self, info, card_id=None, user_id=None):
         if card_id is None:
             return WhoCanEditType(card_name=True, card_description=True, project_name=True, owner=True,
-                                  date=True, estimate=True, tasks=True)
+                                  date=True, estimate=True, tasks=True, priority=True)
         else:
             card = models.Card.objects.get(id=card_id)
 
@@ -483,7 +484,7 @@ class CardQueries(graphene.ObjectType):
                             return WhoCanEditType(error="Product Owner lahko posodablja le normalne kartice.")
                     else:
                         return WhoCanEditType(card_name=True, card_description=True, project_name=True, owner=True,
-                                              date=True, estimate=True, tasks=True)
+                                              date=True, estimate=True, tasks=True, priority=True)
                 elif 3 in user_team_roles:
                     if card.type_id == 0:
                         if 4 in user_team_roles:
@@ -494,7 +495,7 @@ class CardQueries(graphene.ObjectType):
                             return WhoCanEditType(error="Kanban master lahko posodablja le silver bullet kartice.")
                     else:
                         return WhoCanEditType(card_name=True, card_description=True, project_name=True, owner=True,
-                                              date=True, estimate=True, tasks=True)
+                                              date=True, estimate=True, tasks=True, priority=True)
                 else:
                     return WhoCanEditType(card_name=False, card_description=False, project_name=False, owner=False,
                                           date=False, estimate=False, tasks=True)
@@ -516,7 +517,7 @@ class CardQueries(graphene.ObjectType):
                             return WhoCanEditType(error="Kanban master lahko posodablja le silver bullet kartice.")
                     else:
                         return WhoCanEditType(card_name=True, card_description=True, project_name=False, owner=False,
-                                              date=False, estimate=False, tasks=True)
+                                              date=False, estimate=False, tasks=True, priority=True)
                 else:
                     return WhoCanEditType(card_name=False, card_description=False, project_name=False, owner=False,
                                           date=False, estimate=False, tasks=True)

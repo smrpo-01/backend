@@ -604,6 +604,7 @@ class CardInput(graphene.InputObjectType):
     expiration = graphene.String(required=False,
                                  default_value=str(datetime.datetime.now() + datetime.timedelta(5)).split(' ')[0])
     owner_userteam_id = graphene.Int(requred=False)
+    priority = graphene.String(required=True)
     description = graphene.String(required=False, default_value="")
     estimate = graphene.Float(required=False, default_value=1)
     tasks = graphene.List(TasksInput, default_value=[])
@@ -652,7 +653,8 @@ class AddCard(graphene.Mutation):
                            estimate=card_data.estimate,
                            project=models.Project.objects.get(id=card_data.project_id),
                            expiration=HelperClass.get_si_date(card_data.expiration),
-                           owner=owner)
+                           owner=owner,
+                           priority=card_data.priority)
         card.save()
 
         for task in card_data.tasks:
@@ -719,6 +721,7 @@ class EditCard(graphene.Mutation):
         card.project = models.Project.objects.get(id=card_data.project_id)
         card.expiration = HelperClass.get_si_date(card_data.expiration),
         card.owner = owner
+        card.priority = card_data.priority
         card.save()
 
         # first delete all tasks assigned to card

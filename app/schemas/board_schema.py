@@ -8,6 +8,8 @@ from backend.utils import HelperClass
 import json
 from graphql import GraphQLError
 
+import uuid
+
 from app.schemas.card_schema import *
 
 
@@ -16,6 +18,20 @@ def validate_columns(columns):
         if models.Column.objects.filter(pk=column['id']).exists():
             return "Stolpec z istim ID že obstaja."
         validate_columns(column['columns'])
+    return None
+
+
+def validate_wips(columns):
+    for column in columns:
+        try:
+            col = models.Column.objects.get(pk=column['id'])
+            if col.is_over_wip(int(column['wip'])):
+                return "Omejitev WIP je presežena."
+        except:
+            continue
+        error = validate_wips(column['columns'])
+        if error:
+            return error
     return None
 
 
@@ -121,6 +137,29 @@ def save_board_json(json_data, edit=False, copy_board=False):
         save_column(parent, column['columns'], edit)
 
     return get_columns_json(board.id)
+
+
+def copy_board(board_id):
+    board = models.Board.objects.get(id=board_id)
+    new_board = models.Board(name=board.name + '-copy')
+    new_board.save()
+    for column in models.Column.objects.filter(board=board):
+        new_column = models.Column(
+            id=uuid.uuid4(),
+            board=new_board,
+            name=column.name,
+            position=column.position,
+            wip=column.wip,
+            boundary=column.boundary,
+            acceptance=column.acceptance,
+            priority=column.priority,
+            parent=column.parent
+        )
+        new_column.save()
+        if new_column.parent:
+            new_column.parent = models.Column.objects.filter(board=new_board, name=column.parent.name).first()
+            new_column.save()
+    return new_board
 
 
 def get_column(column_id):
@@ -252,26 +291,39 @@ class CreateBoard(graphene.Mutation):
 class EditBoard(graphene.Mutation):
     class Arguments:
         json_string = graphene.String(required=True)
+        check_wip = graphene.Boolean()
 
     board = graphene.String()
 
     @staticmethod
-    def mutate(root, info, json_string=None):
+    def mutate(root, info, json_string=None, check_wip=True):
+        if check_wip:
+            data = json.loads(json_string)
+            board_id = data['id']
+            b = models.Board.objects.get(id=board_id)
+            error = validate_wips(data['columns'])
+            print(error)
+            if error:
+                raise GraphQLError(error)
+
         board_json = save_board_json(json_string, edit=True)
         return EditBoard(board=json.dumps(board_json))
+
 
 class CopyBoard(graphene.Mutation):
     class Arguments:
         board_id = graphene.Int(required=True)
 
-    board = graphene.String()
+    board = graphene.Field(BoardType)
 
     @staticmethod
-    def mutate(root, info, json_string=None):
-        board_json = save_board_json(json_string, edit=True)
-        return EditBoard(board=json.dumps(board_json))
+    def mutate(root, info, board_id=None):
+        if board_id:
+            board = copy_board(board_id)
+        return CopyBoard(board=board)
 
 
 class BoardMutations(graphene.ObjectType):
     create_board = CreateBoard.Field()
     edit_board = EditBoard.Field()
+    copy_board = CopyBoard.Field()

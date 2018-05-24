@@ -199,8 +199,9 @@ class Column(models.Model):
     def num_of_cards(self):
         return len(self.cards.all()) + sum([c.num_of_cards() for c in self.children.all()])
 
-    def is_over_wip(self):
-        return self.num_of_cards() > self.wip if self.wip > 0 else False
+    def is_over_wip(self, wip=None):
+        wip = wip if wip else self.wip
+        return self.num_of_cards() > wip if wip > 0 else False
 
     def is_parent_over_wip(self):
         col, lst = self, []

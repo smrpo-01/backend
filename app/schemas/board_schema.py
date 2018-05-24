@@ -225,7 +225,9 @@ class BoardQueries(graphene.ObjectType):
         u = models.User.objects.get(pk=userId)
         if u in models.User.objects.filter(roles__id=1):
             return models.Board.objects.all()
-        return [models.Board.objects.get(pk=b) for b in get_user_board_ids(userId)]
+        none_boards = [b for b in models.Board.objects.all() if not len(b.projects.all())]
+        user_boards = [models.Board.objects.get(pk=b) for b in get_user_board_ids(userId)]
+        return user_boards + none_boards
 
     def resolve_what_columns_can_edit(self, info, board_id):
         col_list = models.Column.objects.filter(board=models.Board.objects.get(id=board_id))

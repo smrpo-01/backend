@@ -40,24 +40,36 @@ def validate_structure(data, edit_board=True):
     return None
 
 
-def save_column(parent, columns):
+def save_column(parent, columns, edit):
     for pos, column in enumerate(columns):
-        col = models.Column(
-            id=column['id'],
-            board=parent.board,
-            name=column['name'],
-            position=pos,
-            wip=column['wip'],
-            boundary=column['boundary'],
-            acceptance=column['acceptance'],
-            priority=column['priority'],
-            parent=parent
-        )
-        col.save()
-        save_column(col, column['columns'])
+        try:
+            col = models.Column.objects.get(id=column['id'])
+            col.board = parent.board
+            col.name = column['name']
+            col.position = pos
+            col.wip = column['wip']
+            col.boundary = column['boundary']
+            col.acceptance = column['acceptance']
+            col.priority = column['priority']
+            col.parent=parent
+            col.save()
+        except:
+            col = models.Column(
+                id=column['id'],
+                board=parent.board,
+                name=column['name'],
+                position=pos,
+                wip=column['wip'],
+                boundary=column['boundary'],
+                acceptance=column['acceptance'],
+                priority=column['priority'],
+                parent=parent
+            )
+            col.save()
+        save_column(col, column['columns'], edit)
 
 
-def save_board_json(json_data, edit=False):
+def save_board_json(json_data, edit=False, copy_board=False):
     data = json.loads(json_data)
 
     error = validate_structure(data)
@@ -68,7 +80,9 @@ def save_board_json(json_data, edit=False):
         board = models.Board.objects.get(pk=data['id'])
         board.name = data['boardName']
         board.save()
-        models.Column.objects.filter(board=board).delete()
+        for col in models.Column.objects.filter(board=board):
+            col.board = None
+            col.save()
         for p in board.projects.all():
             p.board = None
             p.save()
@@ -82,18 +96,29 @@ def save_board_json(json_data, edit=False):
         project.save()
 
     for pos, column in enumerate(data['columns']):
-        parent = models.Column(
-            id=column['id'],
-            board=board,
-            name=column['name'],
-            position=pos,
-            wip=column['wip'],
-            boundary=column['boundary'],
-            acceptance=column['acceptance'],
-            priority=column['priority']
-        )
-        parent.save()
-        save_column(parent, column['columns'])
+        try:
+            parent = models.Column.objects.get(id=column['id'])
+            parent.board = board
+            parent.name = column['name']
+            parent.position = pos
+            parent.wip = column['wip']
+            parent.boundary = column['boundary']
+            parent.acceptance = column['acceptance']
+            parent.priority = column['priority']
+            parent.save()
+        except:
+            parent = models.Column(
+                id=column['id'],
+                board=board,
+                name=column['name'],
+                position=pos,
+                wip=column['wip'],
+                boundary=column['boundary'],
+                acceptance=column['acceptance'],
+                priority=column['priority']
+            )
+            parent.save()
+        save_column(parent, column['columns'], edit)
 
     return get_columns_json(board.id)
 
@@ -207,8 +232,6 @@ class BoardQueries(graphene.ObjectType):
         lst = []
         for column in col_list:
             lst.append(CanEditColType(id_col=column.id, can_edit=column.can_edit()))
-
-
         return lst
 
 
@@ -227,6 +250,17 @@ class CreateBoard(graphene.Mutation):
 class EditBoard(graphene.Mutation):
     class Arguments:
         json_string = graphene.String(required=True)
+
+    board = graphene.String()
+
+    @staticmethod
+    def mutate(root, info, json_string=None):
+        board_json = save_board_json(json_string, edit=True)
+        return EditBoard(board=json.dumps(board_json))
+
+class CopyBoard(graphene.Mutation):
+    class Arguments:
+        board_id = graphene.Int(required=True)
 
     board = graphene.String()
 

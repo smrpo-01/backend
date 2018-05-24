@@ -187,7 +187,7 @@ class Column(models.Model):
         ordering = ['parent__position', 'position']
 
     id = models.CharField(max_length=255, primary_key=True)
-    board = models.ForeignKey(Board, null=False, on_delete=models.CASCADE)
+    board = models.ForeignKey(Board, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
     position = models.IntegerField(default=0, null=False)
     wip = models.IntegerField(default=0, null=False)
@@ -233,13 +233,13 @@ class CardType(models.Model):
 
 
 class Card(models.Model):
-    column = models.ForeignKey(Column, null=False, on_delete=models.CASCADE, related_name='cards')
+    column = models.ForeignKey(Column, null=True, blank=True, on_delete=models.CASCADE, related_name='cards')
     type = models.ForeignKey(CardType, null=False, on_delete=models.CASCADE)
     card_number = models.IntegerField(null=True)
     description = models.TextField(blank=True, null=True, default="")
     name = models.CharField(max_length=255, null=True)
     estimate = models.FloatField(null=True)
-    project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE, related_name='cards')
     expiration = models.DateField(default=timezone.now, null=True)
     owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE, related_name='cards_assigned')
     date_created = models.DateTimeField(default=timezone.now)

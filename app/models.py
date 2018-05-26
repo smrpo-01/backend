@@ -197,7 +197,7 @@ class Column(models.Model):
     parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
 
     def num_of_cards(self):
-        return len(self.cards.all()) + sum([c.num_of_cards() for c in self.children.all()])
+        return len(self.cards.filter(project__board=self.board).all()) + sum([c.num_of_cards() for c in self.children.all()])
 
     def is_over_wip(self, wip=None):
         wip = wip if wip else self.wip

@@ -26,7 +26,7 @@ def validate_wips(columns):
         try:
             col = models.Column.objects.get(pk=column['id'])
             if col.is_over_wip(int(column['wip'])):
-                return "Omejitev WIP je presežena."
+                return ("Omejitev WIP je presežena.", col)
         except:
             continue
         error = validate_wips(column['columns'])
@@ -210,14 +210,14 @@ class BoardType(DjangoObjectType):
     card_types = graphene.List(CardTypeType)
 
     def resolve_estimate_min(instance, info):
-        if all([len(p.card_set.all()) == 0 for p in instance.projects.all()]):
+        if all([len(p.cards.all()) == 0 for p in instance.projects.all()]):
             return 1
-        return min([min([c.estimate for c in p.card_set.all()]) for p in instance.projects.all()])
+        return min([min([c.estimate for c in p.cards.all()]) for p in instance.projects.all()])
 
     def resolve_estimate_max(instance, info):
-        if all([len(p.card_set.all()) == 0 for p in instance.projects.all()]):
+        if all([len(p.cards.all()) == 0 for p in instance.projects.all()]):
             return 1
-        return max([max([c.estimate for c in p.card_set.all()]) for p in instance.projects.all()])
+        return max([max([c.estimate for c in p.cards.all()]) for p in instance.projects.all()])
 
     def resolve_project_start_date(instance, info):
         return str(HelperClass.to_si_date(min([p.date_start for p in instance.projects.all()])))
@@ -226,7 +226,7 @@ class BoardType(DjangoObjectType):
         return str(HelperClass.to_si_date(max([p.date_end for p in instance.projects.all()])))
 
     def resolve_card_types(instance, info):
-        return list(set(HelperClass.flatten([[c.type for c in p.card_set.all()] for p in instance.projects.all()])))
+        return list(set(HelperClass.flatten([[c.type for c in p.cards.all()] for p in instance.projects.all()])))
 
     def resolve_columns(instance, info):
         return json.dumps(get_columns_json(instance.id))
@@ -297,15 +297,12 @@ class EditBoard(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, json_string=None, check_wip=True):
-        if check_wip:
-            data = json.loads(json_string)
-            board_id = data['id']
-            b = models.Board.objects.get(id=board_id)
-            error = validate_wips(data['columns'])
-            print(error)
-            if error:
-                raise GraphQLError(error)
-
+        data = json.loads(json_string)
+        error, col = validate_wips(data['columns'])
+        if check_wip and error:
+            raise GraphQLError(error)
+        if error:
+            models.CardLog(card=None, to_column=col, action="Presežena omejitev WIP zaradi posodabljanja stolpca.").save()
         board_json = save_board_json(json_string, edit=True)
         return EditBoard(board=json.dumps(board_json))
 

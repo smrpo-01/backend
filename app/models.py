@@ -261,10 +261,10 @@ class CardLog(models.Model):
     class Meta:
         ordering = ['timestamp', 'card']
 
-    card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='logs')
+    card = models.ForeignKey(Card, null=True, on_delete=models.CASCADE, related_name='logs')
     from_column = models.ForeignKey(Column, null=True, on_delete=models.CASCADE, related_name='from_column_log')
     to_column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name='to_column_log')
-    user_team = models.ForeignKey(UserTeam, null=False, on_delete=models.CASCADE)
+    user_team = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
     action = models.CharField(max_length=255, null=True)
     timestamp = models.DateTimeField(default=timezone.now)
 

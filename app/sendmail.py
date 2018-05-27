@@ -18,14 +18,12 @@ class Mail:
         self.message = message
 
         # spremeni html body v txt da pravilno prikaze mail z htmljm
-        msgtxt = self.message.replace("<b style='color:#f00'>", "")
-        msgtxt = msgtxt.replace("</b>", "")
-        msgtxt = msgtxt.replace("<h2 style='color:#f00'>", "")
-        msgtxt = msgtxt.replace("</h2>", "")
+        msgtxt = self.message.replace("<p>", "")
+        msgtxt = msgtxt.replace("</p>", "")
 
         # oblikuje text v celo html bliko
         msghtml_tmp = self.message.replace("\n", "<br>")
-        msghtml = "<html><head></head><body><p>" + msghtml_tmp + "</p></body></html>"
+        msghtml = "<html><head></head><body>" + msghtml_tmp + "</body></html>"
 
         self.msg = MIMEMultipart('alternative')
         self.msg['Subject'] = subject

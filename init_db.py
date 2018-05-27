@@ -49,7 +49,7 @@ dev5.save()
 dev5.roles.add(UserRole.objects.get(id=4))
 dev5.save()
 
-km = User.objects.create_user(email="km@demo.com", password=pwd, first_name="K", last_name="M", )
+km = User.objects.create_user(email="jan.subelj010@gmail.com", password=pwd, first_name="Jan", last_name="Šubelj", )
 km.save()
 km.roles.add(UserRole.objects.get(id=3))
 km.save()

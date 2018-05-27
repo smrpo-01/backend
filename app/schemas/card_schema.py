@@ -117,10 +117,13 @@ def get_boundary_columns(board):
 
 
 def done_cards(project_id):
-    project = models.Project.objects.get(id=project_id)
-    done_column = get_done_column(project.board)
-    project_cards = models.Card.objects.filter(project=project)
-    return [c for c in project_cards if get_current_column(c) == done_column]
+    try:
+        project = models.Project.objects.get(id=project_id)
+        done_column = get_done_column(project.board)
+        project_cards = models.Card.objects.filter(project=project)
+        return [c for c in project_cards if get_current_column(c) == done_column]
+    except:
+        return []
 
 
 def filter_cards(project_id, creation_start, creation_end, done_start, done_end, dev_start, dev_end, \
@@ -646,6 +649,10 @@ class AddCard(graphene.Mutation):
 
         cards = models.Card.objects.filter(project=models.Project.objects.get(id=card_data.project_id))
 
+        for card in cards:
+            card.was_mail_send = False
+            card.save()
+
         card = models.Card(column=models.Column.objects.get(id=column_id),
                            type=models.CardType.objects.get(id=card_data.type_id),
                            card_number=len(cards) + 1,
@@ -657,6 +664,8 @@ class AddCard(graphene.Mutation):
                            owner=owner,
                            priority=card_data.priority)
         card.save()
+
+
 
         for task in card_data.tasks:
             if task.assignee_userteam_id is None:
@@ -720,7 +729,15 @@ class EditCard(graphene.Mutation):
         card.name = card_data.name
         card.estimate = card_data.estimate
         card.project = models.Project.objects.get(id=card_data.project_id)
+        old_expiration = card.expiration
+
         card.expiration = HelperClass.get_si_date(card_data.expiration)
+        if card.expiration.date() != old_expiration:
+            card.was_mail_send = False
+            cards = models.Card.objects.filter(project=card.project)
+            for card in cards:
+                card.was_mail_send = True
+                card.save()
         card.owner = owner
         card.priority = card_data.priority
         card.save()

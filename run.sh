@@ -16,4 +16,5 @@ rm db.sqlite
 python manage.py makemigrations
 python manage.py migrate
 python manage.py loaddata data_dump.json
+python mail_trigger.py &
 python manage.py runserver 0.0.0.0:$SERVER_PORT --noreload

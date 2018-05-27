@@ -293,6 +293,11 @@ class CardType(DjangoObjectType):
         column_from=graphene.String(),
         column_to=graphene.String()
     )
+    is_done = graphene.Boolean()
+
+    def resolve_is_done(instance, info):
+        done_col = get_done_column(instance.column.board)
+        return instance.column == done_col
 
     def resolve_card_per_column_time(instance, info, minimal, column_from=None, column_to=None):
         if column_from and column_to:

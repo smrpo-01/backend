@@ -208,7 +208,6 @@ class BoardQueries(graphene.ObjectType):
         for column in col_list:
             lst.append(CanEditColType(id_col=column.id, can_edit=column.can_edit()))
 
-
         return lst
 
 
@@ -236,6 +235,23 @@ class EditBoard(graphene.Mutation):
         return EditBoard(board=json.dumps(board_json))
 
 
+class SetBoardExpiration(graphene.Mutation):
+    class Arguments:
+        board_id = graphene.Int(required=True)
+        days_to_expire = graphene.Int(required=True)
+
+    board = graphene.Field(BoardType)
+
+    @staticmethod
+    def mutate(root, info, board_id=None, days_to_expire=None):
+        board = models.Board.objects.get(id=board_id)
+        board.days_to_expire = days_to_expire
+        board.save()
+
+        return SetBoardExpiration(board=board)
+
+
 class BoardMutations(graphene.ObjectType):
     create_board = CreateBoard.Field()
     edit_board = EditBoard.Field()
+    set_board_expiration = SetBoardExpiration.Field()

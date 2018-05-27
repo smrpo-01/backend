@@ -4,6 +4,7 @@ import app.schemas.card_schema
 import app.schemas.project_schema
 import app.schemas.team_schema
 import app.schemas.user_schema
+import app.schemas.mail_schema
 
 
 class Queries(
@@ -12,6 +13,7 @@ class Queries(
     app.schemas.project_schema.ProjectQueries,
     app.schemas.team_schema.TeamQueries,
     app.schemas.user_schema.UserQueries,
+    app.schemas.mail_schema.MailQueries,
     graphene.ObjectType
 ):
     pass

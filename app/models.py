@@ -169,6 +169,7 @@ class UserTeamLog(models.Model):
 
 class Board(models.Model):
     name = models.CharField(max_length=255, null=False)
+    days_to_expire = models.IntegerField(default=5)
 
 
 class Project(models.Model):
@@ -247,6 +248,12 @@ class Card(models.Model):
     color_rejected = models.BooleanField(default=False)
     priority = models.TextField(default="Must have") # Could
     cause_of_deletion = models.TextField(default="")
+    was_mail_send = models.BooleanField(default=False)
+
+    def does_card_expire_soon(self, days_no):
+        # days_no je dni do expirationa 27.5. dan 30.5. expiraton če je days_no enak 4 ali 3 vrne true če je days_no enak 2 vrne false
+        days = datetime.timedelta(days_no)
+        return self.expiration - datetime.date.today() <= days
 
 
 class Task(models.Model):

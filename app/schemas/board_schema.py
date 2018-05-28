@@ -298,11 +298,11 @@ class EditBoard(graphene.Mutation):
     @staticmethod
     def mutate(root, info, json_string=None, check_wip=True):
         data = json.loads(json_string)
-        error, col = validate_wips(data['columns'])
-        if check_wip and error:
-            raise GraphQLError(error)
-        if error:
-            models.CardLog(card=None, to_column=col, action="Presežena omejitev WIP zaradi posodabljanja stolpca.").save()
+        error = validate_wips(data['columns'])
+        if check_wip and error is not None:
+            raise GraphQLError(error[0])
+        if error is not None:
+            models.CardLog(card=None, to_column=error[1], action="Presežena omejitev WIP zaradi posodabljanja stolpca.").save()
         board_json = save_board_json(json_string, edit=True)
         return EditBoard(board=json.dumps(board_json))
 

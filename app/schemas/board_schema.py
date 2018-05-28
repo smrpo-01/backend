@@ -8,6 +8,8 @@ from backend.utils import HelperClass
 import json
 from graphql import GraphQLError
 
+import uuid
+
 from app.schemas.card_schema import *
 
 
@@ -16,6 +18,20 @@ def validate_columns(columns):
         if models.Column.objects.filter(pk=column['id']).exists():
             return "Stolpec z istim ID že obstaja."
         validate_columns(column['columns'])
+    return None
+
+
+def validate_wips(columns):
+    for column in columns:
+        try:
+            col = models.Column.objects.get(pk=column['id'])
+            if col.is_over_wip(int(column['wip'])):
+                return ("Omejitev WIP je presežena.", col)
+        except:
+            continue
+        error = validate_wips(column['columns'])
+        if error:
+            return error
     return None
 
 
@@ -40,24 +56,36 @@ def validate_structure(data, edit_board=True):
     return None
 
 
-def save_column(parent, columns):
+def save_column(parent, columns, edit):
     for pos, column in enumerate(columns):
-        col = models.Column(
-            id=column['id'],
-            board=parent.board,
-            name=column['name'],
-            position=pos,
-            wip=column['wip'],
-            boundary=column['boundary'],
-            acceptance=column['acceptance'],
-            priority=column['priority'],
-            parent=parent
-        )
-        col.save()
-        save_column(col, column['columns'])
+        try:
+            col = models.Column.objects.get(id=column['id'])
+            col.board = parent.board
+            col.name = column['name']
+            col.position = pos
+            col.wip = column['wip']
+            col.boundary = column['boundary']
+            col.acceptance = column['acceptance']
+            col.priority = column['priority']
+            col.parent=parent
+            col.save()
+        except:
+            col = models.Column(
+                id=column['id'],
+                board=parent.board,
+                name=column['name'],
+                position=pos,
+                wip=column['wip'],
+                boundary=column['boundary'],
+                acceptance=column['acceptance'],
+                priority=column['priority'],
+                parent=parent
+            )
+            col.save()
+        save_column(col, column['columns'], edit)
 
 
-def save_board_json(json_data, edit=False):
+def save_board_json(json_data, edit=False, copy_board=False):
     data = json.loads(json_data)
 
     error = validate_structure(data)
@@ -68,7 +96,9 @@ def save_board_json(json_data, edit=False):
         board = models.Board.objects.get(pk=data['id'])
         board.name = data['boardName']
         board.save()
-        models.Column.objects.filter(board=board).delete()
+        for col in models.Column.objects.filter(board=board):
+            col.board = None
+            col.save()
         for p in board.projects.all():
             p.board = None
             p.save()
@@ -82,20 +112,54 @@ def save_board_json(json_data, edit=False):
         project.save()
 
     for pos, column in enumerate(data['columns']):
-        parent = models.Column(
-            id=column['id'],
-            board=board,
-            name=column['name'],
-            position=pos,
-            wip=column['wip'],
-            boundary=column['boundary'],
-            acceptance=column['acceptance'],
-            priority=column['priority']
-        )
-        parent.save()
-        save_column(parent, column['columns'])
+        try:
+            parent = models.Column.objects.get(id=column['id'])
+            parent.board = board
+            parent.name = column['name']
+            parent.position = pos
+            parent.wip = column['wip']
+            parent.boundary = column['boundary']
+            parent.acceptance = column['acceptance']
+            parent.priority = column['priority']
+            parent.save()
+        except:
+            parent = models.Column(
+                id=column['id'],
+                board=board,
+                name=column['name'],
+                position=pos,
+                wip=column['wip'],
+                boundary=column['boundary'],
+                acceptance=column['acceptance'],
+                priority=column['priority']
+            )
+            parent.save()
+        save_column(parent, column['columns'], edit)
 
     return get_columns_json(board.id)
+
+
+def copy_board(board_id):
+    board = models.Board.objects.get(id=board_id)
+    new_board = models.Board(name=board.name + '-copy')
+    new_board.save()
+    for column in models.Column.objects.filter(board=board):
+        new_column = models.Column(
+            id=uuid.uuid4(),
+            board=new_board,
+            name=column.name,
+            position=column.position,
+            wip=column.wip,
+            boundary=column.boundary,
+            acceptance=column.acceptance,
+            priority=column.priority,
+            parent=column.parent
+        )
+        new_column.save()
+        if new_column.parent:
+            new_column.parent = models.Column.objects.filter(board=new_board, name=column.parent.name).first()
+            new_column.save()
+    return new_board
 
 
 def get_column(column_id):
@@ -146,14 +210,14 @@ class BoardType(DjangoObjectType):
     card_types = graphene.List(CardTypeType)
 
     def resolve_estimate_min(instance, info):
-        if all([len(p.card_set.all()) == 0 for p in instance.projects.all()]):
+        if all([len(p.cards.all()) == 0 for p in instance.projects.all()]):
             return 1
-        return min([min([c.estimate for c in p.card_set.all()]) for p in instance.projects.all()])
+        return min([min([c.estimate for c in p.cards.all()]) for p in instance.projects.all()])
 
     def resolve_estimate_max(instance, info):
-        if all([len(p.card_set.all()) == 0 for p in instance.projects.all()]):
+        if all([len(p.cards.all()) == 0 for p in instance.projects.all()]):
             return 1
-        return max([max([c.estimate for c in p.card_set.all()]) for p in instance.projects.all()])
+        return max([max([c.estimate for c in p.cards.all()]) for p in instance.projects.all()])
 
     def resolve_project_start_date(instance, info):
         return str(HelperClass.to_si_date(min([p.date_start for p in instance.projects.all()])))
@@ -162,7 +226,7 @@ class BoardType(DjangoObjectType):
         return str(HelperClass.to_si_date(max([p.date_end for p in instance.projects.all()])))
 
     def resolve_card_types(instance, info):
-        return list(set(HelperClass.flatten([[c.type for c in p.card_set.all()] for p in instance.projects.all()])))
+        return list(set(HelperClass.flatten([[c.type for c in p.cards.all()] for p in instance.projects.all()])))
 
     def resolve_columns(instance, info):
         return json.dumps(get_columns_json(instance.id))
@@ -200,14 +264,15 @@ class BoardQueries(graphene.ObjectType):
         u = models.User.objects.get(pk=userId)
         if u in models.User.objects.filter(roles__id=1):
             return models.Board.objects.all()
-        return [models.Board.objects.get(pk=b) for b in get_user_board_ids(userId)]
+        none_boards = [b for b in models.Board.objects.all() if not len(b.projects.all())]
+        user_boards = [models.Board.objects.get(pk=b) for b in get_user_board_ids(userId)]
+        return user_boards + none_boards
 
     def resolve_what_columns_can_edit(self, info, board_id):
         col_list = models.Column.objects.filter(board=models.Board.objects.get(id=board_id))
         lst = []
         for column in col_list:
             lst.append(CanEditColType(id_col=column.id, can_edit=column.can_edit()))
-
         return lst
 
 
@@ -226,13 +291,33 @@ class CreateBoard(graphene.Mutation):
 class EditBoard(graphene.Mutation):
     class Arguments:
         json_string = graphene.String(required=True)
+        check_wip = graphene.Boolean()
 
     board = graphene.String()
 
     @staticmethod
-    def mutate(root, info, json_string=None):
+    def mutate(root, info, json_string=None, check_wip=True):
+        data = json.loads(json_string)
+        error, col = validate_wips(data['columns'])
+        if check_wip and error:
+            raise GraphQLError(error)
+        if error:
+            models.CardLog(card=None, to_column=col, action="Presežena omejitev WIP zaradi posodabljanja stolpca.").save()
         board_json = save_board_json(json_string, edit=True)
         return EditBoard(board=json.dumps(board_json))
+
+
+class CopyBoard(graphene.Mutation):
+    class Arguments:
+        board_id = graphene.Int(required=True)
+
+    board = graphene.Field(BoardType)
+
+    @staticmethod
+    def mutate(root, info, board_id=None):
+        if board_id:
+            board = copy_board(board_id)
+        return CopyBoard(board=board)
 
 
 class SetBoardExpiration(graphene.Mutation):
@@ -254,4 +339,5 @@ class SetBoardExpiration(graphene.Mutation):
 class BoardMutations(graphene.ObjectType):
     create_board = CreateBoard.Field()
     edit_board = EditBoard.Field()
+    copy_board = CopyBoard.Field()
     set_board_expiration = SetBoardExpiration.Field()

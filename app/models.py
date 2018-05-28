@@ -188,7 +188,7 @@ class Column(models.Model):
         ordering = ['parent__position', 'position']
 
     id = models.CharField(max_length=255, primary_key=True)
-    board = models.ForeignKey(Board, null=False, on_delete=models.CASCADE)
+    board = models.ForeignKey(Board, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
     position = models.IntegerField(default=0, null=False)
     wip = models.IntegerField(default=0, null=False)
@@ -198,10 +198,11 @@ class Column(models.Model):
     parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
 
     def num_of_cards(self):
-        return len(self.cards.all()) + sum([c.num_of_cards() for c in self.children.all()])
+        return len(self.cards.filter(project__board=self.board).all()) + sum([c.num_of_cards() for c in self.children.all()])
 
-    def is_over_wip(self):
-        return self.num_of_cards() > self.wip if self.wip > 0 else False
+    def is_over_wip(self, wip=None):
+        wip = wip if wip else self.wip
+        return self.num_of_cards() > wip if wip > 0 else False
 
     def is_parent_over_wip(self):
         col, lst = self, []
@@ -234,13 +235,13 @@ class CardType(models.Model):
 
 
 class Card(models.Model):
-    column = models.ForeignKey(Column, null=False, on_delete=models.CASCADE, related_name='cards')
+    column = models.ForeignKey(Column, null=True, blank=True, on_delete=models.CASCADE, related_name='cards')
     type = models.ForeignKey(CardType, null=False, on_delete=models.CASCADE)
     card_number = models.IntegerField(null=True)
     description = models.TextField(blank=True, null=True, default="")
     name = models.CharField(max_length=255, null=True)
     estimate = models.FloatField(null=True)
-    project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE, related_name='cards')
     expiration = models.DateField(default=timezone.now, null=True)
     owner = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE, related_name='cards_assigned')
     date_created = models.DateTimeField(default=timezone.now)
@@ -267,10 +268,10 @@ class CardLog(models.Model):
     class Meta:
         ordering = ['timestamp', 'card']
 
-    card = models.ForeignKey(Card, null=False, on_delete=models.CASCADE, related_name='logs')
+    card = models.ForeignKey(Card, null=True, on_delete=models.CASCADE, related_name='logs')
     from_column = models.ForeignKey(Column, null=True, on_delete=models.CASCADE, related_name='from_column_log')
     to_column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name='to_column_log')
-    user_team = models.ForeignKey(UserTeam, null=False, on_delete=models.CASCADE)
+    user_team = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
     action = models.CharField(max_length=255, null=True)
     timestamp = models.DateTimeField(default=timezone.now)
 

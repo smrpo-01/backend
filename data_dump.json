@@ -49,10 +49,19 @@
     }
 },
 {
+    "model": "app.loginattempt",
+    "pk": 1,
+    "fields": {
+        "ip": "127.0.0.1",
+        "unlock_date": "2018-05-28T06:34:56.514Z",
+        "counter": 0
+    }
+},
+{
     "model": "app.user",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$100000$gg7d3FcKh3dE$Z0hDlTB4yZymWc6/yMRPIL0uy1CtDN3L+wOQkJMyTXM=",
+        "password": "pbkdf2_sha256$100000$fYaZeCCfZDrL$mEGZzvSSBI3mSdqjNSh39PGjP8i8ExXCLEX5h37IaNc=",
         "last_login": null,
         "email": "admin@demo.com",
         "first_name": "Ad",
@@ -71,7 +80,7 @@
     "model": "app.user",
     "pk": 2,
     "fields": {
-        "password": "pbkdf2_sha256$100000$z9uqL80Ke1ZA$q2urjaH3BFNxJ5Miz1TJ1TUhjogw7lhFiiTNg4nxH70=",
+        "password": "pbkdf2_sha256$100000$2isAVQAuBYKQ$NFDXgu7vUULz1+L6OjIYqUUgbVY7b1kCIjnHGyeYcgM=",
         "last_login": null,
         "email": "dev1@demo.com",
         "first_name": "Dev",
@@ -91,7 +100,7 @@
     "model": "app.user",
     "pk": 3,
     "fields": {
-        "password": "pbkdf2_sha256$100000$p26KJsmKDLOp$KIGXNH0vYi2P8hb7utpg6tmSGawhFVZQOwZraFzbu+E=",
+        "password": "pbkdf2_sha256$100000$mlQPQ5LgbGKY$bsACoN5DnwRtP98iUtzaA/w1KR2KbGbvv+nSIqkueak=",
         "last_login": null,
         "email": "dev2@demo.com",
         "first_name": "Dev",
@@ -110,7 +119,7 @@
     "model": "app.user",
     "pk": 4,
     "fields": {
-        "password": "pbkdf2_sha256$100000$zW6xDuDHTq1p$qIA5ovWwHpOPQvEeA4EnLczCefq3u0H07ya9R37HIHE=",
+        "password": "pbkdf2_sha256$100000$RwwRd0l1UPPT$1i/TitQyUAdb8XoYYs1KOpC1l5Nag3T5McXiFhsJ55A=",
         "last_login": null,
         "email": "dev3@demo.com",
         "first_name": "Dev",
@@ -129,7 +138,7 @@
     "model": "app.user",
     "pk": 5,
     "fields": {
-        "password": "pbkdf2_sha256$100000$5LA0NdLye0rP$nnerj0g8qROBNawzRM0FiRMFq6I0yO7leWvpc74HQKI=",
+        "password": "pbkdf2_sha256$100000$5GLlpEUWAgln$xaVPBTfONoid5OqwifvDfdv2R5oXKC+eYsHUNj2Vo70=",
         "last_login": null,
         "email": "dev4@demo.com",
         "first_name": "Dev",
@@ -148,7 +157,7 @@
     "model": "app.user",
     "pk": 6,
     "fields": {
-        "password": "pbkdf2_sha256$100000$r3zKdJwJI5bP$FJpyjbzAJiifaeBXJZe6DHWt8RkVvyVegZXjg6z3iW4=",
+        "password": "pbkdf2_sha256$100000$lZcApmXuZBaR$8/ujtWiUjWN0aHHbk4ods0xdgYHnyoYcB48dv1TfYsw=",
         "last_login": null,
         "email": "dev5@demo.com",
         "first_name": "Dev",
@@ -167,8 +176,8 @@
     "model": "app.user",
     "pk": 7,
     "fields": {
-        "password": "pbkdf2_sha256$100000$jffLSTvOUhLD$mlVYtdlHtbMsO7XYF0cIozUyIw9+Th9TOf3GpBTXAoM=",
-        "last_login": null,
+        "password": "pbkdf2_sha256$100000$E35ROUaLGSEy$ymxQaQ+wRQFkSmhe1ZLg5XN9FfPxaOcz072/o7P/xKU=",
+        "last_login": "2018-05-28T06:34:56.524Z",
         "email": "km@demo.com",
         "first_name": "K",
         "last_name": "M",
@@ -186,7 +195,7 @@
     "model": "app.user",
     "pk": 8,
     "fields": {
-        "password": "pbkdf2_sha256$100000$LwAcjiRTZqS7$1sAdfUDVlQF/h8LPbJ4sLLmF94Hm1UiiQFXdLNZDHpc=",
+        "password": "pbkdf2_sha256$100000$CRecPUb9qD8J$lr4ZEkAaaWRPtto35Vt09FU93oswyMH/bNwssaFy6tk=",
         "last_login": null,
         "email": "po@demo.com",
         "first_name": "P",
@@ -206,7 +215,7 @@
     "model": "app.user",
     "pk": 9,
     "fields": {
-        "password": "pbkdf2_sha256$100000$Ommc5L1haHll$T3UWnclN1KiiM1DQ4tSTH6v2vp/ZiY7XC15dvkPQ9HU=",
+        "password": "pbkdf2_sha256$100000$IG2IpQnJVdWe$D3FcmKdCsuaKWGSW6+SFv2QwO2rE5g8ikiIqu9VXYw8=",
         "last_login": null,
         "email": "wildcard@demo.com",
         "first_name": "Wild",
@@ -228,7 +237,7 @@
     "model": "app.user",
     "pk": 10,
     "fields": {
-        "password": "pbkdf2_sha256$100000$qbLAFPx3HuPW$I0A88/YlevxzlMCtOfBRr5zoH0aEMGsKaZXiA9B9Uws=",
+        "password": "pbkdf2_sha256$100000$0xEfc2Z0VEzp$nPWVzOHGfWrdFDnkjNzilUJmv11/XySOjsxq7BVaFlw=",
         "last_login": null,
         "email": "po2@demo.com",
         "first_name": "Prod",
@@ -505,7 +514,7 @@
     "fields": {
         "userteam": 1,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.591Z"
+        "timestamp": "2018-05-28T06:34:17.884Z"
     }
 },
 {
@@ -514,7 +523,7 @@
     "fields": {
         "userteam": 2,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.621Z"
+        "timestamp": "2018-05-28T06:34:17.907Z"
     }
 },
 {
@@ -523,7 +532,7 @@
     "fields": {
         "userteam": 3,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.650Z"
+        "timestamp": "2018-05-28T06:34:17.929Z"
     }
 },
 {
@@ -532,7 +541,7 @@
     "fields": {
         "userteam": 4,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.680Z"
+        "timestamp": "2018-05-28T06:34:17.953Z"
     }
 },
 {
@@ -541,7 +550,7 @@
     "fields": {
         "userteam": 5,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.710Z"
+        "timestamp": "2018-05-28T06:34:17.976Z"
     }
 },
 {
@@ -550,7 +559,7 @@
     "fields": {
         "userteam": 6,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.740Z"
+        "timestamp": "2018-05-28T06:34:18.000Z"
     }
 },
 {
@@ -559,7 +568,7 @@
     "fields": {
         "userteam": 7,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.772Z"
+        "timestamp": "2018-05-28T06:34:18.023Z"
     }
 },
 {
@@ -568,7 +577,7 @@
     "fields": {
         "userteam": 8,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.802Z"
+        "timestamp": "2018-05-28T06:34:18.045Z"
     }
 },
 {
@@ -577,7 +586,7 @@
     "fields": {
         "userteam": 9,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.832Z"
+        "timestamp": "2018-05-28T06:34:18.079Z"
     }
 },
 {
@@ -586,7 +595,7 @@
     "fields": {
         "userteam": 10,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.862Z"
+        "timestamp": "2018-05-28T06:34:18.103Z"
     }
 },
 {
@@ -595,7 +604,7 @@
     "fields": {
         "userteam": 11,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.891Z"
+        "timestamp": "2018-05-28T06:34:18.126Z"
     }
 },
 {
@@ -604,7 +613,7 @@
     "fields": {
         "userteam": 12,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.921Z"
+        "timestamp": "2018-05-28T06:34:18.148Z"
     }
 },
 {
@@ -613,7 +622,7 @@
     "fields": {
         "userteam": 13,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.950Z"
+        "timestamp": "2018-05-28T06:34:18.173Z"
     }
 },
 {
@@ -622,7 +631,7 @@
     "fields": {
         "userteam": 14,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:46.979Z"
+        "timestamp": "2018-05-28T06:34:18.196Z"
     }
 },
 {
@@ -631,7 +640,7 @@
     "fields": {
         "userteam": 15,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:47.008Z"
+        "timestamp": "2018-05-28T06:34:18.219Z"
     }
 },
 {
@@ -640,7 +649,7 @@
     "fields": {
         "userteam": 16,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:47.037Z"
+        "timestamp": "2018-05-28T06:34:18.241Z"
     }
 },
 {
@@ -649,7 +658,7 @@
     "fields": {
         "userteam": 17,
         "action": "Uporabnik ustvarjen.",
-        "timestamp": "2018-05-08T07:32:47.067Z"
+        "timestamp": "2018-05-28T06:34:18.267Z"
     }
 },
 {
@@ -986,7 +995,7 @@
         "name": "Vzdr\u017eevanje uporabnikov",
         "estimate": 3.5,
         "project": 1,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-10T08:00:00Z",
         "is_deleted": false,
@@ -1006,7 +1015,7 @@
         "name": "Vzdr\u017eevanje razvojnih skupin",
         "estimate": 1.0,
         "project": 1,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-10T08:00:00Z",
         "is_deleted": false,
@@ -1026,7 +1035,7 @@
         "name": "Vzdr\u017eevanje projektov",
         "estimate": 10.0,
         "project": 1,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-11T08:00:00Z",
         "is_deleted": false,
@@ -1046,7 +1055,7 @@
         "name": "Prijava v sistem",
         "estimate": 3.0,
         "project": 1,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-12T08:00:00Z",
         "is_deleted": false,
@@ -1066,7 +1075,7 @@
         "name": "Kreiranje table",
         "estimate": 4.0,
         "project": 1,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 4,
         "date_created": "2018-04-13T08:00:00Z",
         "is_deleted": false,
@@ -1086,7 +1095,7 @@
         "name": "Prikaz table",
         "estimate": 2.0,
         "project": 1,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 4,
         "date_created": "2018-04-15T08:00:00Z",
         "is_deleted": false,
@@ -1106,7 +1115,7 @@
         "name": "Kreiranje kartice",
         "estimate": 1.5,
         "project": 1,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-14T08:00:00Z",
         "is_deleted": false,
@@ -1126,7 +1135,7 @@
         "name": "Prestavljanje kartice",
         "estimate": 1.5,
         "project": 1,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 4,
         "date_created": "2018-04-16T08:00:00Z",
         "is_deleted": false,
@@ -1146,7 +1155,7 @@
         "name": "Prikaz podrobnosti kartice",
         "estimate": 1.5,
         "project": 1,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-18T08:00:00Z",
         "is_deleted": false,
@@ -1166,7 +1175,7 @@
         "name": "Kreiranje nove table s kopiranjem strukture",
         "estimate": 1.5,
         "project": 1,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-17T08:00:00Z",
         "is_deleted": false,
@@ -1186,7 +1195,7 @@
         "name": "Uporabni\u0161ka dokumentacija",
         "estimate": 1.5,
         "project": 1,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 5,
         "date_created": "2018-04-11T08:00:00Z",
         "is_deleted": false,
@@ -1206,7 +1215,7 @@
         "name": "Posodabljanje vsebine kartice",
         "estimate": 4.0,
         "project": 2,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 4,
         "date_created": "2018-04-10T08:00:00Z",
         "is_deleted": false,
@@ -1226,7 +1235,7 @@
         "name": "Brisanje kartice",
         "estimate": 1.0,
         "project": 2,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-12T08:00:00Z",
         "is_deleted": false,
@@ -1246,7 +1255,7 @@
         "name": "Posodabljanje lastnosti stolpca",
         "estimate": 1.0,
         "project": 2,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-11T08:00:00Z",
         "is_deleted": false,
@@ -1266,7 +1275,7 @@
         "name": "Izra\u010dun povpre\u010dnega potrebnega \u010dasa",
         "estimate": 3.0,
         "project": 2,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 4,
         "date_created": "2018-04-17T08:00:00Z",
         "is_deleted": false,
@@ -1286,7 +1295,7 @@
         "name": "Izdelava kumulativnega diagrama delovnega toka",
         "estimate": 6.0,
         "project": 2,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-14T08:00:00Z",
         "is_deleted": false,
@@ -1306,7 +1315,7 @@
         "name": "Izpis kr\u0161itev omejitve WIP",
         "estimate": 5.0,
         "project": 2,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 4,
         "date_created": "2018-04-11T08:00:00Z",
         "is_deleted": false,
@@ -1326,7 +1335,7 @@
         "name": "Prikaz 'kriti\u010dnih' kartic",
         "estimate": 4.0,
         "project": 2,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-14T08:00:00Z",
         "is_deleted": false,
@@ -1346,7 +1355,7 @@
         "name": "Obve\u0161\u010danje o prekora\u010ditvi roka",
         "estimate": 1.5,
         "project": 2,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 5,
         "date_created": "2018-04-13T08:00:00Z",
         "is_deleted": false,
@@ -1366,7 +1375,7 @@
         "name": "Vgradnja pravil za prestavljanje kartic",
         "estimate": 3.0,
         "project": 2,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-15T08:00:00Z",
         "is_deleted": false,
@@ -1386,12 +1395,12 @@
         "name": "'O\u017eenje' stolpcev",
         "estimate": 2.0,
         "project": 2,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 3,
         "date_created": "2018-04-18T08:00:00Z",
         "is_deleted": false,
         "color_rejected": false,
-        "priority": "Must have",
+        "priority": "Could have",
         "cause_of_deletion": ""
     }
 },
@@ -1406,12 +1415,12 @@
         "name": "Prilagodljiv prikaz kartice na tabli",
         "estimate": 1.5,
         "project": 2,
-        "expiration": "2018-05-27",
+        "expiration": "2018-05-30",
         "owner": 4,
         "date_created": "2018-04-11T08:00:00Z",
         "is_deleted": false,
         "color_rejected": false,
-        "priority": "Must have",
+        "priority": "Should have",
         "cause_of_deletion": ""
     }
 },

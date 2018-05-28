@@ -602,6 +602,7 @@ class TasksInput(graphene.InputObjectType):
     description = graphene.String(required=False, default_value="")
     done = graphene.Boolean(default_value=False)
     assignee_userteam_id = graphene.Int(required=False)
+    hours = graphene.Int(required=False, default_value=None)
 
 
 class CardInput(graphene.InputObjectType):
@@ -675,15 +676,13 @@ class AddCard(graphene.Mutation):
                            priority=card_data.priority)
         card.save()
 
-
-
         for task in card_data.tasks:
             if task.assignee_userteam_id is None:
                 assignee = None
             else:
                 assignee = models.UserTeam.objects.get(id=task.assignee_userteam_id)
 
-            task_entity = models.Task(card=card, description=task.description, done=task.done, assignee=assignee)
+            task_entity = models.Task(card=card, description=task.description, done=task.done, assignee=assignee, hours=task.hours)
             task_entity.save()
 
         # kreacija kartice
@@ -766,7 +765,7 @@ class EditCard(graphene.Mutation):
             else:
                 assignee = models.UserTeam.objects.get(id=task.assignee_userteam_id)
 
-            task_entity = models.Task(card=card, description=task.description, done=task.done, assignee=assignee)
+            task_entity = models.Task(card=card, description=task.description, done=task.done, assignee=assignee, hours=task.hours)
             task_entity.save()
 
         return EditCard(ok=True, card=card)
@@ -857,6 +856,11 @@ class MoveCard(graphene.Mutation):
             if force == "":
                 if log_action is not None:
                     raise GraphQLError("Presežena omejitev wip. Nadaljujem?")
+
+        # preverjanje da so usi taski izpolnjeni
+        tasks_done = [task.done for task in card.tasks.all()]
+        if not all(tasks_done) and to_col.acceptance:
+            raise GraphQLError("V acceptance ready gredo lahko le kartice z vsemi dokončanimi nalogami.")
 
         # log_action = force
         card.column = to_col

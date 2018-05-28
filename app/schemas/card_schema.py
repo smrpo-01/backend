@@ -652,11 +652,16 @@ class AddCard(graphene.Mutation):
         else:
             column_id = card_data.column_id
 
-        cards = models.Card.objects.filter(project=models.Project.objects.get(id=card_data.project_id))
+        project = models.Project.objects.get(id=card_data.project_id)
+        cards = models.Card.objects.filter(project=project)
 
-        for card in cards:
-            card.was_mail_send = False
-            card.save()
+        # to reset was mail send for whole board
+        projects_on_board = models.Project.objects.filter(board=project.board)
+        for project in projects_on_board:
+            cards = models.Card.objects.filter(project=project)
+            for card in cards:
+                card.was_mail_send = False
+                card.save()
 
         card = models.Card(column=models.Column.objects.get(id=column_id),
                            type=models.CardType.objects.get(id=card_data.type_id),
@@ -736,13 +741,17 @@ class EditCard(graphene.Mutation):
         card.project = models.Project.objects.get(id=card_data.project_id)
         old_expiration = card.expiration
 
-        card.expiration = HelperClass.get_si_date(card_data.expiration)
-        if card.expiration.date() != old_expiration:
+        card.expiration = HelperClass.get_si_date(card_data.expiration).date()
+        card.save()
+        if card.expiration != old_expiration:
             card.was_mail_send = False
-            cards = models.Card.objects.filter(project=card.project)
-            for card in cards:
-                card.was_mail_send = True
-                card.save()
+            if card.does_card_expire_soon(card.project.board.days_to_expire):
+                projects_on_board = models.Project.objects.filter(board=card.project.board)
+                for project in projects_on_board:
+                    cards = models.Card.objects.filter(project=project)
+                    for card in cards:
+                        card.was_mail_send = False
+                        card.save()
         card.owner = owner
         card.priority = card_data.priority
         card.save()

@@ -1,14 +1,3 @@
-import graphene
-from graphene_django.types import DjangoObjectType
-from graphene.types.generic import GenericScalar
-
-from .. import models
-from backend.utils import HelperClass
-
-import json
-from graphql import GraphQLError
-from datetime import date
-
 from app.schemas.card_schema import *
 from app.sendmail import Mail
 from app.schemas.card_schema import done_cards

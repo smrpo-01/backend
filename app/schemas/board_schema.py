@@ -141,7 +141,7 @@ def save_board_json(json_data, edit=False, copy_board=False):
 
 def copy_board(board_id):
     board = models.Board.objects.get(id=board_id)
-    new_board = models.Board(name=board.name + '-copy')
+    new_board = models.Board(name=board.name + '-kopija')
     new_board.save()
     for column in models.Column.objects.filter(board=board):
         new_column = models.Column(

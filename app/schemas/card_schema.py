@@ -602,7 +602,7 @@ class TasksInput(graphene.InputObjectType):
     description = graphene.String(required=False, default_value="")
     done = graphene.Boolean(default_value=False)
     assignee_userteam_id = graphene.Int(required=False)
-    hours = graphene.Int(required=False, default_value=None)
+    hours = graphene.Float(required=False, default_value=None)
 
 
 class CardInput(graphene.InputObjectType):

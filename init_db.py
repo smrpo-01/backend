@@ -424,16 +424,16 @@ c22 = Card(column=col6, type=CardType.objects.get(id=1), estimate=1.5, project=p
            name="Prilagodljiv prikaz kartice na tabli", card_number=22, expiration=HelperClass.get_si_date("30.5.2018"), priority="Should have")
 c22.save()
 
-t1 = Task(description="To je description 1", card=c1, done=True, hours=8)
+t1 = Task(description="To je description 1", card=c1, done=True, hours=8.4)
 t1.save()
 
-t2 = Task(description="To je description 2", card=c1, done=True, hours=1)
+t2 = Task(description="To je description 2", card=c1, done=True, hours=1.2)
 t2.save()
 
-t3 = Task(description="To je description 3", card=c2, done=True, hours=4)
+t3 = Task(description="To je description 3", card=c2, done=True, hours=4.6)
 t3.save()
 
-t4 = Task(description="To je description 4", card=c3, done=True, hours=3)
+t4 = Task(description="To je description 4", card=c3, done=True, hours=3.3)
 t4.save()
 
 # Project 1 - Logs

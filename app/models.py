@@ -262,7 +262,7 @@ class Task(models.Model):
     description = models.TextField(blank=True, null=True, default="")
     done = models.BooleanField(default=False)
     assignee = models.ForeignKey(UserTeam, null=True, on_delete=models.CASCADE)
-    hours = models.IntegerField(null=True)
+    hours = models.FloatField(null=True)
 
 
 class CardLog(models.Model):

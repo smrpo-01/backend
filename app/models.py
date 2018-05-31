@@ -254,7 +254,12 @@ class Card(models.Model):
     def does_card_expire_soon(self, days_no):
         # days_no je dni do expirationa 27.5. dan 30.5. expiraton če je days_no enak 4 ali 3 vrne true če je days_no enak 2 vrne false
         days = datetime.timedelta(days_no)
-        return self.expiration - datetime.date.today() <= days
+        try:
+            ret = self.expiration - datetime.date.today() <= days
+        except:
+            ret = self.expiration.today() - datetime.date.today() <= days
+
+        return ret
 
 
 class Task(models.Model):

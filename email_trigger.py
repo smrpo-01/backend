@@ -13,8 +13,8 @@ if __name__ == "__main__":
         try:
             http = urllib3.PoolManager()
             #TODO: spremen na taprav url
-            html = http.request('GET', "http://localhost:8000/graphiql?query={mail}").data
-            #html = http.request('GET', "http://emineo.eu-de.mybluemix.net/graphiql?query={mail}").data
+            #html = http.request('GET', "http://localhost:8000/graphiql?query={mail}").data
+            html = http.request('GET', "http://emineo.eu-de.mybluemix.net/graphiql?query={mail}").data
             print(html)
         except:
             pass

@@ -333,6 +333,12 @@ class SetBoardExpiration(graphene.Mutation):
         board.days_to_expire = days_to_expire
         board.save()
 
+        for project in board.projects.all():
+            cards = project.cards.all()
+            for card in cards:
+                card.was_mail_send = False
+                card.save()
+
         return SetBoardExpiration(board=board)
 
 

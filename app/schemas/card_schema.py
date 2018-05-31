@@ -656,14 +656,6 @@ class AddCard(graphene.Mutation):
         project = models.Project.objects.get(id=card_data.project_id)
         cards = models.Card.objects.filter(project=project)
 
-        # to reset was mail send for whole board
-        projects_on_board = models.Project.objects.filter(board=project.board)
-        for project in projects_on_board:
-            cards = models.Card.objects.filter(project=project)
-            for card in cards:
-                card.was_mail_send = False
-                card.save()
-
         card = models.Card(column=models.Column.objects.get(id=column_id),
                            type=models.CardType.objects.get(id=card_data.type_id),
                            card_number=len(cards) + 1,
@@ -671,10 +663,19 @@ class AddCard(graphene.Mutation):
                            name=card_data.name,
                            estimate=card_data.estimate,
                            project=models.Project.objects.get(id=card_data.project_id),
-                           expiration=HelperClass.get_si_date(card_data.expiration),
+                           expiration=HelperClass.get_si_date(card_data.expiration).date(),
                            owner=owner,
                            priority=card_data.priority)
         card.save()
+
+        # to reset was mail send for whole board
+        projects_on_board = models.Project.objects.filter(board=project.board)
+        if card.does_card_expire_soon(card.project.board.days_to_expire):
+            for project in projects_on_board:
+                cards = models.Card.objects.filter(project=project)
+                for card in cards:
+                    card.was_mail_send = False
+                    card.save()
 
         for task in card_data.tasks:
             if task.assignee_userteam_id is None:

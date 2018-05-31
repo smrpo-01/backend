@@ -225,6 +225,11 @@ p4 = Project(team=t3, name="Projekt 4", customer="Smolej", board=None, project_c
              date_start=datetime.date(2018, 4, 10), date_end=datetime.date(2018, 11, 25))
 p4.save()
 
+p5 = Project(team=t1, name="Projekt 5", customer="Marok", board=None, project_code="PR-05",
+             date_start=datetime.date(2018, 4, 10), date_end=datetime.date(2018, 12, 20))
+
+p5.save()
+
 # Board 1 -----------------------------------------------------------------------
 
 col1 = Column(id="1", board=b1, name="Product Backlog", position=0, wip=0)

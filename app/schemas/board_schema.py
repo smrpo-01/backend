@@ -35,6 +35,9 @@ def validate_wips(columns):
     return None
 
 
+def get_json_columns(columns):
+    return [column['id'] for column in columns] + [get_json_columns(column['columns']) for column in columns if column['columns']]
+
 def count_critical(column, critical):
     return [column[critical]] + [count_critical(c, critical) for c in column['columns']]
 
@@ -303,6 +306,11 @@ class EditBoard(graphene.Mutation):
             raise GraphQLError(error[0])
         if error is not None:
             models.CardLog(card=None, to_column=error[1], action="Presežena omejitev WIP zaradi posodabljanja stolpca.").save()
+
+        json_columns = HelperClass.flatten(get_json_columns(data['columns']))
+        columns_in = models.Column.objects.filter(id__in=json_columns)
+        to_delete = models.Column.objects.filter(board=columns_in.first().board).exclude(pk__in=[c.pk for c in columns_in])
+        to_delete.delete()
         board_json = save_board_json(json_string, edit=True)
         return EditBoard(board=json.dumps(board_json))
 

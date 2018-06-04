@@ -309,6 +309,10 @@ class EditBoard(graphene.Mutation):
 
         json_columns = HelperClass.flatten(get_json_columns(data['columns']))
         columns_in = models.Column.objects.filter(id__in=json_columns)
+
+        error = validate_structure(data)
+        if error:
+            raise GraphQLError(error)
         to_delete = models.Column.objects.filter(board=columns_in.first().board).exclude(pk__in=[c.pk for c in columns_in])
         to_delete.delete()
         board_json = save_board_json(json_string, edit=True)
